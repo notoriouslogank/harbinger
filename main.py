@@ -11,7 +11,7 @@ handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w'
 load_dotenv()
 
 TOKEN = os.getenv('TOKEN')
-VERSION = os.getenv('VERSION')
+VERSION = '0.7.8'
 sTime = datetime.now()
 
 intents = discord.Intents.default()
@@ -67,12 +67,14 @@ async def ping(ctx):
 async def uptime(ctx):
     cTime = datetime.now()
     delta = cTime - sTime
-    
     await ctx.send(f'Uptime: {delta}')
 
 @bot.command()
 async def shutdown(ctx):
-    await ctx.send('Shutting down...')
+    shutdownTime = str(datetime.now())
+    embedShutdown = discord.Embed(title='Shutdown', color=0xff0000, timestamp=datetime.now())
+    embedShutdown.add_field(name='user', value=f'{ctx.message.author}', inline=True)
+    await ctx.send(embed = embedShutdown)
     sys.exit()
 
 @bot.command()
@@ -80,5 +82,28 @@ async def mcstart(ctx):
     await os.system('sh mc.sh')
     print('Starting the server, maybe.')
     await ctx.send('Starting MC Server.')
+
+@bot.command()
+async def rps(ctx, choice):
+    choices = ['rock', 'paper', 'scissors']
+    botChoice = choices[random.randint(0, 2)]
+    embedRPS = discord.Embed(color=0x0000ff, title='rock, paper, scissors')
+    embedRPS.add_field(name='You', value=f'{choice}', inline=True)
+    embedRPS.add_field(name='Bot', value=f'{botChoice}', inline=True)
+    if choice == botChoice:
+        embedRPS.add_field(name='result', value='You tied!', inline=False)
+        await ctx.send(embed=embedRPS)
+    elif botChoice == 'rock' and choice == 'paper':
+        embedRPS.add_field(name='result', value='You win!', inline=False)
+        await ctx.send(embed=embedRPS)
+    elif botChoice == 'paper' and choice == 'scissors':
+        embedRPS.add_field(name='result', value='You win!', inline=False)
+        await ctx.send(embed=embedRPS)
+    elif botChoice == 'scissors' and choice == 'rock':
+        embedRPS.add_field(name='result', value='You win!', inline=False)
+        await ctx.send(embed=embedRPS)
+    else:
+        embedRPS.add_field(name='result', value='You lose!', inline=False)
+        await ctx.send(embed=embedRPS)
 
 bot.run(TOKEN, log_handler=handler, log_level=logging.DEBUG)
