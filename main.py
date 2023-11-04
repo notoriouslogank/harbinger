@@ -75,4 +75,10 @@ async def shutdown(ctx):
     await ctx.send('Shutting down...')
     sys.exit()
 
+@bot.command()
+async def mcstart(ctx):
+    await os.system('sh mc.sh')
+    print('Starting the server, maybe.')
+    await ctx.send('Starting MC Server.')
+
 bot.run(TOKEN, log_handler=handler, log_level=logging.DEBUG)
