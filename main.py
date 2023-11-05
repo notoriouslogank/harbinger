@@ -39,6 +39,7 @@ async def on_ready():
 
 @bot.command()
 async def status(ctx):
+    print(f'{bot.user} is online.')
     await ctx.send(f"{bot.user} is online.")
 
 
