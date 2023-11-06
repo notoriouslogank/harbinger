@@ -3,6 +3,11 @@ import os
 import logging
 import random
 import sys
+import sched
+import time
+from urllib.parse import urlencode, urlparse, parse_qs
+from lxml.html import fromstring
+from requests import get
 from dotenv import load_dotenv
 from discord.ext import commands
 from datetime import datetime
@@ -22,8 +27,7 @@ def getLog():
     with open('CHANGELOG.md', 'r') as f:
         changelog = f.readlines()
         return changelog
-
-
+    
 TOKEN = os.getenv("TOKEN")
 VERSION = getVer()
 sTime = datetime.now()
@@ -40,6 +44,14 @@ async def on_ready():
     print(f"Logged in as {bot.user} (ID: {bot.user.id})")
     print(sTime)
     print("---------")
+
+#@bot.command()
+#async def remindme(ctx, message: str, time: str):
+#    await ctx.send(f'I will remind you about {message} in {time}.')
+#    scheduler = sched.scheduler(time.time, time.sleep)
+#    scheduler.enter({time}, 1, {message})
+#    scheduler.run
+
 
 @bot.command()
 async def changelog(ctx):
@@ -158,5 +170,10 @@ async def rps(ctx, choice):
         embedRPS.add_field(name="result", value="You lose!", inline=False)
         await ctx.send(embed=embedRPS)
 
+@bot.command()
+async def lmgtfy(ctx, query: str):
+    google = 'https:"//google.com/search?q='
+    search = google + query
+    await ctx.send('Here, let me Google that for you: ', search)
 
 bot.run(TOKEN, log_handler=handler, log_level=logging.DEBUG)
