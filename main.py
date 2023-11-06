@@ -154,7 +154,7 @@ async def mcstart(ctx):
 async def rps(ctx, choice):
     choices = ["rock", "paper", "scissors"]
     botChoice = choices[random.randint(0, 2)]
-    embedRPS = discord.Embed(color=0x0000FF, title="rock, paper, scissors")
+    embedRPS = discord.Embed(color=purple, title="rock, paper, scissors")
     embedRPS.add_field(name="You", value=f"{choice}", inline=True)
     embedRPS.add_field(name="Bot", value=f"{botChoice}", inline=True)
     if choice == botChoice:
@@ -177,7 +177,7 @@ async def rps(ctx, choice):
 async def lmgtfy(ctx, query: str):
     google = 'https://google.com/search?q='
     search = google + query
-    embed = discord.Embed()
+    embed = discord.Embed(color=purple, title="LMGTFY")
     embed.description = f"[Here]({search}), let me Google that for you!"
     print(search)
     await ctx.send(embed=embed)
