@@ -17,6 +17,11 @@ def getVer():
         vLine = changes[6]
         version = vLine[4:9]
         return version
+    
+def getLog():
+    with open('CHANGELOG.md', 'r') as f:
+        changelog = f.readlines()
+        return changelog
 
 
 TOKEN = os.getenv("TOKEN")
@@ -36,10 +41,21 @@ async def on_ready():
     print(sTime)
     print("---------")
 
+@bot.command()
+async def changelog(ctx):
+    changelog = getLog()
+    print('Getting changelog...')
+    print(f'{changelog}')
+    print(f'{sTime}')
+    print('---------')
+    await ctx.send(f'{changelog}')
+    
 
 @bot.command()
 async def status(ctx):
     print(f'{bot.user} is online.')
+    print(f'{sTime}')
+    print('---------')
     await ctx.send(f"{bot.user} is online.")
 
 
@@ -47,9 +63,16 @@ async def status(ctx):
 async def add(ctx, left: int, right: int):
     await ctx.send(left + right)
 
+@bot.command()
+async def say(ctx, message: str):
+    print('BOT SAYS:')
+    await ctx.send(message)
 
 @bot.command()
 async def roll(ctx, dice: str):
+    print('Rolling dice...')
+    print(f'{sTime}')
+    print('---------')
     try:
         rolls, limit = map(int, dice.split("d"))
     except Exception:
@@ -62,6 +85,9 @@ async def roll(ctx, dice: str):
 
 @bot.command()
 async def joined(ctx, member: discord.Member):
+    print('Joined....')
+    print(f'{sTime}')
+    print('---------')
     await ctx.send(f"{member.name} joined {discord.utils.format_dt(member.joined_at)}")
 
 
