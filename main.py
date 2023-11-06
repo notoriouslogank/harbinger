@@ -15,7 +15,7 @@ from datetime import datetime
 handler = logging.FileHandler(filename="discord.log", encoding="utf-8", mode="w")
 load_dotenv()
 
-purple = '0x884ea0'
+purple = 0x884ea0
 
 
 
