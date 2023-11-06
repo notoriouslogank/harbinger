@@ -174,8 +174,9 @@ async def rps(ctx, choice):
 async def lmgtfy(ctx, query: str):
     google = 'https:"//google.com/search?q='
     search = google + query
+    embed = discord.Embed()
+    embed.description = f"[Here]({search}), let me Google that for you!"
     print(search)
-    await ctx.send('Here, let me Google that for you: ')
-    await ctx.send(search)
+    await ctx.send(embed=embed)
 
 bot.run(TOKEN, log_handler=handler, log_level=logging.DEBUG)
