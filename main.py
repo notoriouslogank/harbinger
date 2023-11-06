@@ -15,6 +15,9 @@ from datetime import datetime
 handler = logging.FileHandler(filename="discord.log", encoding="utf-8", mode="w")
 load_dotenv()
 
+purple = '0x884ea0'
+
+
 
 def getVer():
     with open("CHANGELOG.md", "r") as f:
@@ -107,7 +110,7 @@ async def joined(ctx, member: discord.Member):
 async def info(ctx):
     cTime = datetime.now()
     delta = cTime - sTime
-    embedVar = discord.Embed(title="mcswitch", color=0x00FF00)
+    embedVar = discord.Embed(title="mcswitch", color=purple)
     embedVar.add_field(name="version", value=f"v{VERSION}", inline=True)
     embedVar.add_field(name="uptime", value=f"{delta}", inline=True)
     embedVar.add_field(name="author", value="notoriouslogank", inline=True)
