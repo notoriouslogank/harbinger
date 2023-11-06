@@ -172,7 +172,7 @@ async def rps(ctx, choice):
 
 @bot.command()
 async def lmgtfy(ctx, query: str):
-    google = 'https:"//google.com/search?q='
+    google = 'https://google.com/search?q='
     search = google + query
     embed = discord.Embed()
     embed.description = f"[Here]({search}), let me Google that for you!"
