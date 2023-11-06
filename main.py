@@ -174,6 +174,8 @@ async def rps(ctx, choice):
 async def lmgtfy(ctx, query: str):
     google = 'https:"//google.com/search?q='
     search = google + query
-    await ctx.send('Here, let me Google that for you: ', search)
+    print(search)
+    await ctx.send('Here, let me Google that for you: ')
+    await ctx.send(search)
 
 bot.run(TOKEN, log_handler=handler, log_level=logging.DEBUG)
