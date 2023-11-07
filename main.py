@@ -1,4 +1,3 @@
-import logging
 import os
 import random
 import sys
@@ -10,7 +9,6 @@ from dotenv import load_dotenv
 
 from helpers import getLog, getVer, timestamp, mcswitch
 
-handler = logging.FileHandler(filename="mcswitch.log", encoding="utf-8", mode="w")
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
 CHANNEL = os.getenv("CHANNEL")
@@ -30,7 +28,6 @@ channel = bot.get_channel(CHANNEL)
 async def on_ready():
     """Print username and ID on successful login."""
     print(f"Logged in as {bot.user} (ID: {bot.user.id})")
-    logging.info(f'Logged in as {bot.user}{bot.user.id}')
     timestamp()
 
 
@@ -106,7 +103,6 @@ async def roll(ctx, dice: str):
     try:
         rolls, limit = map(int, dice.split("d"))
     except Exception:
-        logging.warning(f"Bad format: {dice}")
         await ctx.send("Format must be NdN!")
         return
     result = ", ".join(str(random.randint(1, limit)) for r in range(rolls))
@@ -240,7 +236,7 @@ async def lmgtfy(ctx, query: str):
     await ctx.send(f'{query}')
 
 def main():
-    bot.run(TOKEN, log_handler=handler, log_level=logging.DEBUG)
+    bot.run(TOKEN)
 
 
 main()

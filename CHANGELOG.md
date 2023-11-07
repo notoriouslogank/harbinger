@@ -6,9 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [1.0.2-alpha] - 2023-07-11
 
-### Added
+## Removed
 
-- Log message(s) in a few places to test out logging - feature not complete
+- All logging support; will be migrating to proprietary log format because logging sucks in this module
 
 ### Changed
 
