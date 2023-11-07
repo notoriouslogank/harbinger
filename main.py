@@ -215,10 +215,14 @@ async def lmgtfy(ctx, query: str):
     await ctx.send(embed=embed)
     
 @bot.command()
-async def delete(ctx):
-    message = ctx.message.id
-    await message.delete()
-
+async def clear(ctx, number):
+    msgs = []
+    number = int(number)
+    async for x in ctx.logs_from(ctx.message.channnel, limit=number):
+        msgs.append(x)
+    await ctx.delete_messages(msgs)
+    
+    
 #@bot.event
 #async def on_message(message):
 #    if message.author.id == bot.user.id:
