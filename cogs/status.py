@@ -4,7 +4,7 @@ import helpers
 import discord
 import sys
 
-bot = commands.Bot()
+bot = commands.Bot(command_prefix="!")
 
 class BotStatus(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
