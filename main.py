@@ -26,6 +26,11 @@ intents.members = True
 intents.message_content = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
+channel = bot.get_channel(1165826071447486584)
+
+@bot.command()
+async def clear(ctx, amount: int):
+    await ctx.channel.delete_messages(amount)
 
 
 @bot.event
@@ -214,15 +219,7 @@ async def lmgtfy(ctx, query: str):
     timestamp()
     await ctx.send(embed=embed)
     
-@bot.command()
-async def clear(ctx, number):
-    msgs = []
-    number = int(number)
-    async for x in ctx.logs_from(ctx.message.channnel, limit=number):
-        msgs.append(x)
-    await ctx.delete_messages(msgs)
-    
-    
+
 #@bot.event
 #async def on_message(message):
 #    if message.author.id == bot.user.id:
