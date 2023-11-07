@@ -238,7 +238,6 @@ async def lmgtfy(ctx, query: str):
     await ctx.channel.purge(limit=1)
     await ctx.send(embed=embed)
     await send_dm(ctx=ctx, member=ctx.message.author, content=query)
-    await ctx.send(f'{query}')
 
 def main():
     bot.run(TOKEN)
