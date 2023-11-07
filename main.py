@@ -1,28 +1,31 @@
-import os
-import random
-import sys
+#import os
+#import random
+#import sys
 from datetime import datetime
 
 import discord
 from discord.ext import commands
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
+import helpers
 
-from helpers import getLog, getVer, mcswitch, timestamp
+bot = helpers.bot
+TOKEN = helpers.TOKEN
+CHANNEL = helpers.CHANNEL
+COGS = helpers.COGS
+#load_dotenv()
+#TOKEN = os.getenv("TOKEN")
+#CHANNEL = os.getenv("CHANNEL")
+#VERSION = getVer()
+#COGS = ("cogs.moderation", "cogs.tools", "cogs.status")
+#sTime = datetime.now()  # Application launch time; used to calc delta()
+#purple = 0x884EA0
 
-load_dotenv()
-TOKEN = os.getenv("TOKEN")
-CHANNEL = os.getenv("CHANNEL")
-VERSION = getVer()
-COGS = ("cogs.moderation", "cogs.tools", "cogs.status")
-sTime = datetime.now()  # Application launch time; used to calc delta()
-purple = 0x884EA0
 
-
-intents = discord.Intents.default()
-intents.members = True
-intents.message_content = True
-bot = commands.Bot(command_prefix="!", intents=intents)
-channel = bot.get_channel(CHANNEL)
+#intents = discord.Intents.default()
+#intents.members = True
+#intents.message_content = True
+#bot = commands.Bot(command_prefix="!", intents=intents)
+#channel = bot.get_channel(CHANNEL)
 
 @bot.event
 async def setup_hook() -> None:
