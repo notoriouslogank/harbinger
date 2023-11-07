@@ -41,7 +41,7 @@ async def clear(ctx, amount=2):
     if amount > 101:
         await ctx.send('Cannot delete more than 100 messages.')
     else:
-        await ctx.channnel.purge(limit=amount)
+        await ctx.channel.purge(limit=amount)
         await ctx.send('Cleared messages.')
 
 
