@@ -31,6 +31,7 @@ async def send_dm(ctx, member: discord.Member, *, content):
 @bot.event
 async def on_ready():
     """Print username and ID on successful login."""
+    await bot.load_extension(status(bot))
     print(f"Logged in as {bot.user} (ID: {bot.user.id})")
     timestamp()
 
@@ -241,6 +242,5 @@ async def lmgtfy(ctx, query: str):
 
 def main():
     bot.run(TOKEN)
-
 
 main()
