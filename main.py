@@ -245,7 +245,7 @@ async def lmgtfy(ctx, query: str):
     await send_dm(ctx=ctx, member=ctx.message.author, content=query)
 
 def main():
-    bot.run(TOKEN)
     load_cogs()
+    bot.run(TOKEN)
     
 main()

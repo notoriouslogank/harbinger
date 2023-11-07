@@ -1,4 +1,3 @@
-import discord
 from discord.ext import commands
 
 class Status(commands.Cog):
@@ -14,3 +13,6 @@ class Status(commands.Cog):
         else:
             await ctx.send(f'Hello, {member.name}. This feels familiar...')
         self._last_member = member
+
+def setup():
+    bot.add_cog(Test(bot))
