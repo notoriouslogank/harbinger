@@ -28,16 +28,21 @@ intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 channel = bot.get_channel(1165826071447486584)
 
-@bot.command()
-async def clear(ctx, amount: int):
-    await ctx.channel.delete_messages(amount)
-
 
 @bot.event
 async def on_ready():
     """Print username and ID on successful login."""
     print(f"Logged in as {bot.user} (ID: {bot.user.id})")
     timestamp()
+
+@bot.command()
+async def clear(ctx, amount=2):
+    amount = amount + 1
+    if amount > 101:
+        await ctx.send('Cannot delete more than 100 messages.')
+    else:
+        await ctx.channnel.purge(limit=amount)
+        await ctx.send('Cleared messages.')
 
 
 @bot.command()
