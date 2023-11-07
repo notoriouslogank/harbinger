@@ -175,6 +175,8 @@ async def rps(ctx, choice: str):
     Args:
         choice (str): rock, paper, or scissors
     """
+    print(f"played rps")
+    timestamp()
     choices = ["rock", "paper", "scissors"]
     botChoice = choices[random.randint(0, 2)]
     embedRPS = discord.Embed(color=purple, title="rock, paper, scissors")
@@ -194,8 +196,6 @@ async def rps(ctx, choice: str):
         await ctx.send(embed=embedRPS)
     else:
         embedRPS.add_field(name="result", value="You lose!", inline=False)
-        print(f"played rps")
-        timestamp()
         await ctx.send(embed=embedRPS)
 
 
