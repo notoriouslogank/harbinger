@@ -33,7 +33,7 @@ class BotStatus(commands.Cog):
         embedInfo.add_field(name="version", value=f'v{VERSION}', inline=True)
         embedInfo.add_field(name="uptime", value=f'{delta}', inline=True)
         embedInfo.add_field(name="author", value='notoriouslogank', inline=True)
-        embedInfo.add_field('source code', value='https://github.com/notoriouslogank/mcswitch')
+        embedInfo.add_field(name='source code', value='https://github.com/notoriouslogank/mcswitch', inline=False)
         print(f'info dumped')
         helpers.timestamp()
         await ctx.send(embed=embedInfo)
