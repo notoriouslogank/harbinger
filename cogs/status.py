@@ -5,6 +5,8 @@ import discord
 import sys
 
 bot = helpers.bot
+VERSION = helpers.getVer()
+purple = helpers.purple
 
 class BotStatus(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
