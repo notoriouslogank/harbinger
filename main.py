@@ -144,6 +144,13 @@ async def info(ctx):
 
 @bot.command()
 async def playing(ctx, game, field, value):
+    """Create an embed with specific game information.
+
+    Args:
+        game (str): game you're playing
+        field (str): name of data field you want to share (e.g.: IP, room code, etc.). Multiple words must be quoted.
+        value (str): value of data field. Multiple words must be quoted.
+    """
     embedGame = discord.Embed(title=game, color=purple)
     embedGame.add_field(name=f'{field}', value=f'{value}', inline=True)
     print(f'Playing {game}: {field}, {value}')
