@@ -23,6 +23,10 @@ intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 channel = bot.get_channel(CHANNEL)
 
+async def send_dm(ctx, member: discord.Member, *, content):
+    channel = await member.create_dm()
+    await channel.send(content)
+
 
 @bot.event
 async def on_ready():
@@ -233,6 +237,7 @@ async def lmgtfy(ctx, query: str):
     timestamp()
     await ctx.channel.purge(limit=1)
     await ctx.send(embed=embed)
+    await send_dm(ctx, ctx.message.author, query)
     await ctx.send(f'{query}')
 
 def main():

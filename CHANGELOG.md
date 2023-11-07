@@ -25,6 +25,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - !playing() command to post game information
 - sample_env
+- lmgtfy() *may* now send the requesting user a DM with their query string
 
 ## [0.9.9] - 2023-06-11
 
