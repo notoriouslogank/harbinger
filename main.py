@@ -23,7 +23,7 @@ intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 channel = bot.get_channel(CHANNEL)
 
-def load_cogs():
+async def load_cogs():
     for f in os.listdir("./cogs"):
         if f.endswith(".py"):
             bot.load_extension("cogs." + f[:-3])
