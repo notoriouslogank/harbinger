@@ -31,7 +31,7 @@ async def send_dm(ctx, member: discord.Member, *, content):
 @bot.event
 async def on_ready():
     """Print username and ID on successful login."""
-    await bot.load_extension(status(bot))
+    await bot.add_cog(status(bot))
     print(f"Logged in as {bot.user} (ID: {bot.user.id})")
     timestamp()
 
