@@ -4,9 +4,6 @@ import logging
 import random
 import sys
 from helpers import timestamp, getVer, getLog
-from urllib.parse import urlencode, urlparse, parse_qs
-from lxml.html import fromstring
-from requests import get
 from dotenv import load_dotenv
 from discord.ext import commands
 from datetime import datetime
@@ -37,13 +34,17 @@ async def on_ready():
 
 @bot.command()
 async def clear(ctx, amount=2):
-    amount = amount + 1
+    """Delete multiple messages at once.
+
+    Args:
+        amount (int, optional): The number of messages to clear; defaults to 1.
+    """
+    amount = amount + 1 # So that we don't just delete the same message over and over
     if amount > 101:
         await ctx.send('Cannot delete more than 100 messages.')
     else:
         await ctx.channel.purge(limit=amount)
-        await ctx.send('Cleared messages.')
-
+        print(f'{ctx.message.author} cleared {amount} messages.')
 
 @bot.command()
 async def changelog(ctx):
@@ -224,16 +225,7 @@ async def lmgtfy(ctx, query: str):
     timestamp()
     await ctx.send(embed=embed)
     
+def main():
+    bot.run(TOKEN, log_handler=handler, log_level=logging.DEBUG)
 
-#@bot.event
-#async def on_message(message):
-#    if message.author.id == bot.user.id:
-#        return
-#    msg_content = message.content.lower()
-#    
-#    curseWord = ['palestine']
-#    
-#    if any(word in msg_content for word in curseWord):
-#        await message.delete()
-
-bot.run(TOKEN, log_handler=handler, log_level=logging.DEBUG)
+main()
