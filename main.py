@@ -4,8 +4,6 @@ import random
 import sys
 from datetime import datetime
 
-import subprocess
-
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
@@ -144,6 +142,14 @@ async def info(ctx):
     timestamp()
     await ctx.send(embed=embedVar)
 
+@bot.command()
+async def playing(ctx, game, field, value):
+    embedGame = discord.Embed(title=game, color=purple)
+    embedGame.add_field(name=f'{field}', value=f'{value}', inline=True)
+    print(f'Playing {game}: {field}, {value}')
+    timestamp()
+    await ctx.send(embed=embedGame)
+
 
 @bot.command()
 async def ping(ctx):
@@ -224,11 +230,6 @@ async def lmgtfy(ctx, query: str):
     await ctx.channel.purge(limit=1)
     await ctx.send(embed=embed)
 
-
-@bot.command()
-async def mcOn(ctx):
-    result = subprocess.run(["bash", "mc.sh"], capture_output=True, text=True)
-    await ctx.send(result.stdout)
 
 def main():
     bot.run(TOKEN, log_handler=handler, log_level=logging.DEBUG)
