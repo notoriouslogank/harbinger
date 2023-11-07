@@ -32,7 +32,7 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 async def on_ready():
     """Print username and ID on successful login."""
     print(f"Logged in as {bot.user} (ID: {bot.user.id})")
-    timestamp()()
+    timestamp()
 
 
 @bot.command()
@@ -213,6 +213,21 @@ async def lmgtfy(ctx, query: str):
     print(f"LMGTFY: {search}")
     timestamp()
     await ctx.send(embed=embed)
+    
+@bot.command()
+async def delete(ctx):
+    message = ctx.message.id
+    await message.delete()
 
+@bot.event
+async def on_message(message):
+    if message.author.id == bot.user.id:
+        return
+    msg_content = message.content.lower()
+    
+    curseWord = ['palestine']
+    
+    if any(word in msg_content for word in curseWord):
+        await message.delete()
 
 bot.run(TOKEN, log_handler=handler, log_level=logging.DEBUG)
