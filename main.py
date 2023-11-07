@@ -1,7 +1,6 @@
 import os
 import random
 import sys
-from cogs import *
 from datetime import datetime
 
 import discord
@@ -14,7 +13,7 @@ load_dotenv()
 TOKEN = os.getenv("TOKEN")
 CHANNEL = os.getenv("CHANNEL")
 VERSION = getVer()
-COGS = 'cogs/*'
+COGS = ('cogs/*',)
 sTime = datetime.now()  # Application launch time; used to calc delta()
 purple = 0x884EA0
 
