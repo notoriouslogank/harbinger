@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 
 
-class Status(commands.Cog):
+class Test(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self._last_member = None
@@ -17,4 +17,4 @@ class Status(commands.Cog):
         self._last_member = member
         
 def setup(bot):
-    bot.add_cog(Status(bot))
+    bot.add_cog(Test(bot))
