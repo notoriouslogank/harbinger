@@ -10,20 +10,17 @@ from datetime import datetime
 
 handler = logging.FileHandler(filename="discord.log", encoding="utf-8", mode="w")
 load_dotenv()
-
-purple = 0x884EA0
-
 TOKEN = os.getenv("TOKEN")
+CHANNEL = os.getenv('CHANNEL')
 VERSION = getVer()
-sTime = datetime.now()
-
+sTime = datetime.now() # Application launch time; used to calc delta
+purple = 0x884EA0
 
 intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
-
 bot = commands.Bot(command_prefix="!", intents=intents)
-channel = bot.get_channel(1165826071447486584)
+channel = bot.get_channel(CHANNEL)
 
 
 @bot.event
