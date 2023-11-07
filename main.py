@@ -13,7 +13,7 @@ load_dotenv()
 TOKEN = os.getenv("TOKEN")
 CHANNEL = os.getenv("CHANNEL")
 VERSION = getVer()
-COGS = ('cogs/test',)
+COGS = ("cogs/test.py",)
 sTime = datetime.now()  # Application launch time; used to calc delta()
 purple = 0x884EA0
 
@@ -28,7 +28,7 @@ channel = bot.get_channel(CHANNEL)
 async def setup_hook() -> None:
     for cog in COGS:
         print(cog)
-        await bot.load_extension(f'{cog}')
+        await bot.load_extension(cog)
     
 async def send_dm(ctx, member: discord.Member, *, content):
     channel = await member.create_dm()
