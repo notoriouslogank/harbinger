@@ -8,7 +8,7 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 
-from helpers import getLog, getVer, timestamp
+from helpers import getLog, getVer, timestamp, mcswitch
 
 handler = logging.FileHandler(filename="discord.log", encoding="utf-8", mode="w")
 load_dotenv()
@@ -17,6 +17,7 @@ CHANNEL = os.getenv("CHANNEL")
 VERSION = getVer()
 sTime = datetime.now()  # Application launch time; used to calc delta
 purple = 0x884EA0
+
 
 intents = discord.Intents.default()
 intents.members = True
@@ -220,6 +221,14 @@ async def lmgtfy(ctx, query: str):
     timestamp()
     await ctx.channel.purge(limit=1)
     await ctx.send(embed=embed)
+
+
+@bot.command()
+async def mcOn(ctx):
+    mcswitch()
+    print('Switched on MC Server (TRAINING SIMULATION).')
+    await ctx.send('Turning on server (TRAINING SIMULATION ONLY).')
+    timestamp()
 
 
 def main():
