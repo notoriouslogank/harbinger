@@ -24,7 +24,7 @@ intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 channel = bot.get_channel(CHANNEL)
 
-@bot.event()
+@bot.event
 async def setup_hook() -> None:
     for cog in COGS:
         await bot.load_extension(cog)
