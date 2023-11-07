@@ -1,12 +1,14 @@
-import discord
-import os
 import logging
+import os
 import random
 import sys
-from helpers import timestamp, getVer, getLog
-from dotenv import load_dotenv
-from discord.ext import commands
 from datetime import datetime
+
+import discord
+from discord.ext import commands
+from dotenv import load_dotenv
+
+from helpers import getLog, getVer, timestamp
 
 handler = logging.FileHandler(filename="discord.log", encoding="utf-8", mode="w")
 load_dotenv()
