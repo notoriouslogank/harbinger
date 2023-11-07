@@ -4,6 +4,8 @@ import random
 import sys
 from datetime import datetime
 
+import subprocess
+
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
@@ -225,11 +227,8 @@ async def lmgtfy(ctx, query: str):
 
 @bot.command()
 async def mcOn(ctx):
-    mcswitch()
-    print('Switched on MC Server (TRAINING SIMULATION).')
-    await ctx.send('Turning on server (TRAINING SIMULATION ONLY).')
-    timestamp()
-
+    result = subprocess.run(["bash", "mc.sh"], capture_output=True)
+    await ctx.send(result.stdout)
 
 def main():
     bot.run(TOKEN, log_handler=handler, log_level=logging.DEBUG)
