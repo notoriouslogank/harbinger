@@ -23,10 +23,11 @@ intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 channel = bot.get_channel(CHANNEL)
 
-for f in os.listdir("./cogs"):
-    if f.endswith(".py"):
-        bot.load_extension("cogs." + f[:-3])
-        print(f'loading cogs.{f[:-3]}')
+async def load_cogs():
+    for f in os.listdir("./cogs"):
+        if f.endswith(".py"):
+            await bot.load_extension("cogs." + f[:-3])
+            print(f'loading cogs.{f[:-3]}')
 
 async def send_dm(ctx, member: discord.Member, *, content):
     channel = await member.create_dm()
@@ -35,6 +36,7 @@ async def send_dm(ctx, member: discord.Member, *, content):
 
 @bot.event
 async def on_ready():
+    await load_cogs()
     """Print username and ID on successful login."""
     print(f"Logged in as {bot.user} (ID: {bot.user.id})")
     timestamp()
