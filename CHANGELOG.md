@@ -8,7 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
-- Created cog command(s) to test functionality
+- cogs/ directory for transition to cog-based commands
+- cogs/moderation.py: moderation commands
+- cogs/status.py: bot status and info commands
+- cogs/tools.py: useful commands, tools, etc. the bot can access
 
 ## [1.0.2] - 2023-07-11
 
