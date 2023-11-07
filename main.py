@@ -13,9 +13,9 @@ from helpers import getLog, getVer, timestamp
 handler = logging.FileHandler(filename="discord.log", encoding="utf-8", mode="w")
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
-CHANNEL = os.getenv('CHANNEL')
+CHANNEL = os.getenv("CHANNEL")
 VERSION = getVer()
-sTime = datetime.now() # Application launch time; used to calc delta
+sTime = datetime.now()  # Application launch time; used to calc delta
 purple = 0x884EA0
 
 intents = discord.Intents.default()
@@ -31,6 +31,7 @@ async def on_ready():
     print(f"Logged in as {bot.user} (ID: {bot.user.id})")
     timestamp()
 
+
 @bot.command()
 async def clear(ctx, amount=2):
     """Delete multiple messages at once.
@@ -38,12 +39,13 @@ async def clear(ctx, amount=2):
     Args:
         amount (int, optional): The number of messages to clear; defaults to 1.
     """
-    amount = amount + 1 # So that we don't just delete the same message over and over
+    amount = amount + 1  # So that we don't just delete the same message over and over
     if amount > 101:
-        await ctx.send('Cannot delete more than 100 messages.')
+        await ctx.send("Cannot delete more than 100 messages.")
     else:
         await ctx.channel.purge(limit=amount)
-        print(f'{ctx.message.author} cleared {amount} messages.')
+        print(f"{ctx.message.author} cleared {amount} messages.")
+
 
 @bot.command()
 async def changelog(ctx):
@@ -171,13 +173,6 @@ async def shutdown(ctx):
     sys.exit()
 
 
-# @bot.command()
-# async def mcstart(ctx):
-#    await os.system("sh mc.sh")
-#    print("Starting the server, maybe.")
-#    await ctx.send("Starting MC Server.")
-
-
 @bot.command()
 async def rps(ctx, choice: str):
     """Play a game of rock, paper, scissors with the bot.
@@ -223,8 +218,10 @@ async def lmgtfy(ctx, query: str):
     print(f"LMGTFY: {search}")
     timestamp()
     await ctx.send(embed=embed)
-    
+
+
 def main():
     bot.run(TOKEN, log_handler=handler, log_level=logging.DEBUG)
+
 
 main()
