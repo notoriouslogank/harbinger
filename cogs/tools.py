@@ -3,6 +3,9 @@ import helpers
 import discord
 from random import randint
 
+bot = helpers.bot
+purple = helpers.purple
+
 class Tools(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot

@@ -1,6 +1,10 @@
 import discord
 from discord.ext import commands
-from helpers import timestamp
+import helpers
+
+timestamp = helpers.timestamp()
+purple = helpers.purple
+bot = helpers.bot
 
 class Moderation(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
