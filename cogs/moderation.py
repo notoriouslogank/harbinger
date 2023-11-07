@@ -1,10 +1,10 @@
 import discord
 from discord.ext import commands
-import helpers
+from helpers import timestamp, purple
 
-timestamp = helpers.timestamp()
-purple = helpers.purple
-bot = helpers.bot
+#timestamp = helpers.timestamp()
+#purple = helpers.purple
+#bot = helpers.bot
 
 class Moderation(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
@@ -18,7 +18,6 @@ class Moderation(commands.Cog):
         else:
             await ctx.channel.purge(limit=amount)
             print(f'{ctx.message.author} deleted {amount} messages.')
-            timestamp()
             
     @commands.command()
     async def joined(self, ctx: commands.Context, member: discord.Member):
