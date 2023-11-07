@@ -13,6 +13,7 @@ load_dotenv()
 TOKEN = os.getenv("TOKEN")
 CHANNEL = os.getenv("CHANNEL")
 VERSION = getVer()
+COGS = './cogs/'
 sTime = datetime.now()  # Application launch time; used to calc delta()
 purple = 0x884EA0
 
@@ -23,12 +24,11 @@ intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 channel = bot.get_channel(CHANNEL)
 
-async def load_cogs():
-    for f in os.listdir("./cogs"):
-        if f.endswith(".py"):
-            await bot.load_extension("cogs." + f[:-3])
-            print(f'loading cogs.{f[:-3]}')
-
+@bot.event()
+async def setup_hook() -> None:
+    for cog in COGS:
+        await bot.load_extension(cog)
+    
 async def send_dm(ctx, member: discord.Member, *, content):
     channel = await member.create_dm()
     await channel.send(content)
@@ -36,7 +36,6 @@ async def send_dm(ctx, member: discord.Member, *, content):
 
 @bot.event
 async def on_ready():
-    await load_cogs()
     """Print username and ID on successful login."""
     print(f"Logged in as {bot.user} (ID: {bot.user.id})")
     timestamp()
