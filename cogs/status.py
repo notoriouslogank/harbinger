@@ -15,3 +15,6 @@ class Status(commands.Cog):
         else:
             await ctx.send(f'Hello, {member.name}. This feels familiar...')
         self._last_member = member
+        
+def setup(bot):
+    bot.add_cog(Status(bot))
