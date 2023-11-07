@@ -1,7 +1,7 @@
 from datetime import datetime
 import subprocess
 
-def mcOn():
+def mcswitch():
     result = subprocess.run(["sh", "./mc.sh"], shell=True, capture_output=True, text=True)
     print(result.stdout)
 
