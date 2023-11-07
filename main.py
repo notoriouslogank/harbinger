@@ -49,7 +49,7 @@ async def clear(ctx, amount=2):
 
 @bot.command()
 async def changelog(ctx):
-    """Send the changelog as a message and print it to console."""
+    """View the changelog."""
     changelog = getLog()
     print("Getting changelog...")
     print(f"{changelog}")
@@ -59,7 +59,7 @@ async def changelog(ctx):
 
 @bot.command()
 async def status(ctx):
-    """Send message to confirm connection successful."""
+    """Confirm connection status."""
     print(f"{bot.user} is online.")
     timestamp()
     await ctx.send(f"{bot.user} is online.")
@@ -67,7 +67,7 @@ async def status(ctx):
 
 @bot.command()
 async def add(ctx, left: int, right: int):
-    """Add two integers and return total as message.
+    """Add two integers and return total.
 
     Args:
         left (int): first addend
@@ -89,12 +89,13 @@ async def say(ctx, message: str):
     """
     print("BOT SAYS:")
     print(f"{message}")
+    await ctx.channel.purge(limit=1)
     await ctx.send(message)
 
 
 @bot.command()
 async def roll(ctx, dice: str):
-    """Roll XdY dice and return result(s) as message.
+    """Roll NdN dice and return result(s).
 
     Args:
         dice (str): amount of n-sided dice to roll (NdN)
@@ -114,7 +115,7 @@ async def roll(ctx, dice: str):
 
 @bot.command()
 async def joined(ctx, member: discord.Member):
-    """Return datetime a particular user joined the channel.
+    """Return datetime a member joined.
 
     Args:
         member (discord.Member): The name of the member to be looked up.
@@ -175,7 +176,7 @@ async def shutdown(ctx):
 
 @bot.command()
 async def rps(ctx, choice: str):
-    """Play a game of rock, paper, scissors with the bot.
+    """Play a game of rock, paper, scissors.
 
     Args:
         choice (str): rock, paper, or scissors
@@ -206,7 +207,7 @@ async def rps(ctx, choice: str):
 
 @bot.command()
 async def lmgtfy(ctx, query: str):
-    """Passive-aggressively Google something. Returns embed with URL.
+    """Passive-aggressively Google something.
 
     Args:
         query (str): string to be Googled
@@ -217,6 +218,7 @@ async def lmgtfy(ctx, query: str):
     embed.description = f"[Here]({search}), let me Google that for you!"
     print(f"LMGTFY: {search}")
     timestamp()
+    await ctx.channel.purge(limit=1)
     await ctx.send(embed=embed)
 
 
