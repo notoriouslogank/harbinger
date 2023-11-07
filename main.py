@@ -231,6 +231,15 @@ async def lmgtfy(ctx, query: str):
     await ctx.send(embed=embed)
 
 
+<<<<<<< HEAD
+=======
+@bot.command()
+async def mcOn(ctx):
+    result = subprocess.run(["bash", "mc.sh"], capture_output=True)
+    print(result.stdout)
+    await ctx.send(result.stdout)
+
+>>>>>>> parent of b5abde0 (still bugfixing mcOn)
 def main():
     bot.run(TOKEN, log_handler=handler, log_level=logging.DEBUG)
 
