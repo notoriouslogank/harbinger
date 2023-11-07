@@ -35,7 +35,7 @@ class Moderation(commands.Cog):
         await ctx.send(f'{message}')
         
     @commands.command()
-    async def playing(self, ctx: commands.Context, game: str, field: str, value: any):
+    async def playing(self, ctx: commands.Context, game: str, field: str, value: str):
         embedPlaying = discord.Embed(title=game, color=purple)
         embedPlaying.add_field(name=f'{field}', value=f'{value}', inline=True)
         print(f'{ctx.message.author} is playing {game}: {field}, {value}')
