@@ -23,11 +23,10 @@ intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 channel = bot.get_channel(CHANNEL)
 
-async def load_cogs():
-    for f in os.listdir("./cogs"):
-        if f.endswith(".py"):
-            await bot.load_extension("cogs." + f[:-3])
-            print(f'loading cogs.{f[:-3]}')
+for f in os.listdir("./cogs"):
+    if f.endswith(".py"):
+        bot.load_extension("cogs." + f[:-3])
+        print(f'loading cogs.{f[:-3]}')
 
 async def send_dm(ctx, member: discord.Member, *, content):
     channel = await member.create_dm()
@@ -246,7 +245,6 @@ async def lmgtfy(ctx, query: str):
     await send_dm(ctx=ctx, member=ctx.message.author, content=query)
 
 def main():
-    load_cogs()
     bot.run(TOKEN)
     
 main()
