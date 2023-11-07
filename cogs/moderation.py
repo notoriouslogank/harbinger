@@ -26,7 +26,7 @@ class Moderation(commands.Cog):
         await ctx.send(f'{joined}')
         timestamp()
         
-    @commands.command
+    @commands.command()
     async def say(self, ctx: commands.Context, message: str):
         print(f"{ctx.message.author} made McSwitch say:")
         print(f'{message}')
@@ -34,7 +34,7 @@ class Moderation(commands.Cog):
         await ctx.channel.purge(limit=1)
         await ctx.send(f'{message}')
         
-    @commands.command
+    @commands.command()
     async def playing(self, ctx: commands.Context, game: str, field: str, value: any):
         embedPlaying = discord.Embed(title=game, color=purple)
         embedPlaying.add_field(name=f'{field}', value=f'{value}', inline=True)
