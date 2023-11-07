@@ -28,7 +28,8 @@ channel = bot.get_channel(CHANNEL)
 @bot.event
 async def setup_hook() -> None:
     for cog in COGS:
-        await bot.load_extension(cog)
+        print(cog)
+        await bot.load_extension(f'{cog}')
     
 async def send_dm(ctx, member: discord.Member, *, content):
     channel = await member.create_dm()
