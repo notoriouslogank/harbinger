@@ -13,7 +13,7 @@ load_dotenv()
 TOKEN = os.getenv("TOKEN")
 CHANNEL = os.getenv("CHANNEL")
 VERSION = getVer()
-COGS = ("cogs.test",)
+COGS = ("cogs.test", "cogs.moderation")
 sTime = datetime.now()  # Application launch time; used to calc delta()
 purple = 0x884EA0
 
@@ -42,19 +42,19 @@ async def on_ready():
     timestamp()
 
 
-@bot.command()
-async def clear(ctx, amount=2):
-    """Delete multiple messages at once.
-
-    Args:
-        amount (int, optional): The number of messages to clear; defaults to 1.
-    """
-    amount = amount + 1  # So that we don't just delete the same message over and over
-    if amount > 101:
-        await ctx.send("Cannot delete more than 100 messages.")
-    else:
-        await ctx.channel.purge(limit=amount)
-        print(f"{ctx.message.author} cleared {amount} messages.")
+#@bot.command()
+#async def clear(ctx, amount=2):
+#    """Delete multiple messages at once.
+#
+#    Args:
+#        amount (int, optional): The number of messages to clear; defaults to 1.
+#    """
+#    amount = amount + 1  # So that we don't just delete the same message over and over
+#    if amount > 101:
+#        await ctx.send("Cannot delete more than 100 messages.")
+#    else:
+#        await ctx.channel.purge(limit=amount)
+#        print(f"{ctx.message.author} cleared {amount} messages.")
 
 
 @bot.command()
