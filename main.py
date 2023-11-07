@@ -227,8 +227,7 @@ async def lmgtfy(ctx, query: str):
 
 @bot.command()
 async def mcOn(ctx):
-    result = subprocess.run(["bash", "mc.sh"], capture_output=True)
-    print(result.stdout)
+    result = subprocess.run(["bash", "mc.sh"], capture_output=True, text=True)
     await ctx.send(result.stdout)
 
 def main():
