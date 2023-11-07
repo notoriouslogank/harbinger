@@ -2,7 +2,8 @@ from datetime import datetime
 import subprocess
 
 def mcswitch():
-    subprocess.run('sh ./mc.sh')
+    subprocess.run('sh mc.sh', shell=True, capture_output=
+                   True)
 
 def getVer():
     with open('CHANGELOG.md', 'r') as f:
