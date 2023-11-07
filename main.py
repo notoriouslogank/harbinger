@@ -237,7 +237,7 @@ async def lmgtfy(ctx, query: str):
     timestamp()
     await ctx.channel.purge(limit=1)
     await ctx.send(embed=embed)
-    await send_dm(ctx, ctx.message.author, query)
+    await send_dm(ctx.message.author, query)
     await ctx.send(f'{query}')
 
 def main():
