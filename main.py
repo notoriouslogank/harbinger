@@ -7,7 +7,7 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 
-from helpers import getLog, getVer, timestamp, mcswitch
+from helpers import getLog, getVer, mcswitch, timestamp
 
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
@@ -23,6 +23,11 @@ intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 channel = bot.get_channel(CHANNEL)
 
+def load_cogs():
+    for f in os.listdir("./cogs"):
+        if f.endswith(".py"):
+            bot.load_extension("cogs." + f[:-3])
+
 async def send_dm(ctx, member: discord.Member, *, content):
     channel = await member.create_dm()
     await channel.send(content)
@@ -31,7 +36,6 @@ async def send_dm(ctx, member: discord.Member, *, content):
 @bot.event
 async def on_ready():
     """Print username and ID on successful login."""
-    await bot.add_cog(status(bot))
     print(f"Logged in as {bot.user} (ID: {bot.user.id})")
     timestamp()
 
@@ -242,5 +246,6 @@ async def lmgtfy(ctx, query: str):
 
 def main():
     bot.run(TOKEN)
-
+    load_cogs()
+    
 main()

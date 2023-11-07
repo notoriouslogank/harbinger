@@ -21,4 +21,3 @@ def timestamp():
     cTime = datetime.now()
     print(f'{cTime}')
     print(f'----------')
-    
