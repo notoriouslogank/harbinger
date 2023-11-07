@@ -1,6 +1,7 @@
 import os
 import random
 import sys
+from cogs import *
 from datetime import datetime
 
 import discord
