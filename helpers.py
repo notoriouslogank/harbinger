@@ -3,8 +3,6 @@ from os import getenv
 
 import discord
 from discord.ext import commands
-#from discord.ext.commands.cog import Cog  # May be deletable
-#from discord.ext.commands.core import Command  # May be deletable
 from dotenv import load_dotenv
 
 load_dotenv()

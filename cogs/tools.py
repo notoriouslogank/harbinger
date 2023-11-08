@@ -29,6 +29,23 @@ class Tools(commands.Cog):
         await helpers.send_dm(ctx=ctx, member=ctx.message.author, content=query)
 
     @commands.command()
+    async def define(self, ctx: commands.Context, word: str):
+        """Get the Meriam-Webster definition of a word.
+
+        Args:
+            word (str): the word to be defined
+        """
+        dictionary = 'https://www.merriam-webster.com/dictionary/'
+        define_url = dictionary+word
+        embed = discord.Embed(color=purple, title=f"Define: {word}")
+        embed.description = f'[{word}]({define_url})'
+        print(f'Define: {word}: {define_url}')
+        helpers.timestamp()
+        await ctx.channel.purge(limit=1)
+        await ctx.send(embed=embed)
+        await helpers.send_dm(ctx=ctx, member=ctx.message.author, content=define_url)
+        
+    @commands.command()
     async def add(self, ctx: commands.Context, left: int, right: int):
         """Adds two integers and returns result as message."""
         total = left + right
