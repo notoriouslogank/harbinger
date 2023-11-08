@@ -4,7 +4,43 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.1.3-dev] - 2023-07-11
+## [Unreleased] - 2023-08-11
+
+## Fixed
+
+- Formatting errors in README.md
+
+## Changed
+
+- Rewrote all docstrings for brevity and clarity.
+- Removed two (ostensibly) unused imports in helpers.py
+- Rewrote all !help command descriptions
+
+### Removed
+
+- Unused mc.sh file
+
+## [1.1.4] - 2023-08-11
+
+### Deprecated
+
+- getLog() helper function; obsoleted by !changelog()
+
+### Added
+
+- on_ready messages for each Cog
+- embed for !changelog command
+
+### Changed
+
+- !changelog command now sends embed
+
+### Fixed
+
+- !changelog command works properly now
+- Minor formatting errors in CHANGELOG.md
+
+## [1.1.3] - 2023-07-11
 
 ### Added
 
