@@ -30,32 +30,32 @@ class HelpCommand(commands.Cog):
         help_embed.add_field(
             name="!joined", value="Get datetime user joined.", inline=True
         )
-        help_embed.add_field(name="!say", value="Send message as bot.", inline=False)
+        help_embed.add_field(name="!say", value="Send message as bot.", inline=True)
         help_embed.add_field(
-            name="!playing", value="Embed and send game info to channel.", inline=False
+            name="!playing", value="Embed and send game info to channel.", inline=True
         )
         # STATUS
         help_embed.add_field(
-            name="!status", value="Confirm bot online and reachable.", inline=False
+            name="!status", value="Confirm bot online and reachable.", inline=True
         )
         help_embed.add_field(
-            name="!info", value="Get details about this bot.", inline=False
+            name="!info", value="Get details about this bot.", inline=True
         )
-        help_embed.add_field(name="!ping", value="Get network latency.", inline=False)
-        help_embed.add_field(name="!uptime", value="Get bot uptime.", inline=False)
+        help_embed.add_field(name="!ping", value="Get network latency.", inline=True)
+        help_embed.add_field(name="!uptime", value="Get bot uptime.", inline=True)
         help_embed.add_field(
-            name="!shutdown", value="Gracefully shutdown the bot.", inline=False
+            name="!shutdown", value="Gracefully shutdown the bot.", inline=True
         )
         # TOOLS
         help_embed.add_field(
-            name="!lmgtfy", value="Let me Google that for you...", inline=False
+            name="!lmgtfy", value="Let me Google that for you...", inline=True
         )
-        help_embed.add_field(name="!add", value="Add two numbers.", inline=False)
-        help_embed.add_field(name="!roll", value="Roll NdN dice.", inline=False)
+        help_embed.add_field(name="!add", value="Add two numbers.", inline=True)
+        help_embed.add_field(name="!roll", value="Roll NdN dice.", inline=True)
         help_embed.add_field(
             name="!rps",
             value="Play rock, paper, scissors against the bot.",
-            inline=False,
+            inline=True,
         )
         # OTHER
         help_embed.add_field(
