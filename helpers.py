@@ -1,11 +1,10 @@
 from datetime import datetime
 from os import getenv
-from typing import Any, List, Mapping, Optional
 
 import discord
 from discord.ext import commands
-from discord.ext.commands.cog import Cog
-from discord.ext.commands.core import Command
+#from discord.ext.commands.cog import Cog  # May be deletable
+#from discord.ext.commands.core import Command  # May be deletable
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -35,7 +34,7 @@ def getVer():
         return version
 
 
-def getLog():
+def getLog():  # TODO: Replace this with embed function
     """Read CHANGELOG.md and return it as a string.
 
     Returns:
@@ -47,7 +46,7 @@ def getLog():
 
 
 def timestamp():
-    """Print current timestamp of command and end-of-command signifier."""
+    """Print timestamp and end-of-command separator."""
     cTime = datetime.now()
     print(f"{cTime}")
     print(f"----------")

@@ -5,15 +5,14 @@ from helpers import purple, timestamp
 
 
 class Moderation(commands.Cog):
-    """Commands to aid in server moderation.
-    """
+    """Server moderation commands."""
+
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
     @commands.command()
-    async def clear(self, ctx: commands.Context, amount: int=2) -> None:
-        """Delete a number of messages in channel.
-        """
+    async def clear(self, ctx: commands.Context, amount: int = 2) -> None:
+        """Delete a number of messages in channel."""
         amount = amount + 1
         if amount > 101:
             await ctx.send("Cannot delete more than 100 messages.")
@@ -23,8 +22,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     async def joined(self, ctx: commands.Context, member: discord.Member):
-        """Return join date for given user.iption_
-        """
+        """Get user's join datetime."""
         joined = f"{member.name} joined on {discord.utils.format_dt(member.joined_at)}."
         print(f"{joined}")
         await ctx.send(f"{joined}")
@@ -32,8 +30,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     async def say(self, ctx: commands.Context, message: str):
-        """Send a str as the bot instance.
-        """
+        """Say message as bot."""
         print(f"{ctx.message.author} made McSwitch say:")
         print(f"{message}")
         timestamp()
@@ -42,8 +39,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     async def playing(self, ctx: commands.Context, game: str, field: str, value: str):
-        """Send embed to channel with game info.
-        """
+        """Create game info embed."""
         embedPlaying = discord.Embed(title=game, color=purple)
         embedPlaying.add_field(name=f"{field}", value=f"{value}", inline=True)
         print(f"{ctx.message.author} is playing {game}: {field}, {value}")
@@ -52,6 +48,5 @@ class Moderation(commands.Cog):
 
 
 async def setup(bot: commands.Bot) -> None:
-    """Load cogs into bot proper.
-    """
+    """Load cogs into bot."""
     await bot.add_cog(Moderation(bot))
