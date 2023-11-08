@@ -61,12 +61,12 @@ class HelpCommand(commands.Cog):
         help_embed.add_field(
             name="Need Help?",
             value="[Join the Bot-Dev Server](https://discord.gg/9zAW8DfV)",
-            inline=False,
+            inline=True,
         )
         help_embed.add_field(
             name="Find a Problem?",
             value="[Submit a Bug Report](https://github.com/notoriouslogank/mcswitch/issues)",
-            inline=False
+            inline=True
         )
         help_embed.set_footer(
             text=f"Requested by {ctx.author}>.", icon_url=ctx.author.avatar
