@@ -25,10 +25,10 @@ class HelpCommand(commands.Cog):
         )
         # MODERATION
         help_embed.add_field(
-            name="!clear", value="Delete a number of messages.", inline=False
+            name="!clear", value="Delete a number of messages.", inline=True
         )
         help_embed.add_field(
-            name="!joined", value="Get datetime user joined.", inline=False
+            name="!joined", value="Get datetime user joined.", inline=True
         )
         help_embed.add_field(name="!say", value="Send message as bot.", inline=False)
         help_embed.add_field(
@@ -62,6 +62,11 @@ class HelpCommand(commands.Cog):
             name="Need Help?",
             value="[Join the Bot-Dev Server](https://discord.gg/9zAW8DfV)",
             inline=False,
+        )
+        help_embed.add_field(
+            name="Find a Problem?",
+            value="[Submit a Bug Report](https://github.com/notoriouslogank/mcswitch/issues)",
+            inline=False
         )
         help_embed.set_footer(
             text=f"Requested by {ctx.author}>.", icon_url=ctx.author.avatar
