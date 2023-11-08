@@ -5,6 +5,7 @@ TOKEN = helpers.TOKEN
 CHANNEL = helpers.CHANNEL
 COGS = helpers.COGS
 
+bot.remove_command('help')
 
 @bot.event
 async def setup_hook() -> None:
