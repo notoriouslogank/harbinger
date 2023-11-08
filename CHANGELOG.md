@@ -4,12 +4,22 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.1.0] - 2023-07-11
+## [1.1.1] - 2023-07-11
+
+### Changed
+
+- BotStatus cog renamed to Status
+
+### Added
+
+-Docstrings for all commands (cogs/*.)
 
 ### Fixed
 
 - All cogs should work as intended now
 - Imports should work correctly throughout
+- Reformatted entire codebase (Black formatter)
+- Sorted imports correctly (isort)
 
 ### Removed
 
@@ -56,7 +66,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 - Certain commands now auto-remove the original command to obfuscate the sender
-
 
 ## [0.9.8] - 2023-06-11
 
@@ -114,7 +123,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Removed
 
 - Unused imports
-
 
 ## [0.9.1] - 2023-04-11
 
