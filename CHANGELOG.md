@@ -9,6 +9,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 - Custom MyHelpCommand to replace defaulHelpCommand
+- Custom help message for every user engagable bot command
+- Avatar to help message; will be deploying this further in future updates
+
+### Removed
+
+- Default !help function
 
 ## [1.1.2] - 2023-07-11
 
