@@ -1,8 +1,11 @@
 from datetime import datetime
 from os import getenv
+from typing import Any, List, Mapping, Optional
 
 import discord
 from discord.ext import commands
+from discord.ext.commands.cog import Cog
+from discord.ext.commands.core import Command
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -61,3 +64,17 @@ async def send_dm(ctx, member: discord.Member, *, content):
     """
     channel = await member.create_dm()
     await channel.send(content)
+
+class MyHelpCommand(commands.HelpCommand):
+    async def send_bot_help(self, mapping):
+        embed = discord.Embed(title="bot help")
+        for cog, cmds in mapping.items():
+            embed.add_field(
+                name = cog.qualified_name,
+                value = (f'{len(cmds)} commands')
+            )
+        channel = self.get_destination()
+        await channel.send(embed=embed)
+    
+    async def send_command_help(self, command: Command) -> None:
+        return await super().send_command_help(command)
