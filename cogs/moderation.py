@@ -11,7 +11,7 @@ class Moderation(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def clear(self, ctx: commands.Context, amount=2) -> None:
+    async def clear(self, ctx: commands.Context, amount: int=2) -> None:
         """Delete a number of messages in channel.
         """
         amount = amount + 1

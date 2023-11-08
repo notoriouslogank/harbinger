@@ -12,10 +12,12 @@ COGS = ("cogs.moderation", "cogs.tools", "cogs.status")
 sTime = datetime.now()
 purple = 0x884EA0  # Should move this to .env
 
+help_command = commands.DefaultHelpCommand(show_parameter_description=False)
+
 intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
-bot = commands.Bot(command_prefix="!", intents=intents)
+bot = commands.Bot(command_prefix="!", intents=intents, help_command=help_command)
 channel = bot.get_channel(CHANNEL)
 
 
