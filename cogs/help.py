@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-from helpers import bot, getVer, purple # might be able to remove bot import
+from helpers import getVer, purple
 
 VERSION = getVer()
 PURPLE = purple
@@ -25,43 +25,48 @@ class HelpCommand(commands.Cog):
         )
         # MODERATION
         help_embed.add_field(
-            name="!clear", value="Delete a number of messages.", inline=False
+            name="!clear", value="Delete a number of messages.", inline=True
         )
         help_embed.add_field(
-            name="!joined", value="Get datetime user joined.", inline=False
+            name="!joined", value="Get datetime user joined.", inline=True
         )
-        help_embed.add_field(name="!say", value="Send message as bot.", inline=False)
+        help_embed.add_field(name="!say", value="Send message as bot.", inline=True)
         help_embed.add_field(
-            name="!playing", value="Embed and send game info to channel.", inline=False
+            name="!playing", value="Embed and send game info to channel.", inline=True
         )
         # STATUS
         help_embed.add_field(
-            name="!status", value="Confirm bot online and reachable.", inline=False
+            name="!status", value="Confirm bot online and reachable.", inline=True
         )
         help_embed.add_field(
-            name="!info", value="Get details about this bot.", inline=False
+            name="!info", value="Get details about this bot.", inline=True
         )
-        help_embed.add_field(name="!ping", value="Get network latency.", inline=False)
-        help_embed.add_field(name="!uptime", value="Get bot uptime.", inline=False)
+        help_embed.add_field(name="!ping", value="Get network latency.", inline=True)
+        help_embed.add_field(name="!uptime", value="Get bot uptime.", inline=True)
         help_embed.add_field(
-            name="!shutdown", value="Gracefully shutdown the bot.", inline=False
+            name="!shutdown", value="Gracefully shutdown the bot.", inline=True
         )
         # TOOLS
         help_embed.add_field(
-            name="!lmgtfy", value="Let me Google that for you...", inline=False
+            name="!lmgtfy", value="Let me Google that for you...", inline=True
         )
-        help_embed.add_field(name="!add", value="Add two numbers.", inline=False)
-        help_embed.add_field(name="!roll", value="Roll NdN dice.", inline=False)
+        help_embed.add_field(name="!add", value="Add two numbers.", inline=True)
+        help_embed.add_field(name="!roll", value="Roll NdN dice.", inline=True)
         help_embed.add_field(
             name="!rps",
             value="Play rock, paper, scissors against the bot.",
-            inline=False,
+            inline=True,
         )
         # OTHER
         help_embed.add_field(
             name="Need Help?",
             value="[Join the Bot-Dev Server](https://discord.gg/9zAW8DfV)",
-            inline=False,
+            inline=True,
+        )
+        help_embed.add_field(
+            name="Find a Problem?",
+            value="[Submit a Bug Report](https://github.com/notoriouslogank/mcswitch/issues)",
+            inline=True
         )
         help_embed.set_footer(
             text=f"Requested by {ctx.author}>.", icon_url=ctx.author.avatar
