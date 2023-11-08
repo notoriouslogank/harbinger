@@ -4,13 +4,24 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.6] - 2023-08-11
+
+### Changed
+
+-Reformatted the embed created by !help
+
 ## [1.1.5] - 2023-08-11
 
-## Fixed
+### Fixed
 
 - Formatting errors in README.md
+- Removed unused import in help.py
 
-## Changed
+### Added
+
+- Link to GitHub Issue Tracker in !help embed
+
+### Changed
 
 - Rewrote all docstrings for brevity and clarity.
 - Removed two (ostensibly) unused imports in helpers.py

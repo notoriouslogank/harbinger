@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-from helpers import bot, getVer, purple # might be able to remove bot import
+from helpers import getVer, purple
 
 VERSION = getVer()
 PURPLE = purple
