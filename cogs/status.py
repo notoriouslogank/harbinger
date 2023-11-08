@@ -12,20 +12,20 @@ purple = helpers.purple
 
 
 class Status(commands.Cog):
-    """Commands pertaining to bot status."""
+    """Commands to find out status of bot services."""
 
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
     @commands.Cog.listener()
     async def on_ready(self) -> None:
-        """Print message to console when bot is online."""
+        """Confirm bot is logged in."""
         print(f"Logged in as {bot.user} (ID: {bot.user.id}).")
         helpers.timestamp()
 
     @commands.command()
     async def status(self, ctx: commands.Context):
-        """Send message to channel if bot is reachable."""
+        """Confirm bot is online and reachable."""
         status_msg = f"{bot.user} is online."
         print(f"{status_msg}")
         helpers.timestamp()
@@ -33,7 +33,7 @@ class Status(commands.Cog):
 
     @commands.command()
     async def info(self, ctx: commands.Context):
-        """Send embed to channel containing bot info."""
+        """Get information about this bot."""
         sTime = helpers.sTime
         cTime = datetime.now()
         delta = cTime - sTime
@@ -52,7 +52,7 @@ class Status(commands.Cog):
 
     @commands.command()
     async def ping(self, ctx: commands.Context):
-        """Send message to channel with current network latency."""
+        """Check network latency."""
         ping_msg = "Current ping: {0}".format(round(bot.latency, 2))
         print(f"{ping_msg}")
         helpers.timestamp()
@@ -60,7 +60,7 @@ class Status(commands.Cog):
 
     @commands.command()
     async def uptime(self, ctx: commands.Context):
-        """Send message to channel with bot uptime."""
+        """Get bot uptime."""
         cTime = datetime.now()
         delta = cTime - helpers.sTime
         up_msg = f"uptime: {delta}"
@@ -69,8 +69,8 @@ class Status(commands.Cog):
         await ctx.send(f"{up_msg}")
 
     @commands.command()
-    async def changelog(self, ctx: commands.Context):
-        """Send message to channel with changelog."""
+    async def changelog(self, ctx: commands.Context):  # TODO: Fix this (again)
+        """Get changelog."""
         changelog = helpers.getLog()
         print(f"{changelog}")
         helpers.timestamp()
@@ -78,7 +78,7 @@ class Status(commands.Cog):
 
     @commands.command()
     async def shutdown(self, ctx: commands.Context):
-        """Gracefully shuts down the bot.ription_"""
+        """Gracefully shutdown the bot."""
         embedShutdown = discord.Embed(
             title="shutdown", color=0xFF0000, timestamp=datetime.now()
         )
@@ -90,5 +90,5 @@ class Status(commands.Cog):
 
 
 async def setup(bot: commands.Bot) -> None:
-    """Load cogs into bot proper."""
+    """Load cogs into bot."""
     await bot.add_cog(Status(bot))

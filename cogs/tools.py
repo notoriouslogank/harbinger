@@ -10,7 +10,7 @@ purple = helpers.purple
 
 
 class Tools(commands.Cog):
-    """Commands containing utilities (mathematics, etc.)"""
+    """Commands containing various tools/utilites."""
 
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
@@ -38,7 +38,7 @@ class Tools(commands.Cog):
 
     @commands.command()
     async def roll(self, ctx: commands.Context, dice: str):
-        """Roll NdN dice and return result(s) as message."""
+        """Roll NdN dice and get results."""
         try:
             rolls, limit = map(int, dice.split("d"))
         except Exception:
@@ -77,5 +77,5 @@ class Tools(commands.Cog):
 
 
 async def setup(bot: commands.Bot) -> None:
-    """Load cogs into bot proper."""
+    """Load cogs into bot."""
     await bot.add_cog(Tools(bot))
