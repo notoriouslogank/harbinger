@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+
 from helpers import bot, getVer, purple
 
 VERSION = getVer()
@@ -15,8 +16,7 @@ class HelpCommand(commands.Cog):
         
     @commands.command()
     async def help(self, ctx):
-        help_embed = discord.Embed(title='Help Desk', description=f"All commands for mcswitch v{VERSION}", color={purple})
-        help_embed.set_author(name="mcswitch", icon_url=self.bot.avatar)
+        help_embed = discord.Embed(title='Help Desk', description=f"All commands for mcswitch v{VERSION}")
         # MODERATION
         help_embed.add_field(name="clear", value="Deletes a specified amount of messages.", inline=False)
         help_embed.add_field(name="joined", value="Get datetime when member joined.", inline=False)
