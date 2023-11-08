@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 load_dotenv()
 TOKEN = getenv("TOKEN")
 CHANNEL = getenv("CHANNEL")
-COGS = ("cogs.moderation", "cogs.tools", "cogs.status")
+COGS = ("cogs.moderation", "cogs.tools", "cogs.status", "cogs.help")
 sTime = datetime.now()
 purple = 0x884EA0  # Should move this to .env
 
