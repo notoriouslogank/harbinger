@@ -16,7 +16,7 @@ class HelpCommand(commands.Cog):
         
     @commands.command()
     async def help(self, ctx):
-        help_embed = discord.Embed(title='Help Desk', description=f"All commands for mcswitch v{VERSION}")
+        help_embed = discord.Embed(title='Help Desk', description=f"All commands for mcswitch v{VERSION}", color=PURPLE)
         # MODERATION
         help_embed.add_field(name="!clear <amount: int>", value="Delete <amount> of messages.", inline=False)
         help_embed.add_field(name="!joined <member: discord.Member>", value="Return <datetime> <member: discord.Member> joined.", inline=False)
