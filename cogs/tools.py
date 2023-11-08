@@ -17,7 +17,7 @@ class Tools(commands.Cog):
 
     @commands.command()
     async def lmgtfy(self, ctx: commands.Context, query: str):
-        """Let Me Google That For You: message channel with Google query."""
+        """Let Me Google That For You"""
         google = "https://google.com/search?q="
         search = google + query
         embed = discord.Embed(color=purple, title="LMGTFY")
@@ -30,7 +30,7 @@ class Tools(commands.Cog):
 
     @commands.command()
     async def add(self, ctx: commands.Context, left: int, right: int):
-        """Adds two integers and returns result as message in channel."""
+        """Adds two integers and returns result as message."""
         total = left + right
         print(f"{left} + {right} = {total}")
         helpers.timestamp()
@@ -38,7 +38,7 @@ class Tools(commands.Cog):
 
     @commands.command()
     async def roll(self, ctx: commands.Context, dice: str):
-        """Roll NdN dice and return result(s) as message in channel."""
+        """Roll NdN dice and return result(s) as message."""
         try:
             rolls, limit = map(int, dice.split("d"))
         except Exception:
@@ -51,7 +51,7 @@ class Tools(commands.Cog):
 
     @commands.command()
     async def rps(self, ctx: commands.Context, choice: str):
-        """Play rock, paper, scissors against the bot in channel."""
+        """Play rock, paper, scissors against the bot."""
         choices = ["rock", "paper", "scissors"]
         botChoice = choices[randint(0, 2)]
         embedRPS = discord.Embed(color=purple, title="rock, paper, scissors")
