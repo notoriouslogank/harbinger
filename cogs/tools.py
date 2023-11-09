@@ -20,17 +20,10 @@ class Tools(commands.Cog):
         print("Tools Cog online.")
 
     @commands.command()
-    async def mcswitch(self, ctx, state="on"):
-        print('Received command !mcswitch')
-        if state == "on":
-            startServer = mcStart()
-            await ctx.channel.send("Might have started the server?")
-            await ctx.channel.send("You should probably check mimir.")
-        elif state == "off":
-            print("Pretend we turned the server off.")
-            await ctx.channel.send("Pretend like we turned off the server.")
-            await ctx.channel.send("No one will notice.")
-            
+    async def mcswitch(self, ctx):
+        mcStart()
+        await ctx.channel.send("Let's see if this works...")
+        
     @commands.command()
     async def lmgtfy(self, ctx: commands.Context, query: str):
         """Let Me Google That For You"""
