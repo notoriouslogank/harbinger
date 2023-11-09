@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 from utils.helpers import bot, getVer, sTime, timestamp
 
 load_dotenv()
-color1 = getenv("COLOR1")
+color1 = int(getenv("COLOR1"))
 bot = bot
 currentVersion = getVer()
 

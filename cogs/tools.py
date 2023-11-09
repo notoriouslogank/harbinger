@@ -11,7 +11,7 @@ from os import getenv
 bot = bot
 
 load_dotenv()
-color1 = getenv("COLOR1")
+color1 = int(getenv("COLOR1"))
 
 
 class Tools(commands.Cog):

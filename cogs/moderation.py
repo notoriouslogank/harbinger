@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from utils.helpers import timestamp
 
 load_dotenv()
-color1 = getenv("COLOR1")
+color1 = int(getenv("COLOR1"))
 
 class Moderation(commands.Cog):
     """Server moderation commands."""
