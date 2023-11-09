@@ -9,9 +9,9 @@ sTime = datetime.now()
 load_dotenv()
 token = getenv("TOKEN")
 channel = getenv("CHANNEL")
-cogs = getenv("COGS")
 color1 = getenv("COLOR1")
 
+cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools"
 
 intents = discord.Intents.default()
 intents.members = True

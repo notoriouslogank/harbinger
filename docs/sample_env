@@ -1,5 +1,4 @@
 TOKEN=''
 CHANNEL=
-COGS=("cogs.moderation", "cogs.status", "cogs.help", "cogs.tools")
 COLOR1=0x884EA0
 MC_HOST='logank@mimir'

@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 token = getenv('TOKEN')
 channel = getenv('CHANNEL')
-cogs = getenv('COGS')
+cogs = 'cogs.help', 'cogs.moderation', 'cogs.status', 'cogs.tools'
 color1 = getenv('COLOR1')
 mc_host = getenv('MC_HOST')
 
