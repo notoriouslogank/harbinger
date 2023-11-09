@@ -10,6 +10,7 @@ def startServer():
     bot = Connection(f"{mc_hostname}")
     serverSetup = bot.run("tmux new -d -s server")
     serverIp = bot.run('tmux send -t server:0 "curl https://ipinfo.io/ip" C-m')
+    print(str(serverIp))
     serverDir = bot.run('tmux send -t server:0 "cd /home/logank/paper-test" C-m')
     serverStart = bot.run('tmux send -t server:0 "./java.sh" C-m')
     print("Starting the server...")
