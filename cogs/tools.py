@@ -19,11 +19,7 @@ class Tools(commands.Cog):
     async def on_ready(self):
         print("Tools Cog online.")
 
-    @commands.command()
-    async def mcswitch(self, ctx):
-        mcStart()
-        await ctx.channel.send("Let's see if this works...")
-        
+
     @commands.command()
     async def lmgtfy(self, ctx: commands.Context, query: str):
         """Let Me Google That For You"""

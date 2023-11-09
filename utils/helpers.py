@@ -5,9 +5,6 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 
-from fabric import Connection
-from invoke import Responder
-
 load_dotenv()
 TOKEN = getenv("TOKEN")
 CHANNEL = getenv("CHANNEL")
@@ -50,16 +47,8 @@ def timestamp():
     """Print timestamp and end-of-command separator."""
     cTime = datetime.now()
     print(f"{cTime}")
-    print(f"----------")
+    print(f"----------"
 
-
-def mcStart():
-    ssh = Connection('logank@mimir')
-    sudopass = Responder(pattern=r'\[sudo\] password:',
-                         response='mutatismutandis\n', # need to at *least* 64-bit encode this
-                         )
-    sshMimir = ssh.run("tmux -c 'sudo bash /home/logank/paper-1.0.0-dev/startup.sh'", pty=True, watchers=[sudopass])
-    return sshMimir
 
 async def send_dm(ctx, member: discord.Member, *, content):
     """Create a Direct Message channel with a given member.
