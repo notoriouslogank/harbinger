@@ -16,6 +16,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - !define command to get the Meriam-Webster definition of a word
 - !help command description: !define
 
+### Fixed
+
+- Minor formatting errors in CHANGELOG.md
+- !changelog command
+
 ## [1.1.6] - 2023-08-11
 
 ### Changed
@@ -51,7 +56,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
-- on_ready messages for each Cog
+- on ready messages for each Cog
 - embed for !changelog command
 
 ### Changed
@@ -135,7 +140,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 - !playing() command to post game information
-- sample_env
+- sample-env
 - lmgtfy() *may* now send the requesting user a DM with their query string
 
 ## [0.9.9] - 2023-06-11
