@@ -4,11 +4,11 @@ from datetime import datetime
 import discord
 from discord.ext import commands
 
-import helpers
+from utils.helpers import timestamp, getenv, getLog, getVer, purple, bot
 
-bot = helpers.bot
-VERSION = helpers.getVer()
-purple = helpers.purple
+bot = bot
+VERSION = getVer()
+purple = purple
 
 
 class Status(commands.Cog):
@@ -21,20 +21,20 @@ class Status(commands.Cog):
     async def on_ready(self) -> None:
         """Confirm bot is logged in."""
         print(f"Logged in as {bot.user} (ID: {bot.user.id}).")
-        helpers.timestamp()
+        timestamp()
 
     @commands.command()
     async def status(self, ctx: commands.Context):
         """Confirm bot is online and reachable."""
         status_msg = f"{bot.user} is online."
         print(f"{status_msg}")
-        helpers.timestamp()
+        timestamp()
         await ctx.send(f"{status_msg}")
 
     @commands.command()
     async def info(self, ctx: commands.Context):
         """Get information about this bot."""
-        sTime = helpers.sTime
+        sTime = sTime
         cTime = datetime.now()
         delta = cTime - sTime
         embedInfo = discord.Embed(title="mcswitch", color=purple)
@@ -47,7 +47,7 @@ class Status(commands.Cog):
             inline=False,
         )
         print(f"info dumped")
-        helpers.timestamp()
+        timestamp()
         await ctx.send(embed=embedInfo)
 
     @commands.command()
@@ -55,17 +55,17 @@ class Status(commands.Cog):
         """Check network latency."""
         ping_msg = "Current ping: {0}".format(round(bot.latency, 2))
         print(f"{ping_msg}")
-        helpers.timestamp()
+        timestamp()
         await ctx.send(f"{ping_msg}")
 
     @commands.command()
     async def uptime(self, ctx: commands.Context):
         """Get bot uptime."""
         cTime = datetime.now()
-        delta = cTime - helpers.sTime
+        delta = cTime - sTime
         up_msg = f"uptime: {delta}"
         print(f"{up_msg}")
-        helpers.timestamp()
+        timestamp()
         await ctx.send(f"{up_msg}")
 
     @commands.command()
@@ -73,7 +73,7 @@ class Status(commands.Cog):
         """Get changelog."""
         changelog = helpers.getLog()
         print(f"{changelog}")
-        helpers.timestamp()
+        timestamp()
         await ctx.send(f"{changelog}")
 
     @commands.command()
@@ -84,7 +84,7 @@ class Status(commands.Cog):
         )
         embedShutdown.add_field(name="user", value=f"{ctx.message.author}", inline=True)
         print(f"{ctx.message.author} initiated shutdown.")
-        helpers.timestamp()
+        timestamp()
         await ctx.send(embed=embedShutdown)
         sys.exit()
 

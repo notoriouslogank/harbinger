@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-from helpers import getVer, purple
+from utils.helpers import getVer, purple
 
 VERSION = getVer()
 PURPLE = purple
@@ -48,6 +48,9 @@ class HelpCommand(commands.Cog):
         )
         # TOOLS
         help_embed.add_field(
+            name="!define", value="Get the definition of a given word.", inline=True
+        )
+        help_embed.add_field(
             name="!lmgtfy", value="Let me Google that for you...", inline=True
         )
         help_embed.add_field(name="!add", value="Add two numbers.", inline=True)
@@ -66,7 +69,7 @@ class HelpCommand(commands.Cog):
         help_embed.add_field(
             name="Find a Problem?",
             value="[Submit a Bug Report](https://github.com/notoriouslogank/mcswitch/issues)",
-            inline=True
+            inline=True,
         )
         help_embed.set_footer(
             text=f"Requested by {ctx.author}>.", icon_url=ctx.author.avatar
