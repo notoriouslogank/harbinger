@@ -14,7 +14,7 @@ mc_hostname = getenv("MC_HOST")
 def ipServer():
     bot = Connection(f'{mc_hostname}')
     serverIp = bot.run("curl https://ipinfo.io/ip >> /home/logank/paper-test/ip.txt")
-    getIp = transfer.Transfer.get(remote='/home/logank/paper-test/ip.txt')
+    getIp = transfer.Transfer(bot).get(remote='/home/logank/paper-test/ip.txt')
 
 def startServer():
     """Create an SSH connection and start the Minecraft server."""
