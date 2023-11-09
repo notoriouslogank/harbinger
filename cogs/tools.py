@@ -26,7 +26,7 @@ class Tools(commands.Cog):
             startServer()
             await ctx.channel.send('Holy shit, did it work?!')
         except Exception():
-            await ctx.channel.send('Nope, she's fucked.)
+            await ctx.channel.send('Nope, shes fucked.')
 
     @commands.command()
     async def lmgtfy(self, ctx: commands.Context, query: str):
