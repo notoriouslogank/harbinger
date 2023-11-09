@@ -6,9 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [1.2.0] - 2023-08-11
 
+### Breaking Changes
+
+- Restructured entire module: created mcswitch/utils/, mcswitch/server.utils, mcswitch/docs folders to contain source code
+- Changed most instances of importing helpers.py: imports are much more streamlined
+
 ### Added
 
 - !define command to get the Meriam-Webster definition of a word
+- !help command description: !define
+
+### Fixed
+
+- Minor formatting errors in CHANGELOG.md
+- !changelog command
 
 ## [1.1.6] - 2023-08-11
 
@@ -45,7 +56,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
-- on_ready messages for each Cog
+- on ready messages for each Cog
 - embed for !changelog command
 
 ### Changed
@@ -87,7 +98,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
--Docstrings for all commands (cogs/*.)
+-Docstrings for all commands (cogs/)
 
 ### Fixed
 
@@ -129,7 +140,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 - !playing() command to post game information
-- sample_env
+- sample-env
 - lmgtfy() *may* now send the requesting user a DM with their query string
 
 ## [0.9.9] - 2023-06-11
@@ -177,7 +188,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 - Delete command to have the bot silently delete messages.
-- on_message check for 'curse' words
+- onmessage check for 'curse' words
 
 ## [0.9.4] - 2023-06-11
 

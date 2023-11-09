@@ -3,10 +3,10 @@ from random import randint
 import discord
 from discord.ext import commands
 
-import helpers
+from utils.helpers import timestamp, bot, send_dm, purple
 
-bot = helpers.bot
-purple = helpers.purple
+bot = bot
+purple = purple
 
 
 class Tools(commands.Cog):
@@ -23,10 +23,10 @@ class Tools(commands.Cog):
         embed = discord.Embed(color=purple, title="LMGTFY")
         embed.description = f"[Here]({search}), let me Google that for you!"
         print(f"LMGTFY: {search}")
-        helpers.timestamp()
+        timestamp()
         await ctx.channel.purge(limit=1)
         await ctx.send(embed=embed)
-        await helpers.send_dm(ctx=ctx, member=ctx.message.author, content=query)
+        await send_dm(ctx=ctx, member=ctx.message.author, content=query)
 
     @commands.command()
     async def define(self, ctx: commands.Context, word: str):
@@ -35,22 +35,22 @@ class Tools(commands.Cog):
         Args:
             word (str): the word to be defined
         """
-        dictionary = 'https://www.merriam-webster.com/dictionary/'
-        define_url = dictionary+word
+        dictionary = "https://www.merriam-webster.com/dictionary/"
+        define_url = dictionary + word
         embed = discord.Embed(color=purple, title=f"Define: {word}")
-        embed.description = f'[{word}]({define_url})'
-        print(f'Define: {word}: {define_url}')
-        helpers.timestamp()
+        embed.description = f"[{word}]({define_url})"
+        print(f"Define: {word}: {define_url}")
+        timestamp()
         await ctx.channel.purge(limit=1)
         await ctx.send(embed=embed)
-        await helpers.send_dm(ctx=ctx, member=ctx.message.author, content=define_url)
-        
+        await send_dm(ctx=ctx, member=ctx.message.author, content=define_url)
+
     @commands.command()
     async def add(self, ctx: commands.Context, left: int, right: int):
         """Adds two integers and returns result as message."""
         total = left + right
         print(f"{left} + {right} = {total}")
-        helpers.timestamp()
+        timestamp()
         await ctx.send(f"{total}")
 
     @commands.command()
@@ -63,7 +63,7 @@ class Tools(commands.Cog):
             return
         result = ", ".join(str(randint(1, limit)) for r in range(rolls))
         print(f"Roll: {result}")
-        helpers.timestamp()
+        timestamp()
         await ctx.send(f"{result}")
 
     @commands.command()

@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-from helpers import purple, timestamp
+from utils.helpers import timestamp, purple
 
 
 class Moderation(commands.Cog):

@@ -25,7 +25,7 @@ def getVer():
     Returns:
         version (str): software version
     """
-    with open("CHANGELOG.md", "r") as f:
+    with open("docs/CHANGELOG.md", "r") as f:
         changes = f.readlines()
         vLine = changes[6]
         version = vLine[4:9]
@@ -38,7 +38,7 @@ def getLog():  # TODO: Replace this with embed function
     Returns:
         changelog (str): a string containing CHANGELOG.md
     """
-    with open("CHANGELOG.md", "r") as f:
+    with open("docs/CHANGELOG.md", "r") as f:
         changelog = f.readlines()
         return changelog
 
