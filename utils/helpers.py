@@ -2,6 +2,7 @@ from datetime import datetime
 from os import getenv
 
 import discord
+from fabric import Connection
 from discord.ext import commands
 from dotenv import load_dotenv
 
@@ -11,12 +12,17 @@ CHANNEL = getenv("CHANNEL")
 COGS = ("cogs.moderation", "cogs.tools", "cogs.status", "cogs.help")
 sTime = datetime.now()
 purple = 0x884EA0  # Should move this to .env
-
 intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 channel = bot.get_channel(CHANNEL)
+
+def startServer():
+    ssh = Connection('logank@mimir')
+    tmuxStart = ssh.run('tmux send -d -s server')
+    tmuxCd = ssh.run('tmux send -t server:0 "cd /home/logank/paper-test" C-m')
+    tmuxPaper = ssh.run('tmux send -t server:0 "./java.sh" C-m')
 
 
 def getVer():
@@ -47,7 +53,7 @@ def timestamp():
     """Print timestamp and end-of-command separator."""
     cTime = datetime.now()
     print(f"{cTime}")
-    print(f"----------"
+    print(f"----------")
 
 
 async def send_dm(ctx, member: discord.Member, *, content):
@@ -59,4 +65,3 @@ async def send_dm(ctx, member: discord.Member, *, content):
     """
     channel = await member.create_dm()
     await channel.send(content)
-

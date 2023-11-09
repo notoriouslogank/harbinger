@@ -3,7 +3,7 @@ from random import randint
 import discord
 from discord.ext import commands
 
-from utils.helpers import timestamp, bot, send_dm, purple, mcStart
+from utils.helpers import timestamp, bot, send_dm, purple, startServer
 
 bot = bot
 purple = purple
@@ -19,6 +19,14 @@ class Tools(commands.Cog):
     async def on_ready(self):
         print("Tools Cog online.")
 
+    @commands.command()
+    async def mcswitch(self, ctx):
+        await ctx.channel.send('Trying to start the server. Wish me luck...')
+        try:
+            startServer()
+            await ctx.channel.send('Holy shit, did it work?!')
+        except Exception():
+            await ctx.channel.send('Nope, she's fucked.)
 
     @commands.command()
     async def lmgtfy(self, ctx: commands.Context, query: str):
