@@ -73,7 +73,7 @@ class Status(commands.Cog):
         """Get changelog."""
         changelog = getLog()
         timestamp()
-        await ctx.send(f"{changelog}", file="docs/CHANGELOG.md")
+        await ctx.send(f"{changelog}", file="docs\CHANGELOG.md")
 
     @commands.command()
     async def shutdown(self, ctx: commands.Context):
