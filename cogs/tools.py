@@ -65,7 +65,7 @@ class Tools(commands.Cog):
         """Let Me Google That For You"""
         google = "https://google.com/search?q="
         search = google + query
-        embed = discord.Embed(color=f'{f'{COLOR1}'}', title="LMGTFY")
+        embed = discord.Embed(color=f'{COLOR1}', title="LMGTFY")
         embed.description = f"[Here]({search}), let me Google that for you!"
         print(f"LMGTFY: {search}")
         timestamp()
@@ -82,7 +82,7 @@ class Tools(commands.Cog):
         """
         dictionary = "https://www.merriam-webster.com/dictionary/"
         define_url = dictionary + word
-        embed = discord.Embed(color=f'{f'{COLOR1}'}', title=f"Define: {word}")
+        embed = discord.Embed(color=f'{COLOR1}', title=f"Define: {word}")
         embed.description = f"[{word}]({define_url})"
         print(f"Define: {word}: {define_url}")
         timestamp()
