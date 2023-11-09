@@ -11,10 +11,10 @@ bot.remove_command("help")
 @bot.event
 async def setup_hook() -> None:
     """Loads cogs."""
-    print(f"Loading cogs: {cogs}")
+    print(f"Loading cogs...")
     for cog in cogs:
         await bot.load_extension(cog)
-    timestamp()
+
 
 
 def main():
