@@ -6,20 +6,19 @@ from discord.ext import commands
 from dotenv import load_dotenv
 
 sTime = datetime.now()
-
 load_dotenv()
 token = getenv("TOKEN")
 channel = getenv("CHANNEL")
 cogs = getenv("COGS")
 color1 = getenv("COLOR1")
 
+
 intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
-channel = bot.get_channel(channel)
 
-#def startServer():
+# def startServer():
 #    """Start the Minecraft server.
 #    """
 #    ssh = Connection('logank@mimir')

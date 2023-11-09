@@ -1,9 +1,16 @@
-from utils.helpers import CHANNEL, COGS, TOKEN, bot
+from utils.helpers import bot
+from os import getenv
+from dotenv import load_dotenv
+
+load_dotenv()
+token = getenv('TOKEN')
+channel = getenv('CHANNEL')
+cogs = getenv('COGS')
+color1 = getenv('COLOR1')
+mc_host = getenv('MC_HOST')
 
 bot = bot
-token = TOKEN
-channel = CHANNEL
-cogs = COGS
+
 
 bot.remove_command("help")
 
