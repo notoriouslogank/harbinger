@@ -18,14 +18,6 @@ intents.members = True
 intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-# def startServer():
-#    """Start the Minecraft server.
-#    """
-#    ssh = Connection('logank@mimir')
-#    tmuxStart = ssh.run('tmux new -d -s server')
-#    tmuxCd = ssh.run('tmux send -t server:0 "cd /home/logank/paper-test" C-m')
-#    tmuxPaper = ssh.run('tmux send -t server:0 "./java.sh" C-m')
-
 
 def getVer():
     """Return bot software version.
