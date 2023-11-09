@@ -3,7 +3,8 @@ from random import randint
 import discord
 from discord.ext import commands
 
-from utils.helpers import timestamp, bot, send_dm, purple, serverAgent
+from utils import serverAgent
+from utils.helpers import timestamp, bot, send_dm, purple
 
 bot = bot
 purple = purple
