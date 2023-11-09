@@ -9,6 +9,10 @@ class Moderation(commands.Cog):
 
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
+        
+    @commands.Cog.listener()
+    async def on_ready(self):
+        print("Moderation Cog online.")
 
     @commands.command()
     async def clear(self, ctx: commands.Context, amount: int = 2) -> None:
@@ -47,6 +51,6 @@ class Moderation(commands.Cog):
         await ctx.send(embed=embedPlaying)
 
 
-async def setup(bot: commands.Bot) -> None:
+async def setup(bot):
     """Load cogs into bot."""
     await bot.add_cog(Moderation(bot))
