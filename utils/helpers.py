@@ -20,7 +20,7 @@ channel = bot.get_channel(CHANNEL)
 
 def startServer():
     ssh = Connection('logank@mimir')
-    tmuxStart = ssh.run('tmux send -d -s server')
+    tmuxStart = ssh.run('tmux new -d -s server')
     tmuxCd = ssh.run('tmux send -t server:0 "cd /home/logank/paper-test" C-m')
     tmuxPaper = ssh.run('tmux send -t server:0 "./java.sh" C-m')
 
