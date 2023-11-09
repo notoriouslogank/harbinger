@@ -1,7 +1,8 @@
 from os import getenv
 
+
 from dotenv import load_dotenv
-from fabric import Connection
+from fabric import Connection, transfer
 
 load_dotenv()
 mc_hostname = getenv("MC_HOST")
@@ -9,9 +10,16 @@ mc_hostname = getenv("MC_HOST")
 # public_up = get_ip()
 
 
+
+def ipServer():
+    bot = Connection(f'{mc_hostname}')
+    serverIp = bot.run("curl https://ipinfo.io/ip >> ip.txt")
+    getIp = transfer.Transfer.get(remote='/home/logank/paper-test/ip.txt')
+
 def startServer():
     """Create an SSH connection and start the Minecraft server."""
     bot = Connection(f"{mc_hostname}")  # Could probably be gloablly scoped?
+    ipServer()
     serverSetup = bot.run(
         "tmux new -d -s server"
     )  # These can probably be pared down into one long command
