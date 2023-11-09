@@ -71,10 +71,9 @@ class Status(commands.Cog):
     @commands.command()
     async def changelog(self, ctx: commands.Context):  # TODO: Fix this (again)
         """Get changelog."""
-        changelog = helpers.getLog()
-        print(f"{changelog}")
+        changelog = getLog()
         timestamp()
-        await ctx.send(f"{changelog}")
+        await ctx.send(f"{changelog}", file="docs/CHANGELOG.md")
 
     @commands.command()
     async def shutdown(self, ctx: commands.Context):
