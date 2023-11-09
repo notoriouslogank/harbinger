@@ -4,7 +4,7 @@ from datetime import datetime
 import discord
 from discord.ext import commands
 
-from utils.helpers import timestamp, getenv, getLog, getVer, purple, bot
+from utils.helpers import timestamp, getenv, getLog, getVer, purple, bot, sTime
 
 bot = bot
 VERSION = getVer()
@@ -68,12 +68,12 @@ class Status(commands.Cog):
         timestamp()
         await ctx.send(f"{up_msg}")
 
-    @commands.command()
-    async def changelog(self, ctx: commands.Context):  # TODO: Fix this (again)
-        """Get changelog."""
-        changelog = getLog()
-        timestamp()
-        await ctx.send(f"{changelog}", file="docs\CHANGELOG.md")
+#    @commands.command()
+#    async def changelog(self, ctx: commands.Context):  # TODO: Fix this (again)
+#        """Get changelog."""
+#        changelog = getLog()
+#        timestamp()
+#        await ctx.send(f"{changelog}", file="docs/CHANGELOG.md")
 
     @commands.command()
     async def shutdown(self, ctx: commands.Context):
