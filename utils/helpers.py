@@ -9,7 +9,7 @@ sTime = datetime.now()
 load_dotenv()
 token = getenv("TOKEN")
 channel = getenv("CHANNEL")
-color1 = getenv("COLOR1")
+COLOR1 = getenv("COLOR1")
 
 cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools"
 

@@ -1,13 +1,15 @@
-from utils.helpers import bot
 from os import getenv
+
 from dotenv import load_dotenv
 
+from utils.helpers import bot
+
 load_dotenv()
-token = getenv('TOKEN')
-channel = getenv('CHANNEL')
-cogs = 'cogs.help', 'cogs.moderation', 'cogs.status', 'cogs.tools'
-color1 = getenv('COLOR1')
-mc_host = getenv('MC_HOST')
+token = getenv("TOKEN")
+channel = getenv("CHANNEL")
+cogs = "cogs.help", "cogs.moderation", "cogs.status", "cogs.tools"
+COLOR1 = getenv("COLOR1")
+mc_host = getenv("MC_HOST")
 
 bot = bot
 

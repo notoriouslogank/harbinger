@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 from utils.helpers import bot, getVer, sTime, timestamp
 
 load_dotenv()
-color1 = int(getenv("COLOR1"))
+COLOR1 = getenv("COLOR1")
 bot = bot
 currentVersion = getVer()
 
@@ -38,7 +38,7 @@ class Status(commands.Cog):
         """Get information about this bot."""
         cTime = datetime.now()
         delta = cTime - sTime
-        embedInfo = discord.Embed(title="mcswitch", color=color1)
+        embedInfo = discord.Embed(title="mcswitch", color=f'{COLOR1}')
         embedInfo.add_field(name="version", value=f"v{currentVersion}", inline=True)
         embedInfo.add_field(name="uptime", value=f"{delta}", inline=True)
         embedInfo.add_field(name="author", value="notoriouslogank", inline=True)

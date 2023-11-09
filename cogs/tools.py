@@ -11,7 +11,7 @@ from os import getenv
 bot = bot
 
 load_dotenv()
-color1 = int(getenv("COLOR1"))
+COLOR1 = int(getenv("COLOR1"))
 
 
 class Tools(commands.Cog):
@@ -65,7 +65,7 @@ class Tools(commands.Cog):
         """Let Me Google That For You"""
         google = "https://google.com/search?q="
         search = google + query
-        embed = discord.Embed(color=color1, title="LMGTFY")
+        embed = discord.Embed(color=COLOR1, title="LMGTFY")
         embed.description = f"[Here]({search}), let me Google that for you!"
         print(f"LMGTFY: {search}")
         timestamp()
@@ -82,7 +82,7 @@ class Tools(commands.Cog):
         """
         dictionary = "https://www.merriam-webster.com/dictionary/"
         define_url = dictionary + word
-        embed = discord.Embed(color=color1, title=f"Define: {word}")
+        embed = discord.Embed(color=COLOR1, title=f"Define: {word}")
         embed.description = f"[{word}]({define_url})"
         print(f"Define: {word}: {define_url}")
         timestamp()
@@ -116,7 +116,7 @@ class Tools(commands.Cog):
         """Play rock, paper, scissors against the bot."""
         choices = ["rock", "paper", "scissors"]
         botChoice = choices[randint(0, 2)]
-        embedRPS = discord.Embed(color=color1, title="rock, paper, scissors")
+        embedRPS = discord.Embed(color=COLOR1, title="rock, paper, scissors")
         embedRPS.add_field(name="You", value=f"{choice}", inline=True)
         embedRPS.add_field(name="Bot", value=f"{botChoice}", inline=True)
         if choice == botChoice:
