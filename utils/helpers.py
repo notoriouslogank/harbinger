@@ -6,7 +6,7 @@ from discord.ext import commands
 from dotenv import load_dotenv
 
 from fabric import Connection
-
+from invoke import Responder
 
 load_dotenv()
 TOKEN = getenv("TOKEN")
@@ -55,7 +55,10 @@ def timestamp():
 
 def mcStart():
     ssh = Connection('logank@mimir')
-    sshMimir = ssh.run("tmux -c 'bash /home/logank/paper-1.0.0-dev/startup.sh'")
+    sudopass = Responder(pattern=r'\[sudo\] password:',
+                         response='mutatismutandis\n', # need to at *least* 64-bit encode this
+                         )
+    sshMimir = ssh.run("tmux -c 'sudo bash /home/logank/paper-1.0.0-dev/startup.sh'", pty=True, watchers=[sudopass])
     return sshMimir
 
 async def send_dm(ctx, member: discord.Member, *, content):
