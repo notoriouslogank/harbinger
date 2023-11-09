@@ -3,8 +3,7 @@ from random import randint
 import discord
 from discord.ext import commands
 
-from utils.helpers import timestamp, bot, send_dm, purple, startServer
-from utils import serverAgent
+from utils.helpers import timestamp, bot, send_dm, purple, serverAgent
 
 bot = bot
 purple = purple
@@ -15,27 +14,35 @@ class Tools(commands.Cog):
 
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
-        
+
     @commands.Cog.listener()
     async def on_ready(self):
         print("Tools Cog online.")
 
     @commands.command()
-    async def switch(self, ctx: commands.Context, state='on'):
+    async def switch(self, ctx: commands.Context, state="on"):
         if state == "on":
-            print('Attempting to start the server.')
+            print("Attempting to start the server.")
             try:
-                serverAgent.startServer()            
-                await ctx.channel.send('Server is running...')
+                serverAgent.startServer()
+                await ctx.channel.send("Server is running...")
             except:
-                await ctx.channel.send('Some kind of error.')
-        else:
+                await ctx.channel.send("Some kind of error.")
+        elif state == "off":
             try:
                 serverAgent.stopServer()
-                await ctx.channel.send('Server is stopping...')
+                await ctx.channel.send("Server is stopping...")
             except:
-                await ctx.channel.send('Some kind of error.')
-    
+                await ctx.channel.send("Some kind of error.")
+        else:
+            await ctx.channel.send("Invalid Syntax!")
+            await ctx.channel.send("!switch <on|off>")
+
+    @commands.command()
+    async def commandMc(self, ctx: commands.Context, command):
+        serverAgent.commandServer(command)
+        print(f"{ctx.author} sent {command} to the minecraft server.")
+
     @commands.command()
     async def lmgtfy(self, ctx: commands.Context, query: str):
         """Let Me Google That For You"""

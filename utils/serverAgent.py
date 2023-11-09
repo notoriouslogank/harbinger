@@ -5,13 +5,22 @@ from os import getenv
 load_dotenv()
 mc_hostname = getenv("MC_HOST")
 
+
 def startServer():
-    bot = Connection(f'{mc_hostname}')
-    agentSetup = bot.run('tmux new -d -s server')
-    agentCd = bot.run('tmux send -t server:0 "cd /home/logank/paper-test" C-m')
-    agentStart = bot.run('tmux send -t server:0 "./java.sh" C-m')
-    
+    bot = Connection(f"{mc_hostname}")
+    serverSetup = bot.run("tmux new -d -s server")
+    serverDir = bot.run('tmux send -t server:0 "cd /home/logank/paper-test" C-m')
+    serverStart = bot.run('tmux send -t server:0 "./java.sh" C-m')
+    print("Starting the server...")
+
+
 def stopServer():
-    bot = Connection(f'{mc_hostname}')
-    agentStop = bot.run('tmux send -t server:0 "stop" C-m')
-    
+    bot = Connection(f"{mc_hostname}")
+    serverStop = bot.run('tmux send -t server:0 "stop" C-m')
+    print("Stopping the server...")
+
+
+def commandServer(command: str):
+    bot = Connection(f"{mc_hostname}")
+    serverCommand = bot.run(f'tmux send -t server:0 "{command}" C-m')
+    print(f"Sent command: {command}.")
