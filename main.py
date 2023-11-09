@@ -1,4 +1,4 @@
-from utils.helpers import CHANNEL, COGS, TOKEN, bot, timestamp
+from utils.helpers import CHANNEL, COGS, TOKEN, bot
 
 bot = bot
 token = TOKEN
@@ -14,7 +14,6 @@ async def setup_hook() -> None:
     print(f"Loading cogs...")
     for cog in cogs:
         await bot.load_extension(cog)
-
 
 
 def main():

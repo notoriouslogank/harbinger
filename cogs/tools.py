@@ -4,10 +4,14 @@ import discord
 from discord.ext import commands
 
 from utils import serverAgent
-from utils.helpers import timestamp, bot, send_dm, purple
+from utils.helpers import bot, send_dm, timestamp
+from dotenv import load_dotenv
+from os import getenv
 
 bot = bot
-purple = purple
+
+load_dotenv()
+color1 = getenv("COLOR1")
 
 
 class Tools(commands.Cog):
@@ -22,14 +26,21 @@ class Tools(commands.Cog):
 
     @commands.command()
     async def switch(self, ctx: commands.Context, state="on"):
+        """Bot command to start the remote Minecraft server.
+
+        Args:
+            state (str, optional): Switch the server 'on' or 'off'. Defaults to "on".
+        """
         if state == "on":
             print("Attempting to start the server.")
+            await ctx.channel.send("Attempting to start the server...")
             try:
                 serverAgent.startServer()
                 await ctx.channel.send("Server is running...")
             except:
                 await ctx.channel.send("Some kind of error.")
         elif state == "off":
+            print("Attempting to stop the server...")
             try:
                 serverAgent.stopServer()
                 await ctx.channel.send("Server is stopping...")
@@ -40,7 +51,12 @@ class Tools(commands.Cog):
             await ctx.channel.send("!switch <on|off>")
 
     @commands.command()
-    async def commandMc(self, ctx: commands.Context, command):
+    async def commandMc(self, ctx: commands.Context, command: str):
+        """Send an arbitrary Minecraft server command to the server.
+
+        Args:
+            command (str): Command to send to the server
+        """
         serverAgent.commandServer(command)
         print(f"{ctx.author} sent {command} to the minecraft server.")
 
@@ -49,7 +65,7 @@ class Tools(commands.Cog):
         """Let Me Google That For You"""
         google = "https://google.com/search?q="
         search = google + query
-        embed = discord.Embed(color=purple, title="LMGTFY")
+        embed = discord.Embed(color=color1, title="LMGTFY")
         embed.description = f"[Here]({search}), let me Google that for you!"
         print(f"LMGTFY: {search}")
         timestamp()
@@ -66,7 +82,7 @@ class Tools(commands.Cog):
         """
         dictionary = "https://www.merriam-webster.com/dictionary/"
         define_url = dictionary + word
-        embed = discord.Embed(color=purple, title=f"Define: {word}")
+        embed = discord.Embed(color=color1, title=f"Define: {word}")
         embed.description = f"[{word}]({define_url})"
         print(f"Define: {word}: {define_url}")
         timestamp()
@@ -100,7 +116,7 @@ class Tools(commands.Cog):
         """Play rock, paper, scissors against the bot."""
         choices = ["rock", "paper", "scissors"]
         botChoice = choices[randint(0, 2)]
-        embedRPS = discord.Embed(color=purple, title="rock, paper, scissors")
+        embedRPS = discord.Embed(color=color1, title="rock, paper, scissors")
         embedRPS.add_field(name="You", value=f"{choice}", inline=True)
         embedRPS.add_field(name="Bot", value=f"{botChoice}", inline=True)
         if choice == botChoice:

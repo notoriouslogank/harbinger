@@ -1,8 +1,13 @@
+from os import getenv
+
 import discord
 from discord.ext import commands
+from dotenv import load_dotenv
 
-from utils.helpers import timestamp, purple
+from utils.helpers import timestamp
 
+load_dotenv()
+color1 = getenv("COLOR1")
 
 class Moderation(commands.Cog):
     """Server moderation commands."""
@@ -44,7 +49,7 @@ class Moderation(commands.Cog):
     @commands.command()
     async def playing(self, ctx: commands.Context, game: str, field: str, value: str):
         """Create game info embed."""
-        embedPlaying = discord.Embed(title=game, color=purple)
+        embedPlaying = discord.Embed(title=game, color=color1)
         embedPlaying.add_field(name=f"{field}", value=f"{value}", inline=True)
         print(f"{ctx.message.author} is playing {game}: {field}, {value}")
         timestamp()
