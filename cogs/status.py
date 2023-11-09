@@ -70,9 +70,12 @@ class Status(commands.Cog):
     @commands.command()
     async def changelog(self, ctx: commands.Context):  # TODO: Fix this (again)
         """Get changelog."""
-        print(f'Got changelog.')
-        timestamp()
-        await ctx.send(file="docs/CHANGELOG.md")
+        file = discord.File("docs/CHANGELOG.md")
+        embed = discord.Embed(type="rich")
+        await ctx.send(embed=embed, file=file)
+        #print(f'Got changelog.')
+        #timestamp()
+        #await ctx.send(file="docs/CHANGELOG.md")
 
     @commands.command()
     async def shutdown(self, ctx: commands.Context):
