@@ -188,7 +188,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 - Delete command to have the bot silently delete messages.
-- on_message check for 'curse' words
+- onmessage check for 'curse' words
 
 ## [0.9.4] - 2023-06-11
 
