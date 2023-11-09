@@ -4,6 +4,7 @@ import discord
 from discord.ext import commands
 
 from utils.helpers import timestamp, bot, send_dm, purple, startServer
+from utils import serverAgent
 
 bot = bot
 purple = purple
@@ -20,14 +21,21 @@ class Tools(commands.Cog):
         print("Tools Cog online.")
 
     @commands.command()
-    async def mcswitch(self, ctx):
-        await ctx.channel.send('Trying to start the server. Wish me luck...')
-        try:
-            startServer()
-            await ctx.channel.send('Holy shit, did it work?!')
-        except Exception():
-            await ctx.channel.send('Nope, shes fucked.')
-
+    async def switch(self, ctx: commands.Context, state='on'):
+        if state == "on":
+            print('Attempting to start the server.')
+            try:
+                serverAgent.startServer()            
+                await ctx.channel.send('Server is running...')
+            except:
+                await ctx.channel.send('Some kind of error.')
+        else:
+            try:
+                serverAgent.stopServer()
+                await ctx.channel.send('Server is stopping...')
+            except:
+                await ctx.channel.send('Some kind of error.')
+    
     @commands.command()
     async def lmgtfy(self, ctx: commands.Context, query: str):
         """Let Me Google That For You"""
