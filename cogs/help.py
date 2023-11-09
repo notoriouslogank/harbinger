@@ -80,4 +80,6 @@ class HelpCommand(commands.Cog):
 
 
 async def setup(bot):
+    """Load cog into bot.
+    """
     await bot.add_cog(HelpCommand(bot))
