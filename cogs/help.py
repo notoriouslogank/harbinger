@@ -82,6 +82,7 @@ class HelpCommand(commands.Cog):
             usage_embed = discord.Embed(title="clear", description="Delete some amount of messages in the channel.")
             usage_embed.add_field('Usage: ', value='!clear <amount>', inline=False)
             usage_embed.add_field(name="<amount: int>", value="The number of messages to be deleted.")
+            await ctx.send(embed=usage_embed)
         else:
             print('Else.')
 
