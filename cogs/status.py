@@ -71,7 +71,7 @@ class Status(commands.Cog):
     async def changelog(self, ctx: commands.Context):  # TODO: Fix this (again)
         """Get changelog."""
         file = discord.File("docs/CHANGELOG.md")
-        embed = discord.Embed(type="rich")
+        embed = discord.Embed()
         await ctx.send(embed=embed, file=file)
         #print(f'Got changelog.')
         #timestamp()
