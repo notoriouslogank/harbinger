@@ -4,7 +4,7 @@ from datetime import datetime
 import discord
 from discord.ext import commands
 
-from utils.helpers import timestamp, getenv, getLog, getVer, purple, bot, sTime
+from utils.helpers import bot, getVer, purple, sTime, timestamp
 
 bot = bot
 VERSION = getVer()
