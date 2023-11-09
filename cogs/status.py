@@ -4,7 +4,7 @@ from datetime import datetime
 import discord
 from discord.ext import commands
 
-from utils.helpers import bot, getVer, purple, sTime, timestamp
+from utils.helpers import bot, getVer, purple, sTime, timestamp, getLog
 
 bot = bot
 VERSION = getVer()
@@ -34,7 +34,6 @@ class Status(commands.Cog):
     @commands.command()
     async def info(self, ctx: commands.Context):
         """Get information about this bot."""
-        sTime = sTime
         cTime = datetime.now()
         delta = cTime - sTime
         embedInfo = discord.Embed(title="mcswitch", color=purple)
