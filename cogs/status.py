@@ -20,9 +20,8 @@ class Status(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self) -> None:
         """Confirm bot is logged in."""
-        print(f"Logged in as {bot.user} (ID: {bot.user.id}).")
-        timestamp()
-
+        print("Status Cog online.")
+        
     @commands.command()
     async def status(self, ctx: commands.Context):
         """Confirm bot is online and reachable."""
@@ -86,6 +85,6 @@ class Status(commands.Cog):
         sys.exit()
 
 
-async def setup(bot: commands.Bot) -> None:
+async def setup(bot):
     """Load cogs into bot."""
     await bot.add_cog(Status(bot))

@@ -13,7 +13,8 @@ class HelpCommand(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        print("Help command is online.")
+        print("Help Cog online.")
+        
 
     @commands.command()
     async def help(self, ctx):

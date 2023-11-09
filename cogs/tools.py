@@ -14,6 +14,10 @@ class Tools(commands.Cog):
 
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
+        
+    @commands.Cog.listener()
+    async def on_ready(self):
+        print("Tools Cog online.")
 
     @commands.command()
     async def lmgtfy(self, ctx: commands.Context, query: str):
@@ -93,6 +97,6 @@ class Tools(commands.Cog):
             await ctx.send(embed=embedRPS)
 
 
-async def setup(bot: commands.Bot) -> None:
+async def setup(bot):
     """Load cogs into bot."""
     await bot.add_cog(Tools(bot))
