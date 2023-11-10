@@ -35,14 +35,14 @@ class Moderation(commands.Cog):
         cmd_msg = f"Got join data for: {member}."
         joined = f"{member.name} joined on {discord.utils.format_dt(member.joined_at)}."
         await ctx.send(f"{joined}")
-        Helpers.timestamp()
+        Helpers.timestamp(ctx.author.message, cmd, cmd_msg)
 
     @commands.command()
     async def say(self, ctx: commands.Context, message: str):
         """Say message as bot."""
         cmd = f"!say({message})"
         cmd_msg = f"McSwitch says: {message}"
-        Helpers.timestamp()
+        Helpers.timestamp(ctx.author.message, cmd, cmd_msg)
         await ctx.channel.purge(limit=1)
         await ctx.send(f"{message}")
 
@@ -51,6 +51,8 @@ class Moderation(commands.Cog):
         self, ctx: commands.Context, game="Minecraft", field="Server Address", value=""
     ):
         """Create game info embed."""
+        cmd = f'!playing({game}, {field}, {value})'
+        cmd_msg = f'Created playing embed with these values: {game},{field},{value}'
         embedPlaying = discord.Embed(title=game, color=Helpers.color1)
         if path.exists("ip.txt"):
             with open("ip.txt", "r") as f:
@@ -61,7 +63,7 @@ class Moderation(commands.Cog):
         else:
             embedPlaying.add_field(name=f"{field}", value=f"{value}", inline=True)
             print(f"{ctx.message.author} is playing {game}: {field}, {value}")
-            Helpers.timestamp()
+            Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(embed=embedPlaying)
 
 
