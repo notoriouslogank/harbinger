@@ -18,7 +18,7 @@ class ServerAgent:
     def start_server():
         # Couldn't these commands just be one bash script? Or at least the two agent.run() statements could be one?
         """Create an SSH connection and start the Minecraft server."""
-        create_tmux = "tmux new -d -s server"
+        create_tmux = agent.run("tmux new -d -s server")
         cd_to_dir = agent.run('tmux send -t server:0 "cd /home/logank/paper-test" C-m')
         server_start = agent.run('tmux send -t server:0 "./java.sh" C-m')
 
