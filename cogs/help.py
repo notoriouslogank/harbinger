@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from utils.helpers import getVer
 
 load_dotenv()
-color1 = getenv("COLOR1")
+color1 = 0x884EA0
 
 currentVersion = getVer()
 
