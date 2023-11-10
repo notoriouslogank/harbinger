@@ -17,7 +17,7 @@ async def setup_hook() -> None:
 
 def main():
     """Start the bot."""
-    bot.run(Helpers.get_configs.token)
+    bot.run(Helpers.get_token())
 
 
 main()
