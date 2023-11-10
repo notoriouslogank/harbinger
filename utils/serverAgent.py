@@ -31,24 +31,25 @@ class ServerAgent:
         """Constructs necessary paramenters for initializing the agent."""
         self.agent = agent
 
-    def get_server_ip(agent):
+    def get_server_ip(agent):  ## This can probably be done in a much better way.
         """Run curl on remote and send text file back to local."""
+        Helpers.timestamp('BOT', 'GET_IP', 'ATTEMPTING TO GET SERVER IP')
         query_ip = agent.run(
             "curl https://ipinfo.io/ip > /home/logank/paper-test/ip.txt"
         )
         get_ip = transfer.Transfer(agent).get(remote="/home/logank/paper-test/ip.txt")
 
-    def start_server(agent):
+    def start_server(agent): # Couldn't these commands just be one bash script? Or at least the two agent.run() statements could be one?
         """Create an SSH connection and start the Minecraft server."""
         create_tmux = agent.agent("tmux new -d -s server")
         cd_to_dir = agent.run('tmux send -t server:0 "cd /home/logank/paper-test" C-m')
         server_start = agent.run('tmux send -t server:0 "./java.sh" C-m')
-        print("Starting the server...")
+        Helpers.timestamp('BOT', 'START_SERVER', 'LAUNCHING SERVER')
 
     def stop_server(agent):
         """Runs the /stop command in the Minecraft server."""
         server_stop = agent.run('tmux send -t server:0 "stop" C-m')
-        print("Stopping the server...")
+        Helpers.timestamp('BOT', 'STOP_SERVER', 'STOPPING SERVER')
 
     def command_server(command: str, agent):
         """Send a command to the Minecraft server via tmux.
@@ -57,4 +58,4 @@ class ServerAgent:
             command (str): Minecraft server command to send
         """
         server_command = agent.run(f'tmux send -t server:0 "{command}" C-m')
-        print(f"Sent command: {command}.")
+        Helpers.timestamp('BOT', 'SERVER_COMMAND', 'SENDING USER STRING TO SERVER')

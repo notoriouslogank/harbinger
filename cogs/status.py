@@ -19,7 +19,7 @@ class Status(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self) -> None:
         """Confirm bot is logged in."""
-        Helpers.timestamp("bot", "initialize", "the bot is online")
+        Helpers.timestamp("BOT", "INITIALIZE", "BOT IS ONLINE")
 
     @commands.command()
     async def status(self, ctx: commands.Context):

@@ -86,7 +86,6 @@ class Helpers:
             changes = f.readlines()
             vLine = changes[6]
             version = vLine[4:9]
-            print(f"Current version: {version}")
             return version
 
     def get_log():  # TODO: Replace this with embed function
@@ -107,6 +106,7 @@ class Helpers:
         print(f"USR| {user}")
         print(f"CMD| {cmd}")
         print(f"MSG| {cmd_msg}")
+        print(f'++++')
 
     async def send_dm(ctx, member: discord.Member, *, content):
         """Create a Direct Message channel with a given member."""
