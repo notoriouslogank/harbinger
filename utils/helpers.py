@@ -104,8 +104,8 @@ class Helpers:
         nl = '\n'
         cTime = datetime.now()
         print(f'{cTime}:')
-        print(f'{user} used {cmd}')
-        print(f'Command message: {cmd_msg}')
+        print(f'USR: {user} CMD: {cmd}')
+        print(f'CMD_MSG: {cmd_msg}')
             
     
     async def send_dm(ctx, member: discord.Member, *, content):
