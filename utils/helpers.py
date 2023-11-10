@@ -1,5 +1,5 @@
 from datetime import datetime
-from os import getenv
+from os import getenv, path
 
 import discord
 from discord.ext import commands
@@ -107,6 +107,20 @@ class Helpers:
         print(f"USR| {user}")
         print(f"CMD| {cmd}")
         print(f"MSG| {cmd_msg}")
+
+    def get_public_ip():
+        if path.exists("ip.txt"):
+            with open("ip.txt", "r") as f:
+                ip = f.readline()
+                return ip
+
+    async def embed_server(ctx, ip, game_version="1.20.02"):
+        embed_srv = discord.Embed(title="Minecraft", color=Helpers.color1).set_image(
+            url="https://p1.hiclipart.com/preview/964/49/199/minecraft-icon-minecraft-minecraft-png-clipart-thumbnail.jpg"
+        )
+        embed_srv.add_field(name="Server IP", value=ip)
+        embed_srv.add_field(name="Game Version", value=game_version)
+        await ctx.send(embed=embed_srv)
 
     async def send_dm(ctx, member: discord.Member, *, content):
         """Create a Direct Message channel with a given member."""

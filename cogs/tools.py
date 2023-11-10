@@ -3,8 +3,8 @@ from random import randint
 import discord
 from discord.ext import commands
 
-from utils.serverAgent import *
 from utils.helpers import Helpers
+from utils.serverAgent import *
 
 bot = Helpers.bot
 color1 = Helpers.color1
@@ -30,7 +30,9 @@ class Tools(commands.Cog):
             await ctx.channel.send("Attempting to start the server...")
             try:
                 ServerAgent.start_server()
+                ip = Helpers.get_public_ip()
                 await ctx.channel.send("Sucessfully started server...")
+                await Helpers.embed_server(ctx=ctx, ip=ip)
             except:
                 await ctx.channel.send("ERROR: 666")
         elif state == "off":
@@ -67,7 +69,7 @@ class Tools(commands.Cog):
         search = google + query
         embed = discord.Embed(color=color1, title="LMGTFY")
         embed.description = f"[Here]({search}), let me Google that for you!"
-        cmd_msg = f"URL: {search}"
+        cmd_msg = f"url: {search}"
         Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.channel.purge(limit=1)
         await ctx.send(embed=embed)

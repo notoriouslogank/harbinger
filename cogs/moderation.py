@@ -44,20 +44,21 @@ class Moderation(commands.Cog):
 
     @commands.command()  # Should probably break the automated message system out into its own functionality
     async def playing(
-        self, ctx: commands.Context, game="Minecraft", field="Server Address", value=""
+        self,
+        ctx: commands.Context,
+        game="Minecraft",
+        desc="now playing",
+        field="Server Address",
+        value="",
     ):
         """Create game info embed."""
-        cmd = f"!playing({game}, {field}, {value})"
+        cmd = f"!playing({game}, {desc}, {field}, {value})"
         cmd_msg = f"Created playing embed with these values: {game},{field},{value}"
-        embedPlaying = discord.Embed(title=game, color=Helpers.color1)
-        if path.exists("ip.txt"):
-            with open("ip.txt", "r") as f:
-                ip = f.readline()
-            embedPlaying.add_field(name=f"Server IP", value=f"{ip}")
-            embedPlaying.add_field(name=f"Version", value="1.20.1")
-        else:
-            embedPlaying.add_field(name=f"{field}", value=f"{value}", inline=True)
-            Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
+        embedPlaying = discord.Embed(
+            title=f"{game}", description=f"{desc}", color=Helpers.color1
+        )
+        embedPlaying.add_field(name=f"{field}", value=f"{value}", inline=True)
+        Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(embed=embedPlaying)
 
 
