@@ -9,7 +9,7 @@ from utils.helpers import Helpers
 load_dotenv()
 color1 = 0x884EA0
 
-currentVersion = Helpers.getVer()
+currentVersion = Helpers.get_ver()
 
 class HelpCommand(commands.Cog):
     def __init__(self, bot):

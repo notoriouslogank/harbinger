@@ -7,7 +7,7 @@ from discord.ext import commands
 from utils.helpers import Helpers
 
 bot = Helpers.bot
-currentVersion = Helpers.getVer()
+currentVersion = Helpers.get_ver()
 
 
 class Status(commands.Cog):
