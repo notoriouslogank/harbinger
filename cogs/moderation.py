@@ -47,7 +47,7 @@ class Moderation(commands.Cog):
         await ctx.send(f"{message}")
 
     @commands.command()
-    async def playing(self, ctx: commands.Context, game: str, field: str, value: str):
+    async def playing(self, ctx: commands.Context, game='Minecraft', field='Server Address', value=''):
         """Create game info embed."""
         embedPlaying = discord.Embed(title=game, color=color1)
         if path.exists('ip.txt'):
