@@ -1,17 +1,13 @@
 import sys
 from datetime import datetime
-from os import getenv
 
 import discord
 from discord.ext import commands
-from dotenv import load_dotenv
 
-from utils.helpers import bot, getVer, sTime, timestamp
+from utils.helpers import Helpers
 
-load_dotenv()
-color1 = 0x884EA0
-bot = bot
-currentVersion = getVer()
+bot = Helpers.bot
+currentVersion = Helpers.getVer()
 
 
 class Status(commands.Cog):
@@ -30,14 +26,14 @@ class Status(commands.Cog):
         """Confirm bot is online and reachable."""
         status_msg = f"{bot.user} is online."
         print(f"{status_msg}")
-        timestamp()
+        Helpers.stamp()
         await ctx.send(f"{status_msg}")
 
     @commands.command()
     async def info(self, ctx: commands.Context):
         """Get information about this bot."""
         cTime = datetime.now()
-        delta = cTime - sTime
+        delta = cTime - Helpers.sTime
         embedInfo = discord.Embed(title="mcswitch", color=0x884EA0)
         embedInfo.add_field(name="version", value=f"v{currentVersion}", inline=True)
         embedInfo.add_field(name="uptime", value=f"{delta}", inline=True)
@@ -48,7 +44,7 @@ class Status(commands.Cog):
             inline=False,
         )
         print(f"info dumped")
-        timestamp()
+        Helpers.timestamp()
         await ctx.send(embed=embedInfo)
 
     @commands.command()
@@ -56,17 +52,17 @@ class Status(commands.Cog):
         """Check network latency."""
         ping_msg = "Current ping: {0}".format(round(bot.latency, 2))
         print(f"{ping_msg}")
-        timestamp()
+        Helpers.timestamp()
         await ctx.send(f"{ping_msg}")
 
     @commands.command()
     async def uptime(self, ctx: commands.Context):
         """Get bot uptime."""
         cTime = datetime.now()
-        delta = cTime - sTime
+        delta = cTime - Helpers.sTime
         up_msg = f"uptime: {delta}"
         print(f"{up_msg}")
-        timestamp()
+        Helpers.timestamp()
         await ctx.send(f"{up_msg}")
 
     @commands.command()
@@ -83,7 +79,7 @@ class Status(commands.Cog):
         )
         embedShutdown.add_field(name="user", value=f"{ctx.message.author}", inline=True)
         print(f"{ctx.message.author} initiated shutdown.")
-        timestamp()
+        Helpers.timestamp()
         await ctx.send(embed=embedShutdown)
         sys.exit()
 
