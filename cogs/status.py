@@ -1,14 +1,17 @@
 import sys
 from datetime import datetime
+from os import getenv
 
 import discord
 from discord.ext import commands
+from dotenv import load_dotenv
 
-from utils.helpers import bot, getVer, purple, sTime, timestamp, getLog
+from utils.helpers import bot, getVer, sTime, timestamp
 
+load_dotenv()
+COLOR1 = getenv("COLOR1")
 bot = bot
-VERSION = getVer()
-purple = purple
+currentVersion = getVer()
 
 
 class Status(commands.Cog):
@@ -21,7 +24,7 @@ class Status(commands.Cog):
     async def on_ready(self) -> None:
         """Confirm bot is logged in."""
         print("Status Cog online.")
-        
+
     @commands.command()
     async def status(self, ctx: commands.Context):
         """Confirm bot is online and reachable."""
@@ -35,8 +38,8 @@ class Status(commands.Cog):
         """Get information about this bot."""
         cTime = datetime.now()
         delta = cTime - sTime
-        embedInfo = discord.Embed(title="mcswitch", color=purple)
-        embedInfo.add_field(name="version", value=f"v{VERSION}", inline=True)
+        embedInfo = discord.Embed(title="mcswitch", color=0x884EA0)
+        embedInfo.add_field(name="version", value=f"v{currentVersion}", inline=True)
         embedInfo.add_field(name="uptime", value=f"{delta}", inline=True)
         embedInfo.add_field(name="author", value="notoriouslogank", inline=True)
         embedInfo.add_field(
@@ -71,7 +74,7 @@ class Status(commands.Cog):
         """Get changelog."""
         file = discord.File(fp="docs/CHANGELOG.md", filename="CHANGELOG.md")
         await ctx.send(file=file)
-        
+
     @commands.command()
     async def shutdown(self, ctx: commands.Context):
         """Gracefully shutdown the bot."""
