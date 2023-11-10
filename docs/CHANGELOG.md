@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.2-dev] - 2023-09-11
+
+### Changed
+
+- !playing() command should now (automatically) fetch the Minecraft game version as well as the server IP upon running !switch on
+
 ## [1.3.1] - 2023-09-11
 
 ### MAJOR RELEASE VERSION
