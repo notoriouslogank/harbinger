@@ -4,7 +4,7 @@ from utils.helpers import Helpers
 sTime = Helpers.sTime
 bot = Helpers.bot
 bot.remove_command("help")
-cogs = Helpers.get_configs.cogs
+cogs = Helpers.cogs
 
 
 @bot.event

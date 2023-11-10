@@ -28,6 +28,11 @@ class Helpers:
         self.bot = bot
         sTime = datetime.now()
 
+    def get_token():
+        load_dotenv()
+        token = getenv("TOKEN")
+        return token
+
     def get_configs():
         load_dotenv()
         token = getenv("TOKEN")
