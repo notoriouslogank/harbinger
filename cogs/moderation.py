@@ -42,7 +42,7 @@ class Moderation(commands.Cog):
         """Say message as bot."""
         cmd = f"!say({message})"
         cmd_msg = f"McSwitch says: {message}"
-        Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
+        Helpers.timestamp(ctx.author, cmd, cmd_msg)
         await ctx.channel.purge(limit=1)
         await ctx.send(f"{message}")
 
