@@ -2,7 +2,6 @@ from os import path
 
 import discord
 from discord.ext import commands
-from dotenv import load_dotenv
 
 from utils.helpers import Helpers
 
@@ -12,7 +11,7 @@ class Moderation(commands.Cog):
 
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
-        
+
     @commands.Cog.listener()
     async def on_ready(self):
         print("Moderation Cog online.")
@@ -45,15 +44,17 @@ class Moderation(commands.Cog):
         await ctx.send(f"{message}")
 
     @commands.command()
-    async def playing(self, ctx: commands.Context, game='Minecraft', field='Server Address', value=''):
+    async def playing(
+        self, ctx: commands.Context, game="Minecraft", field="Server Address", value=""
+    ):
         """Create game info embed."""
         embedPlaying = discord.Embed(title=game, color=Helpers.color1)
-        if path.exists('ip.txt'):
-            with open('ip.txt', 'r') as f:
+        if path.exists("ip.txt"):
+            with open("ip.txt", "r") as f:
                 ip = f.readline()
-            embedPlaying.add_field(name=f'Server IP', value=f'{ip}')
-            embedPlaying.add_field(name=f'Version', value='1.20.1')
-            print(f'Printed Minecraft server info.')
+            embedPlaying.add_field(name=f"Server IP", value=f"{ip}")
+            embedPlaying.add_field(name=f"Version", value="1.20.1")
+            print(f"Printed Minecraft server info.")
         else:
             embedPlaying.add_field(name=f"{field}", value=f"{value}", inline=True)
             print(f"{ctx.message.author} is playing {game}: {field}, {value}")
