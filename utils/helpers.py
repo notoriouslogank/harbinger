@@ -5,19 +5,11 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 
-# sTime = datetime.now()
-# cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools"
-# intents = discord.Intents.default()
-# intents.members = True
-# intents.message_content = True
-# bot = commands.Bot(command_prefix="!", intents=intents)
-
-
 class Helpers:
     sTime = datetime.now()
 
     cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools"
-
+    color1 = 0x884EA0
     intents = discord.Intents.default()
     intents.members = True
     intents.message_content = True
@@ -27,20 +19,20 @@ class Helpers:
     def __init__(self, bot):
         self.bot = bot
         sTime = datetime.now()
-
-    def get_token():
         load_dotenv()
+        
+    def get_token():
         token = getenv("TOKEN")
         return token
-
-    def get_configs():
-        load_dotenv()
-        token = getenv("TOKEN")
+    
+    def get_channel():
         channel = getenv("CHANNEL")
-        COLOR1 = getenv("COLOR1")
-        cogs = "cogs.help", "cogs.moderation", "cogs.status", "cogs.tools"
+        return channel
+    
+    def get_mc_host():
         mc_host = getenv("MC_HOST")
-
+        return mc_host
+    
     def getVer():
         """Return bot software version.
 

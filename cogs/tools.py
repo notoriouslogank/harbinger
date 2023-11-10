@@ -6,12 +6,8 @@ from discord.ext import commands
 from dotenv import load_dotenv
 
 from utils import serverAgent
-from utils.helpers import bot, send_dm, timestamp
-
-bot = bot
-
-load_dotenv()
-color1 = 0x884EA0
+from utils.helpers import Helpers
+bot = Helpers.bot
 
 
 class Tools(commands.Cog):
@@ -65,10 +61,10 @@ class Tools(commands.Cog):
         """Let Me Google That For You"""
         google = "https://google.com/search?q="
         search = google + query
-        embed = discord.Embed(color=color1, title="LMGTFY")
+        embed = discord.Embed(color=Helpers.get_color(), title="LMGTFY")
         embed.description = f"[Here]({search}), let me Google that for you!"
         print(f"LMGTFY: {search}")
-        timestamp()
+        Helpers.timestamp()
         await ctx.channel.purge(limit=1)
         await ctx.send(embed=embed)
         await send_dm(ctx=ctx, member=ctx.message.author, content=query)
