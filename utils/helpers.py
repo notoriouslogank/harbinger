@@ -1,5 +1,8 @@
 from datetime import datetime
-from os import getenv, path
+
+import os
+
+os.remove("ip.txt")
 
 import discord
 from discord.ext import commands
@@ -55,7 +58,7 @@ class Helpers:
             token (str): string containing the Discord API token
         """
         load_dotenv()
-        token = str(getenv("TOKEN"))
+        token = str(os.getenv("TOKEN"))
         return token
 
     def get_channel():
@@ -64,7 +67,7 @@ class Helpers:
         Returns:
             channel (int): Discord channel ID number
         """
-        channel = getenv("CHANNEL")
+        channel = os.getenv("CHANNEL")
         return channel
 
     def get_mc_host():
@@ -73,7 +76,7 @@ class Helpers:
         Returns:
             mc_host (str): the Minecraft server host information {user@hostname}
         """
-        mc_host = str(getenv("MC_HOST"))
+        mc_host = str(os.getenv("MC_HOST"))
         return mc_host
 
     def get_ver():
@@ -109,10 +112,14 @@ class Helpers:
         print(f"MSG| {cmd_msg}")
 
     def get_public_ip():
-        if path.exists("ip.txt"):
+        if os.path.exists("ip.txt"):
             with open("ip.txt", "r") as f:
                 ip = f.readline()
                 return ip
+
+    def cleanup():
+        if os.path.exists("ip.txt"):
+            os.remove("ip.txt")
 
     async def embed_server(ctx, ip, game_version="1.20.02"):
         embed_srv = discord.Embed(title="Minecraft", color=Helpers.color1).set_image(

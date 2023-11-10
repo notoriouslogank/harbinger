@@ -23,7 +23,7 @@ class Tools(commands.Cog):
         Args:
             state (str, optional): Switch the server 'on' or 'off'. Defaults to "on".
         """
-        cmd = f"!switch{state}"
+        cmd = f"!switch({state})"
         if state == "on":
             cmd_msg = "attempting to start server"
             Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
@@ -31,12 +31,13 @@ class Tools(commands.Cog):
             try:
                 ServerAgent.start_server()
                 ip = Helpers.get_public_ip()
-                await ctx.channel.send("Sucessfully started server...")
+                await ctx.channel.send("Server is online.")
                 await Helpers.embed_server(ctx=ctx, ip=ip)
+                Helpers.cleanup()
             except:
                 await ctx.channel.send("ERROR: 666")
         elif state == "off":
-            cmd_msg = "attempting to stop server"
+            cmd_msg = "stopping server"
             Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
             try:
                 ServerAgent.stop_server()
@@ -44,7 +45,7 @@ class Tools(commands.Cog):
             except:
                 await ctx.channel.send("ERROR: 667")
         else:
-            cmd_message = "ERROR: Invalid choice"
+            cmd_msg = "ERROR: Invalid choice"
             Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
             await ctx.channel.send("Invalid Syntax!")
             await ctx.channel.send("!switch <on|off>")
