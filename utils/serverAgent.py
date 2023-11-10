@@ -1,20 +1,19 @@
 from os import getenv
 
-
 from dotenv import load_dotenv
 from fabric import Connection, transfer
 
 load_dotenv()
 mc_hostname = getenv("MC_HOST")
 # startup_script = /home/logank/paper-test/java.sh
-# public_up = get_ip()
-
 
 
 def ipServer():
-    bot = Connection(f'{mc_hostname}')
+    bot = Connection(f"{mc_hostname}")
     serverIp = bot.run("curl https://ipinfo.io/ip > /home/logank/paper-test/ip.txt")
-    getIp = transfer.Transfer(bot).get(remote='/home/logank/paper-test/ip.txt')
+    getIp = transfer.Transfer(bot).get(remote="/home/logank/paper-test/ip.txt")
+    # TODO: Read this IP address and take it to !playing() command
+
 
 def startServer():
     """Create an SSH connection and start the Minecraft server."""
