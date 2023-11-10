@@ -67,7 +67,7 @@ class Tools(commands.Cog):
         Helpers.timestamp()
         await ctx.channel.purge(limit=1)
         await ctx.send(embed=embed)
-        await send_dm(ctx=ctx, member=ctx.message.author, content=query)
+        await Helpers.send_dm(ctx=ctx, member=ctx.message.author, content=query)
 
     @commands.command()
     async def define(self, ctx: commands.Context, word: str):

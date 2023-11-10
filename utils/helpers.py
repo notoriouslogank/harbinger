@@ -23,7 +23,7 @@ class Helpers:
         
     def get_token():
         token = getenv("TOKEN")
-        return token
+        return str(token)
     
     def get_channel():
         channel = getenv("CHANNEL")
