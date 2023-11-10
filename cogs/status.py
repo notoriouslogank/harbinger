@@ -74,7 +74,7 @@ class Status(commands.Cog):
     async def changelog(self, ctx: commands.Context):  # TODO: Fix this (again)
         """Get changelog."""
         cmd = "!changelog"
-        cmd_msg = f"Uploaded CHANGELOG.md to channel {ctx.channnel.id}"
+        cmd_msg = f"Uploaded CHANGELOG.md to channel."
         file = discord.File(fp="docs/CHANGELOG.md", filename="CHANGELOG.md")
         Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(file=file)
