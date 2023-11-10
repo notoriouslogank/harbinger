@@ -46,7 +46,6 @@ class Status(commands.Cog):
             value="https://github.com/notoriouslogank/mcswitch",
             inline=False,
         )
-        print(f"info dumped")
         Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(embed=embedInfo)
 

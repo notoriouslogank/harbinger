@@ -12,10 +12,6 @@ class Moderation(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
-    @commands.Cog.listener()
-    async def on_ready(self):
-        print("Moderation Cog online.")
-
     @commands.command()
     async def clear(self, ctx: commands.Context, amount: int = 2) -> None:
         """Delete a number of messages in channel."""
@@ -46,7 +42,7 @@ class Moderation(commands.Cog):
         await ctx.channel.purge(limit=1)
         await ctx.send(f"{message}")
 
-    @commands.command()
+    @commands.command()  # Should probably break the automated message system out into its own functionality
     async def playing(
         self, ctx: commands.Context, game="Minecraft", field="Server Address", value=""
     ):
@@ -59,10 +55,8 @@ class Moderation(commands.Cog):
                 ip = f.readline()
             embedPlaying.add_field(name=f"Server IP", value=f"{ip}")
             embedPlaying.add_field(name=f"Version", value="1.20.1")
-            print(f"Printed Minecraft server info.")
         else:
             embedPlaying.add_field(name=f"{field}", value=f"{value}", inline=True)
-            print(f"{ctx.message.author} is playing {game}: {field}, {value}")
             Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(embed=embedPlaying)
 

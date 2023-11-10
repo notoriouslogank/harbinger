@@ -16,10 +16,6 @@ class Tools(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
-    @commands.Cog.listener()
-    async def on_ready(self):
-        print("Tools Cog online.")
-
     @commands.command()
     async def switch(self, ctx: commands.Context, state="on"):
         """Bot command to start the remote Minecraft server.
@@ -27,22 +23,27 @@ class Tools(commands.Cog):
         Args:
             state (str, optional): Switch the server 'on' or 'off'. Defaults to "on".
         """
+        cmd = f"!switch{state}"
         if state == "on":
-            print("Attempting to start the server.")
+            cmd_msg = "attempting to start server"
+            Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
             await ctx.channel.send("Attempting to start the server...")
             try:
                 serverAgent.startServer()
-                await ctx.channel.send("Server is running...")
+                await ctx.channel.send("Sucessfully started server...")
             except:
-                await ctx.channel.send("Some kind of error.")
+                await ctx.channel.send("ERROR: 666")
         elif state == "off":
-            print("Attempting to stop the server...")
+            cmd_msg = "attempting to stop server"
+            Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
             try:
                 serverAgent.stopServer()
                 await ctx.channel.send("Server is stopping...")
             except:
-                await ctx.channel.send("Some kind of error.")
+                await ctx.channel.send("ERROR: 667")
         else:
+            cmd_message = "ERROR: Invalid choice"
+            Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
             await ctx.channel.send("Invalid Syntax!")
             await ctx.channel.send("!switch <on|off>")
 
@@ -53,8 +54,10 @@ class Tools(commands.Cog):
         Args:
             command (str): Command to send to the server
         """
+        cmd = f"!commandMc({command})"
+        cmd_msg = f"sent command {command} to server"
         serverAgent.commandServer(command)
-        print(f"{ctx.author} sent {command} to the minecraft server.")
+        Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
     async def lmgtfy(self, ctx: commands.Context, query: str):

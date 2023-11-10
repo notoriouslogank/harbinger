@@ -12,9 +12,9 @@ class HelpCommand(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.Cog.listener()
-    async def on_ready(self):
-        print("Help Cog online.")
+    #    @commands.Cog.listener()
+    #    async def on_ready(self):
+    #        print("Help Cog online.")
 
     @commands.command()
     async def help(self, ctx, *, command=None):
@@ -240,7 +240,7 @@ class HelpCommand(commands.Cog):
             )
             await ctx.send(embed=usage_embed)
         else:
-            print("Something probably went wrong.")
+            print("ERROR: 420.69")
 
 
 async def setup(bot):
