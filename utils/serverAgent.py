@@ -39,14 +39,12 @@ class ServerAgent:
         )
         get_ip = transfer.Transfer(agent).get(remote="/home/logank/paper-test/ip.txt")
 
-    def start_server(
-        agent,
-    ):  # Couldn't these commands just be one bash script? Or at least the two agent.run() statements could be one?
+    def start_server(agent):  
+        # Couldn't these commands just be one bash script? Or at least the two agent.run() statements could be one?
         """Create an SSH connection and start the Minecraft server."""
         create_tmux = agent.agent("tmux new -d -s server")
         cd_to_dir = agent.run('tmux send -t server:0 "cd /home/logank/paper-test" C-m')
         server_start = agent.run('tmux send -t server:0 "./java.sh" C-m')
-        Helpers.timestamp("BOT", "START_SERVER", "LAUNCHING SERVER")
 
     def stop_server(agent):
         """Runs the /stop command in the Minecraft server."""
