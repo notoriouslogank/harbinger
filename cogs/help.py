@@ -7,6 +7,7 @@ color1 = Helpers.color1
 
 current_version = Helpers.get_ver()
 
+
 class HelpCommand(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -18,15 +19,14 @@ class HelpCommand(commands.Cog):
     @commands.command()
     async def help(self, ctx, *, command=None):
         """Return help embed with command descriptions."""
-        cmd = f'!help({command})'
-        cmd_msg = f'provided help: {command}'
+        cmd = f"!help({command})"
+        cmd_msg = f"provided help: {command}"
         Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
         if command == None:
             help_embed = discord.Embed(
                 title="Command Help",
                 description=f"Commands for bot v{current_version}",
-       
-             color=color1,
+                color=color1,
             )
             # MODERATION
             help_embed.add_field(

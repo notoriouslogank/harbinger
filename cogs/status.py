@@ -9,6 +9,7 @@ from utils.helpers import Helpers
 bot = Helpers.bot
 currentVersion = Helpers.get_ver()
 
+
 class Status(commands.Cog):
     """Commands to find out status of bot services."""
 
@@ -18,13 +19,13 @@ class Status(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self) -> None:
         """Confirm bot is logged in."""
-        print("Status Cog online.")
+        Helpers.timestamp("bot", "initialize", "the bot is online")
 
     @commands.command()
     async def status(self, ctx: commands.Context):
         """Confirm bot is online and reachable."""
-        cmd = '!status'
-        cmd_msg = 'Status: online.'
+        cmd = "!status"
+        cmd_msg = "Status: online."
         status_msg = f"{bot.user} is online."
         Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(f"{status_msg}")
@@ -32,8 +33,8 @@ class Status(commands.Cog):
     @commands.command()
     async def info(self, ctx: commands.Context):
         """Get information about this bot."""
-        cmd = '!info'
-        cmd_msg = f'Sent info embed to channel {ctx.channel.id}'
+        cmd = "!info"
+        cmd_msg = f"Sent info embed to channel {ctx.channel.id}"
         cTime = datetime.now()
         delta = cTime - Helpers.sTime
         embedInfo = discord.Embed(title="mcswitch", color=0x884EA0)
@@ -54,27 +55,27 @@ class Status(commands.Cog):
         """Check network latency."""
         ping_time = round(bot.latency, 2)
         ping_msg = f"Current ping: {ping_time} ms."
-        cmd = f'!ping'
-        cmd_msg = f'{ping_msg}'
+        cmd = f"!ping"
+        cmd_msg = f"{ping_msg}"
         Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(f"{ping_msg}")
 
     @commands.command()
     async def uptime(self, ctx: commands.Context):
         """Get bot uptime."""
-        cmd = '!uptime'
+        cmd = "!uptime"
         cTime = datetime.now()
         delta = cTime - Helpers.sTime
         up_msg = f"uptime: {delta}"
-        cmd_msg = f'{up_msg}'
+        cmd_msg = f"{up_msg}"
         Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(f"{up_msg}")
 
     @commands.command()
     async def changelog(self, ctx: commands.Context):  # TODO: Fix this (again)
         """Get changelog."""
-        cmd = '!changelog'
-        cmd_msg = f'Uploaded CHANGELOG.md to channel {ctx.channnel.id}'
+        cmd = "!changelog"
+        cmd_msg = f"Uploaded CHANGELOG.md to channel {ctx.channnel.id}"
         file = discord.File(fp="docs/CHANGELOG.md", filename="CHANGELOG.md")
         Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(file=file)
@@ -82,8 +83,8 @@ class Status(commands.Cog):
     @commands.command()
     async def shutdown(self, ctx: commands.Context):
         """Gracefully shutdown the bot."""
-        cmd = '!shutdown'
-        cmd_msg = f'Shutting down...'
+        cmd = "!shutdown"
+        cmd_msg = f"Shutting down..."
         embedShutdown = discord.Embed(
             title="shutdown", color=0xFF0000, timestamp=datetime.now()
         )

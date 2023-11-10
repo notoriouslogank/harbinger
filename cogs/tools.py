@@ -9,6 +9,7 @@ from utils.helpers import Helpers
 bot = Helpers.bot
 color1 = Helpers.color1
 
+
 class Tools(commands.Cog):
     """Commands containing various tools/utilites."""
 
@@ -58,12 +59,13 @@ class Tools(commands.Cog):
     @commands.command()
     async def lmgtfy(self, ctx: commands.Context, query: str):
         """Let Me Google That For You"""
+        cmd = f"!lmgtfy({query})"
         google = "https://google.com/search?q="
         search = google + query
         embed = discord.Embed(color=color1, title="LMGTFY")
         embed.description = f"[Here]({search}), let me Google that for you!"
-        print(f"LMGTFY: {search}")
-        Helpers.timestamp()
+        cmd_msg = f"URL: {search}"
+        Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.channel.purge(limit=1)
         await ctx.send(embed=embed)
         await Helpers.send_dm(ctx=ctx, member=ctx.message.author, content=query)
@@ -75,12 +77,12 @@ class Tools(commands.Cog):
         Args:
             word (str): the word to be defined
         """
-        cmd = f'!define({word})'
+        cmd = f"!define({word})"
         dictionary = "https://www.merriam-webster.com/dictionary/"
         define_url = dictionary + word
         embed = discord.Embed(color=color1, title=f"Define: {word}")
         embed.description = f"[{word}]({define_url})"
-        cmd_msg = f'url: {define_url}'
+        cmd_msg = f"url: {define_url}"
         Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.channel.purge(limit=1)
         await ctx.send(embed=embed)
@@ -89,31 +91,31 @@ class Tools(commands.Cog):
     @commands.command()
     async def add(self, ctx: commands.Context, left: int, right: int):
         """Adds two integers and returns result as message."""
-        cmd = f'!add({left} {right})'
+        cmd = f"!add({left} {right})"
         total = left + right
-        cmd_msg = f'total: {total}'
+        cmd_msg = f"total: {total}"
         Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(f"{total}")
 
     @commands.command()
     async def roll(self, ctx: commands.Context, dice: str):
         """Roll NdN dice and get results."""
-        cmd = f'!roll({dice})'
+        cmd = f"!roll({dice})"
         try:
             rolls, limit = map(int, dice.split("d"))
         except Exception:
             await ctx.send("Format must be NdN!")
             return
         result = ", ".join(str(randint(1, limit)) for r in range(rolls))
-        cmd_msg = f'rolled {dice}; result: {result}'
+        cmd_msg = f"rolled {dice}; result: {result}"
         Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(f"{result}")
 
     @commands.command()
     async def rps(self, ctx: commands.Context, choice: str):
         """Play rock, paper, scissors against the bot."""
-        cmd = f'!rps(choice)'
-        cmd_msg = f'choice: {choice}'
+        cmd = f"!rps(choice)"
+        cmd_msg = f"choice: {choice}"
         Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
         choices = ["rock", "paper", "scissors"]
         botChoice = choices[randint(0, 2)]

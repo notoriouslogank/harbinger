@@ -51,8 +51,8 @@ class Moderation(commands.Cog):
         self, ctx: commands.Context, game="Minecraft", field="Server Address", value=""
     ):
         """Create game info embed."""
-        cmd = f'!playing({game}, {field}, {value})'
-        cmd_msg = f'Created playing embed with these values: {game},{field},{value}'
+        cmd = f"!playing({game}, {field}, {value})"
+        cmd_msg = f"Created playing embed with these values: {game},{field},{value}"
         embedPlaying = discord.Embed(title=game, color=Helpers.color1)
         if path.exists("ip.txt"):
             with open("ip.txt", "r") as f:
