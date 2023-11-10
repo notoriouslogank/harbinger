@@ -3,13 +3,11 @@ from random import randint
 import discord
 from discord.ext import commands
 
-from utils.serverAgent import ServerAgent
+from utils.serverAgent import *
 from utils.helpers import Helpers
 
 bot = Helpers.bot
 color1 = Helpers.color1
-
-agent = ServerAgent.agent
 
 class Tools(commands.Cog):
     """Commands containing various tools/utilites."""
@@ -30,7 +28,7 @@ class Tools(commands.Cog):
             Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
             await ctx.channel.send("Attempting to start the server...")
             try:
-                ServerAgent.start_server(agent)
+                start_server(agent)
                 await ctx.channel.send("Sucessfully started server...")
             except:
                 await ctx.channel.send("ERROR: 666")
@@ -38,7 +36,7 @@ class Tools(commands.Cog):
             cmd_msg = "attempting to stop server"
             Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
             try:
-                ServerAgent.start_server(agent)
+                stop_server(agent)
                 await ctx.channel.send("Server is stopping...")
             except:
                 await ctx.channel.send("ERROR: 667")
@@ -57,7 +55,7 @@ class Tools(commands.Cog):
         """
         cmd = f"!commandMc({command})"
         cmd_msg = f"sent command {command} to server"
-        serverAgent.commandServer(command)
+        command_server(command, agent)
         Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
