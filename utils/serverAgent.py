@@ -12,17 +12,14 @@ def ipServer():
     bot = Connection(f"{mc_hostname}")
     serverIp = bot.run("curl https://ipinfo.io/ip > /home/logank/paper-test/ip.txt")
     getIp = transfer.Transfer(bot).get(remote="/home/logank/paper-test/ip.txt")
-    # TODO: Read this IP address and take it to !playing() command
 
-
+    
 def startServer():
     """Create an SSH connection and start the Minecraft server."""
     bot = Connection(f"{mc_hostname}")  # Could probably be gloablly scoped?
-    ipServer()
     serverSetup = bot.run(
         "tmux new -d -s server"
     )  # These can probably be pared down into one long command
-    serverGetip = bot.run('tmux send -t server:0 "cat ip.txt" C-m')
     serverDir = bot.run('tmux send -t server:0 "cd /home/logank/paper-test" C-m')
     serverStart = bot.run('tmux send -t server:0 "./java.sh" C-m')
     print("Starting the server...")

@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.2] - 2023-09-11
+
+### Bugfixes
+
+- Imports should all work correctly now
+- Error handling introduced in some areas
+- All cogs load correctly
+
+### Changed
+
+- Rewrote .env file to make config easier
+- Renamed some variables, constants, and functions to unobfuscate their function
+
 ## [1.3.1] - 2023-09-11
 
 ### MAJOR RELEASE VERSION
