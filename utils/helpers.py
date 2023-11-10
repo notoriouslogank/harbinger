@@ -5,11 +5,38 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 
-class Helpers():
-    sTime = datetime.now()
+
+class Helpers:
+    """Class to help integrate modules together.
+
+    Methods
+    -------
+    get_token():
+        Return the API token as a string.
+
+    get_channel():
+        Return the 'main' channel ID.
+
+    get_mc_host():
+        Returns Minecraft server hostname ({user@host})
+
+    get_ver():
+        Return the current version number from CHANGELOG.md.
+
+    get_log():
+        Return the changelog as a string.
+
+    timestamp():
+        Return a timestamp and end-of-message horizontal line.
+
+    send_dm(ctx, member, *, content):
+        Send a DM to a given user.
+    """
 
     cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools"
     color1 = 0x884EA0
+    sTime = datetime.now()
+
     intents = discord.Intents.default()
     intents.members = True
     intents.message_content = True
@@ -17,27 +44,43 @@ class Helpers():
     bot = commands.Bot(command_prefix="!", intents=intents)
 
     def __init__(self, bot):
+        """Gather parameters for bot."""
         self.bot = bot
         sTime = datetime.now()
-        
+
     def get_token():
+        """Get Discord API token from file.
+
+        Returns:
+            token (str): string containing the Discord API token
+        """
         load_dotenv()
-        token = getenv("TOKEN")
-        return str(token)
-    
+        token = str(getenv("TOKEN"))
+        return token
+
     def get_channel():
+        """Get channel ID number from file.
+
+        Returns:
+            channel (int): Discord channel ID number
+        """
         channel = getenv("CHANNEL")
         return channel
-    
+
     def get_mc_host():
-        mc_host = getenv("MC_HOST")
+        """Get Minecraft server hostname information from file.
+
+        Returns:
+            mc_host (str): the Minecraft server host information {user@hostname}
+        """
+        mc_host = str(getenv("MC_HOST"))
         return mc_host
-    
-    def getVer():
+
+    def get_ver():
         """Return bot software version.
 
         Returns:
-            version (str): software version
+            version (str): the current version information from CHANGELOG.md
         """
         with open("docs/CHANGELOG.md", "r") as f:
             changes = f.readlines()
@@ -46,11 +89,11 @@ class Helpers():
             print(f"Current version: {version}")
             return version
 
-    def getLog():  # TODO: Replace this with embed function
+    def get_log():  # TODO: Replace this with embed function
         """Read CHANGELOG.md and return it as a string.
 
         Returns:
-            changelog (str): a string containing CHANGELOG.md
+            changelog (str): the entire changelog as a string
         """
         with open("docs/CHANGELOG.md", "r") as f:
             changelog = f.readlines()
@@ -63,11 +106,6 @@ class Helpers():
         print(f"----------")
 
     async def send_dm(ctx, member: discord.Member, *, content):
-        """Create a Direct Message channel with a given member.
-
-        Args:
-            member (discord.Member): the member who invoked the command
-            content (str): content of the DM
-        """
+        """Create a Direct Message channel with a given member."""
         channel = await member.create_dm()
         await channel.send(content)
