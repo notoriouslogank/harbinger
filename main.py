@@ -2,7 +2,6 @@ from os import getenv
 
 from dotenv import load_dotenv
 
-from utils.helpers import bot
 
 load_dotenv()
 token = getenv("TOKEN")
