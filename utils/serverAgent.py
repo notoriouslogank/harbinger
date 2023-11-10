@@ -4,9 +4,6 @@ from utils.helpers import Helpers
 
 # startup_script = /home/logank/paper-test/java.sh <<< This should probably be included in the repo
 
-mc_hostname = Helpers.get_mc_host()
-agent = Connection(f"{mc_hostname}")
-
 def get_server_ip(agent):  ## This can probably be done in a much better way.
     """Run curl on remote and send text file back to local."""
     Helpers.timestamp("BOT", "GET_IP", "ATTEMPTING TO GET SERVER IP")

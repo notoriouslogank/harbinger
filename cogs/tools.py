@@ -8,6 +8,8 @@ from utils.helpers import Helpers
 
 bot = Helpers.bot
 color1 = Helpers.color1
+mc_hostname = Helpers.mc_host
+agent = Connection(f'{mc_hostname}')
 
 class Tools(commands.Cog):
     """Commands containing various tools/utilites."""
@@ -22,6 +24,8 @@ class Tools(commands.Cog):
         Args:
             state (str, optional): Switch the server 'on' or 'off'. Defaults to "on".
         """
+        mc_hostname = Helpers.get_mc_host()
+        agent = Connection(f'{mc_hostname}')
         cmd = f"!switch{state}"
         if state == "on":
             cmd_msg = "attempting to start server"
