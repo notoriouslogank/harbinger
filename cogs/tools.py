@@ -23,27 +23,27 @@ class Tools(commands.Cog):
         Args:
             state (str, optional): Switch the server 'on' or 'off'. Defaults to "on".
         """
-#        cmd = f"!switch{state}"
+        cmd = f"!switch{state}"
         if state == "on":
-#            cmd_msg = "attempting to start server"
-#Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
+            cmd_msg = "attempting to start server"
+            Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
             await ctx.channel.send("Attempting to start the server...")
             try:
-                serverAgent.startServer()
+                serverAgent.start_server()
                 await ctx.channel.send("Sucessfully started server...")
             except:
                 await ctx.channel.send("ERROR: 666")
         elif state == "off":
-#            cmd_msg = "attempting to stop server"
-#            Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
+            cmd_msg = "attempting to stop server"
+            Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
             try:
-                serverAgent.stopServer()
+                serverAgent.stop_server()
                 await ctx.channel.send("Server is stopping...")
             except:
                 await ctx.channel.send("ERROR: 667")
         else:
             cmd_message = "ERROR: Invalid choice"
-#            Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
+            Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
             await ctx.channel.send("Invalid Syntax!")
             await ctx.channel.send("!switch <on|off>")
 
