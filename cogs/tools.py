@@ -9,6 +9,7 @@ from utils.helpers import Helpers
 bot = Helpers.bot
 color1 = Helpers.color1
 
+
 class Tools(commands.Cog):
     """Commands containing various tools/utilites."""
 
@@ -36,7 +37,7 @@ class Tools(commands.Cog):
             cmd_msg = "attempting to stop server"
             Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
             try:
-                
+                ServerAgent.stop_server()
                 await ctx.channel.send("Server is stopping...")
             except:
                 await ctx.channel.send("ERROR: 667")
@@ -55,7 +56,7 @@ class Tools(commands.Cog):
         """
         cmd = f"!commandMc({command})"
         cmd_msg = f"sent command {command} to server"
-        command_server(command, agent)
+        ServerAgent.command_server()
         Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
