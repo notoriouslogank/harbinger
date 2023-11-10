@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from fabric import Connection, transfer
 from helpers import Helpers
 mc_hostname = Helpers.get_mc_host()
-# startup_script = /home/logank/paper-test/java.sh
+# startup_script = /home/logank/paper-test/java.sh <<< This should probably be included in the repo
 
 class ServerAgent():
     
