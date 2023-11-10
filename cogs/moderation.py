@@ -24,7 +24,7 @@ class Moderation(commands.Cog):
             await ctx.send("Cannot delete more than 100 messages.")
         else:
             await ctx.channel.purge(limit=amount)
-            print(f"{ctx.message.author} deleted {amount} messages.")
+            print(f"{Helpers.timestamp()}: {ctx.message.author} used {commands.command.__name__} to delete {amount} messages.")
 
     @commands.command()
     async def joined(self, ctx: commands.Context, member: discord.Member):
