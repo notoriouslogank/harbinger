@@ -116,14 +116,19 @@ class Helpers:
             with open("ip.txt", "r") as f:
                 ip = f.readline()
                 return ip
+        else:
+            print('ERROR: missing ./ip.txt')
 
     def cleanup():
         if os.path.exists("ip.txt"):
             os.remove("ip.txt")
+        else:
+            pass
 
     async def embed_server(ctx, ip, game_version="1.20.02"):
+        """Generates an imbed with Minecraft server information."""
         embed_srv = discord.Embed(title="Minecraft", color=Helpers.color1).set_image(
-            url="https://p1.hiclipart.com/preview/964/49/199/minecraft-icon-minecraft-minecraft-png-clipart-thumbnail.jpg"
+            url="https://jasontaylorweb.files.wordpress.com/2021/01/minecraft.jpg"
         )
         embed_srv.add_field(name="Server IP", value=ip)
         embed_srv.add_field(name="Game Version", value=game_version)
