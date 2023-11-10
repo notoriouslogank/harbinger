@@ -1,4 +1,4 @@
-from os import getenv
+from os import path
 
 import discord
 from discord.ext import commands
@@ -50,9 +50,16 @@ class Moderation(commands.Cog):
     async def playing(self, ctx: commands.Context, game: str, field: str, value: str):
         """Create game info embed."""
         embedPlaying = discord.Embed(title=game, color=color1)
-        embedPlaying.add_field(name=f"{field}", value=f"{value}", inline=True)
-        print(f"{ctx.message.author} is playing {game}: {field}, {value}")
-        timestamp()
+        if path.exists('ip.txt'):
+            with open('ip.txt', 'r') as f:
+                ip = f.readline()
+            embedPlaying.add_field(name=f'Server IP', value=f'{ip}')
+            embedPlaying.add_field(name=f'Version', value='1.20.1')
+            print(f'Printed Minecraft server info.')
+        else:
+            embedPlaying.add_field(name=f"{field}", value=f"{value}", inline=True)
+            print(f"{ctx.message.author} is playing {game}: {field}, {value}")
+            timestamp()
         await ctx.send(embed=embedPlaying)
 
 
