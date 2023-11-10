@@ -60,7 +60,7 @@ class Tools(commands.Cog):
         """Let Me Google That For You"""
         google = "https://google.com/search?q="
         search = google + query
-        embed = discord.Embed(color=Helpers.get_color(), title="LMGTFY")
+        embed = discord.Embed(color=color1, title="LMGTFY")
         embed.description = f"[Here]({search}), let me Google that for you!"
         print(f"LMGTFY: {search}")
         Helpers.timestamp()
