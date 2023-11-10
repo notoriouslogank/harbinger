@@ -8,7 +8,7 @@ from utils.helpers import Helpers
 
 bot = Helpers.bot
 color1 = Helpers.color1
-mc_hostname = Helpers.mc_host
+mc_hostname = Helpers.get_mc_host()
 agent = Connection(f'{mc_hostname}')
 
 class Tools(commands.Cog):
