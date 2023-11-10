@@ -49,7 +49,7 @@ class Moderation(commands.Cog):
     @commands.command()
     async def playing(self, ctx: commands.Context, game: str, field: str, value: str):
         """Create game info embed."""
-        embedPlaying = discord.Embed(title=game, color=f'{color1}')
+        embedPlaying = discord.Embed(title=game, color=color1)
         embedPlaying.add_field(name=f"{field}", value=f"{value}", inline=True)
         print(f"{ctx.message.author} is playing {game}: {field}, {value}")
         timestamp()
