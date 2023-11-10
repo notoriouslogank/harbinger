@@ -101,9 +101,10 @@ class Helpers:
 
     def timestamp(user, cmd, cmd_msg):
         """Print timestamp and end-of-command separator."""
+        nl = '\n'
         cTime = datetime.now()
-        timestamp = f'{cTime}: {user} used {cmd}.  {cmd_msg}'
-        return timestamp
+        print(f'{cTime}: {user} used {cmd}.{nl}{nl.join(map(str,{cmd_msg}))}')
+            
     
     async def send_dm(ctx, member: discord.Member, *, content):
         """Create a Direct Message channel with a given member."""
