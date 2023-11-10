@@ -8,7 +8,6 @@ from utils.helpers import Helpers
 
 bot = Helpers.bot
 color1 = Helpers.color1
-timestamp = timestamp
 
 class Tools(commands.Cog):
     """Commands containing various tools/utilites."""
@@ -66,6 +65,9 @@ class Tools(commands.Cog):
         search = google + query
         embed = discord.Embed(color=color1, title="LMGTFY")
         embed.description = f"[Here]({search}), let me Google that for you!"
+        print(f"LMGTFY: {search}")
+        Helpers.timestamp()
+
         await ctx.channel.purge(limit=1)
         await ctx.send(embed=embed)
         await Helpers.send_dm(ctx=ctx, member=ctx.message.author, content=query)
@@ -85,7 +87,8 @@ class Tools(commands.Cog):
         embed = discord.Embed(color=color1, title=f"Define: {word}")
         embed.description = f"[{word}]({define_url})"
         print(f"Define: {word}: {define_url}")
-        timestamp
+        Helpers.timestamp()
+        
         await ctx.channel.purge(limit=1)
         await ctx.send(embed=embed)
         await Helpers.send_dm(ctx=ctx, member=ctx.message.author, content=define_url)
@@ -99,7 +102,8 @@ class Tools(commands.Cog):
         
         total = left + right
         print(f"{left} + {right} = {total}")
-        timestamp
+        Helpers.timestamp()
+
         await ctx.send(f"{total}")
 
     @commands.command()
@@ -116,7 +120,9 @@ class Tools(commands.Cog):
             return
         result = ", ".join(str(randint(1, limit)) for r in range(rolls))
         print(f"Roll: {result}")
-        timestamp
+
+        Helpers.timestamp()
+
         await ctx.send(f"{result}")
 
     @commands.command()
