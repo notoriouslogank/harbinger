@@ -103,7 +103,9 @@ class Helpers:
         """Print timestamp and end-of-command separator."""
         nl = '\n'
         cTime = datetime.now()
-        print(f'{cTime}: {user} used {cmd}.{nl}{nl.join(map(str,{cmd_msg}))}')
+        print(f'{cTime}:')
+        print(f'{user} used {cmd}')
+        print(f'Command message: {cmd_msg}')
             
     
     async def send_dm(ctx, member: discord.Member, *, content):
