@@ -6,9 +6,6 @@ from dotenv import load_dotenv
 
 from utils.helpers import Helpers
 
-load_dotenv()
-color1 = 0x884EA0
-stamp = Helpers.timestamp()
 
 class Moderation(commands.Cog):
     """Server moderation commands."""
@@ -36,21 +33,21 @@ class Moderation(commands.Cog):
         joined = f"{member.name} joined on {discord.utils.format_dt(member.joined_at)}."
         print(f"{joined}")
         await ctx.send(f"{joined}")
-        stamp()
+        Helpers.timestamp()
 
     @commands.command()
     async def say(self, ctx: commands.Context, message: str):
         """Say message as bot."""
         print(f"{ctx.message.author} made McSwitch say:")
         print(f"{message}")
-        stamp()
+        Helpers.timestamp()
         await ctx.channel.purge(limit=1)
         await ctx.send(f"{message}")
 
     @commands.command()
     async def playing(self, ctx: commands.Context, game='Minecraft', field='Server Address', value=''):
         """Create game info embed."""
-        embedPlaying = discord.Embed(title=game, color=color1)
+        embedPlaying = discord.Embed(title=game, color=Helpers.color1)
         if path.exists('ip.txt'):
             with open('ip.txt', 'r') as f:
                 ip = f.readline()
@@ -60,7 +57,7 @@ class Moderation(commands.Cog):
         else:
             embedPlaying.add_field(name=f"{field}", value=f"{value}", inline=True)
             print(f"{ctx.message.author} is playing {game}: {field}, {value}")
-            stamp()
+            Helpers.timestamp()
         await ctx.send(embed=embedPlaying)
 
 
