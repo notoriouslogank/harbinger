@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-from dotenv import load_dotenv
 
 from utils.helpers import Helpers
 
@@ -8,23 +7,26 @@ color1 = Helpers.color1
 
 current_version = Helpers.get_ver()
 
+
 class HelpCommand(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.Cog.listener()
-    async def on_ready(self):
-        print("Help Cog online.")
+    #    @commands.Cog.listener()
+    #    async def on_ready(self):
+    #        print("Help Cog online.")
 
     @commands.command()
     async def help(self, ctx, *, command=None):
         """Return help embed with command descriptions."""
+        cmd = f"!help({command})"
+        cmd_msg = f"provided help: {command}"
+        Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
         if command == None:
             help_embed = discord.Embed(
                 title="Command Help",
                 description=f"Commands for bot v{current_version}",
-       
-             color=color1,
+                color=color1,
             )
             # MODERATION
             help_embed.add_field(
@@ -238,7 +240,7 @@ class HelpCommand(commands.Cog):
             )
             await ctx.send(embed=usage_embed)
         else:
-            print("Something probably went wrong.")
+            print("ERROR: 420.69")
 
 
 async def setup(bot):

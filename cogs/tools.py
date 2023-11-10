@@ -3,21 +3,18 @@ from random import randint
 import discord
 from discord.ext import commands
 
-from utils import serverAgent
+from utils.serverAgent import *
 from utils.helpers import Helpers
 
 bot = Helpers.bot
 color1 = Helpers.color1
+
 
 class Tools(commands.Cog):
     """Commands containing various tools/utilites."""
 
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
-
-    @commands.Cog.listener()
-    async def on_ready(self):
-        print("Tools Cog online.")
 
     @commands.command()
     async def switch(self, ctx: commands.Context, state="on"):
@@ -26,22 +23,27 @@ class Tools(commands.Cog):
         Args:
             state (str, optional): Switch the server 'on' or 'off'. Defaults to "on".
         """
+        cmd = f"!switch{state}"
         if state == "on":
-            print("Attempting to start the server.")
+            cmd_msg = "attempting to start server"
+            Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
             await ctx.channel.send("Attempting to start the server...")
             try:
-                serverAgent.startServer()
-                await ctx.channel.send("Server is running...")
+                ServerAgent.start_server()
+                await ctx.channel.send("Sucessfully started server...")
             except:
-                await ctx.channel.send("Some kind of error.")
+                await ctx.channel.send("ERROR: 666")
         elif state == "off":
-            print("Attempting to stop the server...")
+            cmd_msg = "attempting to stop server"
+            Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
             try:
-                serverAgent.stopServer()
+                ServerAgent.stop_server()
                 await ctx.channel.send("Server is stopping...")
             except:
-                await ctx.channel.send("Some kind of error.")
+                await ctx.channel.send("ERROR: 667")
         else:
+            cmd_message = "ERROR: Invalid choice"
+            Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
             await ctx.channel.send("Invalid Syntax!")
             await ctx.channel.send("!switch <on|off>")
 
@@ -52,18 +54,21 @@ class Tools(commands.Cog):
         Args:
             command (str): Command to send to the server
         """
-        serverAgent.commandServer(command)
-        print(f"{ctx.author} sent {command} to the minecraft server.")
+        cmd = f"!commandMc({command})"
+        cmd_msg = f"sent command {command} to server"
+        ServerAgent.command_server()
+        Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
     async def lmgtfy(self, ctx: commands.Context, query: str):
         """Let Me Google That For You"""
+        cmd = f"!lmgtfy({query})"
         google = "https://google.com/search?q="
         search = google + query
         embed = discord.Embed(color=color1, title="LMGTFY")
         embed.description = f"[Here]({search}), let me Google that for you!"
-        print(f"LMGTFY: {search}")
-        Helpers.timestamp()
+        cmd_msg = f"URL: {search}"
+        Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.channel.purge(limit=1)
         await ctx.send(embed=embed)
         await Helpers.send_dm(ctx=ctx, member=ctx.message.author, content=query)
@@ -75,12 +80,13 @@ class Tools(commands.Cog):
         Args:
             word (str): the word to be defined
         """
+        cmd = f"!define({word})"
         dictionary = "https://www.merriam-webster.com/dictionary/"
         define_url = dictionary + word
         embed = discord.Embed(color=color1, title=f"Define: {word}")
         embed.description = f"[{word}]({define_url})"
-        print(f"Define: {word}: {define_url}")
-        Helpers.timestamp()
+        cmd_msg = f"url: {define_url}"
+        Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.channel.purge(limit=1)
         await ctx.send(embed=embed)
         await Helpers.send_dm(ctx=ctx, member=ctx.message.author, content=define_url)
@@ -88,27 +94,32 @@ class Tools(commands.Cog):
     @commands.command()
     async def add(self, ctx: commands.Context, left: int, right: int):
         """Adds two integers and returns result as message."""
+        cmd = f"!add({left} {right})"
         total = left + right
-        print(f"{left} + {right} = {total}")
-        Helpers.timestamp()
+        cmd_msg = f"total: {total}"
+        Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(f"{total}")
 
     @commands.command()
     async def roll(self, ctx: commands.Context, dice: str):
         """Roll NdN dice and get results."""
+        cmd = f"!roll({dice})"
         try:
             rolls, limit = map(int, dice.split("d"))
         except Exception:
             await ctx.send("Format must be NdN!")
             return
         result = ", ".join(str(randint(1, limit)) for r in range(rolls))
-        print(f"Roll: {result}")
-        Helpers.timestamp()
+        cmd_msg = f"rolled {dice}; result: {result}"
+        Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(f"{result}")
 
     @commands.command()
     async def rps(self, ctx: commands.Context, choice: str):
         """Play rock, paper, scissors against the bot."""
+        cmd = f"!rps(choice)"
+        cmd_msg = f"choice: {choice}"
+        Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
         choices = ["rock", "paper", "scissors"]
         botChoice = choices[randint(0, 2)]
         embedRPS = discord.Embed(color=color1, title="rock, paper, scissors")
