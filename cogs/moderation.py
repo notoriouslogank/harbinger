@@ -19,20 +19,20 @@ class Moderation(commands.Cog):
     @commands.command()
     async def clear(self, ctx: commands.Context, amount: int = 2) -> None:
         """Delete a number of messages in channel."""
-        cmd = f'!clear({amount})'
-        cmd_msg = f'Deleted {amount} messages.'
+        cmd = f"!clear({amount})"
+        cmd_msg = f"Deleted {amount} messages."
         amount = amount + 1
         if amount > 100:
             await ctx.send("Cannot delete more than 100 messages.")
         else:
             await ctx.channel.purge(limit=amount)
             Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
-            
+
     @commands.command()
     async def joined(self, ctx: commands.Context, member: discord.Member):
         """Get user's join datetime."""
-        cmd = f'!joined({member})'
-        cmd_msg = f'Got join data for: {member}.'
+        cmd = f"!joined({member})"
+        cmd_msg = f"Got join data for: {member}."
         joined = f"{member.name} joined on {discord.utils.format_dt(member.joined_at)}."
         await ctx.send(f"{joined}")
         Helpers.timestamp()
@@ -40,8 +40,8 @@ class Moderation(commands.Cog):
     @commands.command()
     async def say(self, ctx: commands.Context, message: str):
         """Say message as bot."""
-        cmd = f'!say({message})'
-        cmd_msg = f'McSwitch says: {message}'
+        cmd = f"!say({message})"
+        cmd_msg = f"McSwitch says: {message}"
         Helpers.timestamp()
         await ctx.channel.purge(limit=1)
         await ctx.send(f"{message}")

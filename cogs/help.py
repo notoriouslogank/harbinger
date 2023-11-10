@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-from dotenv import load_dotenv
 
 from utils.helpers import Helpers
 
@@ -19,6 +18,9 @@ class HelpCommand(commands.Cog):
     @commands.command()
     async def help(self, ctx, *, command=None):
         """Return help embed with command descriptions."""
+        cmd = f'!help({command})'
+        cmd_msg = f'provided help: {command}'
+        Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
         if command == None:
             help_embed = discord.Embed(
                 title="Command Help",
