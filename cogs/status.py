@@ -26,7 +26,7 @@ class Status(commands.Cog):
         """Confirm bot is online and reachable."""
         status_msg = f"{bot.user} is online."
         print(f"{status_msg}")
-        Helpers.stamp()
+        Helpers.timestamp()
         await ctx.send(f"{status_msg}")
 
     @commands.command()
