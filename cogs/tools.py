@@ -29,7 +29,7 @@ class Tools(commands.Cog):
             Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
             await ctx.channel.send("Attempting to start the server...")
             try:
-                serverAgent.start_server()
+                serverAgent.ServerAgent.start_server(bot)
                 await ctx.channel.send("Sucessfully started server...")
             except:
                 await ctx.channel.send("ERROR: 666")
@@ -37,7 +37,7 @@ class Tools(commands.Cog):
             cmd_msg = "attempting to stop server"
             Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
             try:
-                serverAgent.stop_server()
+                serverAgent.stop_server(self)
                 await ctx.channel.send("Server is stopping...")
             except:
                 await ctx.channel.send("ERROR: 667")
