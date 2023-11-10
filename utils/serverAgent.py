@@ -1,5 +1,6 @@
 from fabric import Connection, transfer
-from helpers import Helpers
+
+from utils.helpers import Helpers
 
 # startup_script = /home/logank/paper-test/java.sh <<< This should probably be included in the repo
 
