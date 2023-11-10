@@ -4,12 +4,12 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 
-from utils import helpers, serverAgent
+from utils.helpers import Helpers
 
 load_dotenv()
 color1 = 0x884EA0
 
-currentVersion = helpers.getVer()
+currentVersion = Helpers.getVer()
 
 class HelpCommand(commands.Cog):
     def __init__(self, bot):

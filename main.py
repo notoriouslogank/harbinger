@@ -1,20 +1,11 @@
-from os import getenv
-
-from dotenv import load_dotenv
-
-from utils import helpers, serverAgent
+from utils.helpers import Helpers
 
 
-load_dotenv()
-token = getenv("TOKEN")
-channel = getenv("CHANNEL")
-cogs = "cogs.help", "cogs.moderation", "cogs.status", "cogs.tools"
-COLOR1 = getenv("COLOR1")
-mc_host = getenv("MC_HOST")
-
-bot = helpers.bot
-
+sTime = Helpers.sTime
+bot = Helpers.bot
 bot.remove_command("help")
+cogs = Helpers.get_configs.cogs
+
 
 @bot.event
 async def setup_hook() -> None:
@@ -26,7 +17,7 @@ async def setup_hook() -> None:
 
 def main():
     """Start the bot."""
-    bot.run(token)
+    bot.run(Helpers.get_configs.token)
 
 
 main()

@@ -4,11 +4,11 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 
-from utils import helpers
+from utils.helpers import Helpers
 
 load_dotenv()
 color1 = 0x884EA0
-stamp = helpers.timestamp()
+stamp = Helpers.timestamp()
 
 class Moderation(commands.Cog):
     """Server moderation commands."""
