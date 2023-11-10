@@ -19,13 +19,15 @@ class Moderation(commands.Cog):
     @commands.command()
     async def clear(self, ctx: commands.Context, amount: int = 2) -> None:
         """Delete a number of messages in channel."""
+        cmd = f'!clear({amount})'
+        cmd_msg = f'Deleted {amount} messages.'
         amount = amount + 1
         if amount > 100:
             await ctx.send("Cannot delete more than 100 messages.")
         else:
             await ctx.channel.purge(limit=amount)
-            print(f"{Helpers.timestamp()}: {ctx.message.author} used {commands.command.__name__} to delete {amount} messages.")
-
+            print(f'{Helpers.timestamp(ctx.message.author, cmd, cmd_msg)}')
+            
     @commands.command()
     async def joined(self, ctx: commands.Context, member: discord.Member):
         """Get user's join datetime."""

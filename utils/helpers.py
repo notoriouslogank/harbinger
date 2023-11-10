@@ -99,12 +99,12 @@ class Helpers:
             changelog = f.readlines()
             return changelog
 
-    def timestamp():
+    def timestamp(user, cmd, cmd_msg):
         """Print timestamp and end-of-command separator."""
         cTime = datetime.now()
-        print(f"{cTime}")
-        print(f"----------")
-
+        timestamp = f'{cTime}: {user} used {cmd}.  {cmd_msg}'
+        return timestamp
+    
     async def send_dm(ctx, member: discord.Member, *, content):
         """Create a Direct Message channel with a given member."""
         channel = await member.create_dm()
