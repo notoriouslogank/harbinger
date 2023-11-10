@@ -1,18 +1,13 @@
-from os import getenv
 from random import randint
 
 import discord
 from discord.ext import commands
-from dotenv import load_dotenv
 
 from utils import serverAgent
-from utils.helpers import bot, send_dm, timestamp
+from utils.helpers import Helpers
 
-bot = bot
-
-load_dotenv()
-color1 = 0x884EA0
-
+bot = Helpers.bot
+color1 = Helpers.color1
 
 class Tools(commands.Cog):
     """Commands containing various tools/utilites."""
@@ -68,10 +63,10 @@ class Tools(commands.Cog):
         embed = discord.Embed(color=color1, title="LMGTFY")
         embed.description = f"[Here]({search}), let me Google that for you!"
         print(f"LMGTFY: {search}")
-        timestamp()
+        Helpers.timestamp()
         await ctx.channel.purge(limit=1)
         await ctx.send(embed=embed)
-        await send_dm(ctx=ctx, member=ctx.message.author, content=query)
+        await Helpers.send_dm(ctx=ctx, member=ctx.message.author, content=query)
 
     @commands.command()
     async def define(self, ctx: commands.Context, word: str):
@@ -85,17 +80,17 @@ class Tools(commands.Cog):
         embed = discord.Embed(color=color1, title=f"Define: {word}")
         embed.description = f"[{word}]({define_url})"
         print(f"Define: {word}: {define_url}")
-        timestamp()
+        Helpers.timestamp()
         await ctx.channel.purge(limit=1)
         await ctx.send(embed=embed)
-        await send_dm(ctx=ctx, member=ctx.message.author, content=define_url)
+        await Helpers.send_dm(ctx=ctx, member=ctx.message.author, content=define_url)
 
     @commands.command()
     async def add(self, ctx: commands.Context, left: int, right: int):
         """Adds two integers and returns result as message."""
         total = left + right
         print(f"{left} + {right} = {total}")
-        timestamp()
+        Helpers.timestamp()
         await ctx.send(f"{total}")
 
     @commands.command()
@@ -108,7 +103,7 @@ class Tools(commands.Cog):
             return
         result = ", ".join(str(randint(1, limit)) for r in range(rolls))
         print(f"Roll: {result}")
-        timestamp()
+        Helpers.timestamp()
         await ctx.send(f"{result}")
 
     @commands.command()
