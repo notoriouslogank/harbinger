@@ -1,25 +1,14 @@
-from os import getenv
+from utils.helpers import Helpers
 
-from dotenv import load_dotenv
-
-from utils.helpers import bot
-
-load_dotenv()
-token = getenv("TOKEN")
-channel = getenv("CHANNEL")
-cogs = "cogs.help", "cogs.moderation", "cogs.status", "cogs.tools"
-COLOR1 = getenv("COLOR1")
-mc_host = getenv("MC_HOST")
-
-bot = bot
-
-
+sTime = Helpers.sTime
+bot = Helpers.bot
+cogs = Helpers.cogs
 bot.remove_command("help")
 
 
 @bot.event
 async def setup_hook() -> None:
-    """Loads cogs."""
+    """Load cogs."""
     print(f"Loading cogs...")
     for cog in cogs:
         await bot.load_extension(cog)
@@ -27,6 +16,8 @@ async def setup_hook() -> None:
 
 def main():
     """Start the bot."""
+    token = Helpers.get_token()
+    print(token)
     bot.run(token)
 
 

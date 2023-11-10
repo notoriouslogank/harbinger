@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0-alpha] - [Unreleased]
+
+### Changed
+
+- Refactored many functions throughout Cogs
+- Cleaned up redundant functions calls and unused imports throughout codebase
+
+### Bugfixes
+
+- Attempting to (further) improve imports
+
+### Added
+
+- __init.py__ to utils
+
+### Changed
+
+- ServerAgent is now its own class (I'm not 100% this helps at all, but I'm learning)
+
 ## [1.3.3] 2023-09-11
 
 ### Changed

@@ -1,15 +1,12 @@
-from os import getenv
-
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 
-from utils.helpers import getVer
+from utils.helpers import Helpers
 
-load_dotenv()
-color1 = 0x884EA0
+color1 = Helpers.color1
 
-currentVersion = getVer()
+current_version = Helpers.get_ver()
 
 class HelpCommand(commands.Cog):
     def __init__(self, bot):
@@ -25,7 +22,7 @@ class HelpCommand(commands.Cog):
         if command == None:
             help_embed = discord.Embed(
                 title="Command Help",
-                description=f"Commands for bot v{currentVersion}",
+                description=f"Commands for bot v{current_version}",
        
              color=color1,
             )
