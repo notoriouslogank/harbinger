@@ -2,27 +2,21 @@ from datetime import datetime
 from os import getenv
 
 import discord
-from fabric import Connection
 from discord.ext import commands
 from dotenv import load_dotenv
 
-load_dotenv()
-TOKEN = getenv("TOKEN")
-CHANNEL = getenv("CHANNEL")
-COGS = ("cogs.moderation", "cogs.tools", "cogs.status", "cogs.help")
 sTime = datetime.now()
-purple = 0x884EA0  # Should move this to .env
+load_dotenv()
+token = getenv("TOKEN")
+channel = getenv("CHANNEL")
+COLOR1 = getenv("COLOR1")
+
+cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools"
+
 intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
-channel = bot.get_channel(CHANNEL)
-
-def startServer():
-    ssh = Connection('logank@mimir')
-    tmuxStart = ssh.run('tmux new -d -s server')
-    tmuxCd = ssh.run('tmux send -t server:0 "cd /home/logank/paper-test" C-m')
-    tmuxPaper = ssh.run('tmux send -t server:0 "./java.sh" C-m')
 
 
 def getVer():
