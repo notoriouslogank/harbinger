@@ -5,7 +5,7 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 
-class Helpers:
+class Helpers():
     sTime = datetime.now()
 
     cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools"
@@ -19,9 +19,9 @@ class Helpers:
     def __init__(self, bot):
         self.bot = bot
         sTime = datetime.now()
-        load_dotenv()
         
     def get_token():
+        load_dotenv()
         token = getenv("TOKEN")
         return str(token)
     
