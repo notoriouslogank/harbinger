@@ -4,10 +4,11 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 
-from utils.helpers import timestamp
+from utils import helpers
 
 load_dotenv()
 color1 = 0x884EA0
+stamp = helpers.timestamp()
 
 class Moderation(commands.Cog):
     """Server moderation commands."""
@@ -35,14 +36,14 @@ class Moderation(commands.Cog):
         joined = f"{member.name} joined on {discord.utils.format_dt(member.joined_at)}."
         print(f"{joined}")
         await ctx.send(f"{joined}")
-        timestamp()
+        stamp()
 
     @commands.command()
     async def say(self, ctx: commands.Context, message: str):
         """Say message as bot."""
         print(f"{ctx.message.author} made McSwitch say:")
         print(f"{message}")
-        timestamp()
+        stamp()
         await ctx.channel.purge(limit=1)
         await ctx.send(f"{message}")
 
@@ -59,7 +60,7 @@ class Moderation(commands.Cog):
         else:
             embedPlaying.add_field(name=f"{field}", value=f"{value}", inline=True)
             print(f"{ctx.message.author} is playing {game}: {field}, {value}")
-            timestamp()
+            stamp()
         await ctx.send(embed=embedPlaying)
 
 
