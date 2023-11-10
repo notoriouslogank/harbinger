@@ -86,7 +86,6 @@ class Helpers:
             changes = f.readlines()
             vLine = changes[6]
             version = vLine[4:9]
-            print(f"Current version: {version}")
             return version
 
     def get_log():  # TODO: Replace this with embed function
@@ -99,11 +98,15 @@ class Helpers:
             changelog = f.readlines()
             return changelog
 
-    def timestamp():
+    def timestamp(user, cmd, cmd_msg):
         """Print timestamp and end-of-command separator."""
+        nl = "\n"
         cTime = datetime.now()
+        print(f"++++")
         print(f"{cTime}")
-        print(f"----------")
+        print(f"USR| {user}")
+        print(f"CMD| {cmd}")
+        print(f"MSG| {cmd_msg}")
 
     async def send_dm(ctx, member: discord.Member, *, content):
         """Create a Direct Message channel with a given member."""
