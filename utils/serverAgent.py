@@ -2,9 +2,8 @@ from os import getenv
 
 from dotenv import load_dotenv
 from fabric import Connection, transfer
-
-load_dotenv()
-mc_hostname = getenv("MC_HOST")
+from helpers import Helpers
+mc_hostname = Helpers.get_mc_host()
 # startup_script = /home/logank/paper-test/java.sh
 
 class ServerAgent():
