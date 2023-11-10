@@ -27,21 +27,21 @@ class Moderation(commands.Cog):
         else:
             await ctx.channel.purge(limit=amount)
             Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
-            #print(f'{Helpers.timestamp(ctx.message.author, cmd, cmd_msg)}')
             
     @commands.command()
     async def joined(self, ctx: commands.Context, member: discord.Member):
         """Get user's join datetime."""
+        cmd = f'!joined({member})'
+        cmd_msg = f'Got join data for: {member}.'
         joined = f"{member.name} joined on {discord.utils.format_dt(member.joined_at)}."
-        print(f"{joined}")
         await ctx.send(f"{joined}")
         Helpers.timestamp()
 
     @commands.command()
     async def say(self, ctx: commands.Context, message: str):
         """Say message as bot."""
-        print(f"{ctx.message.author} made McSwitch say:")
-        print(f"{message}")
+        cmd = f'!say({message})'
+        cmd_msg = f'McSwitch says: {message}'
         Helpers.timestamp()
         await ctx.channel.purge(limit=1)
         await ctx.send(f"{message}")
