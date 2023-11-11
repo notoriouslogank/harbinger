@@ -65,7 +65,11 @@ class HelpCommand(commands.Cog):
                 value="Play rock, paper, scissors against the bot.",
                 inline=True,
             )
+            help_embed.add_field(
+                name="!switch", value="Turn the Minecraft server on or off.", inline=True)
+            help_embed.add_field(name="!mccmd", 'Send a command to the Miinecraft Server instance.')
             # OTHER
+            help_embed.add_field(name="!help <command>", value="Get usage and syntax details for <command>.", inline=True)        
             help_embed.add_field(
                 name="Need Help?",
                 value="[Join the Bot-Dev Server](https://discord.gg/9zAW8DfV)",

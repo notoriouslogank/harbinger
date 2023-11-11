@@ -51,13 +51,13 @@ class Tools(commands.Cog):
             await ctx.channel.send("!switch <on|off>")
 
     @commands.command()
-    async def commandMc(self, ctx: commands.Context, command: str):
+    async def mccmd(self, ctx: commands.Context, command: str):
         """Send an arbitrary Minecraft server command to the server.
 
         Args:
             command (str): Command to send to the server
         """
-        cmd = f"!commandMc({command})"
+        cmd = f"!mccmd({command})"
         cmd_msg = f"sent command {command} to server"
         ServerAgent.command_server()
         Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
@@ -71,8 +71,8 @@ class Tools(commands.Cog):
         cmd_msg = f"url: {search}"
         Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.channel.purge(limit=1)
-        await ctx.channel.send('Here, let me Google that for you!', mention_author=True)
-        await ctx.channel.send(f'{search}', mention_author=True)
+        await ctx.channel.send("Here, let me Google that for you!", mention_author=True)
+        await ctx.channel.send(f"{search}", mention_author=True)
         await Helpers.send_dm(ctx=ctx, member=ctx.message.author, content={search})
 
     @commands.command()
@@ -88,7 +88,7 @@ class Tools(commands.Cog):
         cmd_msg = f"url: {define_url}"
         Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.channel.purge(limit=1)
-        await ctx.channel.send(f'{define_url}')
+        await ctx.channel.send(f"{define_url}")
         await Helpers.send_dm(ctx=ctx, member=ctx.message.author, content=define_url)
 
     @commands.command()
