@@ -2,8 +2,6 @@ from datetime import datetime
 
 import os
 
-os.remove("ip.txt")
-
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
