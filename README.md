@@ -44,11 +44,44 @@ Optionally, install venv (``sudo apt install python3-venv``) to create virtual e
 
 ## Repository
 
-First, you'll want to clone the repo: ``git clone https://github.com/notoriouslogank/mcswitch.git``
+First, you'll want to clone the repo: ``git clone https://github.com/notoriouslogank/mcswitch.git``.
 
-### Config Files
+The file structure is fairly straightforward:
 
-[TODO]
+```
+└── 📁mcswitch
+    └── .env
+    └── 📁cogs
+        └── help.py
+        └── moderation.py
+        └── status.py
+        └── tools.py
+    └── 📁docs
+        └── CHANGELOG.md
+        └── requirements.txt
+        └── sample_env
+    └── LICENSE
+    └── main.py
+    └── README.md
+    └── 📁utils
+        └── helpers.py
+        └── serverAgent.py
+        └── __init.py__
+```
+
+### Config Files (.env)
+
+The user-definable configuration settings are set in a .env file (as of v1.4.0).  The .env file should contain the following data:
+
+```python
+TOKEN='text-of-token'
+CHANNEL=int
+MC_HOST='username@hostname'
+```
+
+mcswitch will by default look for this file in mcswitch/.env.
+
+As this method is not ideal, future versions of mcswitch may deprecate .env.
 
 ### java.sh
 
