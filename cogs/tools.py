@@ -86,12 +86,10 @@ class Tools(commands.Cog):
         cmd = f"!define({word})"
         dictionary = "https://www.merriam-webster.com/dictionary/"
         define_url = dictionary + word
-        embed = discord.Embed(color=color1, title=f"Define: {word}")
-        embed.description = f"[{word}]({define_url})"
         cmd_msg = f"url: {define_url}"
         Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.channel.purge(limit=1)
-        await ctx.send(embed=embed)
+        await ctx.channel.send(f'{define_url}')
         await Helpers.send_dm(ctx=ctx, member=ctx.message.author, content=define_url)
 
     @commands.command()
