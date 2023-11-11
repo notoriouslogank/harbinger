@@ -12,10 +12,6 @@ class HelpCommand(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    #    @commands.Cog.listener()
-    #    async def on_ready(self):
-    #        print("Help Cog online.")
-
     @commands.command()
     async def help(self, ctx, *, command=None):
         """Return help embed with command descriptions."""

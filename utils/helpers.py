@@ -1,6 +1,5 @@
-from datetime import datetime
-
 import os
+from datetime import datetime
 
 import discord
 from discord.ext import commands
@@ -115,7 +114,7 @@ class Helpers:
                 ip = f.readline()
                 return ip
         else:
-            print('ERROR: missing ./ip.txt')
+            print("ERROR: missing ./ip.txt")
 
     def cleanup():
         if os.path.exists("ip.txt"):
