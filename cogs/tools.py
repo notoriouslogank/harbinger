@@ -74,9 +74,9 @@ class Tools(commands.Cog):
         Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.channel.purge(limit=1)
 #        await ctx.send(embed=embed)
-        await ctx.channel.send('Here, let me Google that for you!')
-        await ctx.channel.send(f'{search}')
-        await Helpers.send_dm(ctx=ctx, member=ctx.message.author, content=query)
+        await ctx.channel.send('Here, let me Google that for you!', mention_author=True)
+        await ctx.channel.send(f'{search}', mention_author=True)
+        await Helpers.send_dm(ctx=ctx, member=ctx.message.author, content={search})
 
     @commands.command()
     async def define(self, ctx: commands.Context, word: str):
