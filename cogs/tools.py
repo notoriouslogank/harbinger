@@ -75,7 +75,7 @@ class Tools(commands.Cog):
         await ctx.channel.purge(limit=1)
 #        await ctx.send(embed=embed)
         await ctx.channel.send('Here, let me Google that for you!')
-        await ctx.channeel.send(f'{search}')
+        await ctx.channel.send(f'{search}')
         await Helpers.send_dm(ctx=ctx, member=ctx.message.author, content=query)
 
     @commands.command()
