@@ -68,12 +68,9 @@ class Tools(commands.Cog):
         cmd = f"!lmgtfy({query})"
         google = "https://google.com/search?q="
         search = google + query
-#        embed = discord.Embed(color=color1, title="Let Me Google That for You")
-#        embed.description = f"{search}"
         cmd_msg = f"url: {search}"
         Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.channel.purge(limit=1)
-#        await ctx.send(embed=embed)
         await ctx.channel.send('Here, let me Google that for you!', mention_author=True)
         await ctx.channel.send(f'{search}', mention_author=True)
         await Helpers.send_dm(ctx=ctx, member=ctx.message.author, content={search})
