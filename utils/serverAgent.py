@@ -1,15 +1,15 @@
 from fabric import Connection, transfer
 
-from utils.helpers import Helpers
+from mcswitch import Mcswitch
 
-agent = Connection(host=f"{Helpers.get_mc_host()}")
+agent = Connection(host=f"{Mcswitch.get_mc_host()}")
 
 
 # startup_script = /home/logank/paper-test/java.sh <<< This should probably be included in the repo
 class ServerAgent:
     def get_server_ip():  ## This can probably be done in a much better way.
         """Run curl on remote and send text file back to local."""
-        Helpers.timestamp("BOT", "GET_IP", "ATTEMPTING TO GET SERVER IP")
+        Mcswitch.timestamp("BOT", "GET_IP", "ATTEMPTING TO GET SERVER IP")
         query_ip = agent.run(
             "curl https://ipinfo.io/ip > /home/logank/paper-test/ip.txt"
         )
@@ -25,7 +25,7 @@ class ServerAgent:
     def stop_server():
         """Runs the /stop command in the Minecraft server."""
         server_stop = agent.run('tmux send -t server:0 "stop" C-m')
-        Helpers.timestamp("BOT", "STOP_SERVER", "STOPPING SERVER")
+        Mcswitch.timestamp("BOT", "STOP_SERVER", "STOPPING SERVER")
 
     def command_server(command: str):
         """Send a command to the Minecraft server via tmux.
@@ -33,4 +33,4 @@ class ServerAgent:
             command (str): Minecraft server command to send
         """
         server_command = agent.run(f'tmux send -t server:0 "{command}" C-m')
-        Helpers.timestamp("BOT", "SERVER_COMMAND", "SENDING USER STRING TO SERVER")
+        Mcswitch.timestamp("BOT", "SERVER_COMMAND", "SENDING USER STRING TO SERVER")

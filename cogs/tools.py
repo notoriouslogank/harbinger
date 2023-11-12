@@ -25,10 +25,10 @@ class Tools(commands.Cog):
         embed = discord.Embed(color=Mcswitch.custom_color, title="LMGTFY")
         embed.description = f"[Here]({search}), let me Google that for you!"
         cmd_msg = f"URL: {search}"
-        Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
+        Mcswitch.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.channel.purge(limit=1)
         await ctx.send(embed=embed)
-        await Helpers.send_dm(ctx=ctx, member=ctx.message.author, content=query)
+        await Mcswitch.send_dm(ctx=ctx, member=ctx.message.author, content=query)
 
     @commands.command()
     async def define(self, ctx: commands.Context, word: str):
@@ -43,10 +43,10 @@ class Tools(commands.Cog):
         embed = discord.Embed(color=color1, title=f"Define: {word}")
         embed.description = f"[{word}]({define_url})"
         cmd_msg = f"url: {define_url}"
-        Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
+        Mcswitch.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.channel.purge(limit=1)
         await ctx.send(embed=embed)
-        await Helpers.send_dm(ctx=ctx, member=ctx.message.author, content=define_url)
+        await Mcswitch.send_dm(ctx=ctx, member=ctx.message.author, content=define_url)
 
     @commands.command()
     async def add(self, ctx: commands.Context, left: int, right: int):
@@ -54,7 +54,7 @@ class Tools(commands.Cog):
         cmd = f"!add({left} {right})"
         total = left + right
         cmd_msg = f"total: {total}"
-        Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
+        Mcswitch.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(f"{total}")
 
     @commands.command()
@@ -68,7 +68,7 @@ class Tools(commands.Cog):
             return
         result = ", ".join(str(randint(1, limit)) for r in range(rolls))
         cmd_msg = f"rolled {dice}; result: {result}"
-        Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
+        Mcswitch.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(f"{result}")
 
     @commands.command()
@@ -76,10 +76,12 @@ class Tools(commands.Cog):
         """Play rock, paper, scissors against the bot."""
         cmd = f"!rps(choice)"
         cmd_msg = f"choice: {choice}"
-        Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
+        Mcswitch.timestamp(ctx.message.author, cmd, cmd_msg)
         choices = ["rock", "paper", "scissors"]
         botChoice = choices[randint(0, 2)]
-        embedRPS = discord.Embed(color=color1, title="rock, paper, scissors")
+        embedRPS = discord.Embed(
+            color=Mcswitch.custom_color, title="rock, paper, scissors"
+        )
         embedRPS.add_field(name="You", value=f"{choice}", inline=True)
         embedRPS.add_field(name="Bot", value=f"{botChoice}", inline=True)
         if choice == botChoice:

@@ -15,6 +15,7 @@ class Mcswitch:
     intents.members = True
     intents.message_content = True
     bot = commands.Bot(command_prefix="!", intents=intents)
+    bot.remove_command("help")
 
     def __init__(self, bot):
         self.bot = bot
@@ -68,9 +69,12 @@ class Mcswitch:
 bot = Mcswitch.bot
 cogs = Mcswitch.cogs
 
+
 def main():
+    # TODO: tmuxinator entry point here; need to create tmux session and launch main.py inside of it
     Mcswitch.start()
+    # TODO: create a tmux session for the Minecraft server as well
 
 
-if __name__=='__main__':
+if __name__ == "__main__":
     Mcswitch.start()

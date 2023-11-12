@@ -36,7 +36,7 @@ class Status(commands.Cog):
         cmd = "!info"
         cmd_msg = f"Sent info embed to channel {ctx.channel.id}"
         cTime = datetime.now()
-        delta = cTime - Helpers.sTime
+        delta = cTime - Mcswitch.sTime
         embedInfo = discord.Embed(title="mcswitch", color=0x884EA0)
         embedInfo.add_field(name="version", value=f"v{currentVersion}", inline=True)
         embedInfo.add_field(name="uptime", value=f"{delta}", inline=True)
@@ -64,7 +64,7 @@ class Status(commands.Cog):
         """Get bot uptime."""
         cmd = "!uptime"
         cTime = datetime.now()
-        delta = cTime - Helpers.sTime
+        delta = cTime - Mcswitch.sTime
         up_msg = f"uptime: {delta}"
         cmd_msg = f"{up_msg}"
         Mcswitch.timestamp(ctx.message.author, cmd, cmd_msg)
