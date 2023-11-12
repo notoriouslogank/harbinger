@@ -3,7 +3,7 @@ from os import path
 import discord
 from discord.ext import commands
 
-from utils.helpers import Helpers
+from mcswitch import Mcswitch
 
 
 class Moderation(commands.Cog):
@@ -22,7 +22,7 @@ class Moderation(commands.Cog):
             await ctx.send("Cannot delete more than 100 messages.")
         else:
             await ctx.channel.purge(limit=amount)
-            Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
+            Mcswitch.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
     async def joined(self, ctx: commands.Context, member: discord.Member):
@@ -31,14 +31,14 @@ class Moderation(commands.Cog):
         cmd_msg = f"Got join data for: {member}."
         joined = f"{member.name} joined on {discord.utils.format_dt(member.joined_at)}."
         await ctx.send(f"{joined}")
-        Helpers.timestamp(ctx.author.message, cmd, cmd_msg)
+        Mcswitch.timestamp(ctx.author.message, cmd, cmd_msg)
 
     @commands.command()
     async def say(self, ctx: commands.Context, message: str):
         """Say message as bot."""
         cmd = f"!say({message})"
         cmd_msg = f"McSwitch says: {message}"
-        Helpers.timestamp(ctx.author, cmd, cmd_msg)
+        Mcswitch.timestamp(ctx.author, cmd, cmd_msg)
         await ctx.channel.purge(limit=1)
         await ctx.send(f"{message}")
 
@@ -57,7 +57,7 @@ class Moderation(commands.Cog):
             embedPlaying.add_field(name=f"Version", value="1.20.1")
         else:
             embedPlaying.add_field(name=f"{field}", value=f"{value}", inline=True)
-            Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
+            Mcswitch.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(embed=embedPlaying)
 
 

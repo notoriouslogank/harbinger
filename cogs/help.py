@@ -1,27 +1,23 @@
 import discord
 from discord.ext import commands
 
-from utils.helpers import Helpers
+from mcswitch import Mcswitch
 
-color1 = Helpers.color1
+color1 = Mcswitch.custom_color
 
-current_version = Helpers.get_ver()
+current_version = Mcswitch.get_ver()
 
 
 class HelpCommand(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    #    @commands.Cog.listener()
-    #    async def on_ready(self):
-    #        print("Help Cog online.")
-
     @commands.command()
     async def help(self, ctx, *, command=None):
         """Return help embed with command descriptions."""
         cmd = f"!help({command})"
         cmd_msg = f"provided help: {command}"
-        Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
+        Mcswitch.timestamp(ctx.message.author, cmd, cmd_msg)
         if command == None:
             help_embed = discord.Embed(
                 title="Command Help",
