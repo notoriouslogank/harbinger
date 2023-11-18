@@ -1,21 +1,18 @@
 from configparser import ConfigParser
 from datetime import datetime
 
-import subprocess
 import discord
 from discord.ext import commands
 
-subprocess.run(['tmux', 'new', '-d', '-s', 'harbinger'])
-subprocess.run(['tmux', 'send', '-t', 'harbinger:0', 'python3 test.py', 'C-m'])
-
 config_path = "config.ini"
 config = ConfigParser()
-config.read(config_path)    
+config.read(config_path)
 
-class harbinger:
+
+class Harbinger:
     token = config["Bot"]["token"]
     channel = config["Bot"]["channel"]
-    mc_host = config["Server"]['mc_host']
+    mc_host = config["Server"]["mc_host"]
     custom_color = config["Bot"]["custom_color"]
 
     cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools"
@@ -67,7 +64,7 @@ class harbinger:
         print(f"MSG| {cmd_msg}")
 
     def start():
-        bot.run(harbinger.get_token())
+        bot.run(Harbinger.get_token())
 
     async def send_dm(ctx, member: discord.Member, *, content):
         """Create a Direct Message channel with a given member."""
@@ -75,14 +72,13 @@ class harbinger:
         await channel.send(content)
 
 
-bot = harbinger.bot
-cogs = harbinger.cogs
+bot = Harbinger.bot
+cogs = Harbinger.cogs
 
 
 def main():
-    harbinger.start()
-    # TODO: create a tmux session for the Minecraft server as well
+    Harbinger.start()
 
 
 if __name__ == "__main__":
-    harbinger.start()
+    Harbinger.start()
