@@ -67,13 +67,12 @@ class Tools(commands.Cog):
         cmd = f"!lmgtfy({query})"
         google = "https://google.com/search?q="
         search = google + query
-        embed = discord.Embed(color=Mcswitch.custom_color, title="LMGTFY")
-        embed.description = f"[Here]({search}), let me Google that for you!"
         cmd_msg = f"URL: {search}"
         Mcswitch.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.channel.purge(limit=1)
-        await ctx.send(embed=embed)
-        await Mcswitch.send_dm(ctx=ctx, member=ctx.message.author, content=query)
+        await ctx.send("Here, let me just Google that for you:")
+        await ctx.send(search)
+        await Mcswitch.send_dm(ctx=ctx, member=ctx.message.author, content=search)
 
     @commands.command()
     async def define(self, ctx: commands.Context, word: str):
