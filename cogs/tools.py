@@ -17,6 +17,51 @@ class Tools(commands.Cog):
         self.bot = bot
 
     @commands.command()
+
+    async def switch(self, ctx: commands.Context, state="on"):
+        """Bot command to start the remote Minecraft server.
+
+        Args:
+            state (str, optional): Switch the server 'on' or 'off'. Defaults to "on".
+        """
+        cmd = f"!switch{state}"
+        if state == "on":
+            cmd_msg = "attempting to start server"
+            Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
+            await ctx.channel.send("Attempting to start the server...")
+            try:
+                ServerAgent.start_server()
+                await ctx.channel.send("Sucessfully started server...")
+            except:
+                await ctx.channel.send("ERROR: 666")
+        elif state == "off":
+            cmd_msg = "attempting to stop server"
+            Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
+            try:
+                ServerAgent.stop_server()
+                await ctx.channel.send("Server is stopping...")
+            except:
+                await ctx.channel.send("ERROR: 667")
+        else:
+            cmd_message = "ERROR: Invalid choice"
+            Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
+            await ctx.channel.send("Invalid Syntax!")
+            await ctx.channel.send("!switch <on|off>")
+
+    @commands.command()
+    async def commandMc(self, ctx: commands.Context, command: str):
+        """Send an arbitrary Minecraft server command to the server.
+
+        Args:
+            command (str): Command to send to the server
+        """
+        cmd = f"!commandMc({command})"
+        cmd_msg = f"sent command {command} to server"
+        ServerAgent.command_server(command)
+        Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
+
+    @commands.command()
+
     async def lmgtfy(self, ctx: commands.Context, query: str):
         """Let Me Google That For You"""
         cmd = f"!lmgtfy({query})"
