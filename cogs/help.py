@@ -5,6 +5,7 @@ from harbinger import Harbinger
 from configparser import ConfigParser
 
 
+
 config_path = "config.ini"
 config = ConfigParser()
 config.read(config_path)

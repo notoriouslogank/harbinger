@@ -6,7 +6,6 @@ from discord.ext import commands
 from harbinger import Harbinger
 from configparser import ConfigParser
 
-
 class Moderation(commands.Cog):
     """Server moderation commands."""
 
