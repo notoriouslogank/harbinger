@@ -53,6 +53,7 @@ class Status(commands.Cog):
     async def ping(self, ctx: commands.Context):
         """Check network latency."""
         ping_time = round(Mcswitch.bot.latency, 2)
+        print(ping_time)
         ping_msg = f"Current ping: {ping_time} ms."
         cmd = f"!ping"
         cmd_msg = f"{ping_msg}"
