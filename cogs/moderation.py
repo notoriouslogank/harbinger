@@ -13,7 +13,6 @@ class Moderation(commands.Cog):
     config = ConfigParser()
     config.read(config_path)
 
-
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
@@ -67,10 +66,12 @@ class Moderation(commands.Cog):
 
     @commands.command()
     async def server_info(self, ctx, ip):
-        """Generate information about the Minecraft server."""        
-        embed_server_info = discord.Embed(title='Minecraft', color=Moderation.config['Bot']['custom_color'])
+        """Generate information about the Minecraft server."""
+        embed_server_info = discord.Embed(
+            title="Minecraft", color=Moderation.config["Bot"]["custom_color"]
+        )
         embed_server_info.add_field(name="Server Address", value="127.0.0.1")
-        embed_server_info.add_field(name="Version", value='1.20.2 I think')
+        embed_server_info.add_field(name="Version", value="1.20.2 I think")
 
 
 async def setup(bot):
