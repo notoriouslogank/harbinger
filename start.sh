@@ -2,6 +2,13 @@
 
 # Script to start the Bot on Linux
 
+# Navigate to server dir
+# Ensure we have server.jar and paper.jar
+# Ensure we have java.sh
+# Tmux into two windows; start harbinger.py on one
+
+
+
 
 ### Basic Config - Uses .venv
 

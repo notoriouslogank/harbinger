@@ -1,7 +1,6 @@
 from configparser import ConfigParser
 from datetime import datetime
 
-import subprocess
 import discord
 from discord.ext import commands
 
@@ -78,7 +77,6 @@ cogs = Harbinger.cogs
 
 def main():
     Harbinger.start()
-    # TODO: create a tmux session for the Minecraft server as well
 
 
 if __name__ == "__main__":
