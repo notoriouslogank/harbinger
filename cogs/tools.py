@@ -84,7 +84,7 @@ class Tools(commands.Cog):
         cmd = f"!define({word})"
         dictionary = "https://www.merriam-webster.com/dictionary/"
         define_url = dictionary + word
-        embed = discord.Embed(color=color1, title=f"Define: {word}")
+        embed = discord.Embed(color=Mcswitch.custom_color, title=f"Define: {word}")
         embed.description = f"[{word}]({define_url})"
         cmd_msg = f"url: {define_url}"
         Mcswitch.timestamp(ctx.message.author, cmd, cmd_msg)
