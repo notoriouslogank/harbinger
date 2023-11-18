@@ -6,6 +6,7 @@ import discord
 from discord.ext import commands
 
 subprocess.run(['tmux', 'new', '-d', '-s', 'harbinger'])
+subprocess.run(['tmux', 'send', '-t', 'harbinger:0', 'python3 test.py', 'C-m'])
 
 config_path = "config.ini"
 config = ConfigParser()
