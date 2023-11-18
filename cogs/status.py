@@ -52,12 +52,11 @@ class Status(commands.Cog):
     @commands.command()
     async def ping(self, ctx: commands.Context):
         """Check network latency."""
-        ping_time = round(bot.latency, 2)
-        ping_msg = f"Current ping: {ping_time} ms."
+        ping = (round(self.bot.latency, 2)) * 1000
         cmd = f"!ping"
-        cmd_msg = f"{ping_msg}"
+        cmd_msg = "Pong!"
         Mcswitch.timestamp(ctx.message.author, cmd, cmd_msg)
-        await ctx.send(f"{ping_msg}")
+        await ctx.send(f'Pong! ({ping} ms)')
 
     @commands.command()
     async def uptime(self, ctx: commands.Context):
