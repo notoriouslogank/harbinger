@@ -57,3 +57,4 @@ discord.log
 .vscode
 utils/configwriter.py
 config.ini
+utils/config_writer.py
