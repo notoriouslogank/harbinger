@@ -240,6 +240,7 @@ class HelpCommand(commands.Cog):
                 value="Whether to turn the server on or off.",
                 inline=True,
             )
+            await ctx.send(embed=usage_embed)
         elif command == "commandMc":
             usage_embed = discord.Embed(
                 title="commandMc",
@@ -251,6 +252,7 @@ class HelpCommand(commands.Cog):
             usage_embed.add_field(
                 name="<command: str>", value="The command(s) to be sent to the server."
             )
+            await ctx.send(embed=usage_embed)
         elif command == "rps":
             usage_embed = discord.Embed(
                 title="rps", description="Play rock, paper, scissors with the bot."
