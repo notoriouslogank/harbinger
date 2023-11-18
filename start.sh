@@ -9,3 +9,4 @@ tmux send -t harbinger:0 "ssh logank@mimir" C-m                           # SSH 
 tmux send -t harbinger:0 "cd /home/logank/logank_mc_server/try2" C-m      # cd into server dir
 tmux send -t harbinger:0 "zsh ./java.sh" C-m                              # Start Minecraft server, in theory
 tmux a -t harbinger                                                       # connect to the detached session
+tmux send -t harbinger:0 "C-b O" C-m

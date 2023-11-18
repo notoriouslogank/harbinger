@@ -40,6 +40,6 @@ class ServerAgent:
 #        server_command = agent.run(f'tmux send -t harbinger:0 "{command}" C-m')
 #        Harbinger.timestamp("BOT", "SERVER_COMMAND", "SENDING USER STRING TO SERVER")
     def server_command(command: str):
-        server_command = agent.run(f'tmux send -t harbinger:0 "{command}" C-m')
+        server_command = agent.run(f'tmux send -t harbinger:1 "{command}" C-m')
         Harbinger.timestamp("BOT", "SERVER_COMMAND", "SENDING MESSAGE TO SERVER")
     
