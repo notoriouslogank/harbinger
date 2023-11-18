@@ -17,7 +17,7 @@ class Tools(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def switch(self, ctx: commands.Context, state="on"):
+    async def switch(self, ctx: commands.Context, state="on"): # Works when the server was started this way
         """Bot command to start the remote Minecraft server.
 
         Args:
@@ -48,17 +48,23 @@ class Tools(commands.Cog):
             await ctx.channel.send("Invalid Syntax!")
             await ctx.channel.send("!switch <on|off>")
 
-    @commands.command()
-    async def commandMc(self, ctx: commands.Context, command: str):
-        """Send an arbitrary Minecraft server command to the server.
+#    @commands.command()
+#    async def commandMc(self, ctx: commands.Context, command: str): # We need to rethink this
+#        """Send an arbitrary Minecraft server command to the server.
+#
+#        Args:
+#            command (str): Command to send to the server
+#        """
+#        cmd = f"!commandMc({command})"
+#        cmd_msg = f"sent command {command} to server"
+#        ServerAgent.command_server(command)
+#        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
-        Args:
-            command (str): Command to send to the server
-        """
-        cmd = f"!commandMc({command})"
-        cmd_msg = f"sent command {command} to server"
-        ServerAgent.command_server(command)
-        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+    @commands.command()
+    async def commandsrv(self, ctx: commands.Context, command: str):
+        cmd = f'!commandsrv({command})'
+        cmd_msg = f'Sent command {command} to server.'
+        ServerAgent.server_command(command)
 
     @commands.command()
     async def lmgtfy(self, ctx: commands.Context, query: str):

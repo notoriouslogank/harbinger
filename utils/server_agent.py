@@ -32,10 +32,14 @@ class ServerAgent:
         server_stop = agent.run('tmux send -t server:0 "stop" C-m')
         Harbinger.timestamp("BOT", "STOP_SERVER", "STOPPING SERVER")
 
-    def command_server(command: str):
-        """Send a command to the Minecraft server via tmux.
-        Args:
-            command (str): Minecraft server command to send
-        """
+#    def command_server(command: str):
+#        """Send a command to the Minecraft server via tmux.
+#        Args:
+#            command (str): Minecraft server command to send
+#        """
+#        server_command = agent.run(f'tmux send -t harbinger:0 "{command}" C-m')
+#        Harbinger.timestamp("BOT", "SERVER_COMMAND", "SENDING USER STRING TO SERVER")
+    def server_command(command: str):
         server_command = agent.run(f'tmux send -t harbinger:0 "{command}" C-m')
-        Harbinger.timestamp("BOT", "SERVER_COMMAND", "SENDING USER STRING TO SERVER")
+        Harbinger.timestamp("BOT", "SERVER_COMMAND", "SENDING MESSAGE TO SERVER")
+    
