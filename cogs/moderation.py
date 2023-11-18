@@ -3,7 +3,7 @@ from os import path
 import discord
 from discord.ext import commands
 
-from mcswitch import Mcswitch
+from harbinger import harbinger
 
 
 class Moderation(commands.Cog):
@@ -22,7 +22,7 @@ class Moderation(commands.Cog):
             await ctx.send("Cannot delete more than 100 messages.")
         else:
             await ctx.channel.purge(limit=amount)
-            Mcswitch.timestamp(ctx.message.author, cmd, cmd_msg)
+            harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
     async def joined(self, ctx: commands.Context, member: discord.Member):
@@ -31,14 +31,14 @@ class Moderation(commands.Cog):
         cmd_msg = f"Got join data for: {member}."
         joined = f"{member.name} joined on {discord.utils.format_dt(member.joined_at)}."
         await ctx.send(f"{joined}")
-        Mcswitch.timestamp(ctx.author.message, cmd, cmd_msg)
+        harbinger.timestamp(ctx.author.message, cmd, cmd_msg)
 
     @commands.command()
     async def say(self, ctx: commands.Context, message: str):
         """Say message as bot."""
         cmd = f"!say({message})"
-        cmd_msg = f"McSwitch says: {message}"
-        Mcswitch.timestamp(ctx.author, cmd, cmd_msg)
+        cmd_msg = f"harbinger says: {message}"
+        harbinger.timestamp(ctx.author, cmd, cmd_msg)
         await ctx.channel.purge(limit=1)
         await ctx.send(f"{message}")
 
@@ -49,7 +49,7 @@ class Moderation(commands.Cog):
         """Create game info embed."""
         cmd = f"!playing({game}, {field}, {value})"
         cmd_msg = f"Created playing embed with these values: {game},{field},{value}"
-        embedPlaying = discord.Embed(title=game, color=Helpers.color1)
+        embedPlaying = discord.Embed(title=game, color=harbinger.custom_color)
         if path.exists("ip.txt"):
             with open("ip.txt", "r") as f:
                 ip = f.readline()
@@ -57,7 +57,7 @@ class Moderation(commands.Cog):
             embedPlaying.add_field(name=f"Version", value="1.20.1")
         else:
             embedPlaying.add_field(name=f"{field}", value=f"{value}", inline=True)
-            Mcswitch.timestamp(ctx.message.author, cmd, cmd_msg)
+            harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(embed=embedPlaying)
 
 

@@ -4,10 +4,10 @@ from datetime import datetime
 import discord
 from discord.ext import commands
 
-from mcswitch import Mcswitch
+from harbinger import harbinger
 
-bot = Mcswitch.bot
-currentVersion = Mcswitch.get_ver()
+bot = harbinger.bot
+currentVersion = harbinger.get_ver()
 
 
 class Status(commands.Cog):
@@ -19,7 +19,7 @@ class Status(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self) -> None:
         """Confirm bot is logged in."""
-        Mcswitch.timestamp("BOT", "INITIALIZE", "BOT IS ONLINE")
+        harbinger.timestamp("BOT", "INITIALIZE", "BOT IS ONLINE")
 
     @commands.command()
     async def status(self, ctx: commands.Context):
@@ -27,7 +27,7 @@ class Status(commands.Cog):
         cmd = "!status"
         cmd_msg = "Status: online."
         status_msg = f"{bot.user} is online."
-        Mcswitch.timestamp(ctx.message.author, cmd, cmd_msg)
+        harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(f"{status_msg}")
 
     @commands.command()
@@ -36,17 +36,17 @@ class Status(commands.Cog):
         cmd = "!info"
         cmd_msg = f"Sent info embed to channel {ctx.channel.id}"
         cTime = datetime.now()
-        delta = cTime - Mcswitch.sTime
-        embedInfo = discord.Embed(title="mcswitch", color=0x884EA0)
+        delta = cTime - harbinger.sTime
+        embedInfo = discord.Embed(title="harbinger", color=0x884EA0)
         embedInfo.add_field(name="version", value=f"v{currentVersion}", inline=True)
         embedInfo.add_field(name="uptime", value=f"{delta}", inline=True)
         embedInfo.add_field(name="author", value="notoriouslogank", inline=True)
         embedInfo.add_field(
             name="source code",
-            value="https://github.com/notoriouslogank/mcswitch",
+            value="https://github.com/notoriouslogank/harbinger",
             inline=False,
         )
-        Mcswitch.timestamp(ctx.message.author, cmd, cmd_msg)
+        harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(embed=embedInfo)
 
     @commands.command()
@@ -55,7 +55,7 @@ class Status(commands.Cog):
         ping = (round(self.bot.latency, 2)) * 1000
         cmd = f"!ping"
         cmd_msg = "Pong!"
-        Mcswitch.timestamp(ctx.message.author, cmd, cmd_msg)
+        harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(f'Pong! ({ping} ms)')
 
     @commands.command()
@@ -63,10 +63,10 @@ class Status(commands.Cog):
         """Get bot uptime."""
         cmd = "!uptime"
         cTime = datetime.now()
-        delta = cTime - Mcswitch.sTime
+        delta = cTime - harbinger.sTime
         up_msg = f"uptime: {delta}"
         cmd_msg = f"{up_msg}"
-        Mcswitch.timestamp(ctx.message.author, cmd, cmd_msg)
+        harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(f"{up_msg}")
 
     @commands.command()
@@ -75,7 +75,7 @@ class Status(commands.Cog):
         cmd = "!changelog"
         cmd_msg = f"Uploaded CHANGELOG.md to channel."
         file = discord.File(fp="docs/CHANGELOG.md", filename="CHANGELOG.md")
-        Mcswitch.timestamp(ctx.message.author, cmd, cmd_msg)
+        harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(file=file)
 
     @commands.command()
@@ -88,7 +88,7 @@ class Status(commands.Cog):
         )
         embedShutdown.add_field(name="user", value=f"{ctx.message.author}", inline=True)
         await ctx.send(embed=embedShutdown)
-        Mcswitch.timestamp(ctx.message.author, cmd, cmd_msg)
+        harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         sys.exit()
 
 

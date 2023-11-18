@@ -3,11 +3,11 @@ from random import randint
 import discord
 from discord.ext import commands
 
-from mcswitch import Mcswitch
+from harbinger import harbinger
 from utils.serverAgent import *
 
-bot = Mcswitch.bot
-color = Mcswitch.custom_color
+bot = harbinger.bot
+color = harbinger.custom_color
 
 
 class Tools(commands.Cog):
@@ -27,7 +27,7 @@ class Tools(commands.Cog):
         cmd = f"!switch{state}"
         if state == "on":
             cmd_msg = "attempting to start server"
-            Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
+            harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
             await ctx.channel.send("Attempting to start the server...")
             try:
                 ServerAgent.start_server()
@@ -36,7 +36,7 @@ class Tools(commands.Cog):
                 await ctx.channel.send("ERROR: 666")
         elif state == "off":
             cmd_msg = "attempting to stop server"
-            Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
+            harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
             try:
                 ServerAgent.stop_server()
                 await ctx.channel.send("Server is stopping...")
@@ -44,7 +44,8 @@ class Tools(commands.Cog):
                 await ctx.channel.send("ERROR: 667")
         else:
             cmd_message = "ERROR: Invalid choice"
-            Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
+            harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+            await ctx.channel.send(f'{cmd_message}')
             await ctx.channel.send("Invalid Syntax!")
             await ctx.channel.send("!switch <on|off>")
 
@@ -58,7 +59,7 @@ class Tools(commands.Cog):
         cmd = f"!commandMc({command})"
         cmd_msg = f"sent command {command} to server"
         ServerAgent.command_server(command)
-        Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
+        harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
 
@@ -68,11 +69,11 @@ class Tools(commands.Cog):
         google = "https://google.com/search?q="
         search = google + query
         cmd_msg = f"URL: {search}"
-        Mcswitch.timestamp(ctx.message.author, cmd, cmd_msg)
+        harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.channel.purge(limit=1)
         await ctx.send("Here, let me just Google that for you:")
         await ctx.send(search)
-        await Mcswitch.send_dm(ctx=ctx, member=ctx.message.author, content=search)
+        await harbinger.send_dm(ctx=ctx, member=ctx.message.author, content=search)
 
     @commands.command()
     async def define(self, ctx: commands.Context, word: str):
@@ -85,10 +86,10 @@ class Tools(commands.Cog):
         dictionary = "https://www.merriam-webster.com/dictionary/"
         define_url = dictionary + word
         cmd_msg = f"url: {define_url}"
-        Mcswitch.timestamp(ctx.message.author, cmd, cmd_msg)
+        harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.channel.purge(limit=1)
         await ctx.send(define_url)
-        await Mcswitch.send_dm(ctx=ctx, member=ctx.message.author, content=define_url)
+        await harbinger.send_dm(ctx=ctx, member=ctx.message.author, content=define_url)
 
     @commands.command()
     async def add(self, ctx: commands.Context, left: int, right: int):
@@ -96,7 +97,7 @@ class Tools(commands.Cog):
         cmd = f"!add({left} {right})"
         total = left + right
         cmd_msg = f"total: {total}"
-        Mcswitch.timestamp(ctx.message.author, cmd, cmd_msg)
+        harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(f"{total}")
 
     @commands.command()
@@ -110,7 +111,7 @@ class Tools(commands.Cog):
             return
         result = ", ".join(str(randint(1, limit)) for r in range(rolls))
         cmd_msg = f"rolled {dice}; result: {result}"
-        Mcswitch.timestamp(ctx.message.author, cmd, cmd_msg)
+        harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(f"{result}")
 
     @commands.command()
@@ -118,11 +119,11 @@ class Tools(commands.Cog):
         """Play rock, paper, scissors against the bot."""
         cmd = f"!rps(choice)"
         cmd_msg = f"choice: {choice}"
-        Mcswitch.timestamp(ctx.message.author, cmd, cmd_msg)
+        harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         choices = ["rock", "paper", "scissors"]
         botChoice = choices[randint(0, 2)]
         embedRPS = discord.Embed(
-            color=Mcswitch.custom_color, title="rock, paper, scissors"
+            color=harbinger.custom_color, title="rock, paper, scissors"
         )
         embedRPS.add_field(name="You", value=f"{choice}", inline=True)
         embedRPS.add_field(name="Bot", value=f"{botChoice}", inline=True)

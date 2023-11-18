@@ -15,7 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
-- namespace for Helpers.timestamp (now Mcswitch.timestamp)
+- namespace for Helpers.timestamp (now harbinger.timestamp)
 
 ## [1.5.0] - 2023-10-11
 
@@ -26,11 +26,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Deprecated
 
-- main.py has been removed and its functionality merge into mcswitch.py
+- main.py has been removed and its functionality merge into harbinger.py
 
 ## Added
 
-- mcswitch.py takes the place of main.py as the entry point for the system
+- harbinger.py takes the place of main.py as the entry point for the system
 - New cog: mc_server
 
 ## [1.4.0] - 2023-10-11
@@ -91,7 +91,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Major Update
 
-- !mcswitch command now functions (somewhat, usually).  lots and lots to do now, can't list it all right here! Check [GitHub](https://github.com/notoriouslogank/mcswitch/issues).
+- !harbinger command now functions (somewhat, usually).  lots and lots to do now, can't list it all right here! Check [GitHub](https://github.com/notoriouslogank/harbinger/issues).
 
 ## [1.2.1] - 2023-08-11
 
@@ -107,7 +107,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Breaking Changes
 
-- Restructured entire module: created mcswitch/utils/, mcswitch/server.utils, mcswitch/docs folders to contain source code
+- Restructured entire module: created harbinger/utils/, harbinger/server.utils, harbinger/docs folders to contain source code
 - Changed most instances of importing helpers.py: imports are much more streamlined
 
 ### Added
@@ -228,7 +228,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 - !lmgtfy() now returns a separate message with only the query string
-- log file name changed to 'mcswitch.log'
+- log file name changed to 'harbinger.log'
 
 ### Fixed
 
