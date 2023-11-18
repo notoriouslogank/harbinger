@@ -56,7 +56,7 @@ class Status(commands.Cog):
         cmd = f"!ping"
         cmd_msg = "Pong!"
         harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-        await ctx.send(f'Pong! ({ping} ms)')
+        await ctx.send(f"Pong! ({ping} ms)")
 
     @commands.command()
     async def uptime(self, ctx: commands.Context):

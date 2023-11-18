@@ -17,7 +17,6 @@ class Tools(commands.Cog):
         self.bot = bot
 
     @commands.command()
-
     async def switch(self, ctx: commands.Context, state="on"):
         """Bot command to start the remote Minecraft server.
 
@@ -45,7 +44,7 @@ class Tools(commands.Cog):
         else:
             cmd_message = "ERROR: Invalid choice"
             harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-            await ctx.channel.send(f'{cmd_message}')
+            await ctx.channel.send(f"{cmd_message}")
             await ctx.channel.send("Invalid Syntax!")
             await ctx.channel.send("!switch <on|off>")
 
@@ -62,7 +61,6 @@ class Tools(commands.Cog):
         harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
-
     async def lmgtfy(self, ctx: commands.Context, query: str):
         """Let Me Google That For You"""
         cmd = f"!lmgtfy({query})"
