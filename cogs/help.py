@@ -3,7 +3,7 @@ from discord.ext import commands
 
 from harbinger import Harbinger
 
-color1 = Harbinger.custom_color
+color1 = 8933024
 
 current_version = Harbinger.get_ver()
 
@@ -63,6 +63,14 @@ class HelpCommand(commands.Cog):
             help_embed.add_field(
                 name="!rps",
                 value="Play rock, paper, scissors against the bot.",
+                inline=True,
+            )
+            help_embed.add_field(
+                name="!switch", value="Start/stop the Minecraft server.", inline=True
+            )
+            help_embed.add_field(
+                name="!commandMc",
+                value="Send a command to the Minecraft server.",
                 inline=True,
             )
             # OTHER
@@ -221,6 +229,29 @@ class HelpCommand(commands.Cog):
                 inline=True,
             )
             usage_embed.set_footer(text="Note: Format should be NdN *only*.")
+            await ctx.send(embed=usage_embed)
+        elif command == "switch":
+            usage_embed = discord.Embed(
+                title="switch", description="Turn the Minecraft server on or off."
+            )
+            usage_embed.add_field(name="Usage:", value="!switch <on|off>", inline=False)
+            usage_embed.add_field(
+                name="<on|off: str>",
+                value="Whether to turn the server on or off.",
+                inline=True,
+            )
+            await ctx.send(embed=usage_embed)
+        elif command == "commandMc":
+            usage_embed = discord.Embed(
+                title="commandMc",
+                description="Send command(s) to the Minecraft server console.",
+            )
+            usage_embed.add_field(
+                name="Usage:", value="!commandMc <command>", inline=False
+            )
+            usage_embed.add_field(
+                name="<command: str>", value="The command(s) to be sent to the server."
+            )
             await ctx.send(embed=usage_embed)
         elif command == "rps":
             usage_embed = discord.Embed(

@@ -26,7 +26,7 @@ class Status(commands.Cog):
         """Confirm bot is online and reachable."""
         cmd = "!status"
         cmd_msg = "Status: online."
-        status_msg = f"{bot.user} is online."
+        status_msg = f"{self.bot.user} is online."
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(f"{status_msg}")
 
