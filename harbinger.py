@@ -78,5 +78,3 @@ def main():
 
 if __name__ == "__main__":
     harbinger.start()
-
-# TODO: ping, lmgtfy, define, status, playing
