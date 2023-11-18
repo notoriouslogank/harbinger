@@ -56,7 +56,7 @@ class Tools(commands.Cog):
         """
         cmd = f"!commandMc({command})"
         cmd_msg = f"sent command {command} to server"
-        ServerAgent.command_server()
+        ServerAgent.command_server(command)
         Helpers.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
