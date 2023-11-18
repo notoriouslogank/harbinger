@@ -1,11 +1,8 @@
 import configparser
-import pathlib
 from datetime import datetime
-from os import getenv
 
 import discord
 from discord.ext import commands
-from dotenv import load_dotenv
 
 config_path = "config.ini"
 config = configparser.ConfigParser()
@@ -37,16 +34,15 @@ class harbinger:
             await bot.load_extension(cog)
 
     def get_token():
-        load_dotenv()
-        token = str(getenv("TOKEN"))
+        token = config['Bot']['token']
         return token
 
     def get_mc_host():
-        mc_host = str(getenv("MC_HOST"))
+        mc_host = config['Server']['mc_host']
         return mc_host
 
     def get_channel():
-        channel = getenv("CHANNEL")
+        channel = config['Bot']['channel']
         return channel
 
     def get_ver():
@@ -80,7 +76,6 @@ cogs = harbinger.cogs
 
 
 def main():
-    # TODO: tmuxinator entry point here; need to create tmux session and launch main.py inside of it
     harbinger.start()
     # TODO: create a tmux session for the Minecraft server as well
 
