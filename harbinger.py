@@ -1,6 +1,7 @@
 import configparser
 from datetime import datetime
 
+import subprocess
 import discord
 from discord.ext import commands
 
@@ -76,6 +77,7 @@ cogs = harbinger.cogs
 
 
 def main():
+    subprocess.run('tmux new -s harbinger')
     harbinger.start()
     # TODO: create a tmux session for the Minecraft server as well
 
