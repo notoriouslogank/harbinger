@@ -1,9 +1,9 @@
 from discord.ext import commands
 
-from harbinger import harbinger
+from harbinger import Harbinger
 
-bot = harbinger.bot
-color = harbinger.custom_color
+bot = Harbinger.bot
+color = Harbinger.custom_color
 
 
 class MineServ(commands.Cog):

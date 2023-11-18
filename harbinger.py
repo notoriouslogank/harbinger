@@ -9,7 +9,7 @@ config_path = "config.ini"
 config = ConfigParser()
 config.read(config_path)  
 
-class harbinger:
+class Harbinger:
     token = config["Bot"]["token"]
     channel = config["Bot"]["channel"]
     mc_host = config["Server"]['mc_host']
@@ -64,7 +64,7 @@ class harbinger:
         print(f"MSG| {cmd_msg}")
 
     def start():
-        bot.run(harbinger.get_token())
+        bot.run(Harbinger.get_token())
 
     async def send_dm(ctx, member: discord.Member, *, content):
         """Create a Direct Message channel with a given member."""
@@ -72,14 +72,14 @@ class harbinger:
         await channel.send(content)
 
 
-bot = harbinger.bot
-cogs = harbinger.cogs
+bot = Harbinger.bot
+cogs = Harbinger.cogs
 
 
 def main():
-    harbinger.start()
+    Harbinger.start()
     # TODO: create a tmux session for the Minecraft server as well
 
 
 if __name__ == "__main__":
-    harbinger.start()
+    Harbinger.start()

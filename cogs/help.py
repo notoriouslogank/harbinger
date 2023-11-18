@@ -1,11 +1,11 @@
 import discord
 from discord.ext import commands
 
-from harbinger import harbinger
+from harbinger import Harbinger
 
-color1 = harbinger.custom_color
+color1 = Harbinger.custom_color
 
-current_version = harbinger.get_ver()
+current_version = Harbinger.get_ver()
 
 
 class HelpCommand(commands.Cog):
@@ -17,7 +17,7 @@ class HelpCommand(commands.Cog):
         """Return help embed with command descriptions."""
         cmd = f"!help({command})"
         cmd_msg = f"provided help: {command}"
-        harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         if command == None:
             help_embed = discord.Embed(
                 title="Command Help",
@@ -73,7 +73,7 @@ class HelpCommand(commands.Cog):
             )
             help_embed.add_field(
                 name="Find a Problem?",
-                value="[Submit a Bug Report](https://github.com/notoriouslogank/harbinger/issues)",
+                value="[Submit a Bug Report](https://github.com/notoriouslogank/Harbinger/issues)",
                 inline=True,
             )
             help_embed.set_footer(
