@@ -1,14 +1,24 @@
+from configparser import ConfigParser
 from datetime import datetime
-from os import getenv
 
+import subprocess
 import discord
 from discord.ext import commands
-from dotenv import load_dotenv
 
+subprocess.run(['tmux', 'new', '-d', '-s', 'harbinger'])
+subprocess.run(['tmux', 'send', '-t', 'harbinger:0', 'python3 test.py', 'C-m'])
+
+config_path = "config.ini"
+config = ConfigParser()
+config.read(config_path)    
 
 class harbinger:
+    token = config["Bot"]["token"]
+    channel = config["Bot"]["channel"]
+    mc_host = config["Server"]['mc_host']
+    custom_color = config["Bot"]["custom_color"]
+
     cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools"
-    custom_color = 0x884EA0
     sTime = datetime.now()
 
     intents = discord.Intents.default()
@@ -28,16 +38,15 @@ class harbinger:
             await bot.load_extension(cog)
 
     def get_token():
-        load_dotenv()
-        token = str(getenv("TOKEN"))
+        token = config["Bot"]["token"]
         return token
 
     def get_mc_host():
-        mc_host = str(getenv("MC_HOST"))
+        mc_host = config["Server"]["mc_host"]
         return mc_host
 
     def get_channel():
-        channel = getenv("CHANNEL")
+        channel = config["Bot"]["channel"]
         return channel
 
     def get_ver():
@@ -71,7 +80,6 @@ cogs = harbinger.cogs
 
 
 def main():
-    # TODO: tmuxinator entry point here; need to create tmux session and launch main.py inside of it
     harbinger.start()
     # TODO: create a tmux session for the Minecraft server as well
 
