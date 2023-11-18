@@ -15,10 +15,10 @@
 tmux new -d -s harbinger
 tmux send -t harbinger:0 "source .venv/bin/activate" C-m
 tmux split-window
-tmux send -t harbinger:0 "ssh logank@mimir" C-m
-tmux swap-pane
 tmux send -t harbinger:0 "python3 -m pip install -r requirements.txt" C-m
 tmux send -t harbinger:0 "python3 harbinger.py" C-m
+tmux swap-pane
+tmux send -t harbinger:0 "ssh logank@mimir" C-m
 
 
 
