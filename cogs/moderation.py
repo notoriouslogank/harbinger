@@ -4,10 +4,15 @@ import discord
 from discord.ext import commands
 
 from harbinger import Harbinger
-
+from configparser import ConfigParser
 
 class Moderation(commands.Cog):
     """Server moderation commands."""
+
+    config_path = "config.ini"
+    config = ConfigParser()
+    config.read(config_path)
+
 
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
@@ -59,6 +64,13 @@ class Moderation(commands.Cog):
             embedPlaying.add_field(name=f"{field}", value=f"{value}", inline=True)
             Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(embed=embedPlaying)
+
+    @commands.command()
+    async def server_info(self, ctx, ip):
+        """Generate information about the Minecraft server."""        
+        embed_server_info = discord.Embed(title='Minecraft', color=Moderation.config['Bot']['custom_color'])
+        embed_server_info.add_field(name="Server Address", value="127.0.0.1")
+        embed_server_info.add_field(name="Version", value='1.20.2 I think')
 
 
 async def setup(bot):
