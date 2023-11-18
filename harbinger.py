@@ -1,12 +1,11 @@
+import configparser
+import pathlib
 from datetime import datetime
 from os import getenv
 
-import pathlib
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
-import configparser
-
 
 config_path = "config.ini"
 config = configparser.ConfigParser()
