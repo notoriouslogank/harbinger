@@ -2,8 +2,14 @@ import discord
 from discord.ext import commands
 
 from harbinger import Harbinger
+from configparser import ConfigParser
 
-color1 = 8933024
+
+config_path = "config.ini"
+config = ConfigParser()
+config.read(config_path)
+
+color1 = config['Bot']['custom_color'] #fuck I hope that's right
 
 current_version = Harbinger.get_ver()
 
