@@ -1,0 +1,4 @@
+TOKEN=''    # string
+MC_HOST=''  # string
+COLOR=''    # int
+CHANNEL=''  # int
