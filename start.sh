@@ -13,9 +13,9 @@
 ### Basic Config - Uses .venv
 
 tmux new -d -s harbinger
-tmux split-window
 tmux send -t harbinger:0 "source .venv/bin/activate" C-m
 tmux split-window
 tmux send -t harbinger:0 "python3 -m pip install -r requirements.txt" C-m
 tmux send -t harbinger:0 "python3 harbinger.py" C-m
+tmux send -t harbinger:1 "ssh logank@mimir"
 
