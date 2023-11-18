@@ -37,5 +37,5 @@ class ServerAgent:
         Args:
             command (str): Minecraft server command to send
         """
-        server_command = agent.run(f'tmux send -t server:0 "{command}" C-m')
+        server_command = agent.run(f'tmux send -t harbinger:0 "{command}" C-m')
         Harbinger.timestamp("BOT", "SERVER_COMMAND", "SENDING USER STRING TO SERVER")
