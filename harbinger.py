@@ -80,12 +80,6 @@ cogs = harbinger.cogs
 
 
 def main():
-    try:
-        
-        subprocess.run(['tmux', 'a', '-t', 'harbinger:0'])
-    except Exception:
-        print('oops')
-        
     harbinger.start()
     # TODO: create a tmux session for the Minecraft server as well
 
