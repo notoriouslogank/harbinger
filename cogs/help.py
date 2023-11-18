@@ -10,7 +10,7 @@ config_path = "config.ini"
 config = ConfigParser()
 config.read(config_path)
 
-color1 = config["Bot"]["custom_color"]  # fuck I hope that's right
+custom_color = config["Bot"]["custom_color"]
 
 current_version = Harbinger.get_ver()
 
@@ -29,7 +29,7 @@ class HelpCommand(commands.Cog):
             help_embed = discord.Embed(
                 title="Command Help",
                 description=f"Commands for bot v{current_version}",
-                color=color1,
+                color=custom_color,
             )
             # MODERATION
             help_embed.add_field(
