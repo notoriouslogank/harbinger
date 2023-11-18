@@ -7,12 +7,14 @@ from discord.ext import commands
 
 config_path = "config.ini"
 config = ConfigParser()
-config.read(config_path)
-
+config.read(config_path)    
 
 class harbinger:
     token = config["Bot"]["token"]
+    channel = config["Bot"]["channel"]
+    mc_host = config["Server"]['mc_host']
     custom_color = config["Bot"]["custom_color"]
+
     cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools"
     sTime = datetime.now()
 
@@ -75,7 +77,12 @@ cogs = harbinger.cogs
 
 
 def main():
-    subprocess.run("tmux new -s harbinger")
+    try:
+        subprocess.run("tmux new -s harbinger")
+        subprocess.run("tmux send -t harbinger:0 'C-b %' C-m")
+    except Exception:
+        print('oops')
+        
     harbinger.start()
     # TODO: create a tmux session for the Minecraft server as well
 
