@@ -87,7 +87,7 @@ class Tools(commands.Cog):
         cmd_msg = f"url: {define_url}"
         Mcswitch.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.channel.purge(limit=1)
-        await ctx.send(embed=define_url)
+        await ctx.send(define_url)
         await Mcswitch.send_dm(ctx=ctx, member=ctx.message.author, content=define_url)
 
     @commands.command()
