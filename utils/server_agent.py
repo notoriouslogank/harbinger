@@ -1,8 +1,11 @@
 from fabric import Connection, transfer
-
+from configparser import ConfigParser
 from harbinger import Harbinger
 
-agent = Connection(host=f"{Harbinger.get_mc_host()}")
+config_path = "config.ini"
+config = ConfigParser()
+config.read(config_path)
+agent = Connection(host=f"{config['Server']['mc_host']}")
 
 
 # startup_script = /home/logank/paper-test/java.sh <<< This should probably be included in the repo
@@ -18,11 +21,11 @@ class ServerAgent:
     def start_server():
         # Couldn't these commands just be one bash script? Or at least the two agent.run() statements could be one?
         """Create an SSH connection and start the Minecraft server."""
+        server_dir = config["Bot"]["server_dir"]
+        server_script = config["Bot"]["server_script"]
         create_tmux = agent.run("tmux new -d -s server")
-        cd_to_dir = agent.run(
-            'tmux send -t server:0 "cd /home/logank/logank_mc_server/try2" C-m'
-        )
-        server_start = agent.run('tmux send -t server:0 "./java.sh" C-m')
+        cd_to_dir = agent.run(f'tmux send -t server:0 "cd {server_dir}" C-m')
+        server_start = agent.run(f'tmux send -t server:0 "{server_script}" C-m')
 
     def stop_server():
         """Runs the /stop command in the Minecraft server."""

@@ -6,12 +6,13 @@ from discord.ext import commands
 
 config_path = "config.ini"
 config = ConfigParser()
-config.read(config_path)  
+config.read(config_path)
+
 
 class Harbinger:
     token = config["Bot"]["token"]
     channel = config["Bot"]["channel"]
-    mc_host = config["Server"]['mc_host']
+    mc_host = config["Server"]["mc_host"]
     custom_color = config["Bot"]["custom_color"]
 
     cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools"
