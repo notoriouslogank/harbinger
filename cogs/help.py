@@ -3,7 +3,7 @@ from discord.ext import commands
 
 from harbinger import Harbinger
 
-color1 = Harbinger.custom_color
+color1 = 8933024
 
 current_version = Harbinger.get_ver()
 
