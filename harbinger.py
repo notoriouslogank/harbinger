@@ -1,4 +1,4 @@
-import configparser
+from configparser import ConfigParser
 from datetime import datetime
 
 import subprocess
@@ -6,16 +6,14 @@ import discord
 from discord.ext import commands
 
 config_path = "config.ini"
-config = configparser.ConfigParser()
+config = ConfigParser()
 config.read(config_path)
-
-token = config["Bot"]["token"]
-print(token)
 
 
 class harbinger:
+    token = config["Bot"]["token"]
+    custom_color = config["Bot"]["custom_color"]
     cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools"
-    custom_color = 0x884EA0
     sTime = datetime.now()
 
     intents = discord.Intents.default()
@@ -35,15 +33,15 @@ class harbinger:
             await bot.load_extension(cog)
 
     def get_token():
-        token = config['Bot']['token']
+        token = config["Bot"]["token"]
         return token
 
     def get_mc_host():
-        mc_host = config['Server']['mc_host']
+        mc_host = config["Server"]["mc_host"]
         return mc_host
 
     def get_channel():
-        channel = config['Bot']['channel']
+        channel = config["Bot"]["channel"]
         return channel
 
     def get_ver():
@@ -77,7 +75,7 @@ cogs = harbinger.cogs
 
 
 def main():
-    subprocess.run('tmux new -s harbinger')
+    subprocess.run("tmux new -s harbinger")
     harbinger.start()
     # TODO: create a tmux session for the Minecraft server as well
 
