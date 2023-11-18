@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fixed
 
 - tmux now behaves correctly within start.sh
+- !help command now returns help information for Minecraft server side commands
 
 ### Changed
 
