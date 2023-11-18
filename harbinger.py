@@ -5,6 +5,8 @@ import subprocess
 import discord
 from discord.ext import commands
 
+subprocess.run(['tmux', 'new', '-d', '-s', 'harbinger'])
+
 config_path = "config.ini"
 config = ConfigParser()
 config.read(config_path)    
@@ -78,7 +80,7 @@ cogs = harbinger.cogs
 
 def main():
     try:
-        subprocess.run(['tmux', 'new', '-d', '-s', 'harbinger'])
+        
         subprocess.run(['tmux', 'a', '-t', 'harbinger:0'])
     except Exception:
         print('oops')
