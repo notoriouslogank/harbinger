@@ -78,8 +78,8 @@ cogs = harbinger.cogs
 
 def main():
     try:
-        subprocess.run("tmux new -s harbinger")
-        subprocess.run("tmux send -t harbinger:0 'C-b %' C-m")
+        subprocess.run(['tmux', 'new', '-d', '-s', 'harbinger'])
+        subprocess.run(['tmux', 'a', '-t', 'harbinger:0'])
     except Exception:
         print('oops')
         
