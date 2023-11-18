@@ -9,7 +9,7 @@ config_path = "config.ini"
 config = ConfigParser()
 config.read(config_path)
 
-color1 = config['Bot']['custom_color'] #fuck I hope that's right
+color1 = config["Bot"]["custom_color"]  # fuck I hope that's right
 
 current_version = Harbinger.get_ver()
 
