@@ -6,11 +6,11 @@ from configparser import ConfigParser
 
 
 
-config_path = "config.ini"
+config_path = "config.ini" # I don't know if this really needs to be it's own thing
 config = ConfigParser()
 config.read(config_path)
 
-custom_color = config["Bot"]["custom_color"]
+
 
 current_version = Harbinger.get_ver()
 
@@ -24,6 +24,7 @@ class HelpCommand(commands.Cog):
         """Return help embed with command descriptions."""
         cmd = f"!help({command})"
         cmd_msg = f"provided help: {command}"
+        custom_color = config["Bot"]["custom_color"]
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         if command == None:
             help_embed = discord.Embed(
@@ -42,6 +43,11 @@ class HelpCommand(commands.Cog):
             help_embed.add_field(
                 name="!playing",
                 value="Embed and send game info to channel.",
+                inline=True,
+            )
+            help_embed.add_field(
+                name="!testField",
+                value="I'm testing this shit bois",
                 inline=True,
             )
             # STATUS
