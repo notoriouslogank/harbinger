@@ -32,7 +32,7 @@ You likely already have python installed.
 
 First, make sure you have pip installed: ``sudo apt install python3-pip`` (Your system may differ.)
 
-Then, install pipreqs and the requirements file: ``python3 -m pip install pipreqs && python3 -m pipreqs . --ignore .env,__pycache__,.venv`` (Your system may differ.)
+Then, install pipreqs and the requirements file: ``python3 -m pip install pipreqs && python3 -m pipreqs`` (Your system may differ.)
 
 Optionally, install venv (``sudo apt install python3-venv``) to create virtual environments quickly.
 
