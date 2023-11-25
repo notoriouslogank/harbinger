@@ -15,7 +15,7 @@ class Harbinger:
     # mc_host = config["Server"]["hostname"]
     custom_color = 0x88AE00
 
-    cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools"
+    cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools", "cogs.minecraft"
     sTime = datetime.now()
 
     intents = discord.Intents.default()
