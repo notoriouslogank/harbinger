@@ -15,10 +15,10 @@ class Minecraft(commands.Cog):
     async def switch(self, ctx: commands.Context, state="on"):
         startup_script = Harbinger.startup_script
         if state == "on":
-            subprocess.run(["zsh", f"{startup_script}"])
+            subprocess.run(["tmux", "send", "-t", "harbinger:0", "zsh", f"{startup_script}", "C-m"])
             await ctx.send("Server is starting...")
         elif state == "off":
-            subprocess.run(["tmux", "-t", "harbinger:0", "stop", "C-m"])
+            subprocess.run(["tmux", "send", "-t", "harbinger:0", "stop", "C-m"])
             await ctx.send("Stopping server...")
         else:
             await ctx.send("Invalid argument.")
