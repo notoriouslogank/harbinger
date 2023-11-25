@@ -4,18 +4,18 @@ from datetime import datetime
 import discord
 from discord.ext import commands
 
-config_path = "config.ini"
+config_path = "config/config.ini"
 config = ConfigParser()
 config.read(config_path)
 
 
 class Harbinger:
     token = config["Bot"]["token"]
-    channel = config["Bot"]["channel"]
-    mc_host = config["Server"]["mc_host"]
-    custom_color = config["Bot"]["custom_color"]
+    server_dir = config["Paths"]["server_dir"]
+    startup_script = config["Paths"]["startup_script"]
+    custom_color = 0x88AE00
 
-    cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools"
+    cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools", "cogs.minecraft"
     sTime = datetime.now()
 
     intents = discord.Intents.default()
@@ -38,13 +38,13 @@ class Harbinger:
         token = config["Bot"]["token"]
         return token
 
-    def get_mc_host():
-        mc_host = config["Server"]["mc_host"]
-        return mc_host
+    #    def get_mc_host():
+    #        mc_host = config["Server"]["mc_host"]
+    #        return mc_host
 
-    def get_channel():
-        channel = config["Bot"]["channel"]
-        return channel
+    #    def get_channel():
+    #        channel = config["Bot"]["channel"]
+    #        return channel
 
     def get_ver():
         with open("docs/CHANGELOG.md", "r") as f:

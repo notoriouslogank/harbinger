@@ -4,10 +4,8 @@ import discord
 from discord.ext import commands
 
 from harbinger import Harbinger
-from utils.server_agent import *
 
 bot = Harbinger.bot
-color = Harbinger.custom_color
 
 
 class Tools(commands.Cog):
@@ -15,50 +13,6 @@ class Tools(commands.Cog):
 
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
-
-    @commands.command()
-    async def switch(self, ctx: commands.Context, state="on"):
-        """Bot command to start the remote Minecraft server.
-
-        Args:
-            state (str, optional): Switch the server 'on' or 'off'. Defaults to "on".
-        """
-        cmd = f"!switch{state}"
-        if state == "on":
-            cmd_msg = "attempting to start server"
-            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-            await ctx.channel.send("Attempting to start the server...")
-            try:
-                ServerAgent.start_server()
-                await ctx.channel.send("Sucessfully started server...")
-            except:
-                await ctx.channel.send("ERROR: 666")
-        elif state == "off":
-            cmd_msg = "attempting to stop server"
-            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-            try:
-                ServerAgent.stop_server()
-                await ctx.channel.send("Server is stopping...")
-            except:
-                await ctx.channel.send("ERROR: 667")
-        else:
-            cmd_message = "ERROR: Invalid choice"
-            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-            await ctx.channel.send(f"{cmd_message}")
-            await ctx.channel.send("Invalid Syntax!")
-            await ctx.channel.send("!switch <on|off>")
-
-    @commands.command()
-    async def commandMc(self, ctx: commands.Context, command: str):
-        """Send an arbitrary Minecraft server command to the server.
-
-        Args:
-            command (str): Command to send to the server
-        """
-        cmd = f"!commandMc({command})"
-        cmd_msg = f"sent command {command} to server"
-        ServerAgent.command_server(command)
-        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
     async def lmgtfy(self, ctx: commands.Context, query: str):
@@ -117,12 +71,11 @@ class Tools(commands.Cog):
         """Play rock, paper, scissors against the bot."""
         cmd = f"!rps(choice)"
         cmd_msg = f"choice: {choice}"
+        custom_color = Harbinger.custom_color
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         choices = ["rock", "paper", "scissors"]
         botChoice = choices[randint(0, 2)]
-        embedRPS = discord.Embed(
-            color=Harbinger.custom_color, title="rock, paper, scissors"
-        )
+        embedRPS = discord.Embed(color=custom_color, title="rock, paper, scissors")
         embedRPS.add_field(name="You", value=f"{choice}", inline=True)
         embedRPS.add_field(name="Bot", value=f"{botChoice}", inline=True)
         if choice == botChoice:

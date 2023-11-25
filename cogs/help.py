@@ -2,17 +2,13 @@ import discord
 from discord.ext import commands
 
 from harbinger import Harbinger
-from configparser import ConfigParser
+
+# from configparser import ConfigParser
 
 
-
-config_path = "config.ini"
-config = ConfigParser()
-config.read(config_path)
-
-custom_color = config["Bot"]["custom_color"]
-
-current_version = Harbinger.get_ver()
+# config_path = "config.ini"  # I don't know if this really needs to be it's own thing
+# config = ConfigParser()
+# config.read(config_path)
 
 
 class HelpCommand(commands.Cog):
@@ -24,11 +20,12 @@ class HelpCommand(commands.Cog):
         """Return help embed with command descriptions."""
         cmd = f"!help({command})"
         cmd_msg = f"provided help: {command}"
+        custom_color = Harbinger.custom_color
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         if command == None:
             help_embed = discord.Embed(
                 title="Command Help",
-                description=f"Commands for bot v{current_version}",
+                description=f"Commands for bot v{Harbinger.get_ver()}",
                 color=custom_color,
             )
             # MODERATION
@@ -42,6 +39,11 @@ class HelpCommand(commands.Cog):
             help_embed.add_field(
                 name="!playing",
                 value="Embed and send game info to channel.",
+                inline=True,
+            )
+            help_embed.add_field(
+                name="!testField",
+                value="I'm testing this shit bois",
                 inline=True,
             )
             # STATUS
@@ -76,7 +78,7 @@ class HelpCommand(commands.Cog):
                 name="!switch", value="Start/stop the Minecraft server.", inline=True
             )
             help_embed.add_field(
-                name="!commandMc",
+                name="!mccmd",
                 value="Send a command to the Minecraft server.",
                 inline=True,
             )
@@ -244,18 +246,16 @@ class HelpCommand(commands.Cog):
             usage_embed.add_field(name="Usage:", value="!switch <on|off>", inline=False)
             usage_embed.add_field(
                 name="<on|off: str>",
-                value="Whether to turn the server on or off.",
+                value="Turn the server on or off.",
                 inline=True,
             )
             await ctx.send(embed=usage_embed)
-        elif command == "commandMc":
+        elif command == "mccmd":
             usage_embed = discord.Embed(
-                title="commandMc",
+                title="mccmd",
                 description="Send command(s) to the Minecraft server console.",
             )
-            usage_embed.add_field(
-                name="Usage:", value="!commandMc <command>", inline=False
-            )
+            usage_embed.add_field(name="Usage:", value="!mccmd <command>", inline=False)
             usage_embed.add_field(
                 name="<command: str>", value="The command(s) to be sent to the server."
             )
@@ -274,7 +274,7 @@ class HelpCommand(commands.Cog):
             )
             await ctx.send(embed=usage_embed)
         else:
-            print("ERROR: 420.69")
+            print("ERROR 420: Command not found.")
 
 
 async def setup(bot):

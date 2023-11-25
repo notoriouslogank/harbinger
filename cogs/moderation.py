@@ -6,6 +6,7 @@ from discord.ext import commands
 from harbinger import Harbinger
 from configparser import ConfigParser
 
+
 class Moderation(commands.Cog):
     """Server moderation commands."""
 
@@ -53,7 +54,8 @@ class Moderation(commands.Cog):
         """Create game info embed."""
         cmd = f"!playing({game}, {field}, {value})"
         cmd_msg = f"Created playing embed with these values: {game},{field},{value}"
-        embedPlaying = discord.Embed(title=game, color=Harbinger.custom_color)
+        custom_color = Harbinger.custom_color
+        embedPlaying = discord.Embed(title=game, color=custom_color)
         if path.exists("ip.txt"):
             with open("ip.txt", "r") as f:
                 ip = f.readline()
@@ -67,11 +69,10 @@ class Moderation(commands.Cog):
     @commands.command()
     async def server_info(self, ctx, ip):
         """Generate information about the Minecraft server."""
-        embed_server_info = discord.Embed(
-            title="Minecraft", color=Moderation.config["Bot"]["custom_color"]
-        )
-        embed_server_info.add_field(name="Server Address", value="127.0.0.1")
-        embed_server_info.add_field(name="Version", value="1.20.2 I think")
+        custom_color = Harbinger.custom_color
+        embed_server_info = discord.Embed(title="Minecraft", color=custom_color)
+        embed_server_info.add_field(name="Server Address", value="24.254.180.161")
+        embed_server_info.add_field(name="Version", value="1.20.1")
 
 
 async def setup(bot):
