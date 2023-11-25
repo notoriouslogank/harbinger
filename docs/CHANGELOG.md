@@ -4,6 +4,38 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2023-25-11
+
+### MAJOR UPDATE
+
+- Nearly *complete* overhaul of module
+- **ALL** bot commands should now be fully supported
+
+### Added
+
+- !switch command(s)
+- !mccmd command
+- /docs/examples/ dir to house default config files
+- /config/ dir to house user config file(s)
+
+### Fixed
+
+- Config files now load correctly throughout entire module
+- Color designation should now work throughout module
+- Ran Black formatter throughout
+
+### Removed
+
+- utils/server_agent.py
+- many unused imports throughtout
+
+### Changed
+
+- !mccmd and !switch commands no longer use SSH
+- Startup now managed by start.sh
+- Location of config file(s): /docs/examples/config.ini, /docs/examples/start.conf
+- Config file(s) now have a dedicated location
+
 ## [1.6.4] - 2023-18-11
 
 ### Added
@@ -47,7 +79,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Removed
 
-- errant __pycache__ files that may have been included in the repo
+- errant **pycache** files that may have been included in the repo
 
 ## [1.6.0] - 2023-18-11
 
@@ -91,7 +123,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
-- __init.py__ to utils
+- **init.py** to utils
 
 ### Changed
 

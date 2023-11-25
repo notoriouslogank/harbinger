@@ -255,9 +255,7 @@ class HelpCommand(commands.Cog):
                 title="mccmd",
                 description="Send command(s) to the Minecraft server console.",
             )
-            usage_embed.add_field(
-                name="Usage:", value="!mccmd <command>", inline=False
-            )
+            usage_embed.add_field(name="Usage:", value="!mccmd <command>", inline=False)
             usage_embed.add_field(
                 name="<command: str>", value="The command(s) to be sent to the server."
             )
