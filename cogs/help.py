@@ -78,7 +78,7 @@ class HelpCommand(commands.Cog):
                 name="!switch", value="Start/stop the Minecraft server.", inline=True
             )
             help_embed.add_field(
-                name="!commandMc",
+                name="!mccmd",
                 value="Send a command to the Minecraft server.",
                 inline=True,
             )
@@ -246,17 +246,17 @@ class HelpCommand(commands.Cog):
             usage_embed.add_field(name="Usage:", value="!switch <on|off>", inline=False)
             usage_embed.add_field(
                 name="<on|off: str>",
-                value="Whether to turn the server on or off.",
+                value="Turn the server on or off.",
                 inline=True,
             )
             await ctx.send(embed=usage_embed)
-        elif command == "commandMc":
+        elif command == "mccmd":
             usage_embed = discord.Embed(
-                title="commandMc",
+                title="mccmd",
                 description="Send command(s) to the Minecraft server console.",
             )
             usage_embed.add_field(
-                name="Usage:", value="!commandMc <command>", inline=False
+                name="Usage:", value="!mccmd <command>", inline=False
             )
             usage_embed.add_field(
                 name="<command: str>", value="The command(s) to be sent to the server."
@@ -276,7 +276,7 @@ class HelpCommand(commands.Cog):
             )
             await ctx.send(embed=usage_embed)
         else:
-            print("ERROR: 420.69")
+            print("ERROR 420: Command not found.")
 
 
 async def setup(bot):
