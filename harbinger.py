@@ -12,7 +12,7 @@ class Harbinger:
     token = config["Bot"]["token"]
     server_dir = config["Paths"]["server_dir"]
     startup_script = config["Paths"]["startup_script"]
-    custom_color = 0x88AE00
+    custom_color = int(config['Bot']['custom_color'])
 
     cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools", "cogs.minecraft"
     sTime = datetime.now()
