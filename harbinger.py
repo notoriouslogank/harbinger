@@ -11,9 +11,9 @@ config.read(config_path)
 
 class Harbinger:
     token = config["Bot"]["token"]
-    #channel = config["Bot"]["channel"]
-    #mc_host = config["Server"]["hostname"]
-    custom_color = 0x88ae00
+    # channel = config["Bot"]["channel"]
+    # mc_host = config["Server"]["hostname"]
+    custom_color = 0x88AE00
 
     cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools"
     sTime = datetime.now()
@@ -38,13 +38,13 @@ class Harbinger:
         token = config["Bot"]["token"]
         return token
 
-#    def get_mc_host():
-#        mc_host = config["Server"]["mc_host"]
-#        return mc_host
+    #    def get_mc_host():
+    #        mc_host = config["Server"]["mc_host"]
+    #        return mc_host
 
-#    def get_channel():
-#        channel = config["Bot"]["channel"]
-#        return channel
+    #    def get_channel():
+    #        channel = config["Bot"]["channel"]
+    #        return channel
 
     def get_ver():
         with open("docs/CHANGELOG.md", "r") as f:

@@ -2,18 +2,12 @@ import discord
 from discord.ext import commands
 
 from harbinger import Harbinger
-from configparser import ConfigParser
+#from configparser import ConfigParser
 
 
-
-config_path = "config.ini" # I don't know if this really needs to be it's own thing
-config = ConfigParser()
-config.read(config_path)
-
-
-
-current_version = Harbinger.get_ver()
-
+#config_path = "config.ini"  # I don't know if this really needs to be it's own thing
+#config = ConfigParser()
+#config.read(config_path)
 
 class HelpCommand(commands.Cog):
     def __init__(self, bot):
@@ -24,12 +18,12 @@ class HelpCommand(commands.Cog):
         """Return help embed with command descriptions."""
         cmd = f"!help({command})"
         cmd_msg = f"provided help: {command}"
-        custom_color = config["Bot"]["custom_color"]
+        custom_color = Harbinger.custom_color
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         if command == None:
             help_embed = discord.Embed(
                 title="Command Help",
-                description=f"Commands for bot v{current_version}",
+                description=f"Commands for bot v{Harbinger.get_ver()}",
                 color=custom_color,
             )
             # MODERATION

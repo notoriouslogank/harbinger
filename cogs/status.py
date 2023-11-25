@@ -3,11 +3,11 @@ from datetime import datetime
 
 import discord
 from discord.ext import commands
+from paramiko import Channel
 
 from harbinger import Harbinger
 
 bot = Harbinger.bot
-currentVersion = Harbinger.get_ver()
 
 
 class Status(commands.Cog):
@@ -35,10 +35,11 @@ class Status(commands.Cog):
         """Get information about this bot."""
         cmd = "!info"
         cmd_msg = f"Sent info embed to channel {ctx.channel.id}"
+        current_version = Harbinger.get_ver()
         cTime = datetime.now()
         delta = cTime - Harbinger.sTime
         embedInfo = discord.Embed(title="Harbinger", color=Harbinger.custom_color)
-        embedInfo.add_field(name="version", value=f"v{currentVersion}", inline=True)
+        embedInfo.add_field(name="version", value=f"v{current_version}", inline=True)
         embedInfo.add_field(name="uptime", value=f"{delta}", inline=True)
         embedInfo.add_field(name="author", value="notoriouslogank", inline=True)
         embedInfo.add_field(
