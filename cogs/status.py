@@ -3,7 +3,6 @@ from datetime import datetime
 
 import discord
 from discord.ext import commands
-from paramiko import Channel
 
 from harbinger import Harbinger
 
