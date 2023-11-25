@@ -4,7 +4,7 @@ from datetime import datetime
 import discord
 from discord.ext import commands
 
-config_path = "config.ini"
+config_path = "config/config.ini"
 config = ConfigParser()
 config.read(config_path)
 
