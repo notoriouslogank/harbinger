@@ -13,7 +13,7 @@ class Harbinger:
     token = config["Bot"]["token"]
     channel = config["Bot"]["channel"]
     mc_host = config["Server"]["mc_host"]
-    custom_color = config["Bot"]["custom_color"]
+    custom_color = int(config["Bot"]["custom_color"])
 
     cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools"
     sTime = datetime.now()
