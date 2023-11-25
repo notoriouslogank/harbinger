@@ -57,3 +57,4 @@ discord.log
 .vscode
 .configwriter.py
 config.ini
+./start.config
