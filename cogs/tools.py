@@ -75,9 +75,7 @@ class Tools(commands.Cog):
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         choices = ["rock", "paper", "scissors"]
         botChoice = choices[randint(0, 2)]
-        embedRPS = discord.Embed(
-            color=custom_color, title="rock, paper, scissors"
-        )
+        embedRPS = discord.Embed(color=custom_color, title="rock, paper, scissors")
         embedRPS.add_field(name="You", value=f"{choice}", inline=True)
         embedRPS.add_field(name="Bot", value=f"{botChoice}", inline=True)
         if choice == botChoice:

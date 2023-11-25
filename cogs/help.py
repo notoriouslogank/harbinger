@@ -2,12 +2,14 @@ import discord
 from discord.ext import commands
 
 from harbinger import Harbinger
-#from configparser import ConfigParser
+
+# from configparser import ConfigParser
 
 
-#config_path = "config.ini"  # I don't know if this really needs to be it's own thing
-#config = ConfigParser()
-#config.read(config_path)
+# config_path = "config.ini"  # I don't know if this really needs to be it's own thing
+# config = ConfigParser()
+# config.read(config_path)
+
 
 class HelpCommand(commands.Cog):
     def __init__(self, bot):
