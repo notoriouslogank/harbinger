@@ -4,10 +4,6 @@ from datetime import datetime
 import discord
 from discord.ext import commands
 
-#config_path = "config/config.ini"
-#config = ConfigParser()
-#config.read(config_path)
-
 config_path = "config/config.ini"
 config = ConfigParser()
 config.read(config_path)
@@ -40,14 +36,6 @@ class Harbinger:
     def get_token():
         token = config["Bot"]["token"]
         return token
-
-    #    def get_mc_host():
-    #        mc_host = config["Server"]["mc_host"]
-    #        return mc_host
-
-    #    def get_channel():
-    #        channel = config["Bot"]["channel"]
-    #        return channel
 
     def get_ver():
         with open("docs/CHANGELOG.md", "r") as f:
