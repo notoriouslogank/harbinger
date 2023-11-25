@@ -8,11 +8,11 @@ from discord.ext import commands
 #config = ConfigParser()
 #config.read(config_path)
 
-
+config_path = "config/config.ini"
+config = ConfigParser()
+config.read(config_path)
+    
 class Harbinger:
-    config_path = "config/config.ini"
-    config = ConfigParser()
-    config.read(config_path)
     token = config["Bot"]["token"]
     server_dir = config["Paths"]["server_dir"]
     startup_script = config["Paths"]["startup_script"]
