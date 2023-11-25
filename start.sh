@@ -1,5 +1,5 @@
 #!/bin/bash
-source ./start.config
+source start.config
 
 python3 -m venv .venv                               # Create Python venv
 source .venv/bin/activate                           # Activate .venv
