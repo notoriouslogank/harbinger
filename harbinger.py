@@ -12,7 +12,11 @@ class Harbinger:
     token = config["Bot"]["token"]
     server_dir = config["Paths"]["server_dir"]
     startup_script = config["Paths"]["startup_script"]
-    custom_color = discord.Color.from_rgb(config["Custom Color"]['r'], config["Custom Color"]['g'], config["Custom Color"]["b"])
+    r = config["Custom Color"]['r']
+    g = config['Custom Color']['g']
+    b = config['Custom Color']['b']
+    
+    custom_color = discord.Color.from_rgb(int(r), int(g), int(b))
     
     cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools", "cogs.minecraft"
     sTime = datetime.now()
