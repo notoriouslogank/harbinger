@@ -11,8 +11,8 @@ config.read(config_path)
 
 class Harbinger:
     token = config["Bot"]["token"]
-    channel = config["Bot"]["channel"]
-    mc_host = config["Server"]["hostname"]
+    #channel = config["Bot"]["channel"]
+    #mc_host = config["Server"]["hostname"]
     custom_color = 0x88ae00
 
     cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools"
