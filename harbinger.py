@@ -38,13 +38,13 @@ class Harbinger:
         token = config["Bot"]["token"]
         return token
 
-    def get_mc_host():
-        mc_host = config["Server"]["mc_host"]
-        return mc_host
+#    def get_mc_host():
+#        mc_host = config["Server"]["mc_host"]
+#        return mc_host
 
-    def get_channel():
-        channel = config["Bot"]["channel"]
-        return channel
+#    def get_channel():
+#        channel = config["Bot"]["channel"]
+#        return channel
 
     def get_ver():
         with open("docs/CHANGELOG.md", "r") as f:

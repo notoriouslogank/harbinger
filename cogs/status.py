@@ -37,7 +37,7 @@ class Status(commands.Cog):
         cmd_msg = f"Sent info embed to channel {ctx.channel.id}"
         cTime = datetime.now()
         delta = cTime - Harbinger.sTime
-        embedInfo = discord.Embed(title="Harbinger", color=0x884EA0)
+        embedInfo = discord.Embed(title="Harbinger", color=Harbinger.custom_color)
         embedInfo.add_field(name="version", value=f"v{currentVersion}", inline=True)
         embedInfo.add_field(name="uptime", value=f"{delta}", inline=True)
         embedInfo.add_field(name="author", value="notoriouslogank", inline=True)
