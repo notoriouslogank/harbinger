@@ -24,7 +24,8 @@ class Minecraft(commands.Cog):
 
     @commands.command()
     async def mccmd(self, ctx: commands.Context, command):
-        subprocess.run(f'tmux send -t harbinger:0 "{command}" C-m')
+        subprocess.run(['tmux', 'send', '-t', 'harbinger:0', f'{command}', 'C-m'])
+        #subprocess.run(f'tmux send -t harbinger:0 "{command}" C-m')
         await ctx.send(f'Sending command: {command} to server...')
 
 async def setup(bot):
