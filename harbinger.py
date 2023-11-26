@@ -20,10 +20,8 @@ class Harbinger:
     server_dir = config["Server"]["server_dir"]
     startup_script = config["Server"]["startup_script"]
     server_public_ip = config["Server"]["server_public_ip"]
-    r = config["Custom Color"]["r"]
-    g = config["Custom Color"]["g"]
-    b = config["Custom Color"]["b"]
-
+    rgb = config["Custom Color"]["rgb"]
+    r,g,b = map(int, rgb.split())
     custom_color = discord.Color.from_rgb(int(r), int(g), int(b))
 
     cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools", "cogs.minecraft"
