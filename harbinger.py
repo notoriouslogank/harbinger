@@ -4,6 +4,9 @@ from datetime import datetime
 import discord
 from discord.ext import commands
 
+import os
+from sys import exit
+from config.configure import Configure
 
 config_path = "config/config.ini"
 config = ConfigParser()
@@ -34,8 +37,7 @@ class Harbinger:
 
     def __init__(self, bot):
         self.bot = bot
-        start_time = datetime.now()
-
+        
     @bot.event
     async def setup_hook() -> None:
         """Sequentially load cogs."""
@@ -80,8 +82,16 @@ class Harbinger:
 bot = Harbinger.bot
 cogs = Harbinger.cogs
 
+def check_configs():
+    if os.path.exists("config/config.ini"):
+        pass
+    else:
+        print("Missing config file(s)! \n Creating config.ini...")
+        Configure.write_sh_config(Configure.write_py_config(), Configure.path + Configure.shell_config_file)
+        print("Created config/config.ini and config/start.conf")
 
 def main():
+    check_configs()
     Harbinger.start()
 
 

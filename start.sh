@@ -1,6 +1,6 @@
 #!/bin/bash
-source config/start.config
 
+source config/start.config
 python3 -m venv .venv                                 # Create Python venv
 source .venv/bin/activate                             # Activate .venv
 pip install --upgrade pip                             # Upgrade venv pip
