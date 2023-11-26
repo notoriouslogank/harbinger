@@ -30,6 +30,8 @@ class Configure():
         rgb = input("RGB: ")
         r,g,b = map(int, rgb.split())
         print(f"{r}{g}{b}")
+
+    get_custom_color()
     
     def get_local_ip() -> str:
         """Fetch local IP address.
