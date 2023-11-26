@@ -29,7 +29,7 @@ class Configure():
     def get_custom_color():
         rgb = input("RGB: ")
         r,g,b = map(int, rgb.split())
-        return r,g,b
+        print(f"{r}{g}{b}")
     
     def get_local_ip() -> str:
         """Fetch local IP address.
@@ -63,7 +63,7 @@ class Configure():
         config = configparser.ConfigParser()
         config["Bot"] = {"token": f"{Configure.get_token()}", "channel": f"{Configure.get_channel_id()}"}
 
-        config["Custom Color"] = {"r": f"{Configure.get_custom_color([0])}", "g": f"{Configure.get_custom_color([1])}", "b": f"{Configure.get_custom_color([2])}"}
+        #config["Custom Color"] = {"r": f"{Configure.get_custom_color([0])}", "g": f"{Configure.get_custom_color([1])}", "b": f"{Configure.get_custom_color([2])}"}
 
         config["Server"] = {
             "server_dir": f"{Configure.get_server_dir()}",
