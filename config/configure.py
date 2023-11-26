@@ -6,8 +6,9 @@ from requests import get
 
 
 class Configure:
-    python_config_file = "config/config.ini"
-    shell_config_file = "config/start.conf"
+    config_path = "config/"
+    python_config_file = "config.ini"
+    shell_config_file = "start.conf"
 
     def get_token():
         token = input("Discord API Token: ")
@@ -64,7 +65,7 @@ class Configure:
             "server_public_ip": f"{Configure.get_public_ip()}",
         }
 
-        with open(Configure.python_config_file, "w") as configfile:
+        with open(f'{Configure.config_path}{Configure.python_config_file}', "w") as configfile:
             config.write(configfile)
 
     def write_sh_config(configfile):
@@ -74,7 +75,7 @@ class Configure:
         startup_script = config["Server"]["startup_script"]
         text = f"#!/bin/bash\nServerDir={server_dir}\nStartupScript={startup_script}\n"
 
-        with open(f"{Configure.shell_config_file}", "w") as conf:
+        with open(f"{Configure.config_path}{Configure.shell_config_file}", "w") as conf:
             conf.write(text)
 
 
