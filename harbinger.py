@@ -15,7 +15,6 @@ class Harbinger:
     config_path = "config/config.ini"
     config = ConfigParser()
     config.read(config_path)
-    token = config["Bot"]["token"]
     server_dir = config["Server"]["server_dir"]
     startup_script = config["Server"]["startup_script"]
     server_public_ip = config["Server"]["server_public_ip"]
@@ -69,7 +68,7 @@ class Harbinger:
     def start() -> None:
         """Start the bot."""
         config = ConfigParser()
-        token = config.read(["Bot"]["token"])
+        token = config["Bot"]["token"]
         bot.run(token)
 
     async def send_dm(ctx, member: discord.Member, *, content) -> None:
