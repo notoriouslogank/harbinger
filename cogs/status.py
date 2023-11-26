@@ -35,8 +35,8 @@ class Status(commands.Cog):
         cmd = "!info"
         cmd_msg = f"Sent info embed to channel {ctx.channel.id}"
         current_version = Harbinger.get_ver()
-        cTime = datetime.now()
-        delta = cTime - Harbinger.sTime
+        current_time = datetime.now()
+        delta = current_time - Harbinger.start_time
         embedInfo = discord.Embed(title="Harbinger", color=Harbinger.custom_color)
         embedInfo.add_field(name="version", value=f"v{current_version}", inline=True)
         embedInfo.add_field(name="uptime", value=f"{delta}", inline=True)
@@ -62,8 +62,8 @@ class Status(commands.Cog):
     async def uptime(self, ctx: commands.Context) -> None:
         """Get bot uptime."""
         cmd = "!uptime"
-        cTime = datetime.now()
-        delta = cTime - Harbinger.sTime
+        current_time = datetime.now()
+        delta = current_time - Harbinger.start_time
         up_msg = f"uptime: {delta}"
         cmd_msg = f"{up_msg}"
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
