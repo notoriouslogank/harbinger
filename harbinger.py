@@ -3,10 +3,11 @@ from datetime import datetime
 
 import discord
 from discord.ext import commands
-config.read(config_path)
+
 
 config_path = "config/config.ini"
 config = ConfigParser()
+config.read(config_path)
     
 class Harbinger:
     """Class for the main bot functions."""
