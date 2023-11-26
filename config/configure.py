@@ -4,12 +4,12 @@ import socket
 
 from requests import get
 
-class Configure():
 
+class Configure:
     path = "config/"
     python_config_file = "config.ini"
-    shell_config_file = "start.config"
-        
+    shell_config_file = "start.conf"
+
     def get_token():
         token = input("Discord API Token: ")
         return token
@@ -30,39 +30,33 @@ class Configure():
         rgb = input("RGB (000 000 000): ")
         return rgb
 
-    get_custom_color()
-    
     def get_local_ip() -> str:
         """Fetch local IP address.
 
         Returns:
         str: Local IP address.
-            """
+        """
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         s.connect(("8.8.8.8", 80))
         ip = s.getsockname()[0]
         s.close()
         return ip
 
-
     def get_public_ip() -> str:
         """Query the Internet and return public IP.
-        
+
         Returns:
             str: Public IP address
         """
         ip = get("https://api.ipify.org").content.decode("utf8")
         return ip
 
-
     def write_py_config() -> str:
-        """Write the Python config.ini file
-
-        Returns:
-            str: Return the config.ini file
-        """
         config = configparser.ConfigParser()
-        config["Bot"] = {"token": f"{Configure.get_token()}", "channel": f"{Configure.get_channel_id()}"}
+        config["Bot"] = {
+            "token": f"{Configure.get_token()}",
+            "channel": f"{Configure.get_channel_id()}",
+        }
         config["Custom Color"] = {"rgb": f"{Configure.get_custom_color()}"}
         config["Server"] = {
             "server_dir": f"{Configure.get_server_dir()}",
@@ -74,29 +68,20 @@ class Configure():
         with open(Configure.python_config_file, "w") as configfile:
             config.write(configfile)
 
-        file = Configure.path + Configure.python_config_file
-        return file
-
-
-    def write_sh_config(infile: str, outfile: str):
-        """Write the shell config file start.config
-
-        Args:
-            infile (str): The file being ingested to generate start.conf
-            outfile (str): The name of the file to be generated, ie start.conf
-        """
+    def write_sh_config(configfile):
         config = configparser.ConfigParser()
-        config.read(infile)
+        config.read(configfile)
         server_dir = config["Server"]["server_dir"]
         startup_script = config["Server"]["startup_script"]
-        header = "#!/bin/bash\n"
-        line1 = f"ServerDir={server_dir}\n"
-        line2 = f"StartupScript={startup_script}\n"
+        text = f"#!/bin/bash\nServerDir={server_dir}\nStartupScript={startup_script}\n"
 
-        with open(outfile, "w") as conf:
-            conf.write(header + line1 + line2)
+        with open(f"{Configure.shell_config_file}", "w") as conf:
+            conf.write(text)
+
 
 def main():
-    Configure.write_py_config(Configure.write_py_config(), Configure.path + Configure.shell_config_file)
+    Configure.write_py_config()
+    Configure.write_sh_config(Configure.python_config_file)
+
 
 main()
