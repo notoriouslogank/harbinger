@@ -37,8 +37,10 @@ class Harbinger:
         """Sequentially load cogs."""
         print(f"Loading cogs")
         for cog in cogs:
+            print(f'Loading {cog}...')
             await bot.load_extension(cog)
-
+            print(f'Loaded {cog}.')
+            print(Harbinger.sTime)
 
     def get_ver() -> str:
         """Check CHANGELOG.md for version info, return version string.
@@ -52,7 +54,7 @@ class Harbinger:
             version = vLine[4:9]
             return version
 
-    def timestamp(user, cmd, cmd_msg):
+    def timestamp(user, cmd, cmd_msg) -> None:
         """Print timestamp and end-of-command separator."""
         nl = "\n"
         cTime = datetime.now()
@@ -62,11 +64,11 @@ class Harbinger:
         print(f"CMD| {cmd}")
         print(f"MSG| {cmd_msg}")
 
-    def start():
+    def start() -> None:
         """Start the bot."""
         bot.run(Harbinger.token)
 
-    async def send_dm(ctx, member: discord.Member, *, content):
+    async def send_dm(ctx, member: discord.Member, *, content) -> None:
         """Create a Direct Message channel with a given member."""
         channel = await member.create_dm()
         await channel.send(content)
