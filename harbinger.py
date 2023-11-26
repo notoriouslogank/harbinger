@@ -99,5 +99,5 @@ def main():
 
 
 if __name__ == "__main__":
-    check_config()
+    #check_config()
     Harbinger.start()
