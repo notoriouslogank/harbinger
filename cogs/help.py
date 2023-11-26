@@ -6,7 +6,7 @@ from harbinger import Harbinger
 
 class HelpCommand(commands.Cog):
     """Class containing help info for each command."""
-    
+
     def __init__(self, bot):
         self.bot = bot
 

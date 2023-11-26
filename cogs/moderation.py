@@ -42,26 +42,19 @@ class Moderation(commands.Cog):
         await ctx.channel.purge(limit=1)
         await ctx.send(f"{message}")
 
-    @commands.command()  # TODO: Rework this
+    @commands.command()
     async def playing(
-        self, ctx: commands.Context, game="Minecraft", field="Server Address", value=""
+        self, ctx: commands.Context, game, description, field, value
     ) -> None:
         """Create game info embed."""
         cmd = f"!playing({game}, {field}, {value})"
         cmd_msg = f"Created playing embed with these values: {game},{field},{value}"
         custom_color = Harbinger.custom_color
-        embedPlaying = discord.Embed(title=game, color=custom_color)
-        if path.exists("ip.txt"):
-            with open("ip.txt", "r") as f:
-                ip = f.readline()
-            embedPlaying.add_field(name=f"Server IP", value=f"{ip}")
-            embedPlaying.add_field(name=f"Version", value="1.20.1")
-        else:
-            embedPlaying.add_field(name=f"{field}", value=f"{value}", inline=True)
-            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-        await ctx.send(embed=embedPlaying)
-
-
+        playing_embed = discord.Embed(title=f"{game}", description=f"{description}")
+        playing_embed.add_field(name=f"{field}", value=f"{value}")
+        await ctx.send(embed=playing_embed)
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        
 async def setup(bot):
     """Load cogs into bot."""
     await bot.add_cog(Moderation(bot))

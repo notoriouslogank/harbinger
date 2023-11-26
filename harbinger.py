@@ -3,16 +3,17 @@ from datetime import datetime
 
 import discord
 from discord.ext import commands
+config.read(config_path)
 
 config_path = "config/config.ini"
 config = ConfigParser()
-config.read(config_path)
     
 class Harbinger:
     """Class for the main bot functions."""
     token = config["Bot"]["token"]
     server_dir = config["Paths"]["server_dir"]
     startup_script = config["Paths"]["startup_script"]
+    server_public_ip = config['Server']['server_public_ip']
     r = config["Custom Color"]['r']
     g = config['Custom Color']['g']
     b = config['Custom Color']['b']
