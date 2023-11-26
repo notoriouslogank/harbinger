@@ -68,6 +68,7 @@ class Harbinger:
     def start() -> None:
         """Start the bot."""
         config = ConfigParser()
+        config.read(Harbinger.config_path)
         token = config["Bot"]["token"]
         bot.run(token)
 
