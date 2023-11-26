@@ -53,7 +53,7 @@ class Tools(commands.Cog):
         await ctx.send(f"{total}")
 
     @commands.command()
-    async def roll(self, ctx: commands.Context, dice: str):
+    async def roll(self, ctx: commands.Context, dice: str) -> None:
         """Roll NdN dice and get results."""
         cmd = f"!roll({dice})"
         try:

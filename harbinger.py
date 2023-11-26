@@ -20,7 +20,7 @@ class Harbinger:
     custom_color = discord.Color.from_rgb(int(r), int(g), int(b))
     
     cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools", "cogs.minecraft"
-    sTime = datetime.now()
+    start_time = datetime.now()
 
     intents = discord.Intents.default()
     intents.members = True
@@ -30,7 +30,7 @@ class Harbinger:
 
     def __init__(self, bot):
         self.bot = bot
-        sTime = datetime.now()
+        start_time = datetime.now()
 
     @bot.event
     async def setup_hook() -> None:
@@ -40,7 +40,7 @@ class Harbinger:
             print(f'Loading {cog}...')
             await bot.load_extension(cog)
             print(f'Loaded {cog}.')
-            print(Harbinger.sTime)
+            print(Harbinger.start_time)
 
     def get_ver() -> str:
         """Check CHANGELOG.md for version info, return version string.
@@ -50,16 +50,15 @@ class Harbinger:
         """
         with open("docs/CHANGELOG.md", "r") as f:
             changes = f.readlines()
-            vLine = changes[6]
-            version = vLine[4:9]
+            version_line = changes[6]
+            version = version_line[4:9]
             return version
 
     def timestamp(user, cmd, cmd_msg) -> None:
         """Print timestamp and end-of-command separator."""
-        nl = "\n"
-        cTime = datetime.now()
+        current_time = datetime.now()
         print(f"++++")
-        print(f"{cTime}")
+        print(f"{current_time}")
         print(f"USR| {user}")
         print(f"CMD| {cmd}")
         print(f"MSG| {cmd_msg}")
