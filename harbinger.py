@@ -94,7 +94,7 @@ def check_config():
 
 
 def main():
-    check_config()
+    #check_config()
     Harbinger.start()
 
 
