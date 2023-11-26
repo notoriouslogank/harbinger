@@ -9,7 +9,6 @@ from sys import exit
 from config.configure import Configure
 
 
-
 class Harbinger:
     """Class for the main bot functions."""
 
@@ -21,7 +20,7 @@ class Harbinger:
     startup_script = config["Server"]["startup_script"]
     server_public_ip = config["Server"]["server_public_ip"]
     rgb = config["Custom Color"]["rgb"]
-    r,g,b = map(int, rgb.split(""))
+    r, g, b = map(int, rgb.split())
     custom_color = discord.Color.from_rgb(int(r), int(g), int(b))
 
     cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools", "cogs.minecraft"
@@ -35,7 +34,7 @@ class Harbinger:
 
     def __init__(self, bot):
         self.bot = bot
-        
+
     @bot.event
     async def setup_hook() -> None:
         """Sequentially load cogs."""
@@ -69,7 +68,9 @@ class Harbinger:
 
     def start() -> None:
         """Start the bot."""
-        bot.run(Harbinger.token)
+        config = ConfigParser()
+        token = config.read(["Bot"]["token"])
+        bot.run(token)
 
     async def send_dm(ctx, member: discord.Member, *, content) -> None:
         """Create a Direct Message channel with a given member."""
@@ -80,6 +81,7 @@ class Harbinger:
 bot = Harbinger.bot
 cogs = Harbinger.cogs
 
+
 def check_config():
     if os.path.exists("config/config.ini"):
         if os.path.exists("config/start.conf"):
@@ -89,11 +91,13 @@ def check_config():
     else:
         Configure.write_py_config()
         Configure.write_sh_config(Configure.python_config_file)
-    
+
+
 def main():
     check_config()
     Harbinger.start()
 
 
 if __name__ == "__main__":
+    check_config()
     Harbinger.start()
