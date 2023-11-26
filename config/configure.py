@@ -6,9 +6,8 @@ from requests import get
 
 
 class Configure:
-    path = "config/"
-    python_config_file = "config.ini"
-    shell_config_file = "start.conf"
+    python_config_file = "config/config.ini"
+    shell_config_file = "config/start.conf"
 
     def get_token():
         token = input("Discord API Token: ")
