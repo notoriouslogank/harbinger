@@ -27,9 +27,8 @@ class Configure():
         return startup_script
 
     def get_custom_color():
-        r = input("Red: ")
-        g = input("Green: ")
-        b = input("Blue: ")
+        rgb = input("RGB: ")
+        r,g,b = map(int, rgb.split())
         return r,g,b
     
     def get_local_ip() -> str:
@@ -97,3 +96,8 @@ class Configure():
 
         with open(outfile, "w") as conf:
             conf.write(header + line1 + line2)
+
+def main():
+    Configure.write_py_config(Configure.write_py_config(), Configure.path + Configure.shell_config_file)
+
+main()
