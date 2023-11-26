@@ -71,7 +71,7 @@ class Configure():
             "server_public_ip": f"{Configure.get_public_ip()}",
         }
 
-        with open(Configure.path + Configure.python_config_file, "w") as configfile:
+        with open(Configure.python_config_file, "w") as configfile:
             config.write(configfile)
 
         file = Configure.path + Configure.python_config_file
