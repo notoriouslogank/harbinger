@@ -1,11 +1,10 @@
+import os
 from configparser import ConfigParser
 from datetime import datetime
 
 import discord
 from discord.ext import commands
 
-import os
-from sys import exit
 from config.configure import Configure
 
 
@@ -41,8 +40,7 @@ class Harbinger:
         for cog in cogs:
             print(f"Loading {cog}...")
             await bot.load_extension(cog)
-            print(f"Loaded {cog}.")
-            print(Harbinger.start_time)
+            print(f"Loaded {cog}.\n{Harbinger.start_time}")
 
     def get_ver() -> str:
         """Check CHANGELOG.md for version info, return version string.
@@ -59,11 +57,7 @@ class Harbinger:
     def timestamp(user, cmd, cmd_msg) -> None:
         """Print timestamp and end-of-command separator."""
         current_time = datetime.now()
-        print(f"++++")
-        print(f"{current_time}")
-        print(f"USR| {user}")
-        print(f"CMD| {cmd}")
-        print(f"MSG| {cmd_msg}")
+        print(f"++++\n{current_time}\nUSR| {user}\nCMD| {cmd}\nMSG| {cmd_msg}")
 
     def start() -> None:
         """Start the bot."""
