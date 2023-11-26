@@ -21,7 +21,7 @@ class Status(commands.Cog):
         Harbinger.timestamp("BOT", "INITIALIZE", "BOT IS ONLINE")
 
     @commands.command()
-    async def status(self, ctx: commands.Context):
+    async def status(self, ctx: commands.Context) -> None:
         """Confirm bot is online and reachable."""
         cmd = "!status"
         cmd_msg = "Status: online."
@@ -30,7 +30,7 @@ class Status(commands.Cog):
         await ctx.send(f"{status_msg}")
 
     @commands.command()
-    async def info(self, ctx: commands.Context):
+    async def info(self, ctx: commands.Context) -> None:
         """Get information about this bot."""
         cmd = "!info"
         cmd_msg = f"Sent info embed to channel {ctx.channel.id}"
@@ -50,7 +50,7 @@ class Status(commands.Cog):
         await ctx.send(embed=embedInfo)
 
     @commands.command()
-    async def ping(self, ctx: commands.Context):
+    async def ping(self, ctx: commands.Context) -> None:
         """Check network latency."""
         ping = (round(self.bot.latency, 2)) * 1000
         cmd = f"!ping"
@@ -59,7 +59,7 @@ class Status(commands.Cog):
         await ctx.send(f"Pong! ({ping} ms)")
 
     @commands.command()
-    async def uptime(self, ctx: commands.Context):
+    async def uptime(self, ctx: commands.Context) -> None:
         """Get bot uptime."""
         cmd = "!uptime"
         cTime = datetime.now()
@@ -70,7 +70,7 @@ class Status(commands.Cog):
         await ctx.send(f"{up_msg}")
 
     @commands.command()
-    async def changelog(self, ctx: commands.Context):  # TODO: Fix this (again)
+    async def changelog(self, ctx: commands.Context) -> None:  # TODO: Fix this (again)
         """Get changelog."""
         cmd = "!changelog"
         cmd_msg = f"Uploaded CHANGELOG.md to channel."
@@ -79,7 +79,7 @@ class Status(commands.Cog):
         await ctx.send(file=file)
 
     @commands.command()
-    async def shutdown(self, ctx: commands.Context):
+    async def shutdown(self, ctx: commands.Context) -> None:
         """Gracefully shutdown the bot."""
         cmd = "!shutdown"
         cmd_msg = f"Shutting down..."
