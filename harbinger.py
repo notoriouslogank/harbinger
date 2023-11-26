@@ -14,8 +14,8 @@ class Harbinger:
     """Class for the main bot functions."""
 
     token = config["Bot"]["token"]
-    server_dir = config["Paths"]["server_dir"]
-    startup_script = config["Paths"]["startup_script"]
+    server_dir = config["Server"]["server_dir"]
+    startup_script = config["Server"]["startup_script"]
     server_public_ip = config["Server"]["server_public_ip"]
     r = config["Custom Color"]["r"]
     g = config["Custom Color"]["g"]

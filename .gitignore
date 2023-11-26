@@ -57,3 +57,4 @@ discord.log
 .vscode
 config/start.config
 config/config.ini
+config/config.ini.bak
