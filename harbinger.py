@@ -9,6 +9,7 @@ config = ConfigParser()
 config.read(config_path)
     
 class Harbinger:
+    """Class for the main bot functions."""
     token = config["Bot"]["token"]
     server_dir = config["Paths"]["server_dir"]
     startup_script = config["Paths"]["startup_script"]
@@ -33,15 +34,18 @@ class Harbinger:
 
     @bot.event
     async def setup_hook() -> None:
+        """Sequentially load cogs."""
         print(f"Loading cogs")
         for cog in cogs:
             await bot.load_extension(cog)
 
-    def get_token():
-        token = config["Bot"]["token"]
-        return token
 
-    def get_ver():
+    def get_ver() -> str:
+        """Check CHANGELOG.md for version info, return version string.
+
+        Returns:
+            str: Software version
+        """
         with open("docs/CHANGELOG.md", "r") as f:
             changes = f.readlines()
             vLine = changes[6]
@@ -59,7 +63,8 @@ class Harbinger:
         print(f"MSG| {cmd_msg}")
 
     def start():
-        bot.run(Harbinger.get_token())
+        """Start the bot."""
+        bot.run(Harbinger.token)
 
     async def send_dm(ctx, member: discord.Member, *, content):
         """Create a Direct Message channel with a given member."""

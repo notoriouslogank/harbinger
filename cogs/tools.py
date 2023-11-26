@@ -15,7 +15,7 @@ class Tools(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def lmgtfy(self, ctx: commands.Context, query: str):
+    async def lmgtfy(self, ctx: commands.Context, query: str) -> None:
         """Let Me Google That For You"""
         cmd = f"!lmgtfy({query})"
         google = "https://google.com/search?q="
@@ -28,7 +28,7 @@ class Tools(commands.Cog):
         await Harbinger.send_dm(ctx=ctx, member=ctx.message.author, content=search)
 
     @commands.command()
-    async def define(self, ctx: commands.Context, word: str):
+    async def define(self, ctx: commands.Context, word: str) -> None:
         """Get the Meriam-Webster definition of a word.
 
         Args:
@@ -44,7 +44,7 @@ class Tools(commands.Cog):
         await Harbinger.send_dm(ctx=ctx, member=ctx.message.author, content=define_url)
 
     @commands.command()
-    async def add(self, ctx: commands.Context, left: int, right: int):
+    async def add(self, ctx: commands.Context, left: int, right: int) -> None:
         """Adds two integers and returns result as message."""
         cmd = f"!add({left} {right})"
         total = left + right
@@ -67,7 +67,7 @@ class Tools(commands.Cog):
         await ctx.send(f"{result}")
 
     @commands.command()
-    async def rps(self, ctx: commands.Context, choice: str):
+    async def rps(self, ctx: commands.Context, choice: str) -> None:
         """Play rock, paper, scissors against the bot."""
         cmd = f"!rps(choice)"
         cmd_msg = f"choice: {choice}"

@@ -3,20 +3,15 @@ from discord.ext import commands
 
 from harbinger import Harbinger
 
-# from configparser import ConfigParser
-
-
-# config_path = "config.ini"  # I don't know if this really needs to be it's own thing
-# config = ConfigParser()
-# config.read(config_path)
-
 
 class HelpCommand(commands.Cog):
+    """Class containing help info for each command."""
+    
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command()
-    async def help(self, ctx, *, command=None):
+    async def help(self, ctx, *, command=None) -> None:
         """Return help embed with command descriptions."""
         cmd = f"!help({command})"
         cmd_msg = f"provided help: {command}"
@@ -39,11 +34,6 @@ class HelpCommand(commands.Cog):
             help_embed.add_field(
                 name="!playing",
                 value="Embed and send game info to channel.",
-                inline=True,
-            )
-            help_embed.add_field(
-                name="!testField",
-                value="I'm testing this shit bois",
                 inline=True,
             )
             # STATUS

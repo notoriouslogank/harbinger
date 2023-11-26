@@ -4,15 +4,10 @@ import discord
 from discord.ext import commands
 
 from harbinger import Harbinger
-from configparser import ConfigParser
 
 
 class Moderation(commands.Cog):
     """Server moderation commands."""
-
-    config_path = "config.ini"
-    config = ConfigParser()
-    config.read(config_path)
 
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
@@ -30,7 +25,7 @@ class Moderation(commands.Cog):
             Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
-    async def joined(self, ctx: commands.Context, member: discord.Member):
+    async def joined(self, ctx: commands.Context, member: discord.Member) -> None:
         """Get user's join datetime."""
         cmd = f"!joined({member})"
         cmd_msg = f"Got join data for: {member}."
@@ -39,7 +34,7 @@ class Moderation(commands.Cog):
         Harbinger.timestamp(ctx.author.message, cmd, cmd_msg)
 
     @commands.command()
-    async def say(self, ctx: commands.Context, message: str):
+    async def say(self, ctx: commands.Context, message: str) -> None:
         """Say message as bot."""
         cmd = f"!say({message})"
         cmd_msg = f"Harbinger says: {message}"
@@ -47,10 +42,10 @@ class Moderation(commands.Cog):
         await ctx.channel.purge(limit=1)
         await ctx.send(f"{message}")
 
-    @commands.command()  # Should probably break the automated message system out into its own functionality
+    @commands.command()  # TODO: Rework this
     async def playing(
         self, ctx: commands.Context, game="Minecraft", field="Server Address", value=""
-    ):
+    ) -> None:
         """Create game info embed."""
         cmd = f"!playing({game}, {field}, {value})"
         cmd_msg = f"Created playing embed with these values: {game},{field},{value}"
@@ -65,14 +60,6 @@ class Moderation(commands.Cog):
             embedPlaying.add_field(name=f"{field}", value=f"{value}", inline=True)
             Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(embed=embedPlaying)
-
-    @commands.command()
-    async def server_info(self, ctx, ip):
-        """Generate information about the Minecraft server."""
-        custom_color = Harbinger.custom_color
-        embed_server_info = discord.Embed(title="Minecraft", color=custom_color)
-        embed_server_info.add_field(name="Server Address", value="24.254.180.161")
-        embed_server_info.add_field(name="Version", value="1.20.1")
 
 
 async def setup(bot):
