@@ -21,7 +21,7 @@ class Harbinger:
     startup_script = config["Server"]["startup_script"]
     server_public_ip = config["Server"]["server_public_ip"]
     rgb = config["Custom Color"]["rgb"]
-    r,g,b = map(int, rgb.split())
+    r,g,b = map(int, rgb.split(""))
     custom_color = discord.Color.from_rgb(int(r), int(g), int(b))
 
     cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools", "cogs.minecraft"
@@ -80,16 +80,18 @@ class Harbinger:
 bot = Harbinger.bot
 cogs = Harbinger.cogs
 
-def check_configs():
+def check_config():
     if os.path.exists("config/config.ini"):
-        pass
+        if os.path.exists("config/start.conf"):
+            pass
+        else:
+            Configure.write_sh_config(Configure.python_config_file)
     else:
-        print("Missing config file(s)! \n Creating config.ini...")
-        Configure.write_sh_config(Configure.write_py_config(), Configure.path + Configure.shell_config_file)
-        print("Created config/config.ini and config/start.conf")
-
+        Configure.write_py_config()
+        Configure.write_sh_config(Configure.python_config_file)
+    
 def main():
-    check_configs()
+    check_config()
     Harbinger.start()
 
 
