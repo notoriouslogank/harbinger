@@ -8,14 +8,14 @@ import os
 from sys import exit
 from config.configure import Configure
 
-config_path = "config/config.ini"
-config = ConfigParser()
-config.read(config_path)
 
 
 class Harbinger:
     """Class for the main bot functions."""
 
+    config_path = "config/config.ini"
+    config = ConfigParser()
+    config.read(config_path)
     token = config["Bot"]["token"]
     server_dir = config["Server"]["server_dir"]
     startup_script = config["Server"]["startup_script"]
