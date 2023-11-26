@@ -62,15 +62,15 @@ class Configure():
             str: Return the config.ini file
         """
         config = configparser.ConfigParser()
-        config["Bot"] = {"token": f"{get_token()}", "channel": f"{get_channel_id()}"}
+        config["Bot"] = {"token": f"{Configure.get_token()}", "channel": f"{Configure.get_channel_id()}"}
 
-        config["Custom Color"] = {"r": f"{get_custom_color([0])}", "g": f"{get_custom_color([1])}", "b": f"{get_custom_color([2])}"}
+        config["Custom Color"] = {"r": f"{Configure.get_custom_color([0])}", "g": f"{Configure.get_custom_color([1])}", "b": f"{get_custom_color([2])}"}
 
         config["Server"] = {
-            "server_dir": f"{get_server_dir()}",
-            "startup_script": f"{get_startup_script()}",
-            "server_local_ip": f"{get_local_ip()}",
-            "server_public_ip": f"{get_public_ip()}",
+            "server_dir": f"{Configure.get_server_dir()}",
+            "startup_script": f"{Configure.get_startup_script()}",
+            "server_local_ip": f"{Configure.get_local_ip()}",
+            "server_public_ip": f"{Configure.get_public_ip()}",
         }
 
         with open(Configure.path + Configure.python_config_file, "w") as configfile:
@@ -97,7 +97,3 @@ class Configure():
 
         with open(outfile, "w") as conf:
             conf.write(header + line1 + line2)
-
-
-
-Configure.write_sh_config(Configure.write_py_config(), Configure.path + Configure.shell_config_file)
