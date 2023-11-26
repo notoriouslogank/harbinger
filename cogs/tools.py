@@ -19,7 +19,8 @@ class Tools(commands.Cog):
         """Let Me Google That For You"""
         cmd = f"!lmgtfy({query})"
         google = "https://google.com/search?q="
-        search = google + query
+        sanitized_query = query.replace(" ", "+")
+        search = google + sanitized_query
         cmd_msg = f"URL: {search}"
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.channel.purge(limit=1)
