@@ -8,19 +8,21 @@ from discord.ext import commands
 config_path = "config/config.ini"
 config = ConfigParser()
 config.read(config_path)
-    
+
+
 class Harbinger:
     """Class for the main bot functions."""
+
     token = config["Bot"]["token"]
     server_dir = config["Paths"]["server_dir"]
     startup_script = config["Paths"]["startup_script"]
-    server_public_ip = config['Server']['server_public_ip']
-    r = config["Custom Color"]['r']
-    g = config['Custom Color']['g']
-    b = config['Custom Color']['b']
-    
+    server_public_ip = config["Server"]["server_public_ip"]
+    r = config["Custom Color"]["r"]
+    g = config["Custom Color"]["g"]
+    b = config["Custom Color"]["b"]
+
     custom_color = discord.Color.from_rgb(int(r), int(g), int(b))
-    
+
     cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools", "cogs.minecraft"
     start_time = datetime.now()
 
@@ -39,9 +41,9 @@ class Harbinger:
         """Sequentially load cogs."""
         print(f"Loading cogs")
         for cog in cogs:
-            print(f'Loading {cog}...')
+            print(f"Loading {cog}...")
             await bot.load_extension(cog)
-            print(f'Loaded {cog}.')
+            print(f"Loaded {cog}.")
             print(Harbinger.start_time)
 
     def get_ver() -> str:
