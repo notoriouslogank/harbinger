@@ -65,7 +65,9 @@ class Configure:
             "server_public_ip": f"{Configure.get_public_ip()}",
         }
 
-        with open(f'{Configure.config_path}{Configure.python_config_file}', "w") as configfile:
+        with open(
+            f"{Configure.config_path}{Configure.python_config_file}", "w"
+        ) as configfile:
             config.write(configfile)
 
     def write_sh_config(configfile):
@@ -81,7 +83,7 @@ class Configure:
 
 def main():
     Configure.write_py_config()
-    Configure.write_sh_config(Configure.python_config_file)
+    Configure.write_sh_config(f"{Configure.config_path}{Configure.python_config_file}")
 
 
 main()
