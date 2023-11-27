@@ -36,11 +36,10 @@ class Harbinger:
     @bot.event
     async def setup_hook() -> None:
         """Sequentially load cogs."""
-        print(f"Loading cogs")
         for cog in cogs:
             print(f"Loading {cog}...")
             await bot.load_extension(cog)
-            print(f"Loaded {cog}.\n{Harbinger.start_time}")
+            print(f"Loaded {cog}.")
 
     def get_ver() -> str:
         """Check CHANGELOG.md for version info, return version string.
@@ -49,8 +48,8 @@ class Harbinger:
             str: Software version
         """
         with open("docs/CHANGELOG.md", "r") as f:
-            changes = f.readlines()
-            version_line = changes[6]
+            changelog = f.readlines()
+            version_line = changelog[6]
             version = version_line[4:9]
             return version
 
@@ -78,20 +77,24 @@ cogs = Harbinger.cogs
 
 def check_config():
     if os.path.exists("config/config.ini"):
-        if os.path.exists("config/start.conf"):
-            pass
-        else:
-            Configure.write_sh_config(Configure.python_config_file)
+        print("Config file found.")
     else:
-        Configure.write_py_config()
-        Configure.write_sh_config(Configure.python_config_file)
+        print("No config file found.")
+#        if os.path.exists("config/start.conf"):
+#            pass
+#        else:
+#            Configure.write_sh_config(Configure.python_config_file)
+#    else:
+#        Configure.write_py_config()
+#        Configure.write_sh_config(Configure.python_config_file)
 
 
 def main():
-    #check_config()
-    Harbinger.start()
+    check_config()
+    #Harbinger.start()
 
 
 if __name__ == "__main__":
+    main()
     #check_config()
-    Harbinger.start()
+    #Harbinger.start()

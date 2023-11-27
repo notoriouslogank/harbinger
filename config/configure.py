@@ -79,11 +79,3 @@ class Configure:
 
         with open(f"{Configure.config_path}{Configure.shell_config_file}", "w") as conf:
             conf.write(text)
-
-
-def main():
-    Configure.write_py_config()
-    Configure.write_sh_config(f"{Configure.config_path}{Configure.python_config_file}")
-
-
-main()
