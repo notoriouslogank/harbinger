@@ -22,11 +22,8 @@ class Harbinger:
     config = ConfigParser()
     config.read(config_path)
     server_dir = reveal(config["Server"]["server_dir"])
-    print(server_dir)
     startup_script = reveal(config["Server"]["startup_script"])
-    print(startup_script)
     server_public_ip = reveal(config["Server"]["server_public_ip"])
-    print(server_public_ip)
     rgb = config["Custom Color"]["rgb"]
     r, g, b = map(int, rgb.split())
     custom_color = discord.Color.from_rgb(int(r), int(g), int(b))
@@ -72,8 +69,7 @@ class Harbinger:
         config = ConfigParser()
         config.read(Harbinger.config_path)
         token = reveal(config["Bot"]["token"])
-        print(token)
-        #bot.run(token)
+        bot.run(token)
 
     async def send_dm(ctx, member: discord.Member, *, content) -> None:
         """Create a Direct Message channel with a given member."""
