@@ -1,20 +1,19 @@
-import os
+import base64
 from configparser import ConfigParser
 from datetime import datetime
-import base64
+
 import discord
 from discord.ext import commands
 
-from config.configure import Configure
-
 
 def reveal(b64data):
-        base64_data = b64data
-        base64_data_bytes = base64_data.encode("ascii")
-        data_bytes = base64.b64decode(base64_data_bytes)
-        data = data_bytes.decode("ascii")
-        return data
-    
+    base64_data = b64data
+    base64_data_bytes = base64_data.encode("ascii")
+    data_bytes = base64.b64decode(base64_data_bytes)
+    data = data_bytes.decode("ascii")
+    return data
+
+
 class Harbinger:
     """Class for the main bot functions."""
 
@@ -81,22 +80,7 @@ bot = Harbinger.bot
 cogs = Harbinger.cogs
 
 
-def check_config():
-    if os.path.exists("config/config.ini"):
-        print("Config file found.")
-    else:
-        print("No config file found.")
-#        if os.path.exists("config/start.conf"):
-#            pass
-#        else:
-#            Configure.write_sh_config(Configure.python_config_file)
-#    else:
-#        Configure.write_py_config()
-#        Configure.write_sh_config(Configure.python_config_file)
-
-
 def main():
-    #check_config()
     Harbinger.start()
 
 
