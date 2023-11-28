@@ -1,6 +1,6 @@
 import configparser
-from os import path
 import socket
+from os import path
 
 from requests import get
 
