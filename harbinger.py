@@ -6,7 +6,9 @@ import discord
 from discord.ext import commands
 
 
-def reveal(b64data):
+def reveal(
+    b64data,
+):  # This might be better placed in config/configure.py, then just call it as needed?
     base64_data = b64data
     base64_data_bytes = base64_data.encode("ascii")
     data_bytes = base64.b64decode(base64_data_bytes)
