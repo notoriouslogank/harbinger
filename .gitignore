@@ -55,6 +55,6 @@ venv.bak/
 # Other
 discord.log
 .vscode
-.configwriter.py
 config/start.config
 config/config.ini
+config/config.ini.bak

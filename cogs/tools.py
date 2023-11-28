@@ -19,7 +19,8 @@ class Tools(commands.Cog):
         """Let Me Google That For You"""
         cmd = f"!lmgtfy({query})"
         google = "https://google.com/search?q="
-        search = google + query
+        sanitized_query = query.replace(" ", "+")
+        search = google + sanitized_query
         cmd_msg = f"URL: {search}"
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.channel.purge(limit=1)
@@ -53,7 +54,7 @@ class Tools(commands.Cog):
         await ctx.send(f"{total}")
 
     @commands.command()
-    async def roll(self, ctx: commands.Context, dice: str):
+    async def roll(self, ctx: commands.Context, dice: str) -> None:
         """Roll NdN dice and get results."""
         cmd = f"!roll({dice})"
         try:
@@ -100,3 +101,4 @@ class Tools(commands.Cog):
 async def setup(bot):
     """Load cogs into bot."""
     await bot.add_cog(Tools(bot))
+
