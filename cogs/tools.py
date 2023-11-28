@@ -101,3 +101,4 @@ class Tools(commands.Cog):
 async def setup(bot):
     """Load cogs into bot."""
     await bot.add_cog(Tools(bot))
+
