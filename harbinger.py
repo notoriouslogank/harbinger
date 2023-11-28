@@ -1,19 +1,10 @@
-import base64
 from configparser import ConfigParser
 from datetime import datetime
 
 import discord
 from discord.ext import commands
 
-
-def reveal(
-    b64data,
-):  # This might be better placed in config/configure.py, then just call it as needed?
-    base64_data = b64data
-    base64_data_bytes = base64_data.encode("ascii")
-    data_bytes = base64.b64decode(base64_data_bytes)
-    data = data_bytes.decode("ascii")
-    return data
+from config.configure import Configure
 
 
 class Harbinger:
@@ -22,9 +13,9 @@ class Harbinger:
     config_path = "config/config.ini"
     config = ConfigParser()
     config.read(config_path)
-    server_dir = reveal(config["Server"]["server_dir"])
-    startup_script = reveal(config["Server"]["startup_script"])
-    server_public_ip = reveal(config["Server"]["server_public_ip"])
+    server_dir = Configure.reveal(config["Server"]["server_dir"])
+    startup_script = Configure.reveal(config["Server"]["startup_script"])
+    server_public_ip = Configure.reveal(config["Server"]["server_public_ip"])
     rgb = config["Custom Color"]["rgb"]
     r, g, b = map(int, rgb.split())
     custom_color = discord.Color.from_rgb(int(r), int(g), int(b))
@@ -69,7 +60,7 @@ class Harbinger:
         """Start the bot."""
         config = ConfigParser()
         config.read(Harbinger.config_path)
-        token = reveal(config["Bot"]["token"])
+        token = Configure.reveal(config["Bot"]["token"])
         bot.run(token)
 
     async def send_dm(ctx, member: discord.Member, *, content) -> None:
