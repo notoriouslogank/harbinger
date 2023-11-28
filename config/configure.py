@@ -95,5 +95,3 @@ class Configure:
         with open(f"{Configure.config_path}{Configure.shell_config_file}", "w") as conf:
             conf.write(text)
 
-
-Configure.write_py_config()
