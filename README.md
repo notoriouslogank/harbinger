@@ -56,6 +56,7 @@ By default, the configuration files for Harbinger are located in /config/:
 - start.conf: configures paths necessary to auto-start the Minecraft server (as well as multiplex the terminal)
 
 To ensure you have the configuration files created properly, it is recommended to run:
+
 ```bash
 python3 config/configure.py
 ```
@@ -64,7 +65,7 @@ This will walk you step-by-step through writing your config.ini file; advanced u
 
 ## Usage
 
-Eventually, the goal is to have startup scripts for multiple operating systems.  At the time of this writing, however (v2.2.0), only a Linux startup script exists.  
+Eventually, the goal is to have startup scripts for multiple operating systems.  At the time of this writing, however (v2.1.0), only a Linux startup script exists.  
 
 To launch via the Linux startup script (launches both Harbinger as well as the Minecraft server in a multiplexed terminal):
 
