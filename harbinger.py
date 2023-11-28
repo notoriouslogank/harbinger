@@ -1,11 +1,19 @@
-import os
+import base64
 from configparser import ConfigParser
 from datetime import datetime
 
 import discord
 from discord.ext import commands
 
-from config.configure import Configure
+
+def reveal(
+    b64data,
+):  # This might be better placed in config/configure.py, then just call it as needed?
+    base64_data = b64data
+    base64_data_bytes = base64_data.encode("ascii")
+    data_bytes = base64.b64decode(base64_data_bytes)
+    data = data_bytes.decode("ascii")
+    return data
 
 
 class Harbinger:
@@ -14,13 +22,12 @@ class Harbinger:
     config_path = "config/config.ini"
     config = ConfigParser()
     config.read(config_path)
-    server_dir = config["Server"]["server_dir"]
-    startup_script = config["Server"]["startup_script"]
-    server_public_ip = config["Server"]["server_public_ip"]
+    server_dir = reveal(config["Server"]["server_dir"])
+    startup_script = reveal(config["Server"]["startup_script"])
+    server_public_ip = reveal(config["Server"]["server_public_ip"])
     rgb = config["Custom Color"]["rgb"]
     r, g, b = map(int, rgb.split())
     custom_color = discord.Color.from_rgb(int(r), int(g), int(b))
-
     cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools", "cogs.minecraft"
     start_time = datetime.now()
 
@@ -62,7 +69,7 @@ class Harbinger:
         """Start the bot."""
         config = ConfigParser()
         config.read(Harbinger.config_path)
-        token = config["Bot"]["token"]
+        token = reveal(config["Bot"]["token"])
         bot.run(token)
 
     async def send_dm(ctx, member: discord.Member, *, content) -> None:
@@ -75,22 +82,7 @@ bot = Harbinger.bot
 cogs = Harbinger.cogs
 
 
-def check_config():
-    if os.path.exists("config/config.ini"):
-        print("Config file found.")
-    else:
-        print("No config file found.")
-#        if os.path.exists("config/start.conf"):
-#            pass
-#        else:
-#            Configure.write_sh_config(Configure.python_config_file)
-#    else:
-#        Configure.write_py_config()
-#        Configure.write_sh_config(Configure.python_config_file)
-
-
 def main():
-    #check_config()
     Harbinger.start()
 
 

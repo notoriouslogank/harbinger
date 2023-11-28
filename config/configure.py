@@ -1,6 +1,7 @@
+import base64
 import configparser
-from os import path
 import socket
+from os import path
 
 from requests import get
 
@@ -10,8 +11,15 @@ class Configure:
     python_config_file = "config.ini"
     shell_config_file = "start.conf"
 
+    def obscure(data):
+        data_bytes = data.encode("ascii")
+        base64_data_bytes = base64.b64encode(data_bytes)
+        base64_data = base64_data_bytes.decode("ascii")
+        return base64_data
+
     def get_token():
         token = input("Discord API Token: ")
+        print(token)
         return token
 
     def get_channel_id():
@@ -54,15 +62,15 @@ class Configure:
     def write_py_config() -> str:
         config = configparser.ConfigParser()
         config["Bot"] = {
-            "token": f"{Configure.get_token()}",
-            "channel": f"{Configure.get_channel_id()}",
+            "token": f"{Configure.obscure(Configure.get_token())}",
+            "channel": f"{Configure.obscure(Configure.get_channel_id())}",
         }
         config["Custom Color"] = {"rgb": f"{Configure.get_custom_color()}"}
         config["Server"] = {
-            "server_dir": f"{Configure.get_server_dir()}",
-            "startup_script": f"{Configure.get_startup_script()}",
-            "server_local_ip": f"{Configure.get_local_ip()}",
-            "server_public_ip": f"{Configure.get_public_ip()}",
+            "server_dir": f"{Configure.obscure(Configure.get_server_dir())}",
+            "startup_script": f"{Configure.obscure(Configure.get_startup_script())}",
+            "server_local_ip": f"{Configure.obscure(Configure.get_local_ip())}",
+            "server_public_ip": f"{Configure.obscure(Configure.get_public_ip())}",
         }
 
         with open(
@@ -79,3 +87,6 @@ class Configure:
 
         with open(f"{Configure.config_path}{Configure.shell_config_file}", "w") as conf:
             conf.write(text)
+
+
+Configure.write_py_config()

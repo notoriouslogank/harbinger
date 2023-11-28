@@ -58,3 +58,6 @@ discord.log
 config/start.config
 config/config.ini
 config/config.ini.bak
+__pycache__
+test.py
+.config.ini
