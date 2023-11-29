@@ -85,9 +85,9 @@ class Moderation(commands.Cog):
         for word in message:
             string_message = string_message + str(word) + " "
         content = string_message.strip()
-        Harbinger.timestamp(ctx.author, cmd, cmd_msg)
         await ctx.channel.purge(limit=1)
         cmd_msg = f"Harbinger says: {content}"
+        Harbinger.timestamp(ctx.author, cmd, cmd_msg)
         await ctx.send(f"{content}")
 
     @commands.command()
