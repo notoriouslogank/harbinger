@@ -7,7 +7,6 @@ from random import randint
 import discord
 from discord.ext import commands
 
-from config.configure import Configure
 from harbinger import Harbinger
 
 playing = [
@@ -23,7 +22,7 @@ playing = [
     "grab ass with your mom",
     "knifey-stabby",
     "Find the Open Network Port",
-    "dead"
+    "dead",
 ]
 listening = [
     "the screams of my enemies",
