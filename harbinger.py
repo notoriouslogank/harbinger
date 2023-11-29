@@ -21,7 +21,7 @@ class Harbinger:
     rgb = config["Custom Color"]["rgb"]
     r, g, b = map(int, rgb.split())
     custom_color = discord.Color.from_rgb(int(r), int(g), int(b))
-    cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools", "cogs.minecraft"
+    cogs = "cogs.moderation", "cogs.status", "cogs.help", "cogs.tools", "cogs.minecraft", "cogs.music"
     start_time = datetime.now()
 
     intents = discord.Intents.default()

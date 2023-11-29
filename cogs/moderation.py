@@ -54,7 +54,8 @@ class Moderation(commands.Cog):
         playing_embed.add_field(name=f"{field}", value=f"{value}")
         await ctx.send(embed=playing_embed)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-        
+
+
 async def setup(bot):
     """Load cogs into bot."""
     await bot.add_cog(Moderation(bot))
