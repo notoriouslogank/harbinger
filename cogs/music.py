@@ -92,18 +92,18 @@ class Music(commands.Cog):
             )
         await ctx.send(f"Now playing: {player.title}")
 
-    #@commands.command()
-    #async def stream(self, ctx, *, url):
-    #    async with ctx.typing():
-    #        player = await YTDLSource.from_url(url, loop=self.bot.loop, stream=True)
-    #        ctx.voice_client.play(
-    #            player, after=lambda e: print(f"Player error: {e}") if e else None
-    #        )
-    #    await ctx.send(f"Now playing: {player.title}")
+    @commands.command()
+    async def stream(self, ctx, *, url):
+        async with ctx.typing():
+            player = await YTDLSource.from_url(url, loop=self.bot.loop, stream=True)
+            ctx.voice_client.play(
+                player, after=lambda e: print(f"Player error: {e}") if e else None
+            )
+        await ctx.send(f"Now playing: {player.title}")
 
     #@play.before_invoke
     @yt.before_invoke
-    #@stream.before_invoke
+    @stream.before_invoke
     async def ensure_voice(self, ctx):
         if ctx.voice_client is None:
             if ctx.author.voice:
