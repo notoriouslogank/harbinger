@@ -10,9 +10,35 @@ from config.configure import Configure
 from harbinger import Harbinger
 from random import randint
 
-playing = ["with myself", "the synth"]
-listening = ["the screams of my enemies", "your phonecalls"]
-watching = ["you sleep", "my mouth"]
+playing = [
+    "with myself",
+    "the synth",
+    "bass",
+    "with fire",
+    "with my food",
+    "games with your heart",
+    "God",
+    "Half Life 3",
+    "Notepad",
+    "grab ass with your mom",
+]
+listening = [
+    "the screams of my enemies",
+    "your phonecalls",
+    "the voices",
+    "complaints",
+    "the national anthem",
+]
+watching = [
+    "you sleep",
+    "my mouth",
+    "the world burn",
+    "you",
+    "Star Trek probably",
+    "the horror unfold",
+    "you ",
+    "it all come crashing down",
+]
 
 Watching = discord.Activity(
     type=discord.ActivityType.watching,
