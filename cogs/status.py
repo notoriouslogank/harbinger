@@ -2,10 +2,11 @@ import smtplib
 import sys
 from datetime import datetime
 from email.message import EmailMessage
+
 import discord
 from discord.ext import commands
-from config.configure import Configure
 
+from config.configure import Configure
 from harbinger import Harbinger
 
 
@@ -18,6 +19,7 @@ class Status(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self) -> None:
         """Confirm bot is logged in."""
+        await self.bot.change_presence(activity=discord.Game('with myself.'))
         Harbinger.timestamp("BOT", "INITIALIZE", "BOT IS ONLINE")
 
     @commands.command()
@@ -80,6 +82,7 @@ class Status(commands.Cog):
 
     @commands.command()
     async def bug(self, ctx: commands.Context, message) -> None:
+        
         cmd = "!bug"
         cmd_msg = f"Sent bug report."
         email_address = Harbinger.email_address
