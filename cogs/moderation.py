@@ -56,7 +56,7 @@ class Moderation(commands.Cog):
                 color=member.color,
             )
             members_embed.add_field(name="Member Since: ", value=f"{member.joined_at}")
-            members_embed.set_footer(text=" ", icon_url=f"{member.avatar.url}")
+            members_embed.set_footer(text=" ", icon_url=f"{member.display_avatar}")
             await ctx.send(embed=members_embed)
             # await ctx.send(
             #    "Name : {}\t Status : {}\n Joined at {}".format(
