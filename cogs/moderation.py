@@ -32,7 +32,7 @@ class Moderation(commands.Cog):
         #        region = str(ctx.guild.region)
         guild_id = str(ctx.guild.id)
         member_count = str(ctx.guild.member_count)
-        #icon = str(ctx.guild.icon_url)
+        # icon = str(ctx.guild.icon_url)
         desc = ctx.guild.description
 
         embed = discord.Embed(
@@ -40,7 +40,7 @@ class Moderation(commands.Cog):
             description=desc,
             color=Harbinger.custom_color,
         )
-        #embed.set_thumbnail(url=icon)
+        # embed.set_thumbnail(url=icon)
         embed.add_field(name="Owner", value=owner, inline=True)
         embed.add_field(name="Server ID", value=guild_id, inline=True)
         #        embed.add_field(name="Region", value=region, inline=True)
@@ -50,11 +50,17 @@ class Moderation(commands.Cog):
 
         members = []
         async for member in ctx.guild.fetch_members(limit=150):
-            await ctx.send(
-                "Name : {}\t Status : {}\n Joined at {}".format(
-                    member.display_name, str(member.status), str(member.joined_at)
-                )
+            members_embed = discord.Embed(
+                title=f"{member.display_name}", description=f"Status: {member.status}"
             )
+            members_embed.add_field(name="Member Since: ", value=f"{member.joined_at}")
+            members_embed.set_footer(icon_url=member.avatar)
+            await ctx.send(embed=members_embed)
+            # await ctx.send(
+            #    "Name : {}\t Status : {}\n Joined at {}".format(
+            #        member.display_name, str(member.status), str(member.joined_at)
+            #    )
+            # )
 
     @commands.command()
     async def joined(self, ctx: commands.Context, member: discord.Member) -> None:
