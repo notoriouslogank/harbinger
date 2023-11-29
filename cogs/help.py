@@ -37,7 +37,7 @@ class HelpCommand(commands.Cog):
                 inline=True,
             )
             # STATUS
-            help_embed.add_fied(
+            help_embed.add_field(
                 name="!bug",
                 value="Send bug report to bot development team.",
                 inline=True,
@@ -77,6 +77,26 @@ class HelpCommand(commands.Cog):
                 value="Send a command to the Minecraft server.",
                 inline=True,
             )
+            # MUSIC
+            help_embed.add_field(
+                name="!join",
+                value="Join bot to current voice channel",
+                inline=True,
+            )
+            help_embed.add_field(
+                name="!leave",
+                value="Remove the bot from the current voice channel.",
+                inline=True,
+            )
+            help_embed.add_field(
+                name="!pause", value="Pause the currently-playing song.", inline=True
+            )
+            help_embed.add_field(
+                name="!play", value="Resume playback after pausing.", inline=True
+            )
+            help_embed.add_field(
+                name="!stream", value="Start audio stream from URL.", inline=True
+            )
             # OTHER
             help_embed.add_field(
                 name="Need Help?",
@@ -106,6 +126,44 @@ class HelpCommand(commands.Cog):
                 inline=True,
             )
             await ctx.send(embed=usage_embed)
+        elif command == "join":
+            usage_embed = discord.Embed(
+                title="join", description="Join the bot to current voice channel."
+            )
+            usage_embed.add_field(name="Usage", value="!join", inline=False)
+            await ctx.send(embed=usage_embed)
+        elif command == "leave":
+            usage_embed = discord.Embed(
+                title="leave", description="Remove bot from current voice channel."
+            )
+            usage_embed.add_field(name="Usage", value="!leave", inline=False)
+            await ctx.send(embed=usage_embed)
+        elif command == "pause":
+            usage_embed = discord.Embed(
+                title="pause", description="Pause the currently-playing track."
+            )
+            usage_embed.add_field(name="Usage", value="!pause", inline=False)
+            await ctx.send(embed=usage_embed)
+        elif command == "play":
+            usage_embed = discord.Embed(
+                title="play", description="Resume playback of paused track."
+            )
+            usage_embed.add_field(name="Usage", value="!play", inline=False)
+            await ctx.send(embed=usage_embed)
+        elif command == "stream":
+            usage_embed = discord.Embed(
+                title="stream", description="Begin playback of track."
+            )
+            usage_embed.add_field(name="Usage", value="!stream <URL>", inline=False)
+            usage_embed.add_field(
+                name="<URL: str>",
+                value="URL of track to be played.",
+                inline=True,
+            )
+            usage_embed.set_footer(
+                text="Note: While URLs from many websites may function as expected, only YouTube URLs are officially supported at this time."
+            )
+            await ctx.send(embed=usage_embed)
         elif command == "bug":
             usage_embed = discord.Embed(
                 title="bug", description="Send bot developer(s) a bug report."
@@ -116,6 +174,7 @@ class HelpCommand(commands.Cog):
                 value="Bug report message to be sent to bot development team.",
                 inline=True,
             )
+            await ctx.send(embed=usage_embed)
         elif command == "joined":
             usage_embed = discord.Embed(
                 title="joined", description="Get the datetime a given member joined."
