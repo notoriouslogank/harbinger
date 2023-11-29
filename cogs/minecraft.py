@@ -1,7 +1,9 @@
+import subprocess
+
 import discord
 from discord.ext import commands
+
 from harbinger import Harbinger
-import subprocess
 
 bot = Harbinger.bot
 custom_color = Harbinger.custom_color
