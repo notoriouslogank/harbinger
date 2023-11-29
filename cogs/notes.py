@@ -27,9 +27,10 @@ class Notes(commands.Cog):
         await ctx.send(f"```{all_notes}```")
 
     @commands.command()
-    async def cnote(self, ctx: commands.Context, *content):
-        # Clear notes
-        pass
+    async def cnote(self, ctx: commands.Context):
+        clear_message = " "
+        with open(f"user_notes/{ctx.message.author.display_name}.txt", "w") as n:
+            n.write(clear_message)
 
 
 async def setup(bot):
