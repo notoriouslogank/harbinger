@@ -78,13 +78,17 @@ class Moderation(commands.Cog):
         await ctx.send(embed=whois_embed)
 
     @commands.command()
-    async def say(self, ctx: commands.Context, message: str) -> None:
+    async def say(self, ctx: commands.Context, *message: str) -> None:
         """Say message as bot."""
         cmd = f"!say({message})"
         cmd_msg = f"Harbinger says: {message}"
+        string_message = ""
+        for word in message:
+            string_message = string_message + str(word) + " "
+        content = string_message.strip()
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
         await ctx.channel.purge(limit=1)
-        await ctx.send(f"{message}")
+        await ctx.send(f"{content}")
 
     @commands.command()
     async def playing(
