@@ -7,34 +7,84 @@ from requests import get
 
 
 class Configure:
+    """Class containing methods to create config.ini and start.conf."""
+
     config_path = "config/"
     python_config_file = "config.ini"
     shell_config_file = "start.conf"
 
-    def obscure(data):
+    def obscure(data) -> bytes:
+        """Take user input and return base64-encoded string.
+
+        Args:
+            data (str): Data to encode as base64
+
+        Returns:
+            bytes: Base64-encoded data
+        """
         data_bytes = data.encode("ascii")
         base64_data_bytes = base64.b64encode(data_bytes)
         base64_data = base64_data_bytes.decode("ascii")
         return base64_data
 
-    def get_token():
+    def reveal(b64data) -> str:
+        """Decode base64-encoded data.
+
+        Args:
+            b64data (bytes): Base64-encoded data to decode.
+
+        Returns:
+            str: Decoded string.
+        """
+        base64_data = b64data
+        base64_data_bytes = base64_data.encode("ascii")
+        data_bytes = base64.b64decode(base64_data_bytes)
+        data = data_bytes.decode("ascii")
+        return data
+
+    def get_token() -> str:
+        """Prompt user for API token.
+
+        Returns:
+            str: Discord API token
+        """
         token = input("Discord API Token: ")
         print(token)
         return token
 
-    def get_channel_id():
+    def get_channel_id() -> int:
+        """Prompt user for Channel ID.
+
+        Returns:
+            int: Channel ID
+        """
         channel = input("Channel ID: ")
         return channel
 
-    def get_server_dir():
+    def get_server_dir() -> str:
+        """Prompt user for directory to Minecraft server.
+
+        Returns:
+            str: Path to Minecraft server
+        """
         server_dir = input("Directory of server: ")
         return server_dir
 
-    def get_startup_script():
+    def get_startup_script() -> str:
+        """Prompt user for path to Minecraft server startup script.
+
+        Returns:
+            str: Path to Minecraft server startup script
+        """
         startup_script = input("Path to startup script: ")
         return startup_script
 
-    def get_custom_color():
+    def get_custom_color() -> str:
+        """Prompt user for custom color as RGB values.
+
+        Returns:
+            str: R G B value(s)
+        """
         rgb = input("RGB (000 000 000): ")
         return rgb
 
@@ -59,8 +109,21 @@ class Configure:
         ip = get("https://api.ipify.org").content.decode("utf8")
         return ip
 
-    def write_py_config() -> str:
+    def get_email():
+        email_address = input("Email address: ")
+        return email_address
+
+    def get_email_pass():
+        email_pass = input("Password: ")
+        return email_pass
+
+    def write_py_config() -> None:
+        """Create config.ini."""
         config = configparser.ConfigParser()
+        config["Email"] = {
+            "address": f"{Configure.obscure(Configure.get_email())}",
+            "password": f"{Configure.obscure(Configure.get_email_pass())}",
+        }
         config["Bot"] = {
             "token": f"{Configure.obscure(Configure.get_token())}",
             "channel": f"{Configure.obscure(Configure.get_channel_id())}",
@@ -78,15 +141,19 @@ class Configure:
         ) as configfile:
             config.write(configfile)
 
-    def write_sh_config(configfile):
+    def write_sh_config(configfile) -> None:
+        """Create start.conf configuration file.
+
+        Args:
+            configfile (str): Path to config.ini
+        """
         config = configparser.ConfigParser()
         config.read(configfile)
-        server_dir = config["Server"]["server_dir"]
-        startup_script = config["Server"]["startup_script"]
+        server_dir = Configure.reveal(config["Server"]["server_dir"])
+        startup_script = Configure.reveal(config["Server"]["startup_script"])
         text = f"#!/bin/bash\nServerDir={server_dir}\nStartupScript={startup_script}\n"
 
         with open(f"{Configure.config_path}{Configure.shell_config_file}", "w") as conf:
             conf.write(text)
-
 
 Configure.write_py_config()
