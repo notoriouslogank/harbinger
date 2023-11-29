@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.1] - 2023-29-11
+
+### Added
+
+- Help messages for all music commands
+- Various music playback commands (join, leave, stream, play, pause)
+
+### Fixed
+
+- Some help embeds not sending as expected
+
+### Deprecated
+
+- yt() commmand has been replaced with stream() command to avoid confusion regarding which URLs may be played
+
 ## [2.2.0] - 2023-28-11
 
 ### Added
