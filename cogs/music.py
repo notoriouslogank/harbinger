@@ -29,6 +29,12 @@ ytdl = yt_dlp.YoutubeDL(ytdl_format_options)
 
 
 class YTDLSource(discord.PCMVolumeTransformer):
+    """Class to configure FFMpeg and yt-dlp to interact with commands.
+
+    Args:
+        discord (obj): discord.PCMVolumeTransformer
+    """
+
     def __init__(self, source, *, data, volume=0.5):
         super().__init__(source, volume)
         self.data = data
@@ -37,6 +43,16 @@ class YTDLSource(discord.PCMVolumeTransformer):
 
     @classmethod
     async def from_url(cls, url, *, loop=None, stream=False):
+        """Download or stream data from provided URL.
+
+        Args:
+            url (str): URL to be downloaded
+            loop (optional): Defaults to None.
+            stream (bool, optional): Whether to download or stream the data. Defaults to False.
+
+        Returns:
+            cls: An FFmpeg object?
+        """
         loop = loop or asyncio.get_event_loop()
         data = await loop.run_in_executor(
             None, lambda: ytdl.extract_info(url, download=not stream)
@@ -50,11 +66,14 @@ class YTDLSource(discord.PCMVolumeTransformer):
 
 
 class Music(commands.Cog):
+    """A class of commands for streaming music via the bot in the voice channel."""
+
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command()
     async def join(self, ctx) -> None:
+        """Join the bot to the contextual voice channel."""
         cmd = "!join"
         cmd_msg = f"Added bot to voice channel."
         channel = ctx.message.author.voice.channel
@@ -63,6 +82,7 @@ class Music(commands.Cog):
 
     @commands.command()
     async def leave(self, ctx) -> None:
+        """Leave the voice channel."""
         cmd = "!leave"
         voice_client = ctx.message.guild.voice_client
         if voice_client.is_connected():
@@ -76,6 +96,7 @@ class Music(commands.Cog):
 
     @commands.command()
     async def pause(self, ctx) -> None:
+        """Pause the currently-playing song/video."""
         cmd = "!pause"
         cmd_msg = "Paused playback."
         voice_client = ctx.message.guild.voice_client
@@ -84,6 +105,7 @@ class Music(commands.Cog):
 
     @commands.command()
     async def play(self, ctx) -> None:
+        """Resume playback of a previously-paused video/song."""
         cmd = "!play"
         voice_client = ctx.message.guild.voice_client
         if voice_client.is_paused():
@@ -106,6 +128,11 @@ class Music(commands.Cog):
 
     @commands.command()
     async def stream(self, ctx, *, url) -> None:
+        """Stream, rather than download and playback, a given URL.
+
+        Args:
+            url (str): The URL to be streamed to the voice channel.
+        """
         cmd = "!stream"
         async with ctx.typing():
             player = await YTDLSource.from_url(url, loop=self.bot.loop, stream=True)
@@ -119,12 +146,17 @@ class Music(commands.Cog):
     # @yt.before_invoke
     @stream.before_invoke
     async def ensure_voice(self, ctx) -> None:
+        """Ensure that the ctx.message.author is actively in a voice channel.
+
+        Raises:
+            commands.CommandError: Raises when the command is invoked by someone not in a voice channel.
+        """
         if ctx.voice_client is None:
             if ctx.author.voice:
                 await ctx.author.voice.channel.connect()
             else:
-                await ctx.send("Not connected to a voice channel.")
-                raise commands.CommandError("Auuthor not connected to a voice channel.")
+                await ctx.send("You must be connected to a voice channel.")
+                raise commands.CommandError("Author not connected to a voice channel.")
         elif ctx.voice_client.is_playing():
             ctx.voice_client.stop()
 
