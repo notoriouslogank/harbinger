@@ -123,7 +123,7 @@ class Eightball(commands.Cog):
         string_question = ""
         print(question)
         for word in question:
-            string_question = string_question + word
+            string_question = string_question + " " + word
             print(string_question)
         if string_question.endswith("?"):
             cmd_msg = f"{ctx.message.author} asked {string_question}."
