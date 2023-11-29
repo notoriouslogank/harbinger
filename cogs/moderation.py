@@ -81,13 +81,13 @@ class Moderation(commands.Cog):
     async def say(self, ctx: commands.Context, *message: str) -> None:
         """Say message as bot."""
         cmd = f"!say({message})"
-        cmd_msg = f"Harbinger says: {message}"
         string_message = ""
         for word in message:
             string_message = string_message + str(word) + " "
         content = string_message.strip()
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
         await ctx.channel.purge(limit=1)
+        cmd_msg = f"Harbinger says: {content}"
         await ctx.send(f"{content}")
 
     @commands.command()
