@@ -16,11 +16,13 @@ playing = [
     "bass",
     "with fire",
     "with my food",
-    "games with your heart",
+    "games with my heart",
     "God",
     "Half Life 3",
     "Notepad",
     "grab ass with your mom",
+    "knifey-stabby",
+    "Find the Open Network Port",
 ]
 listening = [
     "the screams of my enemies",
@@ -28,6 +30,8 @@ listening = [
     "the voices",
     "complaints",
     "the national anthem",
+    "some guy bloody ramble",
+    "that new Olivia Rodrigo jam",
 ]
 watching = [
     "you sleep",
@@ -36,8 +40,12 @@ watching = [
     "you",
     "Star Trek probably",
     "the horror unfold",
-    "you ",
+    "you",
     "it all come crashing down",
+    "from within the walls of your home",
+    "in abject terror",
+    "from the shadows",
+    "your Internet traffic",
 ]
 
 Watching = discord.Activity(
