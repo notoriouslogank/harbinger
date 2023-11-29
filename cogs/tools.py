@@ -15,7 +15,7 @@ class Tools(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def lmgtfy(self, ctx: commands.Context, query: str) -> None:
+    async def lmgtfy(self, ctx: commands.Context, *query: str) -> None:
         """Let Me Google That For You"""
         cmd = f"!lmgtfy({query})"
         google = "https://google.com/search?q="
