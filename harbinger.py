@@ -29,6 +29,7 @@ class Harbinger:
         "cogs.minecraft",
         "cogs.music",
         "cogs.8ball",
+        "cogs.notes"
     )
     start_time = datetime.now()
 
