@@ -118,7 +118,7 @@ class Eightball(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def ask(self, ctx: commands.Context, question: str):
+    async def ask(self, ctx: commands.Context, *question: str):
         cmd = "!ask"
         if question.endswith("?"):
             cmd_msg = f"{ctx.message.author} asked {question}."
