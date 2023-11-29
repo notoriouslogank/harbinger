@@ -62,7 +62,8 @@ class Moderation(commands.Cog):
         whois_embed = discord.Embed(title=f'{member.display_name}', description=f"{member.status}", color=member.color)
         whois_embed.add_field(name="Roles:", value=f'{member.roles}')
         whois_embed.add_field(name="Joined:", value=f'{member.joined_at}', inline=True)
-        whois_embed.set_thumbnail(url=member.display_avatar.url)
+        whois_embed.set_image(url=member.display_avatar.url)
+        #whois_embed.set_thumbnail(url=member.display_avatar.url)
         await ctx.send(embed=whois_embed)
         
     #@commands.command()  # Deprecated
