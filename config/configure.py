@@ -109,9 +109,21 @@ class Configure:
         ip = get("https://api.ipify.org").content.decode("utf8")
         return ip
 
+    def get_email():
+        email_address = input("Email address: ")
+        return email_address
+
+    def get_email_pass():
+        email_pass = input("Password: ")
+        return email_pass
+
     def write_py_config() -> None:
         """Create config.ini."""
         config = configparser.ConfigParser()
+        config["Email"] = {
+            "address": f"{Configure.obscure(Configure.get_email())}",
+            "password": f"{Configure.obscure(Configure.get_email_pass())}",
+        }
         config["Bot"] = {
             "token": f"{Configure.obscure(Configure.get_token())}",
             "channel": f"{Configure.obscure(Configure.get_channel_id())}",

@@ -13,6 +13,8 @@ class Harbinger:
     config_path = "config/config.ini"
     config = ConfigParser()
     config.read(config_path)
+    email_address = Configure.reveal(config["Email"]["address"])
+    email_pass = Configure.reveal(config["Email"]["password"])
     server_dir = Configure.reveal(config["Server"]["server_dir"])
     startup_script = Configure.reveal(config["Server"]["startup_script"])
     server_public_ip = Configure.reveal(config["Server"]["server_public_ip"])

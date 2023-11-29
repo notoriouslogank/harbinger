@@ -1,8 +1,11 @@
 import sys
 from datetime import datetime
-
+import smtplib
+import codecs
+from email.message import EmailMessage
 import discord
 from discord.ext import commands
+from config.configure import Configure 
 
 from harbinger import Harbinger
 
@@ -77,6 +80,24 @@ class Status(commands.Cog):
         file = discord.File(fp="docs/CHANGELOG.md", filename="CHANGELOG.md")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(file=file)
+        
+    @commands.command()
+    async def bug(self, ctx: commands.Context, message) -> None:
+        cmd = "!bug"
+        cmd_msg = f"Sent bug report."
+        email_address = Harbinger.email_address
+        password = Harbinger.email_pass
+        email = EmailMessage()
+        email["from"] = "Harbinger"
+        email["to"] = email_address
+        email.set_content(message)
+        with smtplib.SMTP(host="smtp.gmail.com", port=587) as smtp:
+            smtp.ehlo()
+            smtp.starttls()
+            smtp.login(email_address, password)
+            smtp.send_message(email)
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        await ctx.send("Bug report sent!")
 
     @commands.command()
     async def shutdown(self, ctx: commands.Context) -> None:
