@@ -23,6 +23,7 @@ playing = [
     "grab ass with your mom",
     "knifey-stabby",
     "Find the Open Network Port",
+    "dead"
 ]
 listening = [
     "the screams of my enemies",
