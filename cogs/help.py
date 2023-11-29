@@ -37,7 +37,11 @@ class HelpCommand(commands.Cog):
                 inline=True,
             )
             # STATUS
-            help_embed.add_fied(name="!bug", value="Send bug report to bot development team.", inline=True)
+            help_embed.add_fied(
+                name="!bug",
+                value="Send bug report to bot development team.",
+                inline=True,
+            )
             help_embed.add_field(
                 name="!status", value="Confirm bot online and reachable.", inline=True
             )
@@ -107,7 +111,11 @@ class HelpCommand(commands.Cog):
                 title="bug", description="Send bot developer(s) a bug report."
             )
             usage_embed.add_field(name="Usage:", value="!bug <message>", inline=False)
-            usage_embed.add_field(name="<message: str>", value="Bug report message to be sent to bot development team.", inline=True)
+            usage_embed.add_field(
+                name="<message: str>",
+                value="Bug report message to be sent to bot development team.",
+                inline=True,
+            )
         elif command == "joined":
             usage_embed = discord.Embed(
                 title="joined", description="Get the datetime a given member joined."
