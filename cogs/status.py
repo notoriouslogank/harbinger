@@ -16,7 +16,7 @@ watching = ["you sleep", "my mouth"]
 
 Watching = discord.Activity(type=discord.ActivityType.watching, name=f'{watching[randint(0, (len(watching)-1))]}')
 Playing = discord.Game(playing[randint(0, (len(playing)-1))])
-Listening = discord.Activity(type=discord.ActivityType.listening, name=f'{listening(randint(0, (len(listening)-1)))}')
+Listening = discord.Activity(type=discord.ActivityType.listening, name=f'{listening[randint(0, (len(listening)-1))]}')
 
 presences = [Watching, Playing, Listening]
 
