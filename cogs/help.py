@@ -77,6 +77,26 @@ class HelpCommand(commands.Cog):
                 value="Send a command to the Minecraft server.",
                 inline=True,
             )
+            # MUSIC
+            help_embed.add_field(
+                name="!join",
+                value="Join bot to current voice channel",
+                inline=True,
+            )
+            help_embed.add_field(
+                name="!leave",
+                value="Remove the bot from the current voice channel.",
+                inline=True,
+            )
+            help_embed.add_field(
+                name="!pause", value="Pause the currently-playing song.", inline=True
+            )
+            help_embed.add_field(
+                name="!play", value="Resume playback after pausing.", inline=True
+            )
+            help_embed.add_field(
+                name="!stream", value="Start audio stream from URL.", inline=True
+            )
             # OTHER
             help_embed.add_field(
                 name="Need Help?",
@@ -106,6 +126,36 @@ class HelpCommand(commands.Cog):
                 inline=True,
             )
             await ctx.send(embed=usage_embed)
+        elif command == "join":
+            usage_embed = discord.Embed(
+                title="join", description="Join the bot to current voice channel."
+            )
+            usage_embed.add_field(name="Usage", value="!join", inline=False)
+        elif command == "leave":
+            usage_embed = discord.Embed(
+                title="leave", description="Remove bot from current voice channel."
+            )
+            usage_embed.add_field(name="Usage", value="!leave", inline=False)
+        elif command == "pause":
+            usage_embed = discord.Embed(
+                title="pause", description="Pause the currently-playing track."
+            )
+            usage_embed.add_field(name="Usage", value="!pause", inline=False)
+        elif command == "play":
+            usage_embed = discord.Embed(
+                title="play", description="Resume playback of paused track."
+            )
+            usage_embed.add_field(name="Usage", value="!play", inline=False)
+        elif command == "stream":
+            usage_embed = discord.Embed(
+                title="stream", description="Begin playback of track."
+            )
+            usage_embed.add_field(name="Usage", value="!stream <URL>", inline=False)
+            usage_embed.add_field(
+                name="<URL: str>",
+                value="URL of track to be played (YouTube works; other sites may work, but are not officially supported).",
+                inline=True,
+            )
         elif command == "bug":
             usage_embed = discord.Embed(
                 title="bug", description="Send bot developer(s) a bug report."
