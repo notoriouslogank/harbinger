@@ -2,14 +2,12 @@ import smtplib
 import sys
 from datetime import datetime
 from email.message import EmailMessage
-
 from random import randint
+
 import discord
 from discord.ext import commands
 
-from config.configure import Configure
 from harbinger import Harbinger
-from random import randint
 
 playing = [
     "with myself",
