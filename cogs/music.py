@@ -50,7 +50,8 @@ class Music(commands.Cog):
         self.bot = bot
         
     @commands.command()
-    async def join(self, ctx, *, channel: discord.VoiceChannel):
+    async def join(self, ctx):
+        channel = ctx.message.author.voice.channel
         await channel.connect()
         
     @commands.command()
