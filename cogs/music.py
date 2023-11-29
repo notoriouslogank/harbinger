@@ -15,20 +15,20 @@ class Music(commands.Cog):
     @commands.command()
     async def join(self, ctx):
         channel = ctx.message.author.voice.channel
-        voice = get(commands.Bot.voice_clients, guild=ctx.guild)
+        voice = get(bot.voice_clients, guild=ctx.guild)
         if voice and voice.is_connected():
             await voice.move_to(channel)
         else:
             voice = await channel.connect()
 
-    @bot.command()
+    @commands.command()
     async def play(self, ctx, url):
         YDL_OPTIONS = {"format": "bestaudio", "noplaylist": "True"}
         FFMPEG_OPTIONS = {
             "before_options": "-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5",
             "options": "-vn",
         }
-        voice = get(commands.Bot.voice_clients, guild=ctx.guild)
+        voice = get(bot.voice_clients, guild=ctx.guild)
         if not voice.is_playing():
             with youtube_dl.YoutubeDL(YDL_OPTIONS) as ydl:
                 info = ydl.extract_info(url, download=False)
@@ -42,7 +42,7 @@ class Music(commands.Cog):
 
     @commands.command()
     async def stop(self, ctx):
-        voice = get(commands.Bot.voice_clients, guild=ctx.guild)
+        voice = get(bot.voice_clients, guild=ctx.guild)
         if voice.is_playing():
             voice.stop()
             await ctx.send("Stopping...")
