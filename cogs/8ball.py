@@ -122,7 +122,7 @@ class Eightball(commands.Cog):
         cmd = "!ask"
         string_question = ""
         for word in question:
-            string_question = str(word) + string_question
+            string_question = string_question + word
         if string_question.endswith("?"):
             cmd_msg = f"{ctx.message.author} asked {string_question}."
             response = answers[random.randint(0, (len(answers) - 1))]
