@@ -116,7 +116,7 @@ class Music(commands.Cog):
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(f"Now playing: {player.title}")
 
-    #@yt.before_invoke
+    # @yt.before_invoke
     @stream.before_invoke
     async def ensure_voice(self, ctx) -> None:
         if ctx.voice_client is None:
