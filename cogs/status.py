@@ -19,7 +19,12 @@ Playing = discord.Game(playing[randint(0, (len(playing)-1))])
 Listening = discord.Activity(type=discord.ActivityType.listening, name=f'{listening(randint(0, (len(listening)-1)))}')
 
 presences = [Watching, Playing, Listening]
-PRESENCE = presences[randint(0, (len(presences)-1))]
+
+def get_presence():
+    presence = presences[randint(0, (len(presences)-1))]
+    return presence
+    
+status = presences[randint(0, (len(presences)-1))]
 
 class Status(commands.Cog):
     """Commands to find out status of bot services."""
@@ -30,7 +35,7 @@ class Status(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self) -> None:
         """Confirm bot is logged in."""
-        await self.bot.change_presence(activity=PRESENCE)
+        await self.bot.change_presence(activity=get_presence())
         Harbinger.timestamp("BOT", "INITIALIZE", "BOT IS ONLINE")
 
     @commands.command()
