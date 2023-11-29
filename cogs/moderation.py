@@ -25,6 +25,38 @@ class Moderation(commands.Cog):
             Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
+    async def serverinfo(self, ctx: commands.Context):
+        cmd = "!serverinfo"
+        cmd_msg = "Get details about the server."
+        owner = str(ctx.guild.owner)
+        guild_id = str(ctx.guild.id)
+        member_count = str(ctx.guild.member_count)
+        # icon = str(ctx.guild.icon_url)
+        desc = ctx.guild.description
+
+        embed = discord.Embed(
+            title=ctx.guild.name + "Server Information",
+            description=desc,
+            color=Harbinger.custom_color,
+        )
+        embed.add_field(name="Owner", value=owner, inline=True)
+        embed.add_field(name="Server ID", value=guild_id, inline=True)
+        embed.add_field(name="Member Count", value=member_count, inline=True)
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        await ctx.send(embed=embed)
+
+        members = []
+        async for member in ctx.guild.fetch_members(limit=150):
+            members_embed = discord.Embed(
+                title=f"{member.display_name}",
+                description=f"Status: {member.status}",
+                color=member.color,
+            )
+            members_embed.add_field(name="Member Since: ", value=f"{member.joined_at}")
+            members_embed.set_thumbnail(url=member.display_avatar.url)
+            await ctx.send(embed=members_embed)
+
+    @commands.command()
     async def joined(self, ctx: commands.Context, member: discord.Member) -> None:
         """Get user's join datetime."""
         cmd = f"!joined({member})"

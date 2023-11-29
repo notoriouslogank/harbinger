@@ -18,7 +18,6 @@ class Minecraft(commands.Cog):
         minecraft_embed = discord.Embed(title="Minecraft", description=f"{version}")
         minecraft_embed.add_field(name="Server Address", value=f"{ip}")
         return minecraft_embed
-    
 
     @commands.command()
     async def switch(self, ctx: commands.Context, state="on"):
@@ -30,7 +29,7 @@ class Minecraft(commands.Cog):
         cmd = f"!switch({state})"
         cmd_msg = f"Switched Minecraft server {state}."
         startup_script = Harbinger.startup_script
-        embed = Minecraft.create_embed('v1.20.1')
+        embed = Minecraft.create_embed("v1.20.1")
         if state == "on":
             subprocess.run(
                 ["tmux", "send", "-t", "harbinger:0", f"zsh {startup_script}", "C-m"]
@@ -57,6 +56,7 @@ class Minecraft(commands.Cog):
         subprocess.run(["tmux", "send", "-t", "harbinger:0", f"{command}", "C-m"])
         await ctx.send(f"Sending command: {command} to server...")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+
 
 async def setup(bot):
     """Load cog into bot."""
