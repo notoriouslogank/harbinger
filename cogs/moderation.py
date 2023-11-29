@@ -53,9 +53,10 @@ class Moderation(commands.Cog):
             members_embed = discord.Embed(
                 title=f"{member.display_name}",
                 description=f"Status: {member.status}",
-                color=member.accent_color)
+                color=member.accent_color,
+            )
             members_embed.add_field(name="Member Since: ", value=f"{member.joined_at}")
-            members_embed.set_footer(text="", icon_url=f'{member.avatar}')
+            members_embed.set_footer(text=" ", icon_url=f"{member.avatar.url}")
             await ctx.send(embed=members_embed)
             # await ctx.send(
             #    "Name : {}\t Status : {}\n Joined at {}".format(
