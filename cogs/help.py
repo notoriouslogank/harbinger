@@ -37,7 +37,7 @@ class HelpCommand(commands.Cog):
                 inline=True,
             )
             # STATUS
-            help_embed.add_fied(
+            help_embed.add_field(
                 name="!bug",
                 value="Send bug report to bot development team.",
                 inline=True,
