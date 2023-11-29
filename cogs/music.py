@@ -4,7 +4,7 @@ from discord import FFmpegAudio
 import youtube_dl
 from harbinger import Harbinger
 
-#bot = Harbinger.bot
+bot = Harbinger.bot
 players = {}
 
 
@@ -15,20 +15,20 @@ class Music(commands.Cog):
     @commands.command()
     async def join(self, ctx):
         channel = ctx.message.author.voice.channel
-        voice = get(bot.voice_clients, guild=ctx.guild)
+        voice = get(self.voice_clients, guild=ctx.guild)
         if voice and voice.is_connected():
             await voice.move_to(channel)
         else:
             voice = await channel.connect()
 
-    @commands.command()
+    @bot.command()
     async def play(self, ctx, url):
         YDL_OPTIONS = {"format": "bestaudio", "noplaylist": "True"}
         FFMPEG_OPTIONS = {
             "before_options": "-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5",
             "options": "-vn",
         }
-        voice = get(bot.voice_clients, guild=ctx.guild)
+        voice = get(self.voice_clients, guild=ctx.guild)
         if not voice.is_playing():
             with youtube_dl.YoutubeDL(YDL_OPTIONS) as ydl:
                 info = ydl.extract_info(url, download=False)
