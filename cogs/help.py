@@ -12,7 +12,7 @@ class HelpCommand(commands.Cog):
 
     @commands.command()
     async def help(self, ctx, *, command=None) -> None:
-        """Return help embed with command descriptions."""
+        """Send channel an embed with help information about arbitrary commands."""
         cmd = f"!help({command})"
         cmd_msg = f"provided help: {command}"
         custom_color = Harbinger.custom_color
@@ -24,6 +24,11 @@ class HelpCommand(commands.Cog):
                 color=custom_color,
             )
             # MODERATION
+            help_embed.add_field(
+                name="!whois",
+                value="Get detailed information about a specific user.",
+                inline=True,
+            )
             help_embed.add_field(
                 name="!serverinfo", value="Get details about the server.", inline=True
             )
@@ -102,19 +107,10 @@ class HelpCommand(commands.Cog):
             )
             # OTHER
             help_embed.add_field(
-                name="Need Help?",
-                value="[Join the Bot-Dev Server](https://discord.gg/9zAW8DfV)",
-                inline=True,
-            )
-            help_embed.add_field(
                 name="Find a Problem?",
                 value="[Submit a Bug Report](https://github.com/notoriouslogank/Harbinger/issues)",
                 inline=True,
             )
-            help_embed.set_footer(
-                text=f"Requested by {ctx.author}.", icon_url=ctx.author.avatar
-            )
-
             await ctx.send(embed=help_embed)
 
         elif command == "clear":
@@ -128,6 +124,22 @@ class HelpCommand(commands.Cog):
                 name="<amount: int>",
                 value="The number of messages to be deleted.",
                 inline=True,
+            )
+            await ctx.send(embed=usage_embed)
+        elif command == "whois":
+            usage_embed = discord.Embed(
+                title="whois",
+                description="Get detailed information about given user.",
+                color=Harbinger.color,
+            )
+            usage_embed.add_field(name="Usage:", value="!whois <member>", inline=False)
+            usage_embed.add_field(
+                name="<member: discord.Member>",
+                value="The member to get info for.",
+                inline=True,
+            )
+            usage_embed.set_footer(
+                text="Note: member name must be an exact match (case sensitive)."
             )
             await ctx.send(embed=usage_embed)
         elif command == "serverinfo":
