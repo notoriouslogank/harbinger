@@ -4,7 +4,7 @@ from discord import FFmpegAudio
 import youtube_dl
 from harbinger import Harbinger
 
-bot = Harbinger.bot
+#bot = Harbinger.bot
 players = {}
 
 
