@@ -147,7 +147,7 @@ class Status(commands.Cog):
 
     @commands.command()
     async def bug(self, ctx: commands.Context, *raw_message) -> None:
-        cmd = "!bug"
+        cmd = f"!bug {raw_message}"
         cmd_msg = f"Sent bug report."
         message = ""
         for word in raw_message:
