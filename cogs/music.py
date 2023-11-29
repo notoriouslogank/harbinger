@@ -67,7 +67,7 @@ class Music(commands.Cog):
         voice_client = ctx.message.guild.voice_client
         await voice_client.pause()
         
-    @commands.comman()
+    @commands.command()
     async def resume(self, ctx):
         voice_client = ctx.message.guild.voice_client
         if voice_client.is_paused():
