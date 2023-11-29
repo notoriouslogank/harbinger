@@ -1,10 +1,7 @@
-import discord
-import os
 from discord.ext import commands
 from discord.utils import get
 from discord import FFmpegAudio
-from discord import TextChannel
-from youtube_dl import YoutubeDL
+import youtube_dl
 from harbinger import Harbinger
 
 bot = Harbinger.bot
@@ -33,7 +30,7 @@ class Music(commands.Cog):
         }
         voice = get(bot.voice_clients, guild=ctx.guild)
         if not voice.is_playing():
-            with YoutubeDL(YDL_OPTIONS) as ydl:
+            with youtube_dl.YoutubeDL(YDL_OPTIONS) as ydl:
                 info = ydl.extract_info(url, download=False)
             URL = info["url"]
             voice.play(FFmpegAudio(URL, **FFMPEG_OPTIONS))
