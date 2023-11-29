@@ -124,7 +124,7 @@ class Eightball(commands.Cog):
         for word in question:
             string_question = string_question + " " + word
         if string_question.endswith("?"):
-            cmd_msg = f"{ctx.message.author} asked {string_question}."
+            cmd_msg = f"{ctx.message.author} asked: {string_question}."
             response = answers[random.randint(0, (len(answers) - 1))]
             Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
             await ctx.send(f"{response}")
