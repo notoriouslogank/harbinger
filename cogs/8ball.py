@@ -120,10 +120,10 @@ class Eightball(commands.Cog):
     @commands.command()
     async def ask(self, ctx: commands.Context, *question: str):
         cmd = "!ask"
-        question_string = ""
+        string_question = ""
         for word in question:
-            question_string = str(word) + question_string
-        if question_string.endswith("?"):
+            string_question = str(word) + string_question
+        if string_question.endswith("?"):
             cmd_msg = f"{ctx.message.author} asked {question_string}."
             response = answers[random.randint(0, (len(answers) - 1))]
             Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
