@@ -123,7 +123,7 @@ class Eightball(commands.Cog):
         if question.endswith("?"):
             cmd_msg = f"{ctx.message.author} asked {question}."
             response = answers[random.randint(0, (len(answers) - 1))]
-            Harbinger.timestamp(ctx.message.authoor, cmd, cmd_msg)
+            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
             await ctx.send(f"{response}")
         else:
             cmd_msg = f"{ctx.message.author} did not ask a valid question: {question}."
