@@ -16,6 +16,14 @@ class Minecraft(commands.Cog):
         self.bot = bot
 
     def create_embed(version):
+        """Create an embed with the Minecraft server information.
+
+        Args:
+            version (str): The Minecraft version of the current server instance.
+
+        Returns:
+            embed: An embed object containing the Minecraft server version and IP address.
+        """
         ip = Harbinger.server_public_ip
         minecraft_embed = discord.Embed(title="Minecraft", description=f"{version}")
         minecraft_embed.add_field(name="Server Address", value=f"{ip}")
