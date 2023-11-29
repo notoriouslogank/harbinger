@@ -88,8 +88,9 @@ class Status(commands.Cog):
         email_address = Harbinger.email_address
         password = Harbinger.email_pass
         email = EmailMessage()
-        email["from"] = "Harbinger"
-        email["to"] = email_address
+        email["From"] = "Harbinger"
+        email["To"] = email_address
+        email['Subject'] = f'BUG REPORT - {ctx.message.author}'
         email.set_content(message)
         with smtplib.SMTP(host="smtp.gmail.com", port=587) as smtp:
             smtp.ehlo()
@@ -97,7 +98,7 @@ class Status(commands.Cog):
             smtp.login(email_address, password)
             smtp.send_message(email)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-        await ctx.send("Bug report sent!")
+        await ctx.send("Thank you for submitting a bug report.\nIf you'd like to keep abreast of updates/bugfixes, please check out https://github.com/notoriouslogank/harbinger")
 
     @commands.command()
     async def shutdown(self, ctx: commands.Context) -> None:
