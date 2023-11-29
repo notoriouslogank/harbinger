@@ -15,11 +15,14 @@ class Tools(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def lmgtfy(self, ctx: commands.Context, query: str) -> None:
+    async def lmgtfy(self, ctx: commands.Context, *query: str) -> None:
         """Let Me Google That For You"""
         cmd = f"!lmgtfy({query})"
         google = "https://google.com/search?q="
-        sanitized_query = query.replace(" ", "+")
+        string_query = ""
+        for word in query:
+            string_query = string_query + str(word) + " "
+        sanitized_query = string_query.replace(" ", "+")
         search = google + sanitized_query
         cmd_msg = f"URL: {search}"
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
@@ -45,10 +48,12 @@ class Tools(commands.Cog):
         await Harbinger.send_dm(ctx=ctx, member=ctx.message.author, content=define_url)
 
     @commands.command()
-    async def add(self, ctx: commands.Context, left: int, right: int) -> None:
+    async def add(self, ctx: commands.Context, *num: int) -> None:
         """Adds two integers and returns result as message."""
-        cmd = f"!add({left} {right})"
-        total = left + right
+        cmd = f"!add({num})"
+        total = 0
+        for i in num:
+            total = total + i
         cmd_msg = f"total: {total}"
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(f"{total}")
