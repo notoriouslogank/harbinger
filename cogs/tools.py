@@ -19,6 +19,7 @@ class Tools(commands.Cog):
         """Let Me Google That For You"""
         cmd = f"!lmgtfy({query})"
         google = "https://google.com/search?q="
+        string_query = ""
         for word in query:
             string_query = str(word) + string_query
         sanitized_query = string_query.replace(" ", "+")
