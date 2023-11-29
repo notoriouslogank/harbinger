@@ -15,7 +15,7 @@ class Notes(commands.Cog):
         timestamp = datetime.now()
         for word in content:
             note_content = note_content + word + " "
-        with open(f"{note_author}.txt", "a") as n:
+        with open(f"user_notes/{note_author}.txt", "a") as n:
             n.writelines(f"{timestamp}\n{note_content}\n--------------------\n")
             n.close()
 
