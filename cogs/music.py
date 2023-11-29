@@ -54,52 +54,71 @@ class Music(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def join(self, ctx):
+    async def join(self, ctx) -> None:
+        cmd = "!join"
+        cmd_msg = f"Added bot to voice channel."
         channel = ctx.message.author.voice.channel
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await channel.connect()
 
     @commands.command()
-    async def leave(self, ctx):
+    async def leave(self, ctx) -> None:
+        cmd = "!leave"
         voice_client = ctx.message.guild.voice_client
         if voice_client.is_connected():
+            cmd_msg = f"Removed bot from voice channel."
+            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
             await voice_client.disconnect()
         else:
+            cmd_msg = f"Failed to remove bot from channel (not in channel)."
+            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
             await ctx.send("Bot is not currently in a channel...")
 
     @commands.command()
-    async def pause(self, ctx):
+    async def pause(self, ctx) -> None:
+        cmd = "!pause"
+        cmd_msg = "Paused playback."
         voice_client = ctx.message.guild.voice_client
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await voice_client.pause()
 
     @commands.command()
-    async def resume(self, ctx):
+    async def play(self, ctx) -> None:
+        cmd = "!play"
         voice_client = ctx.message.guild.voice_client
         if voice_client.is_paused():
+            cmd_msg = "Resumed playback."
+            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
             await voice_client.resume()
         else:
+            cmd_msg = "Tried to resume playback; nothing playing."
+            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
             await ctx.send("Bot not paused...")
 
-    @commands.command()
-    async def yt(self, ctx, *, url):
-        async with ctx.typing():
-            player = await YTDLSource.from_url(url, loop=self.bot.loop)
-            ctx.voice_client.play(
-                player, after=lambda e: print(f"Player error: {e}") if e else None
-            )
-        await ctx.send(f"Now playing: {player.title}")
+    #    @commands.command()  # Felt cute, might delete later
+    #    async def yt(self, ctx, *, url) -> None:
+    #        async with ctx.typing():
+    #            player = await YTDLSource.from_url(url, loop=self.bot.loop)
+    #            ctx.voice_client.play(
+    #                player, after=lambda e: print(f"Player error: {e}") if e else None
+    #            )
+    #        await ctx.send(f"Now playing: {player.title}")
 
     @commands.command()
-    async def stream(self, ctx, *, url):
+    async def stream(self, ctx, *, url) -> None:
+        cmd = "!stream"
         async with ctx.typing():
             player = await YTDLSource.from_url(url, loop=self.bot.loop, stream=True)
+            cmd_msg = f"Started playing {url}"
             ctx.voice_client.play(
                 player, after=lambda e: print(f"Player error: {e}") if e else None
             )
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(f"Now playing: {player.title}")
 
-    @yt.before_invoke
+    #@yt.before_invoke
     @stream.before_invoke
-    async def ensure_voice(self, ctx):
+    async def ensure_voice(self, ctx) -> None:
         if ctx.voice_client is None:
             if ctx.author.voice:
                 await ctx.author.voice.channel.connect()
