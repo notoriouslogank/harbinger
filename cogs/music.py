@@ -57,14 +57,31 @@ class Music(commands.Cog):
     async def join(self, ctx):
         channel = ctx.message.author.voice.channel
         await channel.connect()
-
+        
     @commands.command()
-    async def play(self, ctx, *, query):
-        source = discord.PCMVolumeTransformer(discord.FFmpegAudio(query))
-        ctx.voice_client.play(
-            source, after=lambda e: print(f"Player error: {e}") if e else None
-        )
-        await ctx.send(f"Now playing: {query}")
+    async def leave(self, ctx):
+        voice_client = ctx.message.guild.voice_client
+        
+    @commands.command()
+    async def pause(self, ctx):
+        voice_client = ctx.message.guild.voice_client
+        await voice_client.pause()
+        
+    @commands.comman()
+    async def resume(self, ctx):
+        voice_client = ctx.message.guild.voice_client
+        if voice_client.is_paused():
+            await voice_client.resume()
+        else:
+            await ctx.send("Bot not paused...")
+
+    #@commands.command()
+    #async def play(self, ctx, *, query):
+    #    source = discord.PCMVolumeTransformer(discord.FFmpegAudio(query))
+    #    ctx.voice_client.play(
+    #        source, after=lambda e: print(f"Player error: {e}") if e else None
+    #    )
+    #    await ctx.send(f"Now playing: {query}")
 
     @commands.command()
     async def yt(self, ctx, *, url):
@@ -75,18 +92,18 @@ class Music(commands.Cog):
             )
         await ctx.send(f"Now playing: {player.title}")
 
-    @commands.command()
-    async def stream(self, ctx, *, url):
-        async with ctx.typing():
-            player = await YTDLSource.from_url(url, loop=self.bot.loop, stream=True)
-            ctx.voice_client.play(
-                player, after=lambda e: print(f"Player error: {e}") if e else None
-            )
-        await ctx.send(f"Now playing: {player.title}")
+    #@commands.command()
+    #async def stream(self, ctx, *, url):
+    #    async with ctx.typing():
+    #        player = await YTDLSource.from_url(url, loop=self.bot.loop, stream=True)
+    #        ctx.voice_client.play(
+    #            player, after=lambda e: print(f"Player error: {e}") if e else None
+    #        )
+    #    await ctx.send(f"Now playing: {player.title}")
 
-    @play.before_invoke
+    #@play.before_invoke
     @yt.before_invoke
-    @stream.before_invoke
+    #@stream.before_invoke
     async def ensure_voice(self, ctx):
         if ctx.voice_client is None:
             if ctx.author.voice:
