@@ -2,11 +2,77 @@ import smtplib
 import sys
 from datetime import datetime
 from email.message import EmailMessage
+
 import discord
 from discord.ext import commands
-from config.configure import Configure
 
+from config.configure import Configure
 from harbinger import Harbinger
+from random import randint
+
+playing = [
+    "with myself",
+    "the synth",
+    "bass",
+    "with fire",
+    "with my food",
+    "games with my heart",
+    "God",
+    "Half Life 3",
+    "Notepad",
+    "grab ass with your mom",
+    "knifey-stabby",
+    "Find the Open Network Port",
+    "dead"
+]
+listening = [
+    "the screams of my enemies",
+    "your phonecalls",
+    "the voices",
+    "complaints",
+    "the national anthem",
+    "some guy bloody ramble",
+    "that new Olivia Rodrigo jam",
+]
+watching = [
+    "you sleep",
+    "my mouth",
+    "the world burn",
+    "you",
+    "Star Trek probably",
+    "the horror unfold",
+    "you",
+    "it all come crashing down",
+    "from within the walls of your home",
+    "in abject terror",
+    "from the shadows",
+    "your Internet traffic",
+]
+
+Watching = discord.Activity(
+    type=discord.ActivityType.watching,
+    name=f"{watching[randint(0, (len(watching)-1))]}",
+)
+Playing = discord.Game(playing[randint(0, (len(playing) - 1))])
+Listening = discord.Activity(
+    type=discord.ActivityType.listening,
+    name=f"{listening[randint(0, (len(listening)-1))]}",
+)
+
+presences = [Watching, Playing, Listening]
+
+
+def get_presence():
+    """Randomly select a bot presence from the lists.
+
+    Returns:
+        obj: An activity object to set bot activity status.
+    """
+    presence = presences[randint(0, (len(presences) - 1))]
+    return presence
+
+
+status = presences[randint(0, (len(presences) - 1))]
 
 
 class Status(commands.Cog):
@@ -18,6 +84,7 @@ class Status(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self) -> None:
         """Confirm bot is logged in."""
+        await self.bot.change_presence(activity=get_presence())
         Harbinger.timestamp("BOT", "INITIALIZE", "BOT IS ONLINE")
 
     @commands.command()
