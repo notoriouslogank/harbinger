@@ -57,7 +57,7 @@ class Music(commands.Cog):
     async def join(self, ctx):
         channel = ctx.message.author.voice.channel
         await channel.connect()
-        
+
     @commands.command()
     async def leave(self, ctx):
         voice_client = ctx.message.guild.voice_client
@@ -65,12 +65,12 @@ class Music(commands.Cog):
             await voice_client.disconnect()
         else:
             await ctx.send("Bot is not currently in a channel...")
-            
+
     @commands.command()
     async def pause(self, ctx):
         voice_client = ctx.message.guild.voice_client
         await voice_client.pause()
-        
+
     @commands.command()
     async def resume(self, ctx):
         voice_client = ctx.message.guild.voice_client
@@ -78,14 +78,6 @@ class Music(commands.Cog):
             await voice_client.resume()
         else:
             await ctx.send("Bot not paused...")
-
-    #@commands.command()
-    #async def play(self, ctx, *, query):
-    #    source = discord.PCMVolumeTransformer(discord.FFmpegAudio(query))
-    #    ctx.voice_client.play(
-    #        source, after=lambda e: print(f"Player error: {e}") if e else None
-    #    )
-    #    await ctx.send(f"Now playing: {query}")
 
     @commands.command()
     async def yt(self, ctx, *, url):
@@ -105,7 +97,6 @@ class Music(commands.Cog):
             )
         await ctx.send(f"Now playing: {player.title}")
 
-    #@play.before_invoke
     @yt.before_invoke
     @stream.before_invoke
     async def ensure_voice(self, ctx):
