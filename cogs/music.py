@@ -61,7 +61,11 @@ class Music(commands.Cog):
     @commands.command()
     async def leave(self, ctx):
         voice_client = ctx.message.guild.voice_client
-        
+        if voice_client.is_connected():
+            await voice_client.disconnect()
+        else:
+            await ctx.send("Bot is not currently in a channel...")
+            
     @commands.command()
     async def pause(self, ctx):
         voice_client = ctx.message.guild.voice_client
