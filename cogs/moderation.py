@@ -57,14 +57,22 @@ class Moderation(commands.Cog):
             members_embed.set_thumbnail(url=member.display_avatar.url)
             await ctx.send(embed=members_embed)
 
-    @commands.command()  # Deprecated
-    async def joined(self, ctx: commands.Context, member: discord.Member) -> None:
-        """Get user's join datetime."""
-        cmd = f"!joined({member})"
-        cmd_msg = f"Got join data for: {member}."
-        joined = f"{member.name} joined on {discord.utils.format_dt(member.joined_at)}."
-        await ctx.send(f"{joined}")
-        Harbinger.timestamp(ctx.author.message, cmd, cmd_msg)
+    @commands.command()
+    async def whois(self, ctx: commands.Context, member: discord.Member) -> None:
+        whois_embed = discord.Embed(title=f'{member.display_name}', description=f"{member.status}", color=member.color)
+        whois_embed.add_field(name="Roles:", value=f'{member.roles}')
+        whois_embed.add_field(name="Joined:", value=f'{member.joined_at}', inline=True)
+        whois_embed.set_thumbnail(url=member.display_avatar.url)
+        await ctx.send(embed=whois_embed)
+        
+    #@commands.command()  # Deprecated
+    #async def joined(self, ctx: commands.Context, member: discord.Member) -> None:
+    #    """Get user's join datetime."""
+    #    cmd = f"!joined({member})"
+    #    cmd_msg = f"Got join data for: {member}."
+    #    joined = f"{member.name} joined on {discord.utils.format_dt(member.joined_at)}."
+    #    await ctx.send(f"{joined}")
+    #    Harbinger.timestamp(ctx.author.message, cmd, cmd_msg)
 
     @commands.command()
     async def say(self, ctx: commands.Context, message: str) -> None:
