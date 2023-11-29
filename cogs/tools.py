@@ -48,7 +48,7 @@ class Tools(commands.Cog):
         await Harbinger.send_dm(ctx=ctx, member=ctx.message.author, content=define_url)
 
     @commands.command()
-    async def add(self, ctx: commands.Context, *num) -> None:
+    async def add(self, ctx: commands.Context, *num: int) -> None:
         """Adds two integers and returns result as message."""
         cmd = f"!add({num})"
         total = 0
