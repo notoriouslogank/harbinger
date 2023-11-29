@@ -112,7 +112,7 @@ class HelpCommand(commands.Cog):
                 inline=True,
             )
             help_embed.set_footer(
-                text=f"Requested by {ctx.author}>.", icon_url=ctx.author.avatar
+                text=f"Requested by {ctx.author}.", icon_url=ctx.author.avatar
             )
 
             await ctx.send(embed=help_embed)

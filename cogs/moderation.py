@@ -51,10 +51,12 @@ class Moderation(commands.Cog):
         members = []
         async for member in ctx.guild.fetch_members(limit=150):
             members_embed = discord.Embed(
-                title=f"{member.display_name}", description=f"Status: {member.status}"
+                title=f"{member.display_name}",
+                description=f"Status: {member.status}",
+                color=member.accent_color,
             )
             members_embed.add_field(name="Member Since: ", value=f"{member.joined_at}")
-            members_embed.set_footer(icon_url=member.avatar)
+            members_embed.set_thumbnail(member.avatar)
             await ctx.send(embed=members_embed)
             # await ctx.send(
             #    "Name : {}\t Status : {}\n Joined at {}".format(
