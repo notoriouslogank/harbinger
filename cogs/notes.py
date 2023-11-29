@@ -24,7 +24,7 @@ class Notes(commands.Cog):
         note_file = f"user_notes/{ctx.message.author.display_name}.txt"
         with open(note_file, "r") as n:
             all_notes = n.read()
-        await ctx.send(all_notes)
+        await ctx.send(f"```{all_notes}```")
 
     @commands.command()
     async def cnote(self, ctx: commands.Context, *content):
