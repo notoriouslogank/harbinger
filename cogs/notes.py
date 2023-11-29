@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-
+from datetime import datetime
 from harbinger import Harbinger
 
 class Notes(commands.Cog):
@@ -12,10 +12,11 @@ class Notes(commands.Cog):
     async def note(self, ctx: commands.Context, *content):
         note_author = str(ctx.message.author.display_name)
         note_content = ""
+        timestamp = datetime.now()
         for word in content:
             note_content = note_content + word + " "
         with open(f"{note_author}.txt", "a") as n:
-            n.writelines(f"{note_content}\n--------------------\n")
+            n.writelines(f"{timestamp}\n{note_content}\n--------------------\n")
             n.close()
 
     @commands.command()
