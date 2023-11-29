@@ -26,6 +26,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     async def serverinfo(self, ctx: commands.Context):
+        """Create embeds containing server details and member information and send them to the channel."""
         cmd = "!serverinfo"
         cmd_msg = "Get details about the server."
         owner = str(ctx.guild.owner)
@@ -56,7 +57,7 @@ class Moderation(commands.Cog):
             members_embed.set_thumbnail(url=member.display_avatar.url)
             await ctx.send(embed=members_embed)
 
-    @commands.command()
+    @commands.command()  # Deprecated
     async def joined(self, ctx: commands.Context, member: discord.Member) -> None:
         """Get user's join datetime."""
         cmd = f"!joined({member})"
