@@ -21,7 +21,7 @@ class Tools(commands.Cog):
         google = "https://google.com/search?q="
         string_query = ""
         for word in query:
-            string_query = string_query + str(word)
+            string_query = string_query + str(word) + " "
         sanitized_query = string_query.replace(" ", "+")
         search = google + sanitized_query
         cmd_msg = f"URL: {search}"
