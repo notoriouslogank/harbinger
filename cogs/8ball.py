@@ -127,7 +127,7 @@ class Eightball(commands.Cog):
             await ctx.send(f"{response}")
         else:
             cmd_msg = f"{ctx.message.author} did not ask a valid question: {question}."
-            Harbinger.timestamp(ctx.message.authoor, cmd, cmd_msg)
+            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
             await ctx.send(
                 f"Not a valid question.  (Questions end with a question mark.)"
             )
