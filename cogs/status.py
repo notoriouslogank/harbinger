@@ -151,13 +151,13 @@ class Status(commands.Cog):
         Harbinger.timestamp("BOT", "INITIALIZE", "BOT IS ONLINE")
 
     @commands.command()
-    async def status(self, ctx: commands.Context) -> None:
+    async def up(self, ctx: commands.Context) -> None:
         """Confirm bot is online and reachable."""
-        cmd = "!status"
+        cmd = "!up"
         cmd_msg = "Status: online."
-        status_msg = f"{self.bot.user} is online."
+        up_msg = f"{self.bot.user} is online."
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-        await ctx.send(f"{status_msg}")
+        await ctx.send(f"{up_msg}")
 
     @commands.command()
     async def info(self, ctx: commands.Context) -> None:
