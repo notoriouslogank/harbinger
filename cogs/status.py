@@ -2,13 +2,13 @@ import smtplib
 import sys
 from datetime import datetime
 from email.message import EmailMessage
+from random import randint
 
 import discord
 from discord.ext import commands
 
 from config.configure import Configure
 from harbinger import Harbinger
-from random import randint
 
 playing = [
     "with myself",
@@ -146,9 +146,12 @@ class Status(commands.Cog):
         await ctx.send(file=file)
 
     @commands.command()
-    async def bug(self, ctx: commands.Context, message) -> None:
+    async def bug(self, ctx: commands.Context, *raw_message) -> None:
         cmd = "!bug"
         cmd_msg = f"Sent bug report."
+        message = ""
+        for word in raw_message:
+            message = message + word + " "
         email_address = Harbinger.email_address
         password = Harbinger.email_pass
         email = EmailMessage()
