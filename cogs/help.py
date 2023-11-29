@@ -107,19 +107,10 @@ class HelpCommand(commands.Cog):
             )
             # OTHER
             help_embed.add_field(
-                name="Need Help?",
-                value="[Join the Bot-Dev Server](https://discord.gg/9zAW8DfV)",
-                inline=True,
-            )
-            help_embed.add_field(
                 name="Find a Problem?",
                 value="[Submit a Bug Report](https://github.com/notoriouslogank/Harbinger/issues)",
                 inline=True,
             )
-            help_embed.set_footer(
-                text=f"Requested by {ctx.author}.", icon_url=ctx.author.avatar
-            )
-
             await ctx.send(embed=help_embed)
 
         elif command == "clear":
