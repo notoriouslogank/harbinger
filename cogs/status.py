@@ -14,17 +14,31 @@ playing = ["with myself", "the synth"]
 listening = ["the screams of my enemies", "your phonecalls"]
 watching = ["you sleep", "my mouth"]
 
-Watching = discord.Activity(type=discord.ActivityType.watching, name=f'{watching[randint(0, (len(watching)-1))]}')
-Playing = discord.Game(playing[randint(0, (len(playing)-1))])
-Listening = discord.Activity(type=discord.ActivityType.listening, name=f'{listening[randint(0, (len(listening)-1))]}')
+Watching = discord.Activity(
+    type=discord.ActivityType.watching,
+    name=f"{watching[randint(0, (len(watching)-1))]}",
+)
+Playing = discord.Game(playing[randint(0, (len(playing) - 1))])
+Listening = discord.Activity(
+    type=discord.ActivityType.listening,
+    name=f"{listening[randint(0, (len(listening)-1))]}",
+)
 
 presences = [Watching, Playing, Listening]
 
+
 def get_presence():
-    presence = presences[randint(0, (len(presences)-1))]
+    """Randomly select a bot presence from the lists.
+
+    Returns:
+        obj: An activity object to set bot activity status.
+    """
+    presence = presences[randint(0, (len(presences) - 1))]
     return presence
-    
-status = presences[randint(0, (len(presences)-1))]
+
+
+status = presences[randint(0, (len(presences) - 1))]
+
 
 class Status(commands.Cog):
     """Commands to find out status of bot services."""
@@ -98,7 +112,6 @@ class Status(commands.Cog):
 
     @commands.command()
     async def bug(self, ctx: commands.Context, message) -> None:
-        
         cmd = "!bug"
         cmd_msg = f"Sent bug report."
         email_address = Harbinger.email_address
