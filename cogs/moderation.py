@@ -29,7 +29,7 @@ class Moderation(commands.Cog):
         cmd = "!serverinfo"
         cmd_msg = "Get details about the server."
         owner = str(ctx.guild.owner)
-        region = str(ctx.guild.region)
+#        region = str(ctx.guild.region)
         guild_id = str(ctx.guild.id)
         member_count = str(ctx.guild.member_count)
         icon = str(ctx.guild.icon_url)
@@ -43,7 +43,7 @@ class Moderation(commands.Cog):
         embed.set_thumbnail(url=icon)
         embed.add_field(name="Owner", value=owner, inline=True)
         embed.add_field(name="Server ID", value=guild_id, inline=True)
-        embed.add_field(name="Region", value=region, inline=True)
+#        embed.add_field(name="Region", value=region, inline=True)
         embed.add_field(name="Member Count", value=member_count, inline=True)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(embed=embed)
