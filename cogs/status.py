@@ -8,7 +8,14 @@ from discord.ext import commands
 
 from config.configure import Configure
 from harbinger import Harbinger
+from random import randint
 
+playing = ["one", "two"]
+listening = []
+streaming = []
+watching = ["one", "two"]
+
+Watching = discord.Activity(type=discord.ActivityType.watching, name=f'{watching[randint(0, len(watching))]}')
 
 class Status(commands.Cog):
     """Commands to find out status of bot services."""
@@ -19,7 +26,7 @@ class Status(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self) -> None:
         """Confirm bot is logged in."""
-        await self.bot.change_presence(activity=discord.Game('with myself.'))
+        await self.bot.change_presence(activity=Watching)
         Harbinger.timestamp("BOT", "INITIALIZE", "BOT IS ONLINE")
 
     @commands.command()
