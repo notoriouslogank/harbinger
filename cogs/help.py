@@ -131,21 +131,25 @@ class HelpCommand(commands.Cog):
                 title="join", description="Join the bot to current voice channel."
             )
             usage_embed.add_field(name="Usage", value="!join", inline=False)
+            await ctx.send(embed=usage_embed)
         elif command == "leave":
             usage_embed = discord.Embed(
                 title="leave", description="Remove bot from current voice channel."
             )
             usage_embed.add_field(name="Usage", value="!leave", inline=False)
+            await ctx.send(embed=usage_embed)
         elif command == "pause":
             usage_embed = discord.Embed(
                 title="pause", description="Pause the currently-playing track."
             )
             usage_embed.add_field(name="Usage", value="!pause", inline=False)
+            await ctx.send(embed=usage_embed)
         elif command == "play":
             usage_embed = discord.Embed(
                 title="play", description="Resume playback of paused track."
             )
             usage_embed.add_field(name="Usage", value="!play", inline=False)
+            await ctx.send(embed=usage_embed)
         elif command == "stream":
             usage_embed = discord.Embed(
                 title="stream", description="Begin playback of track."
@@ -153,9 +157,13 @@ class HelpCommand(commands.Cog):
             usage_embed.add_field(name="Usage", value="!stream <URL>", inline=False)
             usage_embed.add_field(
                 name="<URL: str>",
-                value="URL of track to be played (YouTube works; other sites may work, but are not officially supported).",
+                value="URL of track to be played.",
                 inline=True,
             )
+            usage_embed.set_footer(
+                text="Note: While URLs from many websites may function as expected, only YouTube URLs are officially supported at this time."
+            )
+            await ctx.send(embed=usage_embed)
         elif command == "bug":
             usage_embed = discord.Embed(
                 title="bug", description="Send bot developer(s) a bug report."
@@ -166,6 +174,7 @@ class HelpCommand(commands.Cog):
                 value="Bug report message to be sent to bot development team.",
                 inline=True,
             )
+            await ctx.send(embed=usage_embed)
         elif command == "joined":
             usage_embed = discord.Embed(
                 title="joined", description="Get the datetime a given member joined."
