@@ -26,12 +26,9 @@ class Moderation(commands.Cog):
             await ctx.channel.purge(limit=amount)
             Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
-    @clear.error
-    async def clear_error(self, ctx, error):
-        if isinstance(error, commands.MissingRole):
-            await ctx.send("You must be a moderator to delete messages!")
             
     @commands.command()
+    @commands.has_role(1179206642974347344)
     async def serverinfo(self, ctx: commands.Context):
         """Create embeds containing server details and member information and send them to the channel."""
         cmd = "!serverinfo"
@@ -65,6 +62,7 @@ class Moderation(commands.Cog):
             await ctx.send(embed=members_embed)
 
     @commands.command()
+    @commands.has_role(1179206642974347344)
     async def whois(self, ctx: commands.Context, member: discord.Member) -> None:
         """Get detailed information about given member.
 
@@ -85,6 +83,7 @@ class Moderation(commands.Cog):
         await ctx.send(embed=whois_embed)
 
     @commands.command()
+    @commands.has_role(1179206642974347344)
     async def say(self, ctx: commands.Context, *message: str) -> None:
         """Say message as bot."""
         cmd = f"!say({message})"
@@ -110,7 +109,27 @@ class Moderation(commands.Cog):
         await ctx.send(embed=playing_embed)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
+    # ERRORS
+    @clear.error
+    async def clear_error(self, ctx, error):
+        if isinstance(error, commands.MissingRole):
+            await ctx.send("You must be a moderator to do that!")
 
+    @say.error
+    async def say_error(self, ctx, error):
+        if isinstance(error, commands.MissingRole):
+            await ctx.send("You must be a moderator to do that!")
+            
+    @whois.error
+    async def whois_error(self, ctx, error):
+        if isinstance(error, commands.MissingRole):
+            await ctx.send("You must be a moderator to do that!")
+            
+    @serverinfo.error
+    async def serverinfo_error(self, ctx, error):
+        if isinstance(error, commands.MissingRole):
+            await ctx.send("You must be a moderator to do that!")
+    
 async def setup(bot):
     """Load cogs into bot."""
     await bot.add_cog(Moderation(bot))
