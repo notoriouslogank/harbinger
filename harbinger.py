@@ -24,7 +24,7 @@ class Harbinger:
     cogs = (
         "cogs.moderation",
         "cogs.status",
-        "cogs.help",
+        "cogs.helprewrite",
         "cogs.tools",
         "cogs.minecraft",
         "cogs.music",
