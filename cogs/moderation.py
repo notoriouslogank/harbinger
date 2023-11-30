@@ -13,17 +13,27 @@ class Moderation(commands.Cog):
         self.bot = bot
 
     @commands.command()
+    @commands.has_role(1179206642974347344)
     async def clear(self, ctx: commands.Context, amount: int = 2) -> None:
         """Delete a number of messages in channel."""
         cmd = f"!clear({amount})"
         cmd_msg = f"Deleted {amount} messages."
         amount = amount + 1
-        if amount > 100:
-            await ctx.send("Cannot delete more than 100 messages.")
-        else:
-            await ctx.channel.purge(limit=amount)
-            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-
+        try:
+            if amount > 100:
+                await ctx.send("Cannot delete more than 100 messages.")
+            else:
+                await ctx.channel.purge(limit=amount)
+                Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        except commands.MissingRole as error:
+            print(error)
+            print("Must be a moderator to do that.")
+            await ctx.send("You must be a moderator to do that.")
+        except commands.NoPrivateMessage as error:
+            print(error)
+            print("Can't do that in a private message.")
+            await ctx.send("Can't do that in a private message.")
+            
     @commands.command()
     async def serverinfo(self, ctx: commands.Context):
         """Create embeds containing server details and member information and send them to the channel."""
