@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.0] - 2023-30-11
+
+### Added
+
+- Role checks: moderation commands now require moderator role
+- Role checks: status commands now require developer role
+
+### Fixed
+
+- Configure.py now writes Role IDs to config.ini
+- Minor formatting throughout
+
 ## [2.4.1] - 2023-30-11
 
 ### Fixed

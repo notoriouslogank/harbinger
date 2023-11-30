@@ -9,70 +9,7 @@ from discord.ext import commands
 
 from harbinger import Harbinger
 
-playing = [
-    "with myself",
-    "the synth",
-    "bass",
-    "with fire",
-    "with my food",
-    "games with my heart",
-    "God",
-    "Half Life 3",
-    "Notepad",
-    "grab ass with your mom",
-    "knifey-stabby",
-    "Find the Open Network Port",
-    "dead"
-]
-listening = [
-    "the screams of my enemies",
-    "your phonecalls",
-    "the voices",
-    "complaints",
-    "the national anthem",
-    "some guy bloody ramble",
-    "that new Olivia Rodrigo jam",
-]
-watching = [
-    "you sleep",
-    "my mouth",
-    "the world burn",
-    "you",
-    "Star Trek probably",
-    "the horror unfold",
-    "you",
-    "it all come crashing down",
-    "from within the walls of your home",
-    "in abject terror",
-    "from the shadows",
-    "your Internet traffic",
-]
-
-Watching = discord.Activity(
-    type=discord.ActivityType.watching,
-    name=f"{watching[randint(0, (len(watching)-1))]}",
-)
-Playing = discord.Game(playing[randint(0, (len(playing) - 1))])
-Listening = discord.Activity(
-    type=discord.ActivityType.listening,
-    name=f"{listening[randint(0, (len(listening)-1))]}",
-)
-
-presences = [Watching, Playing, Listening]
-
-
-def get_presence():
-    """Randomly select a bot presence from the lists.
-
-    Returns:
-        obj: An activity object to set bot activity status.
-    """
-    presence = presences[randint(0, (len(presences) - 1))]
-    return presence
-
-
-status = presences[randint(0, (len(presences) - 1))]
-
+dev = Harbinger.developer_role_id
 playing = [
     "with myself",
     "the synth",
@@ -151,6 +88,7 @@ class Status(commands.Cog):
         Harbinger.timestamp("BOT", "INITIALIZE", "BOT IS ONLINE")
 
     @commands.command()
+    @commands.has_role(dev)
     async def up(self, ctx: commands.Context) -> None:
         """Confirm bot is online and reachable."""
         cmd = "!up"
@@ -160,6 +98,7 @@ class Status(commands.Cog):
         await ctx.send(f"{up_msg}")
 
     @commands.command()
+    @commands.has_role(dev)
     async def info(self, ctx: commands.Context) -> None:
         """Get information about this bot."""
         cmd = "!info"
@@ -180,6 +119,7 @@ class Status(commands.Cog):
         await ctx.send(embed=embedInfo)
 
     @commands.command()
+    @commands.has_role(dev)
     async def ping(self, ctx: commands.Context) -> None:
         """Check network latency."""
         ping = (round(self.bot.latency, 2)) * 1000
@@ -189,6 +129,7 @@ class Status(commands.Cog):
         await ctx.send(f"Pong! ({ping} ms)")
 
     @commands.command()
+    @commands.has_role(dev)
     async def uptime(self, ctx: commands.Context) -> None:
         """Get bot uptime."""
         cmd = "!uptime"
@@ -200,6 +141,7 @@ class Status(commands.Cog):
         await ctx.send(f"{up_msg}")
 
     @commands.command()
+    @commands.has_role(dev)
     async def changelog(self, ctx: commands.Context) -> None:  # TODO: Fix this (again)
         """Get changelog."""
         cmd = "!changelog"
@@ -233,6 +175,7 @@ class Status(commands.Cog):
         )
 
     @commands.command()
+    @commands.has_role(dev)
     async def shutdown(self, ctx: commands.Context) -> None:
         """Gracefully shutdown the bot."""
         cmd = "!shutdown"
@@ -244,6 +187,47 @@ class Status(commands.Cog):
         await ctx.send(embed=embedShutdown)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         sys.exit()
+
+    # ERRORS
+    @up.error
+    async def up_error(self, ctx, error):
+        cmd = f"ERROR: UpError"
+        cmd_msg = f"User does not have DEV role."
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        if isinstance(error, commands.MissingRole):
+            await ctx.send("You must be a dev to do that!")
+
+    @info.error
+    async def info_error(self, ctx, error):
+        cmd = f"ERROR: InfoError"
+        cmd_msg = f"User does not have DEV role."
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        if isinstance(error, commands.MissingRole):
+            await ctx.send("You must be a dev to do that!")
+
+    @ping.error
+    async def ping_error(self, ctx, error):
+        cmd = f"ERROR: PingError"
+        cmd_msg = f"User does not have DEV role."
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        if isinstance(error, commands.MissingRole):
+            await ctx.send("You must be a dev to do that!")
+
+    @uptime.error
+    async def uptime_error(self, ctx, error):
+        cmd = f"ERROR: UptimeError"
+        cmd_msg = f"User does not have DEV role."
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        if isinstance(error, commands.MissingRole):
+            await ctx.send("You must be a dev to do that!")
+
+    @shutdown.error
+    async def shutdown_error(self, ctx, error):
+        cmd = f"ERROR: UptimeError"
+        cmd_msg = f"User does not have DEV role."
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        if isinstance(error, commands.MissingRole):
+            await ctx.send("You must be a dev to do that!")
 
 
 async def setup(bot):
