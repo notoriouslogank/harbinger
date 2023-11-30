@@ -88,7 +88,7 @@ class Status(commands.Cog):
         Harbinger.timestamp("BOT", "INITIALIZE", "BOT IS ONLINE")
 
     @commands.command()
-    @commands.MissingRole(dev)
+    @commands.has_role(dev)
     async def up(self, ctx: commands.Context) -> None:
         """Confirm bot is online and reachable."""
         cmd = "!up"
@@ -98,7 +98,7 @@ class Status(commands.Cog):
         await ctx.send(f"{up_msg}")
 
     @commands.command()
-    @commands.MissingRole(dev)
+    @commands.has_role(dev)
     async def info(self, ctx: commands.Context) -> None:
         """Get information about this bot."""
         cmd = "!info"
@@ -119,7 +119,7 @@ class Status(commands.Cog):
         await ctx.send(embed=embedInfo)
 
     @commands.command()
-    @commands.MissingRole(dev)
+    @commands.has_role(dev)
     async def ping(self, ctx: commands.Context) -> None:
         """Check network latency."""
         ping = (round(self.bot.latency, 2)) * 1000
@@ -129,7 +129,7 @@ class Status(commands.Cog):
         await ctx.send(f"Pong! ({ping} ms)")
 
     @commands.command()
-    @commands.MissingRole(dev)
+    @commands.has_role(dev)
     async def uptime(self, ctx: commands.Context) -> None:
         """Get bot uptime."""
         cmd = "!uptime"
@@ -141,7 +141,7 @@ class Status(commands.Cog):
         await ctx.send(f"{up_msg}")
 
     @commands.command()
-    @commands.MissingRole(dev)
+    @commands.has_role(dev)
     async def changelog(self, ctx: commands.Context) -> None:  # TODO: Fix this (again)
         """Get changelog."""
         cmd = "!changelog"
@@ -175,7 +175,7 @@ class Status(commands.Cog):
         )
 
     @commands.command()
-    @commands.MissingRole(dev)
+    @commands.has_role(dev)
     async def shutdown(self, ctx: commands.Context) -> None:
         """Gracefully shutdown the bot."""
         cmd = "!shutdown"
