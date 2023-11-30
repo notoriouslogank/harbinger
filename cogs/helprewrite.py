@@ -188,7 +188,7 @@ class HelpCommand(commands.Cog):
                 inline=True,
             )
             await ctx.send(embed=embed)
-        elif command == "":
+        elif command == "ask":
             embed = discord.Embed(
                 title="ask",
                 description="Ask Harbinger for some advice",
@@ -199,7 +199,7 @@ class HelpCommand(commands.Cog):
                 name="<*question: str>", value="Question to ask the bot.", inline=True
             )
             await ctx.send(embed=embed)
-        elif command == "":
+        elif command == "bug":
             embed = discord.Embed(
                 title="bug",
                 description="Send a bug report to bot developers.",
@@ -212,7 +212,7 @@ class HelpCommand(commands.Cog):
                 inline=True,
             )
             await ctx.send(embed=embed)
-        elif command == "":
+        elif command == "clear":
             embed = discord.Embed(
                 title="clear",
                 description="Remove an arbitrary number of messages from the current channel.",
@@ -226,7 +226,7 @@ class HelpCommand(commands.Cog):
             )
             embed.set_footer(text="Note: Number of messages must be under 100.")
             await ctx.send(embed=embed)
-        elif command == "":
+        elif command == "cnote":
             embed = discord.Embed(
                 title="cnote",
                 description="Clear all of your user notes.",
@@ -235,7 +235,7 @@ class HelpCommand(commands.Cog):
             embed.add_field(name="Usage", value="!cnote", inline=True)
             embed.set_footer(text="Note: This action cannot be undone.")
             await ctx.send(embed=embed)
-        elif command == "":
+        elif command == "define":
             embed = discord.Embed(
                 title="define",
                 description="Get the Meriam-Webster definition of a given word.",
@@ -246,7 +246,7 @@ class HelpCommand(commands.Cog):
                 name="<word: str>", value="A word to be defined.", inline=True
             )
             await ctx.send(embed=embed)
-        elif command == "":
+        elif command == "info":
             embed = discord.Embed(
                 title="info",
                 description="Get detailed information about this bot.",
@@ -254,7 +254,7 @@ class HelpCommand(commands.Cog):
             )
             embed.add_field(name="Usage", value="!info", inline=True)
             await ctx.send(embed=embed)
-        elif command == "":
+        elif command == "join":
             embed = discord.Embed(
                 title="join",
                 description="Move the bot into current voice channel to prepare to play music.",
@@ -262,7 +262,7 @@ class HelpCommand(commands.Cog):
             )
             embed.add_field(name="Usage", value="!join", inline=True)
             await ctx.send(embed=embed)
-        elif command == "":
+        elif command == "leave":
             embed = discord.Embed(
                 title="leave",
                 description="Remove the bot from the current voice channel.",
@@ -270,7 +270,7 @@ class HelpCommand(commands.Cog):
             )
             embed.add_field(name="Usage", value="!leave", inline=True)
             await ctx.send(embed=embed)
-        elif command == "":
+        elif command == "lmgtfy":
             embed = discord.Embed(
                 title="lmgtfy",
                 description="Let me Google that for you.",
@@ -283,7 +283,7 @@ class HelpCommand(commands.Cog):
                 inline=True,
             )
             await ctx.send(embed=embed)
-        elif command == "":
+        elif command == "mccmd":
             embed = discord.Embed(
                 title="mccmd",
                 description="Send an arbitrary command to the Minecraft server.",
@@ -296,7 +296,7 @@ class HelpCommand(commands.Cog):
                 inline=True,
             )
             await ctx.send(embed=embed)
-        elif command == "":
+        elif command == "note":
             embed = discord.Embed(
                 title="note",
                 description="Add a note to your user notes file.",
@@ -309,7 +309,7 @@ class HelpCommand(commands.Cog):
                 inline=True,
             )
             await ctx.send(embed=embed)
-        elif command == "":
+        elif command == "notes":
             embed = discord.Embed(
                 title="notes",
                 description="Retreive all of your user notes.",
@@ -317,7 +317,7 @@ class HelpCommand(commands.Cog):
             )
             embed.add_field(name="Usage", value="!notes", inline=True)
             await ctx.send(embed=embed)
-        elif command == "":
+        elif command == "pause":
             embed = discord.Embed(
                 title="pause",
                 description="Pause the currently playing track.",
@@ -325,13 +325,13 @@ class HelpCommand(commands.Cog):
             )
             embed.add_field(name="Usage", value="!pause", inline=True)
             await ctx.send(embed=embed)
-        elif command == "":
+        elif command == "ping":
             embed = discord.Embed(
                 title="ping", description="Get network latency.", color=custom_color
             )
             embed.add_field(name="Usage", value="!ping", inline=True)
             await ctx.send(embed=embed)
-        elif command == "":
+        elif command == "play":
             embed = discord.Embed(
                 title="play",
                 description="Resume playback of paused music track.",
@@ -339,7 +339,7 @@ class HelpCommand(commands.Cog):
             )
             embed.add_field(name="Usage", value="!play", inline=True)
             await ctx.send(embed=embed)
-        elif command == "":
+        elif command == "playing":
             embed = discord.Embed(
                 title="playing",
                 description="Create an embed with arbitrary game information.",
@@ -369,7 +369,7 @@ class HelpCommand(commands.Cog):
                 inline=True,
             )
             await ctx.send(embed=embed)
-        elif command == "":
+        elif command == "roll":
             embed = discord.Embed(
                 title="roll", description=f"Roll some dice.", color=custom_color
             )
@@ -381,7 +381,7 @@ class HelpCommand(commands.Cog):
                 name="<y: int>", value="*y*-sided die to be rolled.", inline=True
             )
             await ctx.send(embed=embed)
-        elif command == "":
+        elif command == "rps":
             embed = discord.Embed(
                 title="rps",
                 description="Play rock, paper, scissors against the bot.",
@@ -396,7 +396,7 @@ class HelpCommand(commands.Cog):
                 inline=True,
             )
             await ctx.send(embed=embed)
-        elif command == "":
+        elif command == "say":
             embed = discord.Embed(
                 title="say",
                 description="Send message to current channel as bot.",
@@ -409,7 +409,7 @@ class HelpCommand(commands.Cog):
                 inline=True,
             )
             await ctx.send(embed=embed)
-        elif command == "":
+        elif command == "serverinfo":
             embed = discord.Embed(
                 title="serverinfo",
                 description="Get detailed server information.",
@@ -417,7 +417,7 @@ class HelpCommand(commands.Cog):
             )
             embed.add_field(name="Usage", value="!serverinfo", inline=True)
             await ctx.send(embed=embed)
-        elif command == "":
+        elif command == "shutdown":
             embed = discord.Embed(
                 title="shutdown",
                 description="Gracefully shut down the bot.",
@@ -425,7 +425,7 @@ class HelpCommand(commands.Cog):
             )
             embed.add_field(name="Usage", value="!shutdown", inline=True)
             await ctx.send(embed=embed)
-        elif command == "":
+        elif command == "stream":
             embed = discord.Embed(
                 title="stream",
                 description="Start streaming audio in the current voice channel.",
@@ -439,7 +439,7 @@ class HelpCommand(commands.Cog):
                 text="Note: while other websites *may* work, only YouTube URLs are *officially* supported."
             )
             await ctx.send(embed=embed)
-        elif command == "":
+        elif command == "up":
             embed = discord.Embed(
                 title="up",
                 description="Check whether bot is online.",
@@ -447,7 +447,7 @@ class HelpCommand(commands.Cog):
             )
             embed.add_field(name="Usage", value="!up", inline=True)
             await ctx.send(embed=embed)
-        elif command == "":
+        elif command == "uptime":
             embed = discord.Embed(
                 title="uptime",
                 description="Get current uptime of the bot.",
@@ -455,7 +455,7 @@ class HelpCommand(commands.Cog):
             )
             embed.add_field(name="Usage", value="!uptime", inline=True)
             await ctx.send(embed=embed)
-        elif command == "":
+        elif command == "whois":
             embed = discord.Embed(
                 title="whois",
                 description="Get detailed information about a given server member.",
