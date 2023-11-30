@@ -18,8 +18,8 @@ class Harbinger:
     server_dir = Configure.reveal(config["Server"]["server_dir"])
     startup_script = Configure.reveal(config["Server"]["startup_script"])
     server_public_ip = Configure.reveal(config["Server"]["server_public_ip"])
-    moderator_role_id = Configure.reveal(config["Roles"]["moderator"])
-    developer_role_id = Configure.reveal(config["Roles"]["developer"])
+    moderator_role_id = int(Configure.reveal(config["Roles"]["moderator"]))
+    developer_role_id = int(Configure.reveal(config["Roles"]["developer"]))
     rgb = config["Custom Color"]["rgb"]
     r, g, b = map(int, rgb.split())
     custom_color = discord.Color.from_rgb(int(r), int(g), int(b))
