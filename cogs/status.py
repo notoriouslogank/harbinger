@@ -214,7 +214,7 @@ class Status(commands.Cog):
         cmd_msg = f"Sent bug report."
         message = ""
         for word in raw_message:
-            message = message + word + " "
+            message = message + str(word) + " "
         email_address = Harbinger.email_address
         password = Harbinger.email_pass
         email = EmailMessage()
