@@ -117,6 +117,14 @@ class Configure:
         email_pass = input("Password: ")
         return email_pass
 
+    def get_moderator_role():
+        role_id = input("Moderator Role ID: ")
+        return role_id
+    
+    def get_developer_role():
+        role_id = input("Developer Role ID: ")
+        return role_id
+        
     def write_py_config() -> None:
         """Create config.ini."""
         config = configparser.ConfigParser()
@@ -135,6 +143,8 @@ class Configure:
             "server_local_ip": f"{Configure.obscure(Configure.get_local_ip())}",
             "server_public_ip": f"{Configure.obscure(Configure.get_public_ip())}",
         }
+        config['Roles'] = {"moderator": f"{Configure.obscure(Configure.get_moderator_role)}",
+                           "developer": f"{Configure.obscure(Configure.get_developer_role)}"}
 
         with open(
             f"{Configure.config_path}{Configure.python_config_file}", "w"
