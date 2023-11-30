@@ -27,7 +27,7 @@ class Moderation(commands.Cog):
             Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @clear.error
-    async def clear_error(ctx, error):
+    async def clear_error(self, ctx, error):
         if isinstance(error, commands.MissingRole):
             await ctx.send("You must be a moderator to delete messages!")
             
