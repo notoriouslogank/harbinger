@@ -32,6 +32,7 @@ class HelpCommand(commands.Cog):
                 value="mccmd, switch, clear, serverinfo, whois, join, leave, pause, play, stream, bug, info, ping, shutdown, up, uptime, add, ask, cnote, define, lmgtfy, note, notes, playing, roll, rps, say",
                 inline=True,
             )
+            await ctx.send(embed=help_embed)
         # CATEGORIES
         elif command == "minecraft":
             minecraft_embed = discord.Embed(
