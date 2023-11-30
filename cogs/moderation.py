@@ -112,21 +112,33 @@ class Moderation(commands.Cog):
     # ERRORS
     @clear.error
     async def clear_error(self, ctx, error):
+        cmd = f"ERROR: clear_error"
+        cmd_msg = f"User does not have mod role."
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         if isinstance(error, commands.MissingRole):
             await ctx.send("You must be a moderator to do that!")
 
     @say.error
     async def say_error(self, ctx, error):
+        cmd = f"ERROR: say_error"
+        cmd_msg = f"User does not have mod role."
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         if isinstance(error, commands.MissingRole):
             await ctx.send("You must be a moderator to do that!")
             
     @whois.error
     async def whois_error(self, ctx, error):
+        cmd = f"ERROR: whois_error"
+        cmd_msg = f"User does not have mod role."
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         if isinstance(error, commands.MissingRole):
             await ctx.send("You must be a moderator to do that!")
             
     @serverinfo.error
     async def serverinfo_error(self, ctx, error):
+        cmd = f"ERROR: serverinfo_error"
+        cmd_msg = f"User does not have mod role."
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         if isinstance(error, commands.MissingRole):
             await ctx.send("You must be a moderator to do that!")
     
