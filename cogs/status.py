@@ -209,7 +209,7 @@ class Status(commands.Cog):
         await ctx.send(file=file)
 
     @commands.command()
-    async def bug(self, ctx: commands.Context, *raw_message: str) -> None:
+    async def bug(self, ctx: commands.Context, *, raw_message: str) -> None:
         cmd = f"!bug {raw_message}"
         cmd_msg = f"Sent bug report."
         message = ""
