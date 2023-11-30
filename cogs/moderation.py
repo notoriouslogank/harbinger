@@ -5,7 +5,7 @@ from discord.ext import commands
 
 from harbinger import Harbinger
 
-
+mod = Harbinger.moderator_role_id
 class Moderation(commands.Cog):
     """Server moderation commands."""
 
@@ -13,7 +13,7 @@ class Moderation(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    @commands.has_role(1179206642974347344)
+    @commands.has_role(mod)
     async def clear(self, ctx: commands.Context, amount: int = 2) -> None:
         """Delete a number of messages in channel."""
 
@@ -28,7 +28,7 @@ class Moderation(commands.Cog):
 
             
     @commands.command()
-    @commands.has_role(1179206642974347344)
+    @commands.has_role(mod)
     async def serverinfo(self, ctx: commands.Context):
         """Create embeds containing server details and member information and send them to the channel."""
         cmd = "!serverinfo"
@@ -62,7 +62,7 @@ class Moderation(commands.Cog):
             await ctx.send(embed=members_embed)
 
     @commands.command()
-    @commands.has_role(1179206642974347344)
+    @commands.has_role(mod)
     async def whois(self, ctx: commands.Context, member: discord.Member) -> None:
         """Get detailed information about given member.
 
@@ -83,7 +83,7 @@ class Moderation(commands.Cog):
         await ctx.send(embed=whois_embed)
 
     @commands.command()
-    @commands.has_role(1179206642974347344)
+    @commands.has_role(mod)
     async def say(self, ctx: commands.Context, *message: str) -> None:
         """Say message as bot."""
         cmd = f"!say({message})"
