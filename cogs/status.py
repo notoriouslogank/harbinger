@@ -209,12 +209,13 @@ class Status(commands.Cog):
         await ctx.send(file=file)
 
     @commands.command()
-    async def bug(self, ctx: commands.Context, *raw_message) -> None:
+    async def bug(self, ctx: commands.Context, *raw_message: str) -> None:
         cmd = f"!bug {raw_message}"
         cmd_msg = f"Sent bug report."
         message = ""
         for word in raw_message:
             message = message + str(word) + " "
+            print(message)
         email_address = Harbinger.email_address
         password = Harbinger.email_pass
         email = EmailMessage()
