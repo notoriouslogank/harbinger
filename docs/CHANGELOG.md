@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.1] - 2023-30-11
+
+### Fixed
+
+- Removed redundant !bug() command in status cog which was causing problems with sending the entire message
+
 ## [2.4.0] - 2023-29-11
 
 ### Removed

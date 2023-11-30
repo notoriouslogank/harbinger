@@ -215,7 +215,6 @@ class Status(commands.Cog):
         message = ""
         for word in raw_message:
             message = message + str(word) + " "
-        print(message)    
         email_address = Harbinger.email_address
         password = Harbinger.email_pass
         email = EmailMessage()
