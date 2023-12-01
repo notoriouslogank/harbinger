@@ -17,7 +17,7 @@ class Dev(commands.Cog):
         try:
             for cog in listdir('./cogs'):
                 if cog.endswith('.py') == True:
-                    self.bot.relead_extension(f'cogs.{cog[:-3]}')
+                    self.bot.reload_extension(f'cogs.{cog[:-3]}')
         except Exception as exc:
             await message.edit(content=f'An error has occured: {exc}', delete_after=20)
         else:
