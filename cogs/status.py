@@ -10,6 +10,8 @@ from discord.ext import commands
 from harbinger import Harbinger
 
 dev = Harbinger.developer_role_id
+deletion_time = Harbinger.d_time
+
 playing = [
     "with myself",
     "the synth",
@@ -95,7 +97,9 @@ class Status(commands.Cog):
         cmd_msg = "Status: online."
         up_msg = f"{self.bot.user} is online."
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-        await ctx.send(f"{up_msg}")
+        message = await ctx.send(f"{up_msg}")
+        await ctx.message.delete()
+        await message.edit(delete_after=deletion_time)
 
     @commands.command()
     @commands.has_role(dev)
@@ -126,7 +130,9 @@ class Status(commands.Cog):
         cmd = f"!ping"
         cmd_msg = "Pong!"
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-        await ctx.send(f"Pong! ({ping} ms)")
+        message = await ctx.send(f"Pong! ({ping} ms)")
+        await ctx.message.delete()
+        await message.edit(delete_after=deletion_time)
 
     @commands.command()
     @commands.has_role(dev)
@@ -138,7 +144,9 @@ class Status(commands.Cog):
         up_msg = f"uptime: {delta}"
         cmd_msg = f"{up_msg}"
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-        await ctx.send(f"{up_msg}")
+        message = await ctx.send(f"{up_msg}")
+        await ctx.message.delete()
+        await message.edit(delete_after=deletion_time)
 
     @commands.command()
     @commands.has_role(dev)
@@ -148,7 +156,9 @@ class Status(commands.Cog):
         cmd_msg = f"Uploaded CHANGELOG.md to channel."
         file = discord.File(fp="docs/CHANGELOG.md", filename="CHANGELOG.md")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-        await ctx.send(file=file)
+        message = await ctx.send(file=file)
+        await ctx.message.delete()
+        await message.edit(delete_after=deletion_time)
 
     @commands.command()
     async def bug(self, ctx: commands.Context, *raw_message: str) -> None:
@@ -184,7 +194,9 @@ class Status(commands.Cog):
             title="shutdown", color=0xFF0000, timestamp=datetime.now()
         )
         embedShutdown.add_field(name="user", value=f"{ctx.message.author}", inline=True)
-        await ctx.send(embed=embedShutdown)
+        message = await ctx.send(embed=embedShutdown)
+        await ctx.message.delete()
+        await message.edit(f"Goodbye!", delete_after=deletion_time)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         sys.exit()
 
@@ -197,7 +209,7 @@ class Status(commands.Cog):
         message = await ctx.send("You must be a developer to do that!")
         await ctx.message.delete()
         if isinstance(error, commands.MissingRole):
-            await message.edit(delete_after=20)
+            await message.edit(delete_after=deletion_time)
 
     @info.error
     async def info_error(self, ctx, error):
@@ -207,7 +219,7 @@ class Status(commands.Cog):
         message = await ctx.send("You must be a developer to do that!")
         await ctx.message.delete()
         if isinstance(error, commands.MissingRole):
-            await message.edit(delete_after=20)
+            await message.edit(delete_after=deletion_time)
 
     @ping.error
     async def ping_error(self, ctx, error):
@@ -217,7 +229,7 @@ class Status(commands.Cog):
         message = await ctx.send("You must be a developer to do that!")
         await ctx.message.delete()
         if isinstance(error, commands.MissingRole):
-            await message.edit(delete_after=20)
+            await message.edit(delete_after=deletion_time)
 
     @uptime.error
     async def uptime_error(self, ctx, error):
@@ -227,7 +239,7 @@ class Status(commands.Cog):
         message = await ctx.send("You must be a developer to do that!")
         await ctx.message.delete()
         if isinstance(error, commands.MissingRole):
-            await message.edit(delete_after=20)
+            await message.edit(delete_after=deletion_time)
 
     @shutdown.error
     async def shutdown_error(self, ctx, error):
@@ -237,7 +249,7 @@ class Status(commands.Cog):
         message = await ctx.send("You must be a developer to do that!")
         await ctx.message.delete()
         if isinstance(error, commands.MissingRole):
-            await message.edit(delete_after=20)
+            await message.edit(delete_after=deletion_time)
 
 
 async def setup(bot):

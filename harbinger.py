@@ -21,6 +21,7 @@ class Harbinger:
     server_public_ip = Configure.reveal(config["Server"]["server_public_ip"])
     moderator_role_id = int(Configure.reveal(config["Roles"]["moderator"]))
     developer_role_id = int(Configure.reveal(config["Roles"]["developer"]))
+    d_time = int(config["Bot"]["delete_after"])
     rgb = config["Custom Color"]["rgb"]
     r, g, b = map(int, rgb.split())
     custom_color = discord.Color.from_rgb(int(r), int(g), int(b))

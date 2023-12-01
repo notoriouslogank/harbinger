@@ -6,6 +6,9 @@ from discord.ext import commands
 from harbinger import Harbinger
 
 mod = Harbinger.moderator_role_id
+deletion_time = Harbinger.d_time
+
+
 class Moderation(commands.Cog):
     """Server moderation commands."""
 
@@ -26,7 +29,6 @@ class Moderation(commands.Cog):
             await ctx.channel.purge(limit=amount)
             Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
-            
     @commands.command()
     @commands.has_role(mod)
     async def serverinfo(self, ctx: commands.Context):
@@ -115,33 +117,42 @@ class Moderation(commands.Cog):
         cmd = f"ERROR: clear_error"
         cmd_msg = f"User does not have mod role."
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        message = await ctx.send("You must be a moderator to do that!")
+        await ctx.message.delete()
         if isinstance(error, commands.MissingRole):
-            await ctx.send("You must be a moderator to do that!")
+            await message.edit(delete_after=deletion_time)
 
     @say.error
     async def say_error(self, ctx, error):
         cmd = f"ERROR: say_error"
         cmd_msg = f"User does not have mod role."
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        message = await ctx.send("You must be a moderator to do that!")
+        await ctx.message.delete()
         if isinstance(error, commands.MissingRole):
-            await ctx.send("You must be a moderator to do that!")
-            
+            await message.edit(delete_after=deletion_time)
+
     @whois.error
     async def whois_error(self, ctx, error):
         cmd = f"ERROR: whois_error"
         cmd_msg = f"User does not have mod role."
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        message = await ctx.send("You must be a moderator to do that!")
+        await ctx.message.delete()
         if isinstance(error, commands.MissingRole):
-            await ctx.send("You must be a moderator to do that!")
-            
+            await message.edit(delete_after=deletion_time)
+
     @serverinfo.error
     async def serverinfo_error(self, ctx, error):
         cmd = f"ERROR: serverinfo_error"
         cmd_msg = f"User does not have mod role."
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        message = await ctx.send("You must be a moderator to do that!")
+        await ctx.message.delete()
         if isinstance(error, commands.MissingRole):
-            await ctx.send("You must be a moderator to do that!")
-    
+            await message.edit(delete_after=deletion_time)
+
+
 async def setup(bot):
     """Load cogs into bot."""
     await bot.add_cog(Moderation(bot))
