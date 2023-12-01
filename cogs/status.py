@@ -184,7 +184,10 @@ class Status(commands.Cog):
             title="shutdown", color=0xFF0000, timestamp=datetime.now()
         )
         embedShutdown.add_field(name="user", value=f"{ctx.message.author}", inline=True)
-        await ctx.send(embed=embedShutdown)
+        message = await ctx.send(embed=embedShutdown)
+        await ctx.message.delete()
+        await message.edit(delete_after=20)
+        
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         sys.exit()
 
