@@ -1,6 +1,8 @@
+from sqlite3 import Timestamp
 from discord.ext import commands
 
 from os import listdir
+from harbinger import Harbinger
 
 
 class Dev(commands.Cog):
@@ -69,6 +71,46 @@ class Dev(commands.Cog):
             await message.edit(
                 content=f"{self.check_cog(cog)} has been reloaded.", delete_after=20
             )
+
+    @reload_all.error
+    async def reload_all_error(self, ctx, error):
+        cmd = f"ERROR: UptimeError"
+        cmd_msg = f"User does not have DEV role."
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        message = await ctx.send("Only the bot owner can do that!")
+        await ctx.message.delete()
+        if isinstance(error, commands.MissingRole):
+            await message.edit(delete_after=20)
+
+    @reload_cog.error
+    async def reload_cog_error(self, ctx, error):
+        cmd = f"ERROR: UptimeError"
+        cmd_msg = f"User does not have DEV role."
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        message = await ctx.send("Only the bot owner can do that!")
+        await ctx.message.delete()
+        if isinstance(error, commands.MissingRole):
+            await message.edit(delete_after=20)
+
+    @unload_cog.error
+    async def unload_cog_error(self, ctx, error):
+        cmd = f"ERROR: UptimeError"
+        cmd_msg = f"User does not have DEV role."
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        message = await ctx.send("Only the bot owner can do that!")
+        await ctx.message.delete()
+        if isinstance(error, commands.MissingRole):
+            await message.edit(delete_after=20)
+
+    @load_cog.error
+    async def load_cog_error(self, ctx, error):
+        cmd = f"ERROR: UptimeError"
+        cmd_msg = f"User does not have DEV role."
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        message = await ctx.send("Only the bot owner can do that!")
+        await ctx.message.delete()
+        if isinstance(error, commands.MissingRole):
+            await message.edit(delete_after=20)
 
 
 async def setup(bot):
