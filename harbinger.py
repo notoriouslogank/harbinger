@@ -24,7 +24,7 @@ class Harbinger:
     r, g, b = map(int, rgb.split())
     custom_color = discord.Color.from_rgb(int(r), int(g), int(b))
     cogs = (
-        'cogs.dev'
+        "cogs.dev",
         "cogs.moderation",
         "cogs.status",
         "cogs.help",
