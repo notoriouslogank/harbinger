@@ -1,3 +1,4 @@
+from os import listdir
 from configparser import ConfigParser
 from datetime import datetime
 
@@ -25,14 +26,14 @@ class Harbinger:
     custom_color = discord.Color.from_rgb(int(r), int(g), int(b))
     cogs = (
         "cogs.dev",
-        "cogs.moderation",
-        "cogs.status",
-        "cogs.help",
-        "cogs.tools",
-        "cogs.minecraft",
-        "cogs.music",
-        "cogs.8ball",
-        "cogs.notes",
+        #"cogs.moderation",
+        #"cogs.status",
+        #"cogs.help",
+        #"cogs.tools",
+        #"cogs.minecraft",
+        #"cogs.music",
+        #"cogs.8ball",
+        #"cogs.notes",
     )
     start_time = datetime.now()
 
@@ -48,11 +49,15 @@ class Harbinger:
     @bot.event
     async def setup_hook() -> None:
         """Sequentially load cogs."""
-        for cog in cogs:
-            print(f"Loading {cog}...")
-            await bot.load_extension(cog)
-            print(f"Loaded {cog}.")
-
+        print(f"Loading cogs...")
+        for cog in listdir('cogs'):
+            if cog.endswith('.py') == True:
+                try:
+                    await bot.load_extension(cog)
+                    print(f"Loaded {cog}.")
+                except Exception as exc:
+                    print(f'An error has occured: {exc}.')
+                    
     def get_ver() -> str:
         """Check CHANGELOG.md for version info, return version string.
 
