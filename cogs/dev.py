@@ -17,7 +17,7 @@ class Dev(commands.Cog):
         try:
             for cog in listdir('./cogs'):
                 if cog.endswith('.py') == True:
-                    self.bot.reload_extension(f'cogs.{cog[:-3]}')
+                    await self.bot.reload_extension(f'cogs.{cog[:-3]}')
         except Exception as exc:
             await message.edit(content=f'An error has occured: {exc}', delete_after=20)
         else:
@@ -35,7 +35,7 @@ class Dev(commands.Cog):
         message = await ctx.send('Loading...')
         await ctx.message.delete()
         try:
-            self.bot.load_extension(self.check_cog(cog))
+            await self.bot.load_extension(self.check_cog(cog))
         except Exception as exc:
             await message.edit(content=f'An erroor has occured: {exc}', delete_after=20)
         else:
@@ -47,7 +47,7 @@ class Dev(commands.Cog):
         message = await ctx.send('Unloading...')
         await ctx.message.delete()
         try:
-            self.bot.unload_extension(self.check_cog(cog))
+            await self.bot.unload_extension(self.check_cog(cog))
         except Exception as exc:
             await message.edit(content=f'An error has occured: {exc}', delete_after=20)
         else:
@@ -59,7 +59,7 @@ class Dev(commands.Cog):
         message = await ctx.send('Reloading...')
         await ctx.message.delete()
         try:
-            self.bot.reload_extension(self.check_cog(cog))
+            await self.bot.reload_extension(self.check_cog(cog))
         except Exception as exc:
             await message.edit(content=f"An error has occured: {exc}", delete_after=20)
         else:
