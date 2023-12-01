@@ -1,10 +1,10 @@
-from os import listdir
 from configparser import ConfigParser
 from datetime import datetime
+from os import listdir
 
 import discord
 from discord.ext import commands
-from cogs.dev import Dev
+
 from config.configure import Configure
 
 
@@ -24,17 +24,7 @@ class Harbinger:
     rgb = config["Custom Color"]["rgb"]
     r, g, b = map(int, rgb.split())
     custom_color = discord.Color.from_rgb(int(r), int(g), int(b))
-    cogs = (
-        "cogs.dev",
-        #"cogs.moderation",
-        #"cogs.status",
-        #"cogs.help",
-        #"cogs.tools",
-        #"cogs.minecraft",
-        #"cogs.music",
-        #"cogs.8ball",
-        #"cogs.notes",
-    )
+
     start_time = datetime.now()
 
     intents = discord.Intents.default()
@@ -50,14 +40,14 @@ class Harbinger:
     async def setup_hook() -> None:
         """Sequentially load cogs."""
         print(f"Loading cogs...")
-        for cog in listdir('cogs'):
-            if cog.endswith('.py') == True:
+        for cog in listdir("cogs"):
+            if cog.endswith(".py") == True:
                 try:
-                    await bot.load_extension(f'cogs.{cog[:-3]}')
-                    print(f"Loaded {cog}-{Dev.version}")
+                    await bot.load_extension(f"cogs.{cog[:-3]}")
+                    print(f"Loaded {cog}")
                 except Exception as exc:
-                    print(f'An error has occured: {exc}.')
-                    
+                    print(f"An error has occured: {exc}.")
+
     def get_ver() -> str:
         """Check CHANGELOG.md for version info, return version string.
 
