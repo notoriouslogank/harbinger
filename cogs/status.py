@@ -184,10 +184,7 @@ class Status(commands.Cog):
             title="shutdown", color=0xFF0000, timestamp=datetime.now()
         )
         embedShutdown.add_field(name="user", value=f"{ctx.message.author}", inline=True)
-        message = await ctx.send(embed=embedShutdown)
-        await ctx.message.delete()
-        await message.edit(delete_after=20)
-        
+        await ctx.send(embed=embedShutdown)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         sys.exit()
 
@@ -205,8 +202,10 @@ class Status(commands.Cog):
         cmd = f"ERROR: InfoError"
         cmd_msg = f"User does not have DEV role."
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        message = await ctx.send("You must be a developer to do that!")
+        await ctx.message.delete()
         if isinstance(error, commands.MissingRole):
-            await ctx.send("You must be a dev to do that!")
+            await message.edit(delete_after=20)
 
     @ping.error
     async def ping_error(self, ctx, error):
