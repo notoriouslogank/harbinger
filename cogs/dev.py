@@ -1,6 +1,7 @@
+from os import listdir
+
 from discord.ext import commands
 
-from os import listdir
 from harbinger import Harbinger
 
 deletion_time = Harbinger.d_time
