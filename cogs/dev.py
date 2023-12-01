@@ -21,8 +21,8 @@ class Dev(commands.Cog):
         try:
             for cog in listdir("./cogs"):
                 if cog.endswith(".py") == True:
-                    await self.bot.reload_extension(f"cogs.{cog[:-3]}")
                     Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+                    await self.bot.reload_extension(f"cogs.{cog[:-3]}")
         except Exception as exc:
             await message.edit(
                 content=f"An error has occured: {exc}", delete_after=deletion_time
