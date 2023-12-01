@@ -13,6 +13,7 @@ class Dev(commands.Cog):
     @commands.command()
     @commands.is_owner()
     async def reload_all(self, ctx):
+        """Reloads all cogs in the cogs directory."""
         message = await ctx.send("Reloading cogs...")
         await ctx.message.delete()
         try:
@@ -28,14 +29,27 @@ class Dev(commands.Cog):
                 content="All cogs have been reloaded.", delete_after=deletion_time
             )
 
-    def check_cog(self, cog):
+    def check_cog(self, cog) -> str:
+        """Correctly formats the cog name.
+
+        Args:
+            cog (str): The cog name to be formatted
+
+        Returns:
+            str: Correctly formatted cog name
+        """
         if (cog.lower()).startswith("cogs.") == True:
             return cog.lower()
         return f"cogs.{cog.lower()}"
 
     @commands.command()
     @commands.is_owner()
-    async def load_cog(self, ctx, *, cog: str):
+    async def load_cog(self, ctx, *, cog: str) -> None:
+        """Load a given (unloaded) cog.
+
+        Args:
+            cog (str): The name of the cog to be loaded
+        """
         message = await ctx.send("Loading...")
         await ctx.message.delete()
         try:
@@ -52,7 +66,12 @@ class Dev(commands.Cog):
 
     @commands.command()
     @commands.is_owner()
-    async def unload_cog(self, ctx, *, cog: str):
+    async def unload_cog(self, ctx, *, cog: str) -> None:
+        """Unload a given cog.
+
+        Args:
+            cog (str): The cog to be unloaded
+        """
         message = await ctx.send("Unloading...")
         await ctx.message.delete()
         try:
@@ -69,7 +88,12 @@ class Dev(commands.Cog):
 
     @commands.command()
     @commands.is_owner()
-    async def reload_cog(self, ctx, *, cog: str):
+    async def reload_cog(self, ctx, *, cog: str) -> None:
+        """Reload a given cog.
+
+        Args:
+        cog (str): The cog to be reloaded
+        """
         message = await ctx.send("Reloading...")
         await ctx.message.delete()
         try:
@@ -85,7 +109,12 @@ class Dev(commands.Cog):
             )
 
     @reload_all.error
-    async def reload_all_error(self, ctx, error):
+    async def reload_all_error(self, ctx, error) -> None:
+        """Send message when !reload_all command fails due to MissingRole.
+
+        Args
+            error (MissingRole): The exception raised
+        """
         cmd = f"ERROR: UptimeError"
         cmd_msg = f"User does not have DEV role."
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
@@ -96,6 +125,11 @@ class Dev(commands.Cog):
 
     @reload_cog.error
     async def reload_cog_error(self, ctx, error):
+        """Send message when !reload_cog command fails due to MissingRole.
+
+        Args
+            error (MissingRole): The exception raised
+        """
         cmd = f"ERROR: UptimeError"
         cmd_msg = f"User does not have DEV role."
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
@@ -106,6 +140,11 @@ class Dev(commands.Cog):
 
     @unload_cog.error
     async def unload_cog_error(self, ctx, error):
+        """Send message when !unload_cog command fails due to MissingRole.
+
+        Args
+            error (MissingRole): The exception raised
+        """
         cmd = f"ERROR: UptimeError"
         cmd_msg = f"User does not have DEV role."
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
@@ -116,6 +155,11 @@ class Dev(commands.Cog):
 
     @load_cog.error
     async def load_cog_error(self, ctx, error):
+        """Send message when !load_cog command fails due to MissingRole.
+
+        Args
+            error (MissingRole): The exception raised
+        """
         cmd = f"ERROR: UptimeError"
         cmd_msg = f"User does not have DEV role."
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)

@@ -162,6 +162,7 @@ class Status(commands.Cog):
 
     @commands.command()
     async def bug(self, ctx: commands.Context, *raw_message: str) -> None:
+        """Generate and email a bug report to the bot maintainer."""
         cmd = f"!bug {raw_message}"
         cmd_msg = f"Sent bug report."
         message = ""
@@ -203,6 +204,11 @@ class Status(commands.Cog):
     # ERRORS
     @up.error
     async def up_error(self, ctx, error):
+        """Error raised when !up command fails
+
+        Args:
+            error (MissingRole): Raised if user does not have developer role.
+        """
         cmd = f"ERROR: UpError"
         cmd_msg = f"User does not have DEV role."
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
@@ -213,6 +219,11 @@ class Status(commands.Cog):
 
     @info.error
     async def info_error(self, ctx, error):
+        """Error raised when !info command fails
+
+        Args:
+            error (MissingRole): Raised if user does not have developer role.
+        """
         cmd = f"ERROR: InfoError"
         cmd_msg = f"User does not have DEV role."
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
@@ -223,6 +234,11 @@ class Status(commands.Cog):
 
     @ping.error
     async def ping_error(self, ctx, error):
+        """Error raised when !ping command fails
+
+        Args:
+            error (MissingRole): Raised if user does not have developer role.
+        """
         cmd = f"ERROR: PingError"
         cmd_msg = f"User does not have DEV role."
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
@@ -233,6 +249,11 @@ class Status(commands.Cog):
 
     @uptime.error
     async def uptime_error(self, ctx, error):
+        """Error raised when !uptime command fails
+
+        Args:
+            error (MissingRole): Raised if user does not have developer role.
+        """
         cmd = f"ERROR: UptimeError"
         cmd_msg = f"User does not have DEV role."
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
@@ -243,6 +264,11 @@ class Status(commands.Cog):
 
     @shutdown.error
     async def shutdown_error(self, ctx, error):
+        """Error raised when !shutdown command fails
+
+        Args:
+            error (MissingRole): Raised if user does not have developer role.
+        """
         cmd = f"ERROR: UptimeError"
         cmd_msg = f"User does not have DEV role."
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)

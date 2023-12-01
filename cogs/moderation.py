@@ -113,7 +113,12 @@ class Moderation(commands.Cog):
 
     # ERRORS
     @clear.error
-    async def clear_error(self, ctx, error):
+    async def clear_error(self, ctx, error) -> None:
+        """Error raised when !clear command fails
+
+        Args:
+            error (MissingRole): Raised if user does not have developer role.
+        """
         cmd = f"ERROR: clear_error"
         cmd_msg = f"User does not have mod role."
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
@@ -124,6 +129,11 @@ class Moderation(commands.Cog):
 
     @say.error
     async def say_error(self, ctx, error):
+        """Error raised when !say command fails
+
+        Args:
+            error (MissingRole): Raised if user does not have developer role.
+        """
         cmd = f"ERROR: say_error"
         cmd_msg = f"User does not have mod role."
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
@@ -134,6 +144,11 @@ class Moderation(commands.Cog):
 
     @whois.error
     async def whois_error(self, ctx, error):
+        """Error raised when !whois command fails
+
+        Args:
+            error (MissingRole): Raised if user does not have developer role.
+        """
         cmd = f"ERROR: whois_error"
         cmd_msg = f"User does not have mod role."
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
@@ -144,6 +159,11 @@ class Moderation(commands.Cog):
 
     @serverinfo.error
     async def serverinfo_error(self, ctx, error):
+        """Error raised when !serverinfo command fails
+
+        Args:
+            error (MissingRole): Raised if user does not have developer role.
+        """
         cmd = f"ERROR: serverinfo_error"
         cmd_msg = f"User does not have mod role."
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
