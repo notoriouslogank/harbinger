@@ -68,11 +68,13 @@ class YTDLSource(discord.PCMVolumeTransformer):
 class Music(commands.Cog):
     """A class of commands for streaming music via the bot in the voice channel."""
 
+    music_queue = []
+
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command()
-    async def join(self, ctx) -> None:
+    async def join(self, ctx):
         """Join the bot to the contextual voice channel."""
         cmd = "!join"
         cmd_msg = f"Added bot to voice channel."
@@ -81,7 +83,7 @@ class Music(commands.Cog):
         await channel.connect()
 
     @commands.command()
-    async def leave(self, ctx) -> None:
+    async def leave(self, ctx):
         """Leave the voice channel."""
         cmd = "!leave"
         voice_client = ctx.message.guild.voice_client
@@ -95,13 +97,17 @@ class Music(commands.Cog):
             await ctx.send("Bot is not currently in a channel...")
 
     @commands.command()
-    async def pause(self, ctx) -> None:
+    async def pause(self, ctx):
         """Pause the currently-playing song/video."""
         cmd = "!pause"
         cmd_msg = "Paused playback."
         voice_client = ctx.message.guild.voice_client
-        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-        await voice_client.pause()
+        if voice_client.is_playing():
+            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+            voice_client.pause()
+            await ctx.send("Paused playback.")
+        else:
+            await ctx.send("Nothing playing.")
 
     @commands.command()
     async def play(self, ctx) -> None:
@@ -111,11 +117,21 @@ class Music(commands.Cog):
         if voice_client.is_paused():
             cmd_msg = "Resumed playback."
             Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-            await voice_client.resume()
+            await ctx.send("Resuming playback.")
+            voice_client.resume()
         else:
             cmd_msg = "Tried to resume playback; nothing playing."
             Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
             await ctx.send("Bot not paused...")
+
+    @commands.command()
+    async def stop(self, ctx: commands.Cog) -> None:
+        cmd = "!stop"
+        cmd_msg = f"{ctx.message.author} stopped playback."
+        voice_client = ctx.message.guild.voice_client
+        if voice_client.is_playing():
+            voice_client.stop()
+            await ctx.send("Stopping...")
 
     #    @commands.command()  # Felt cute, might delete later
     #    async def yt(self, ctx, *, url) -> None:
@@ -128,20 +144,26 @@ class Music(commands.Cog):
 
     @commands.command()
     async def stream(self, ctx, *, url) -> None:
-        """Stream, rather than download and playback, a given URL.
-
-        Args:
-            url (str): The URL to be streamed to the voice channel.
-        """
-        cmd = "!stream"
+        cmd = f"!stream {url}"
+        self.music_queue.append(url)
+        print(self.music_queue)
         async with ctx.typing():
-            player = await YTDLSource.from_url(url, loop=self.bot.loop, stream=True)
+            player = await YTDLSource.from_url(
+                self.music_queue.pop(0), loop=self.bot.loop, stream=True
+            )
             cmd_msg = f"Started playing {url}"
             ctx.voice_client.play(
-                player, after=lambda e: print(f"Player error: {e}") if e else None
+                player,
+                after=lambda e: asyncio.run_coroutine_threadsafe(
+                    ctx.voice_client.play(player), bot.loop
+                ),
             )
-        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-        await ctx.send(f"Now playing: {player.title}")
+
+    @commands.command()
+    async def queue(self, ctx, *, url) -> None:
+        self.music_queue.append(url)
+        await ctx.send(f"Added to queue!")
+        await ctx.send(f"Current queue: {self.music_queue}")
 
     # @yt.before_invoke
     @stream.before_invoke
