@@ -118,7 +118,12 @@ class Eightball(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def ask(self, ctx: commands.Context, *question: str):
+    async def ask(self, ctx: commands.Context, *question: str) -> None:
+        """Send an answer to the user's question from answers list.
+
+        Args:
+            question (str): The question to be answered
+        """
         cmd = "!ask"
         string_question = ""
         for word in question:

@@ -4,6 +4,29 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.6.0] - 2023-30-11
+
+### Added
+
+- Dev Cog: allows for arbitrary cogs to be loaded/unloaded without shutting down the bot
+- config.ini: deletion_timer to determine when to autodelete system messages from the channel (errors, etc.)
+- Various error messages
+
+### Fixed
+
+- Minor formatting
+- Command messages printing improperly/at the wrong time
+
+### Changed
+
+- Behavior of cog loading in harbinger.py: cogs now are loaded through a list rather than individually
+
+### Known Issues
+
+- Missing !help() commands for all dev commands
+- Missing error message for !changelog() when missing required role
+- Output of !changelog() should not autodelete
+
 ## [2.5.0] - 2023-30-11
 
 ### Added

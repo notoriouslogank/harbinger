@@ -125,6 +125,10 @@ class Configure:
         role_id = input("Developer Role ID: ")
         return role_id
 
+    def get_deletion_time():
+        delete_after = input("Time until messages auto-delete (seconds): ")
+        return delete_after
+
     def write_py_config() -> None:
         """Create config.ini."""
         config = configparser.ConfigParser()
@@ -135,6 +139,7 @@ class Configure:
         config["Bot"] = {
             "token": f"{Configure.obscure(Configure.get_token())}",
             "channel": f"{Configure.obscure(Configure.get_channel_id())}",
+            "delete_after": f"{Configure.get_deletion_time()}",
         }
         config["Custom Color"] = {"rgb": f"{Configure.get_custom_color()}"}
         config["Server"] = {
