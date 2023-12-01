@@ -79,7 +79,6 @@ class Harbinger:
 
 
 bot = Harbinger.bot
-cogs = Harbinger.cogs
 
 
 def main():
