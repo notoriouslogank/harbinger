@@ -4,7 +4,7 @@ from datetime import datetime
 
 import discord
 from discord.ext import commands
-
+from cogs.dev import Dev
 from config.configure import Configure
 
 
@@ -54,7 +54,7 @@ class Harbinger:
             if cog.endswith('.py') == True:
                 try:
                     await bot.load_extension(f'cogs.{cog[:-3]}')
-                    print(f"Loaded {cog}.")
+                    print(f"Loaded {cog}-{Dev.version}")
                 except Exception as exc:
                     print(f'An error has occured: {exc}.')
                     
