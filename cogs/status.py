@@ -194,8 +194,10 @@ class Status(commands.Cog):
         cmd = f"ERROR: UpError"
         cmd_msg = f"User does not have DEV role."
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        message = await ctx.send("You must be a developer to do that!")
+        await ctx.message.delete()
         if isinstance(error, commands.MissingRole):
-            await ctx.send("You must be a dev to do that!")
+            await message.edit(delete_after=20)
 
     @info.error
     async def info_error(self, ctx, error):
@@ -212,24 +214,30 @@ class Status(commands.Cog):
         cmd = f"ERROR: PingError"
         cmd_msg = f"User does not have DEV role."
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        message = await ctx.send("You must be a developer to do that!")
+        await ctx.message.delete()
         if isinstance(error, commands.MissingRole):
-            await ctx.send("You must be a dev to do that!")
+            await message.edit(delete_after=20)
 
     @uptime.error
     async def uptime_error(self, ctx, error):
         cmd = f"ERROR: UptimeError"
         cmd_msg = f"User does not have DEV role."
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        message = await ctx.send("You must be a developer to do that!")
+        await ctx.message.delete()
         if isinstance(error, commands.MissingRole):
-            await ctx.send("You must be a dev to do that!")
+            await message.edit(delete_after=20)
 
     @shutdown.error
     async def shutdown_error(self, ctx, error):
         cmd = f"ERROR: UptimeError"
         cmd_msg = f"User does not have DEV role."
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        message = await ctx.send("You must be a developer to do that!")
+        await ctx.message.delete()
         if isinstance(error, commands.MissingRole):
-            await ctx.send("You must be a dev to do that!")
+            await message.edit(delete_after=20)
 
 
 async def setup(bot):
