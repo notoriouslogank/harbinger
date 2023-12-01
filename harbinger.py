@@ -53,7 +53,7 @@ class Harbinger:
         for cog in listdir('cogs'):
             if cog.endswith('.py') == True:
                 try:
-                    await bot.load_extension(cog)
+                    await bot.load_extension(f'cogs.{cog}')
                     print(f"Loaded {cog}.")
                 except Exception as exc:
                     print(f'An error has occured: {exc}.')
