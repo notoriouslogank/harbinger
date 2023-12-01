@@ -269,7 +269,7 @@ class Status(commands.Cog):
         Args:
             error (MissingRole): Raised if user does not have developer role.
         """
-        cmd = f"ERROR: UptimeError"
+        cmd = f"ERROR: ShutdownError"
         cmd_msg = f"User does not have DEV role."
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         message = await ctx.send("You must be a developer to do that!")
