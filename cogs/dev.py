@@ -21,13 +21,13 @@ class Dev(commands.Cog):
         try:
             for cog in listdir("./cogs"):
                 if cog.endswith(".py") == True:
-                    Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
                     await self.bot.reload_extension(f"cogs.{cog[:-3]}")
         except Exception as exc:
             await message.edit(
                 content=f"An error has occured: {exc}", delete_after=deletion_time
             )
         else:
+            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
             await message.edit(
                 content="All cogs have been reloaded.", delete_after=deletion_time
             )
@@ -58,13 +58,13 @@ class Dev(commands.Cog):
         message = await ctx.send("Loading...")
         await ctx.message.delete()
         try:
-            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
             await self.bot.load_extension(self.check_cog(cog))
         except Exception as exc:
             await message.edit(
                 content=f"An erroor has occured: {exc}", delete_after=deletion_time
             )
         else:
+            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
             await message.edit(
                 content=f"{self.check_cog(cog)} has been loaded.",
                 delete_after=deletion_time,
@@ -83,13 +83,13 @@ class Dev(commands.Cog):
         message = await ctx.send("Unloading...")
         await ctx.message.delete()
         try:
-            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
             await self.bot.unload_extension(self.check_cog(cog))
         except Exception as exc:
             await message.edit(
                 content=f"An error has occured: {exc}", delete_after=deletion_time
             )
         else:
+            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
             await message.edit(
                 content=f"{self.check_cog(cog)} has been unloaded.",
                 delete_after=deletion_time,
@@ -108,13 +108,13 @@ class Dev(commands.Cog):
         message = await ctx.send("Reloading...")
         await ctx.message.delete()
         try:
-            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
             await self.bot.reload_extension(self.check_cog(cog))
         except Exception as exc:
             await message.edit(
                 content=f"An error has occured: {exc}", delete_after=deletion_time
             )
         else:
+            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
             await message.edit(
                 content=f"{self.check_cog(cog)} has been reloaded.",
                 delete_after=deletion_time,
