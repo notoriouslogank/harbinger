@@ -24,6 +24,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Known Issues
 
 - Missing !help() commands for all dev commands
+- Missing error message for !changelog() when missing required role
+- Output of !changelog() should not autodelete
 
 ## [2.5.0] - 2023-30-11
 
