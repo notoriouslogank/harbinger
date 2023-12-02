@@ -150,15 +150,13 @@ class Status(commands.Cog):
 
     @commands.command()
     @commands.has_role(dev)
-    async def changelog(self, ctx: commands.Context) -> None:  # TODO: Fix this (again)
+    async def changelog(self, ctx: commands.Context) -> None:
         """Get changelog."""
         cmd = "!changelog"
         cmd_msg = f"Uploaded CHANGELOG.md to channel."
         file = discord.File(fp="docs/CHANGELOG.md", filename="CHANGELOG.md")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-        message = await ctx.send(file=file)
-        await ctx.message.delete()
-        await message.edit(delete_after=deletion_time)
+        await ctx.send(file=file)
 
     @commands.command()
     async def bug(self, ctx: commands.Context, *raw_message: str) -> None:
@@ -202,6 +200,21 @@ class Status(commands.Cog):
         sys.exit()
 
     # ERRORS
+    @changelog.error
+    async def changelog_error(self, ctx, error):
+        """Error raised when !changelog command fails.
+
+        Args:
+            error (MissingRole): Raised if user does not have developer role.
+        """
+        cmd = f"ERROR: ChangelogError"
+        cmd_msg = f"User does not have DEV role."
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        message = await ctx.send("You must be a developer to do that!")
+        await ctx.message.delete()
+        if isinstance(error, commands.MissingRole):
+            await message.edit(delete_after=deletion_time)
+
     @up.error
     async def up_error(self, ctx, error):
         """Error raised when !up command fails
