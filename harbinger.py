@@ -1,30 +1,30 @@
-from configparser import ConfigParser
 from datetime import datetime
 from os import listdir
 
 import discord
 from discord.ext import commands
 
-from config.configure import Configure
 from config.read_configs import ReadConfigs as configs
+
+TOKEN = configs.token
 
 class Harbinger:
     """Class for the main bot functions."""
 
-    #config_path = "config/config.ini"
-    #config = ConfigParser()
-    #config.read(config_path)
-    #email_address = Configure.reveal(config["Email"]["address"])
-    #email_pass = Configure.reveal(config["Email"]["password"])
-    #server_dir = Configure.reveal(config["Server"]["server_dir"])
-    #startup_script = Configure.reveal(config["Server"]["startup_script"])
-    #server_public_ip = Configure.reveal(config["Server"]["server_public_ip"])
-    #moderator_role_id = int(Configure.reveal(config["Roles"]["moderator"]))
-    #developer_role_id = int(Configure.reveal(config["Roles"]["developer"]))
-    #d_time = int(config["Bot"]["delete_after"])
-    #rgb = config["Custom Color"]["rgb"]
-    #r, g, b = map(int, rgb.split())
-    #custom_color = discord.Color.from_rgb(int(r), int(g), int(b))
+    # config_path = "config/config.ini"
+    # config = ConfigParser()
+    # config.read(config_path)
+    # email_address = Configure.reveal(config["Email"]["address"])
+    # email_pass = Configure.reveal(config["Email"]["password"])
+    # server_dir = Configure.reveal(config["Server"]["server_dir"])
+    # startup_script = Configure.reveal(config["Server"]["startup_script"])
+    # server_public_ip = Configure.reveal(config["Server"]["server_public_ip"])
+    # moderator_role_id = int(Configure.reveal(config["Roles"]["moderator"]))
+    # developer_role_id = int(Configure.reveal(config["Roles"]["developer"]))
+    # d_time = int(config["Bot"]["delete_after"])
+    # rgb = config["Custom Color"]["rgb"]
+    # r, g, b = map(int, rgb.split())
+    # custom_color = discord.Color.from_rgb(int(r), int(g), int(b))
 
     start_time = datetime.now()
 
@@ -68,8 +68,7 @@ class Harbinger:
 
     def start() -> None:
         """Start the bot."""
-        token = configs.
-        bot.run(token)
+        bot.run(TOKEN)
 
     async def send_dm(ctx, member: discord.Member, *, content) -> None:
         """Create a Direct Message channel with a given member."""
