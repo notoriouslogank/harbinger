@@ -6,8 +6,8 @@ from discord.ext import commands
 from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
 
-PUBLIC_IP = configs.server_public_ip()
-STARTUP_SCRIPT = configs.startup_script()
+SERVER_PUBLIC_IP = configs.server_public_ip()
+SERVER_STARTUP_SCRIPT = configs.startup_script()
 
 bot = Harbinger.bot
 
@@ -28,7 +28,7 @@ class Minecraft(commands.Cog):
             embed: An embed object containing the Minecraft server version and IP address.
         """
         minecraft_embed = discord.Embed(title="Minecraft", description=f"{version}")
-        minecraft_embed.add_field(name="Server Address", value=f"{PUBLIC_IP}")
+        minecraft_embed.add_field(name="Server Address", value=f"{SERVER_PUBLIC_IP}")
         return minecraft_embed
 
     @commands.command()
@@ -43,7 +43,14 @@ class Minecraft(commands.Cog):
         embed = Minecraft.create_embed("v1.20.1")
         if state == "on":
             subprocess.run(
-                ["tmux", "send", "-t", "harbinger:0", f"zsh {STARTUP_SCRIPT}", "C-m"]
+                [
+                    "tmux",
+                    "send",
+                    "-t",
+                    "harbinger:0",
+                    f"zsh {SERVER_STARTUP_SCRIPT}",
+                    "C-m",
+                ]
             )
             await ctx.send("Server is starting...")
             await ctx.send(embed=embed)
