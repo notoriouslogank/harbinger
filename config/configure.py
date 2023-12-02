@@ -1,8 +1,8 @@
 import base64
 import configparser
 import socket
-from os import path
 
+from read_configs import ReadConfigs as configs
 from requests import get
 
 
@@ -27,21 +27,6 @@ class Configure:
         base64_data = base64_data_bytes.decode("ascii")
         return base64_data
 
-    def reveal(b64data) -> str:
-        """Decode base64-encoded data.
-
-        Args:
-            b64data (bytes): Base64-encoded data to decode.
-
-        Returns:
-            str: Decoded string.
-        """
-        base64_data = b64data
-        base64_data_bytes = base64_data.encode("ascii")
-        data_bytes = base64.b64decode(base64_data_bytes)
-        data = data_bytes.decode("ascii")
-        return data
-
     def get_token() -> str:
         """Prompt user for API token.
 
@@ -49,7 +34,6 @@ class Configure:
             str: Discord API token
         """
         token = input("Discord API Token: ")
-        print(token)
         return token
 
     def get_channel_id() -> int:
@@ -153,9 +137,7 @@ class Configure:
             "developer": f"{Configure.obscure(Configure.get_developer_role())}",
         }
 
-        with open(
-            f"{Configure.config_path}{Configure.python_config_file}", "w"
-        ) as configfile:
+        with open(f"{Configure.python_config_file}", "w") as configfile:
             config.write(configfile)
 
     def write_sh_config(configfile) -> None:
@@ -164,10 +146,8 @@ class Configure:
         Args:
             configfile (str): Path to config.ini
         """
-        config = configparser.ConfigParser()
-        config.read(configfile)
-        server_dir = Configure.reveal(config["Server"]["server_dir"])
-        startup_script = Configure.reveal(config["Server"]["startup_script"])
+        server_dir = configs.server_dir()
+        startup_script = configs.startup_script()
         text = f"#!/bin/bash\nServerDir={server_dir}\nStartupScript={startup_script}\n"
 
         with open(f"{Configure.config_path}{Configure.shell_config_file}", "w") as conf:

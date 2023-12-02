@@ -133,15 +133,6 @@ class Music(commands.Cog):
             voice_client.stop()
             await ctx.send("Stopping...")
 
-    #    @commands.command()  # Felt cute, might delete later
-    #    async def yt(self, ctx, *, url) -> None:
-    #        async with ctx.typing():
-    #            player = await YTDLSource.from_url(url, loop=self.bot.loop)
-    #            ctx.voice_client.play(
-    #                player, after=lambda e: print(f"Player error: {e}") if e else None
-    #            )
-    #        await ctx.send(f"Now playing: {player.title}")
-
     @commands.command()
     async def stream(self, ctx, *, url) -> None:
         cmd = f"!stream {url}"

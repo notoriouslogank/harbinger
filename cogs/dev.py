@@ -2,9 +2,10 @@ from os import listdir
 
 from discord.ext import commands
 
+from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
 
-deletion_time = Harbinger.d_time
+DELETION_TIME = configs.delete_time()
 
 
 class Dev(commands.Cog):
@@ -25,12 +26,12 @@ class Dev(commands.Cog):
                     await self.bot.reload_extension(f"cogs.{cog[:-3]}")
         except Exception as exc:
             await message.edit(
-                content=f"An error has occured: {exc}", delete_after=deletion_time
+                content=f"An error has occured: {exc}", delete_after=DELETION_TIME
             )
         else:
             Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
             await message.edit(
-                content="All cogs have been reloaded.", delete_after=deletion_time
+                content="All cogs have been reloaded.", delete_after=DELETION_TIME
             )
 
     def check_cog(self, cog) -> str:
@@ -62,13 +63,13 @@ class Dev(commands.Cog):
             await self.bot.load_extension(self.check_cog(cog))
         except Exception as exc:
             await message.edit(
-                content=f"An erroor has occured: {exc}", delete_after=deletion_time
+                content=f"An erroor has occured: {exc}", delete_after=DELETION_TIME
             )
         else:
             Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
             await message.edit(
                 content=f"{self.check_cog(cog)} has been loaded.",
-                delete_after=deletion_time,
+                delete_after=DELETION_TIME,
             )
 
     @commands.command()
@@ -87,13 +88,13 @@ class Dev(commands.Cog):
             await self.bot.unload_extension(self.check_cog(cog))
         except Exception as exc:
             await message.edit(
-                content=f"An error has occured: {exc}", delete_after=deletion_time
+                content=f"An error has occured: {exc}", delete_after=DELETION_TIME
             )
         else:
             Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
             await message.edit(
                 content=f"{self.check_cog(cog)} has been unloaded.",
-                delete_after=deletion_time,
+                delete_after=DELETION_TIME,
             )
 
     @commands.command()
@@ -112,13 +113,13 @@ class Dev(commands.Cog):
             await self.bot.reload_extension(self.check_cog(cog))
         except Exception as exc:
             await message.edit(
-                content=f"An error has occured: {exc}", delete_after=deletion_time
+                content=f"An error has occured: {exc}", delete_after=DELETION_TIME
             )
         else:
             Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
             await message.edit(
                 content=f"{self.check_cog(cog)} has been reloaded.",
-                delete_after=deletion_time,
+                delete_after=DELETION_TIME,
             )
 
     @reload_all.error
@@ -134,7 +135,7 @@ class Dev(commands.Cog):
         message = await ctx.send("Only the bot owner can do that!")
         await ctx.message.delete()
         if isinstance(error, commands.MissingRole):
-            await message.edit(delete_after=deletion_time)
+            await message.edit(delete_after=DELETION_TIME)
 
     @reload_cog.error
     async def reload_cog_error(self, ctx, error):
@@ -149,7 +150,7 @@ class Dev(commands.Cog):
         message = await ctx.send("Only the bot owner can do that!")
         await ctx.message.delete()
         if isinstance(error, commands.MissingRole):
-            await message.edit(delete_after=deletion_time)
+            await message.edit(delete_after=DELETION_TIME)
 
     @unload_cog.error
     async def unload_cog_error(self, ctx, error):
@@ -164,7 +165,7 @@ class Dev(commands.Cog):
         message = await ctx.send("Only the bot owner can do that!")
         await ctx.message.delete()
         if isinstance(error, commands.MissingRole):
-            await message.edit(delete_after=deletion_time)
+            await message.edit(delete_after=DELETION_TIME)
 
     @load_cog.error
     async def load_cog_error(self, ctx, error):
@@ -179,7 +180,7 @@ class Dev(commands.Cog):
         message = await ctx.send("Only the bot owner can do that!")
         await ctx.message.delete()
         if isinstance(error, commands.MissingRole):
-            await message.edit(delete_after=deletion_time)
+            await message.edit(delete_after=DELETION_TIME)
 
 
 async def setup(bot):

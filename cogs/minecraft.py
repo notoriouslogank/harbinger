@@ -3,10 +3,13 @@ import subprocess
 import discord
 from discord.ext import commands
 
+from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
 
+PUBLIC_IP = configs.server_public_ip()
+STARTUP_SCRIPT = configs.startup_script()
+
 bot = Harbinger.bot
-custom_color = Harbinger.custom_color
 
 
 class Minecraft(commands.Cog):
@@ -24,9 +27,8 @@ class Minecraft(commands.Cog):
         Returns:
             embed: An embed object containing the Minecraft server version and IP address.
         """
-        ip = Harbinger.server_public_ip
         minecraft_embed = discord.Embed(title="Minecraft", description=f"{version}")
-        minecraft_embed.add_field(name="Server Address", value=f"{ip}")
+        minecraft_embed.add_field(name="Server Address", value=f"{PUBLIC_IP}")
         return minecraft_embed
 
     @commands.command()
@@ -38,11 +40,10 @@ class Minecraft(commands.Cog):
         """
         cmd = f"!switch({state})"
         cmd_msg = f"Switched Minecraft server {state}."
-        startup_script = Harbinger.startup_script
         embed = Minecraft.create_embed("v1.20.1")
         if state == "on":
             subprocess.run(
-                ["tmux", "send", "-t", "harbinger:0", f"zsh {startup_script}", "C-m"]
+                ["tmux", "send", "-t", "harbinger:0", f"zsh {STARTUP_SCRIPT}", "C-m"]
             )
             await ctx.send("Server is starting...")
             await ctx.send(embed=embed)
