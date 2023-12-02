@@ -1,12 +1,12 @@
-from os import path
-
 import discord
 from discord.ext import commands
 
+from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
 
-mod = Harbinger.moderator_role_id
-deletion_time = Harbinger.d_time
+MODERATOR_ROLE_ID = configs.moderator_id()
+DELETION_TIME = configs.delete_time()
+CUSTOM_COLOR = configs.custom_color()
 
 
 class Moderation(commands.Cog):
@@ -16,7 +16,7 @@ class Moderation(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    @commands.has_role(mod)
+    @commands.has_role(MODERATOR_ROLE_ID)
     async def clear(self, ctx: commands.Context, amount: int = 2) -> None:
         """Delete a number of messages in channel."""
 
@@ -30,7 +30,7 @@ class Moderation(commands.Cog):
             Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
-    @commands.has_role(mod)
+    @commands.has_role(MODERATOR_ROLE_ID)
     async def serverinfo(self, ctx: commands.Context):
         """Create embeds containing server details and member information and send them to the channel."""
         cmd = "!serverinfo"
@@ -44,7 +44,7 @@ class Moderation(commands.Cog):
         embed = discord.Embed(
             title=ctx.guild.name + "Server Information",
             description=desc,
-            color=Harbinger.custom_color,
+            color=CUSTOM_COLOR,
         )
         embed.add_field(name="Owner", value=owner, inline=True)
         embed.add_field(name="Server ID", value=guild_id, inline=True)
@@ -64,7 +64,7 @@ class Moderation(commands.Cog):
             await ctx.send(embed=members_embed)
 
     @commands.command()
-    @commands.has_role(mod)
+    @commands.has_role(MODERATOR_ROLE_ID)
     async def whois(self, ctx: commands.Context, member: discord.Member) -> None:
         """Get detailed information about given member.
 
@@ -85,7 +85,7 @@ class Moderation(commands.Cog):
         await ctx.send(embed=whois_embed)
 
     @commands.command()
-    @commands.has_role(mod)
+    @commands.has_role(MODERATOR_ROLE_ID)
     async def say(self, ctx: commands.Context, *message: str) -> None:
         """Say message as bot."""
         cmd = f"!say({message})"
@@ -105,7 +105,6 @@ class Moderation(commands.Cog):
         """Create game info embed."""
         cmd = f"!playing({game}, {field}, {value})"
         cmd_msg = f"Created playing embed with these values: {game},{field},{value}"
-        custom_color = Harbinger.custom_color
         playing_embed = discord.Embed(title=f"{game}", description=f"{description}")
         playing_embed.add_field(name=f"{field}", value=f"{value}")
         await ctx.send(embed=playing_embed)
@@ -125,7 +124,7 @@ class Moderation(commands.Cog):
         message = await ctx.send("You must be a moderator to do that!")
         await ctx.message.delete()
         if isinstance(error, commands.MissingRole):
-            await message.edit(delete_after=deletion_time)
+            await message.edit(delete_after=DELETION_TIME)
 
     @say.error
     async def say_error(self, ctx, error) -> None:
@@ -140,7 +139,7 @@ class Moderation(commands.Cog):
         message = await ctx.send("You must be a moderator to do that!")
         await ctx.message.delete()
         if isinstance(error, commands.MissingRole):
-            await message.edit(delete_after=deletion_time)
+            await message.edit(delete_after=DELETION_TIME)
 
     @whois.error
     async def whois_error(self, ctx, error) -> None:
@@ -155,7 +154,7 @@ class Moderation(commands.Cog):
         message = await ctx.send("You must be a moderator to do that!")
         await ctx.message.delete()
         if isinstance(error, commands.MissingRole):
-            await message.edit(delete_after=deletion_time)
+            await message.edit(delete_after=DELETION_TIME)
 
     @serverinfo.error
     async def serverinfo_error(self, ctx, error) -> None:
@@ -170,7 +169,7 @@ class Moderation(commands.Cog):
         message = await ctx.send("You must be a moderator to do that!")
         await ctx.message.delete()
         if isinstance(error, commands.MissingRole):
-            await message.edit(delete_after=deletion_time)
+            await message.edit(delete_after=DELETION_TIME)
 
 
 async def setup(bot):

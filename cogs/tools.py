@@ -3,7 +3,10 @@ from random import randint
 import discord
 from discord.ext import commands
 
+from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
+
+CUSTOM_COLOR = configs.custom_color()
 
 bot = Harbinger.bot
 
@@ -77,11 +80,10 @@ class Tools(commands.Cog):
         """Play rock, paper, scissors against the bot."""
         cmd = f"!rps(choice)"
         cmd_msg = f"choice: {choice}"
-        custom_color = Harbinger.custom_color
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         choices = ["rock", "paper", "scissors"]
         botChoice = choices[randint(0, 2)]
-        embedRPS = discord.Embed(color=custom_color, title="rock, paper, scissors")
+        embedRPS = discord.Embed(color=CUSTOM_COLOR, title="rock, paper, scissors")
         embedRPS.add_field(name="You", value=f"{choice}", inline=True)
         embedRPS.add_field(name="Bot", value=f"{botChoice}", inline=True)
         if choice == botChoice:

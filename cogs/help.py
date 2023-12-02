@@ -1,7 +1,10 @@
 import discord
 from discord.ext import commands
 
+from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
+
+CUSTOM_COLOR = configs.custom_color()
 
 
 class HelpCommand(commands.Cog):
@@ -10,14 +13,12 @@ class HelpCommand(commands.Cog):
 
     @commands.command()
     async def help(self, ctx, *, command=None) -> None:
-        custom_color = Harbinger.custom_color
-
         # HELP
         if command == None:
             help_embed = discord.Embed(
                 title="Help",
                 description=f"Harbinger v{Harbinger.get_ver()}",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             help_embed.add_field(
                 name="Usage", value="!help <category|command>", inline=False
@@ -38,7 +39,7 @@ class HelpCommand(commands.Cog):
             dev_embed = discord.Embed(
                 title="Developer Commands",
                 description="Commands for bot maintenance.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             dev_embed.add_field(
                 name="!load_cog", value="Load a given cog.", inline=True
@@ -57,7 +58,7 @@ class HelpCommand(commands.Cog):
             minecraft_embed = discord.Embed(
                 title="Minecraft Commands",
                 description="Commands to control the Minecraft server instance.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             minecraft_embed.add_field(
                 name="!mccmd",
@@ -74,7 +75,7 @@ class HelpCommand(commands.Cog):
             moderation_embed = discord.Embed(
                 title="Moderation Commands",
                 description="Commands for moderating the Discord server.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             moderation_embed.add_field(
                 name="!clear",
@@ -94,7 +95,7 @@ class HelpCommand(commands.Cog):
             music_embed = discord.Embed(
                 title="Music Commands",
                 description="Commands to control the music player.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             music_embed.add_field(
                 name="!join",
@@ -122,7 +123,7 @@ class HelpCommand(commands.Cog):
             status_embed = discord.Embed(
                 title="Status Commands",
                 description="Commands to get various status information.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             status_embed.add_field(
                 name="!bug",
@@ -149,7 +150,7 @@ class HelpCommand(commands.Cog):
             tools_embed = discord.Embed(
                 title="Tools",
                 description="Various tools or interesting gadgets.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             tools_embed.add_field(
                 name="!add",
@@ -196,7 +197,7 @@ class HelpCommand(commands.Cog):
         # COMMANDS
         elif command == "add":
             embed = discord.Embed(
-                title="add", description="Add some numbers.", color=custom_color
+                title="add", description="Add some numbers.", color=CUSTOM_COLOR
             )
             embed.add_field(name="Usage", value="!add <*numbers>", inline=False)
             embed.add_field(
@@ -209,7 +210,7 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="ask",
                 description="Ask Harbinger for some advice",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             embed.add_field(name="Usage", value="!ask <*question>", inline=False)
             embed.add_field(
@@ -220,7 +221,7 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="bug",
                 description="Send a bug report to bot developers.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             embed.add_field(name="Usage", value="!bug <*report>", inline=False)
             embed.add_field(
@@ -233,7 +234,7 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="clear",
                 description="Remove an arbitrary number of messages from the current channel.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             embed.add_field(name="Usage", value="!clear <num>", inline=False)
             embed.add_field(
@@ -247,7 +248,7 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="cnote",
                 description="Clear all of your user notes.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             embed.add_field(name="Usage", value="!cnote", inline=False)
             embed.set_footer(text="Note: This action cannot be undone.")
@@ -256,7 +257,7 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="define",
                 description="Get the Meriam-Webster definition of a given word.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             embed.add_field(name="Usage", value="!define <word>", inline=False)
             embed.add_field(
@@ -267,7 +268,7 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="info",
                 description="Get detailed information about this bot.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             embed.add_field(name="Usage", value="!info", inline=False)
             await ctx.send(embed=embed)
@@ -275,7 +276,7 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="join",
                 description="Move the bot into current voice channel to prepare to play music.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             embed.add_field(name="Usage", value="!join", inline=False)
             await ctx.send(embed=embed)
@@ -283,7 +284,7 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="leave",
                 description="Remove the bot from the current voice channel.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             embed.add_field(name="Usage", value="!leave", inline=False)
             await ctx.send(embed=embed)
@@ -291,7 +292,7 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="lmgtfy",
                 description="Let me Google that for you.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             embed.add_field(name="Usage", value="!lmgtfy <*query>", inline=False)
             embed.add_field(
@@ -302,7 +303,7 @@ class HelpCommand(commands.Cog):
             await ctx.send(embed=embed)
         elif command == "load_cog":
             embed = discord.Embed(
-                title="load_cog", description="Load a given cog.", color=custom_color
+                title="load_cog", description="Load a given cog.", color=CUSTOM_COLOR
             )
             embed.add_field(name="Usage", value="!load_cog <cog>", inine=False)
             embed.add_field(name="<cog: str>", value="Cog to be loaded.", inline=True)
@@ -311,7 +312,7 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="mccmd",
                 description="Send an arbitrary command to the Minecraft server.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             embed.add_field(name="Usage", value="!mccmd <command>", inline=False)
             embed.add_field(
@@ -324,7 +325,7 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="note",
                 description="Add a note to your user notes file.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             embed.add_field(name="Usage", value="!note <*message>", inline=False)
             embed.add_field(
@@ -337,7 +338,7 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="notes",
                 description="Retreive all of your user notes.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             embed.add_field(name="Usage", value="!notes", inline=False)
             await ctx.send(embed=embed)
@@ -345,13 +346,13 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="pause",
                 description="Pause the currently playing track.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             embed.add_field(name="Usage", value="!pause", inline=False)
             await ctx.send(embed=embed)
         elif command == "ping":
             embed = discord.Embed(
-                title="ping", description="Get network latency.", color=custom_color
+                title="ping", description="Get network latency.", color=CUSTOM_COLOR
             )
             embed.add_field(name="Usage", value="!ping", inline=False)
             await ctx.send(embed=embed)
@@ -359,7 +360,7 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="play",
                 description="Resume playback of paused music track.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             embed.add_field(name="Usage", value="!play", inline=False)
             await ctx.send(embed=embed)
@@ -367,7 +368,7 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="playing",
                 description="Create an embed with arbitrary game information.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             embed.add_field(
                 name="Usage",
@@ -395,7 +396,7 @@ class HelpCommand(commands.Cog):
             await ctx.send(embed=embed)
         elif command == "roll":
             embed = discord.Embed(
-                title="roll", description=f"Roll some dice.", color=custom_color
+                title="roll", description=f"Roll some dice.", color=CUSTOM_COLOR
             )
             embed.add_field(name="Usage", value=f"!roll *x*d*y*", inline=False)
             embed.add_field(
@@ -407,7 +408,7 @@ class HelpCommand(commands.Cog):
             await ctx.send(embed=embed)
         elif command == "reload_all":
             embed = discord.Embed(
-                title="reload_all", description="Reload all cogs.", color=custom_color
+                title="reload_all", description="Reload all cogs.", color=CUSTOM_COLOR
             )
             embed.add_field(name="Usage", value="!reload_all", inline=False)
             await ctx.send(embed=embed)
@@ -415,7 +416,7 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="reload_cog",
                 description="Reload a given cog.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             embed.add_field(name="Usage", value="!reload_cog <cog>", inline=False)
             embed.add_field(name="<cog: str>", value="Cog to be reloaded.", inline=True)
@@ -424,7 +425,7 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="rps",
                 description="Play rock, paper, scissors against the bot.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             embed.add_field(
                 name="Usage", value="!rps <rock|paper|scissors>", inline=False
@@ -439,7 +440,7 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="say",
                 description="Send message to current channel as bot.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             embed.add_field(name="Usage", value="!say <*message>", inline=False)
             embed.add_field(
@@ -452,7 +453,7 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="serverinfo",
                 description="Get detailed server information.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             embed.add_field(name="Usage", value="!serverinfo", inline=False)
             await ctx.send(embed=embed)
@@ -460,7 +461,7 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="shutdown",
                 description="Gracefully shut down the bot.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             embed.add_field(name="Usage", value="!shutdown", inline=False)
             await ctx.send(embed=embed)
@@ -468,7 +469,7 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="stream",
                 description="Start streaming audio in the current voice channel.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             embed.add_field(name="Usage", value="!stream <URL>", inline=False)
             embed.add_field(
@@ -482,7 +483,7 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="unload_cog",
                 description="Unload a given cog.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             embed.add_field(name="Usage", value="!unload_cog <cog>", inline=False)
             embed.add_field(name="<cog: str>", value="Cog to be unloaded.", inline=True)
@@ -490,7 +491,7 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="up",
                 description="Check whether bot is online.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             embed.add_field(name="Usage", value="!up", inline=False)
             await ctx.send(embed=embed)
@@ -498,7 +499,7 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="uptime",
                 description="Get current uptime of the bot.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             embed.add_field(name="Usage", value="!uptime", inline=False)
             await ctx.send(embed=embed)
@@ -506,7 +507,7 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="whois",
                 description="Get detailed information about a given server member.",
-                color=custom_color,
+                color=CUSTOM_COLOR,
             )
             embed.add_field(name="Usage", value="!whois <member>", inline=False)
             embed.add_field(
