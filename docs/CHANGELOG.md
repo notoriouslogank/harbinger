@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.7.2] - 2023-01-12
+
+- Removed all underscore characters in CHANGELOG.md to (hopefully) fix formatting issues
+
 ## [2.7.1] - 2023-01-12
 
 ### Fixed
@@ -47,7 +51,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 - Dev Cog: allows for arbitrary cogs to be loaded/unloaded without shutting down the bot
-- config.ini: deletion_timer to determine when to autodelete system messages from the channel (errors, etc.)
+- config.ini: deletion-timer to determine when to autodelete system messages from the channel (errors, etc.)
 - Various error messages
 
 ### Fixed
@@ -92,7 +96,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 - cogs/helprewrite.py (name will be changed next version)
-
 
 ## [2.3.1] - 2023-29-11
 
@@ -216,7 +219,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Removed
 
-- utils/server_agent.py
+- utils/server-agent.py
 - many unused imports throughtout
 
 ### Changed
@@ -265,7 +268,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
-- docs/sample_env file for end-user configuration
+- docs/sample-env file for end-user configuration
 
 ### Removed
 
@@ -298,7 +301,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## Added
 
 - harbinger.py takes the place of main.py as the entry point for the system
-- New cog: mc_server
+- New cog: mc-server
 
 ## [1.4.0] - 2023-10-11
 
@@ -712,7 +715,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Removed
 
-- utils/server_agent.py
+- utils/server-agent.py
 - many unused imports throughtout
 
 ### Changed
@@ -761,7 +764,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
-- docs/sample_env file for end-user configuration
+- docs/sample-env file for end-user configuration
 
 ### Removed
 
@@ -794,7 +797,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## Added
 
 - harbinger.py takes the place of main.py as the entry point for the system
-- New cog: mc_server
+- New cog: mc-server
 
 ## [1.4.0] - 2023-10-11
 
