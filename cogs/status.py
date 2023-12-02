@@ -150,7 +150,7 @@ class Status(commands.Cog):
 
     @commands.command()
     @commands.has_role(dev)
-    async def changelog(self, ctx: commands.Context) -> None:  # TODO: Fix this (again)
+    async def changelog(self, ctx: commands.Context) -> None:
         """Get changelog."""
         cmd = "!changelog"
         cmd_msg = f"Uploaded CHANGELOG.md to channel."
