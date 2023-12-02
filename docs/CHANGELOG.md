@@ -4,17 +4,23 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.7.1] - 2023-01-12
+
+### Fixed
+
+- Added missing commands to the !help() commands list
+
 ## [2.7.0] - 2023-01-12
 
 ### Changed
 
-- Split configure.py into two modules: configure.py and read_configs.py
-- All config.ini reads are now done within read_configs.py
+- Split configure.py into two modules: configure.py and readconfigs.py
+- All config.ini reads are now done within readconfigs.py
 - All configuration entries are now treated as constants in the modules which use them
 
 ### Added
 
-- DELETION_TIME configuration setting for auto-delete messages
+- DELETIONTIME configuration setting for auto-delete messages
 
 ### Removed
 
@@ -27,14 +33,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [2.6.1] - 2023-30-11
 
+### Added
+
+- !help() command messages for all cogs.dev commands
+
 ### Fixed
 
 - Previously-uncaught exception in !changelog() when MissingRole
 - !changelog() output no longer auto-deletes
-
-### Added
-
-- !help() command messages for all cogs.dev commands
 
 ## [2.6.0] - 2023-30-11
 

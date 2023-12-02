@@ -25,12 +25,12 @@ class HelpCommand(commands.Cog):
             )
             help_embed.add_field(
                 name="Help Categories",
-                value="minecraft, moderation, music, status, tools",
+                value="dev, minecraft, moderation, music, status, tools",
                 inline=False,
             )
             help_embed.add_field(
                 name="Help Commands",
-                value="mccmd, switch, clear, serverinfo, whois, join, leave, pause, play, stream, bug, info, ping, shutdown, up, uptime, add, ask, cnote, define, lmgtfy, note, notes, playing, roll, rps, say",
+                value="add, ask, bug, clear, cnote, define, info, join, leave, lmgtfy, load_cog, mccmd, note, notes, pause, ping, play, playing, reload_all, reload_cog, roll, rps, say, serverinfo, shutdown, stream, switch, unload_cog, up, uptime, whois",
                 inline=False,
             )
             await ctx.send(embed=help_embed)

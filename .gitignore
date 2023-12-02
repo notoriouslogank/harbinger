@@ -62,3 +62,4 @@ __pycache__
 test.py
 .config.ini
 user_notes/logank.txt
+.markdownlint.json
