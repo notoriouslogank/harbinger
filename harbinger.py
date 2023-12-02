@@ -6,7 +6,7 @@ from discord.ext import commands
 
 from config.read_configs import ReadConfigs as configs
 
-TOKEN = configs.token
+TOKEN = configs.token()
 
 class Harbinger:
     """Class for the main bot functions."""
