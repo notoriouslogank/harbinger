@@ -1,6 +1,6 @@
 # Harbinger
 
-Harbinger is a (fairly) straightforward Discord bot written in Python (and a tiny amount of Bash).  It contains commands for Discord servers as well as integration to control a Minecraft server from Discord.
+Harbinger, a Discord bot crafted in Python with a touch of Bash, seamlessly blends essential Discord server commands with a sophisticated integration that empowers users to effortlessly control their Minecraft server directly from within the Discord platform.
 
 ## Installation
 
