@@ -34,6 +34,25 @@ class HelpCommand(commands.Cog):
             )
             await ctx.send(embed=help_embed)
         # CATEGORIES
+        elif command == "dev":
+            dev_embed = discord.Embed(
+                title="Developer Commands",
+                description="Commands for bot maintenance.",
+                color=custom_color,
+            )
+            dev_embed.add_field(
+                name="!load_cog", value="Load a given cog.", inline=True
+            )
+            dev_embed.add_field(
+                name="!reload_all", value="Reload all cogs.", inline=True
+            )
+            dev_embed.add_field(
+                name="!reload_cog", value="Reload a given cog.", inline=True
+            )
+            dev_embed.add_field(
+                name="!unload_cog", value="Unload a given cog.", inline=True
+            )
+            await ctx.send(embed=dev_embed)
         elif command == "minecraft":
             minecraft_embed = discord.Embed(
                 title="Minecraft Commands",
@@ -70,8 +89,6 @@ class HelpCommand(commands.Cog):
                 value="Get detailed information about a server member.",
                 inline=True,
             )
-            #            moderation_embed.add_field()
-            #            moderation_embed.add_field()
             await ctx.send(embed=moderation_embed)
         elif command == "music":
             music_embed = discord.Embed(
@@ -283,6 +300,13 @@ class HelpCommand(commands.Cog):
                 inline=True,
             )
             await ctx.send(embed=embed)
+        elif command == "load_cog":
+            embed = discord.Embed(
+                title="load_cog", description="Load a given cog.", color=custom_color
+            )
+            embed.add_field(name="Usage", value="!load_cog <cog>", inine=False)
+            embed.add_field(name="<cog: str>", value="Cog to be loaded.", inline=True)
+            await ctx.send(embed=embed)
         elif command == "mccmd":
             embed = discord.Embed(
                 title="mccmd",
@@ -381,6 +405,21 @@ class HelpCommand(commands.Cog):
                 name="<y: int>", value="*y*-sided die to be rolled.", inline=True
             )
             await ctx.send(embed=embed)
+        elif command == "reload_all":
+            embed = discord.Embed(
+                title="reload_all", description="Reload all cogs.", color=custom_color
+            )
+            embed.add_field(name="Usage", value="!reload_all", inline=False)
+            await ctx.send(embed=embed)
+        elif command == "reload_cog":
+            embed = discord.Embed(
+                title="reload_cog",
+                description="Reload a given cog.",
+                color=custom_color,
+            )
+            embed.add_field(name="Usage", value="!reload_cog <cog>", inline=False)
+            embed.add_field(name="<cog: str>", value="Cog to be reloaded.", inline=True)
+            await ctx.send(embed=embed)
         elif command == "rps":
             embed = discord.Embed(
                 title="rps",
@@ -439,6 +478,14 @@ class HelpCommand(commands.Cog):
                 text="Note: while other websites *may* work, only YouTube URLs are *officially* supported."
             )
             await ctx.send(embed=embed)
+        elif command == "unload_cog":
+            embed = discord.Embed(
+                title="unload_cog",
+                description="Unload a given cog.",
+                color=custom_color,
+            )
+            embed.add_field(name="Usage", value="!unload_cog <cog>", inline=False)
+            embed.add_field(name="<cog: str>", value="Cog to be unloaded.", inline=True)
         elif command == "up":
             embed = discord.Embed(
                 title="up",
