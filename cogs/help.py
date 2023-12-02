@@ -305,7 +305,7 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="load_cog", description="Load a given cog.", color=CUSTOM_COLOR
             )
-            embed.add_field(name="Usage", value="!load_cog <cog>", inine=False)
+            embed.add_field(name="Usage", value="!load_cog <cog>", inline=False)
             embed.add_field(name="<cog: str>", value="Cog to be loaded.", inline=True)
             await ctx.send(embed=embed)
         elif command == "mccmd":
