@@ -156,9 +156,7 @@ class Status(commands.Cog):
         cmd_msg = f"Uploaded CHANGELOG.md to channel."
         file = discord.File(fp="docs/CHANGELOG.md", filename="CHANGELOG.md")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-        message = await ctx.send(file=file)
-        await ctx.message.delete()
-        await message.edit(delete_after=deletion_time)
+        await ctx.send(file=file)
 
     @commands.command()
     async def bug(self, ctx: commands.Context, *raw_message: str) -> None:
