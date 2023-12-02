@@ -200,6 +200,21 @@ class Status(commands.Cog):
         sys.exit()
 
     # ERRORS
+    @changelog.error
+    async def changelog_error(self, ctx, error):
+        """Error raised when !changelog command fails.
+
+        Args:
+            error (MissingRole): Raised if user does not have developer role.
+        """
+        cmd = f"ERROR: ChangelogError"
+        cmd_msg = f"User does not have DEV role."
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        message = await ctx.send("You must be a developer to do that!")
+        await ctx.message.delete()
+        if isinstance(error, commands.MissingRole):
+            await message.edit(delete_after=deletion_time)
+
     @up.error
     async def up_error(self, ctx, error):
         """Error raised when !up command fails
