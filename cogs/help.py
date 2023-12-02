@@ -479,6 +479,19 @@ class HelpCommand(commands.Cog):
                 text="Note: while other websites *may* work, only YouTube URLs are *officially* supported."
             )
             await ctx.send(embed=embed)
+        elif command == "switch":
+            embed = discord.Embed(
+                title="switch",
+                description="Toggle the Minecraft server on or off.",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(name="Usage", value="!switch <on|off>", inline=False)
+            embed.add_field(
+                name="<on|off: str>",
+                value="Whether to turn the server ON or OFF",
+                inline=True,
+            )
+            await ctx.send(embed=embed)
         elif command == "unload_cog":
             embed = discord.Embed(
                 title="unload_cog",
@@ -487,6 +500,7 @@ class HelpCommand(commands.Cog):
             )
             embed.add_field(name="Usage", value="!unload_cog <cog>", inline=False)
             embed.add_field(name="<cog: str>", value="Cog to be unloaded.", inline=True)
+            await ctx.send(embed=embed)
         elif command == "up":
             embed = discord.Embed(
                 title="up",
