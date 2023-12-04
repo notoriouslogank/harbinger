@@ -42,8 +42,8 @@ class Tools(commands.Cog):
     async def define(self, ctx: commands.Context, word: str) -> None:
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://api.dictionaryapi.dev/api/v2/entries/en/{word}') as definition:
-                result = await definition.json()
-                print(json.load(result))
+                result = definition.json()
+                print(result)
     
 #    @commands.command()
 #    async def define(self, ctx: commands.Context, word: str) -> None:
