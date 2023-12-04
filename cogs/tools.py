@@ -1,3 +1,4 @@
+from curses import keyname
 import json
 import aiohttp
 from random import randint
@@ -41,7 +42,7 @@ class Tools(commands.Cog):
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://api.dictionaryapi.dev/api/v2/entries/en/{word}') as definition:
                 result = await definition.json()
-                print(result[0]["definition"])
+                print(result[keyname])
     
 #    @commands.command()
 #    async def define(self, ctx: commands.Context, word: str) -> None:
