@@ -43,10 +43,10 @@ class Tools(commands.Cog):
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://api.dictionaryapi.dev/api/v2/entries/en/{word}') as resp:
                 dict_entry = await resp.json()
-                origin = dict_entry[0]["phonetics"]
+                phonetics = dict_entry[0]["phonetics"][1]
                 definition = dict_entry[0]["meanings"][0]["definitions"][0]["definition"]
                 #origin = dict_entry[0]["origin"]
-                print(definition, origin)
+                print(definition, phonetics)
                 
 #    @commands.command()
 #    async def define(self, ctx: commands.Context, word: str) -> None:
