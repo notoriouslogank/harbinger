@@ -46,7 +46,7 @@ class Tools(commands.Cog):
                 phonetics = dict_entry[0]["phonetics"][1]["text"]
                 definition = dict_entry[0]["meanings"][0]["definitions"][0]["definition"]
                 origin = dict_entry[0]["origin"]
-                print(definition, phonetics, origin)
+                print(origin)
                 
 #    @commands.command()
 #    async def define(self, ctx: commands.Context, word: str) -> None:
