@@ -45,8 +45,8 @@ class Tools(commands.Cog):
                 dict_entry = await resp.json()
                 phonetics = dict_entry[0]["phonetic"]
                 definition = dict_entry[0]["meanings"][0]["definitions"][0]["definition"]
-                origin = dict_entry[0]["origin"]
-                print(phonetics, definition, origin)
+                #origin = dict_entry[0]["origin"]
+                print(phonetics, definition)
                 
 #    @commands.command()
 #    async def define(self, ctx: commands.Context, word: str) -> None:
