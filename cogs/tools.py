@@ -1,5 +1,6 @@
 from curses import keyname
 import json
+from pstats import SortKey
 import aiohttp
 from random import randint
 
@@ -42,7 +43,7 @@ class Tools(commands.Cog):
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://api.dictionaryapi.dev/api/v2/entries/en/{word}') as definition:
                 result = await definition.json()
-                print(result[1])
+                print(definition.json(SortKey()))
     
 #    @commands.command()
 #    async def define(self, ctx: commands.Context, word: str) -> None:
