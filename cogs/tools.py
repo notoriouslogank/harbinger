@@ -1,3 +1,5 @@
+import json
+import aiohttp
 from random import randint
 
 import discord
@@ -34,6 +36,13 @@ class Tools(commands.Cog):
         await ctx.send(search)
         await Harbinger.send_dm(ctx=ctx, member=ctx.message.author, content=search)
 
+    @commands.command()
+    async def define(self, ctx: commands.Context, word: str) -> None:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(f'https://api.dictionaryapi.dev/api/v2/entries/en/{word}') as definition:
+                result = await definition.json()
+                print(result[0])
+    
     @commands.command()
     async def define(self, ctx: commands.Context, word: str) -> None:
         """Get the Meriam-Webster definition of a word.
