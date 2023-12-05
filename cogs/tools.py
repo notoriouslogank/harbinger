@@ -53,45 +53,16 @@ class Tools(commands.Cog):
                     phonetics = None
                 if pronunciation != "":
                     if phonetics != None:
-                        embed = discord.Embed(title=f"{word}", description=f"[{phonetics}]({pronunciation})", color=CUSTOM_COLOR)
+                        embed = discord.Embed(title=f"**{word}**", description=f"[{phonetics}]({pronunciation})", color=CUSTOM_COLOR)
                     elif phonetics == None:
-                        embed = discord.Embed(title=f"{word}", description=f"[Pronunciation]({pronunciation})")
+                        embed = discord.Embed(title=f"**{word}**", description=f"[Pronunciation]({pronunciation})")
                 elif pronunciation == "":
                     if phonetics != None:
-                        embed = discord.Embed(title=f"{word}", description=f"{phonetics}", color=CUSTOM_COLOR)
+                        embed = discord.Embed(title=f"**{word}**", description=f"{phonetics}", color=CUSTOM_COLOR)
                     elif phonetics == None:
-                        embed = discord.Embed(title=f"{word}", description=f"No phonetic information available", color=CUSTOM_COLOR)
-                embed.add_field(name="Definition", value=f"{definition}")
+                        embed = discord.Embed(title=f"**{word}**", description=f"No phonetic information available", color=CUSTOM_COLOR)
+                embed.add_field(name="**Definition**", value=f"*{definition}*")
                 await ctx.send(embed=embed)
-                               
-                #print(phonetics)
-                #pronunciation = dict_entry[0]["phonetics"][0]["audio"]
-                #print(type(pronunciation))
-                #    embed=discord.Embed(title=f"{word}", description=f"No phonetic guide available.", color=CUSTOM_COLOR)
-                #elif pronunciation == None:
-                #    print(f"pronounce: {pronunciation}")
-                #    embed = discord.Embed(title=f"{word}", description=f"{phonetics}", color=CUSTOM_COLOR)
-                #else:
-                #    embed = discord.Embed(title=f"{word}", description=f"[{phonetics}]({pronunciation})", color=CUSTOM_COLOR)
-                #embed.add_field(name=" ", value=f"{definition}")
-                #await ctx.send(embed=embed)
-                #print(word, pronunciation, phonetics, definition)
-                
-#    @commands.command()
-#    async def define(self, ctx: commands.Context, word: str) -> None:
-#        """Get the Meriam-Webster definition of a word.
-#
-#        Args:
-#            word (str): the word to be defined
-#        """
-#        cmd = f"!define({word})"
-#        dictionary = "https://www.merriam-webster.com/dictionary/"
-#        define_url = dictionary + word
-#        cmd_msg = f"url: {define_url}"
-#        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-#        await ctx.channel.purge(limit=1)
-#        await ctx.send(define_url)
-#        await Harbinger.send_dm(ctx=ctx, member=ctx.message.author, content=define_url)
 
     @commands.command()
     async def add(self, ctx: commands.Context, *num: int) -> None:
