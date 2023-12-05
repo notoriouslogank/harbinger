@@ -44,17 +44,18 @@ class Tools(commands.Cog):
             async with session.get(f'https://api.dictionaryapi.dev/api/v2/entries/en/{word}') as resp:
                 dict_entry = await resp.json()
                 try:
-                    pronunciation = dict_entry[0]["phonetics"][0]["audio"]
-                except Exception:
-                    pronunciation = ""
-                try:
                     definition = dict_entry[0]["meanings"][0]["definitions"][0]["definition"]
-                except:
+                except Exception:
                     await ctx.send(f"Error: Could not find definition for {word}.\nPlease check the spelling and try again.")
+                    return
                 try:
                     definition2 = dict_entry[0]["meanings"][1]["definitions"][0]["definition"]
                 except Exception:
                     definition2 = None
+                try:
+                    pronunciation = dict_entry[0]["phonetics"][0]["audio"]
+                except Exception:
+                    pronunciation = ""
                 await ctx.message.delete()
                 try:
                     phonetics = dict_entry[0]["phonetics"][0]["text"]
@@ -74,7 +75,7 @@ class Tools(commands.Cog):
                 if definition2 != None:
                     embed.add_field(name="2", value=f"*{definition2}*", inline=False)
                 else:
-                    pass
+                    await ctx.send("Error: Bad things happened.")
                 await ctx.send(embed=embed)
 
     @commands.command()
