@@ -46,7 +46,7 @@ class Tools(commands.Cog):
                 pronunciation = dict_entry[0]["phonetics"][0]["audio"]
                 phonetics = dict_entry[0]["phonetics"][0]["text"]
                 definition = dict_entry[0]["meanings"][0]["definitions"][0]["definition"]
-                embed = discord.Embed(title=f"{word}", description=f"({phonetics})[{pronunciation}]", color=CUSTOM_COLOR)
+                embed = discord.Embed(title=f"{word}", description=(phonetics)[pronunciation], color=CUSTOM_COLOR)
                 #embed.add_field(name=f"Pronunciation", value=f"{pronunciation}")
                 embed.add_field(name=" ", value=f"{definition}")
                 await ctx.send(embed=embed)
