@@ -56,11 +56,11 @@ class Tools(commands.Cog):
                     pass
                 definition = dict_entry[0]["meanings"][0]["definitions"][0]["definition"]
                 if phonetics == None:
-                    embed=discord.Embed(title=f"{word}", description=f"No phonetic guide available.")
+                    embed=discord.Embed(title=f"{word}", description=f"No phonetic guide available.", color=CUSTOM_COLOR)
                 elif pronunciation == None:
                     embed = discord.Embed(title=f"{word}", description=f"{phonetics} [No example audio available.]", color=CUSTOM_COLOR)
                 else:
-                    embed = discord.Embed(title=f"{word}", description=f"[{phonetics}]({pronunciation})")
+                    embed = discord.Embed(title=f"{word}", description=f"[{phonetics}]({pronunciation})", color=CUSTOM_COLOR)
                 embed.add_field(name=" ", value=f"{definition}")
                 await ctx.send(embed=embed)
                 #print(word, pronunciation, phonetics, definition)
