@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.7.3] - 2023-04-12
+
+### Changed
+
+- Behavior of !define command: now uses a free API and sends an embed with definition and phonetics/pronunciation information (if available)
+
 ## [2.7.2] - 2023-01-12
 
 - Removed all underscore characters in CHANGELOG.md to (hopefully) fix formatting issues
