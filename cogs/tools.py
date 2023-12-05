@@ -46,7 +46,7 @@ class Tools(commands.Cog):
                 try:
                     definition = dict_entry[0]["meanings"][0]["definitions"][0]["definition"]
                 except Exception:
-                    await ctx.send(f"Error: Could not find definition for {word}.\nPlease check the spelling and try again.")
+                    await ctx.send(f"Error: Could not find definition for *{word}*.\nPlease check the spelling and try again.")
                     return
                 try:
                     definition2 = dict_entry[0]["meanings"][1]["definitions"][0]["definition"]
