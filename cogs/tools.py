@@ -44,6 +44,7 @@ class Tools(commands.Cog):
             async with session.get(f'https://api.dictionaryapi.dev/api/v2/entries/en/{word}') as resp:
                 dict_entry = await resp.json()
                 definition = dict_entry[0]["meanings"][0]["definitions"][0]["definition"]
+                definition2 = dict_entry[0]["meanings"][1]["definitions"][0]["definition"]
                 pronunciation = dict_entry[0]["phonetics"][0]["audio"]
                 phonetics = None
                 await ctx.message.delete()
@@ -61,7 +62,11 @@ class Tools(commands.Cog):
                         embed = discord.Embed(title=f"**{word}**", description=f"{phonetics}", color=CUSTOM_COLOR)
                     elif phonetics == None:
                         embed = discord.Embed(title=f"**{word}**", description=f"No phonetic information available", color=CUSTOM_COLOR)
-                embed.add_field(name="**Definition**", value=f"*{definition}*")
+                embed.add_field(name="1", value=f"*{definition}*", inline=True)
+                if definition2 != None:
+                    embed.add_field(name="2", value=f"*{definition2}*", inline=True)
+                else:
+                    pass
                 await ctx.send(embed=embed)
 
     @commands.command()
