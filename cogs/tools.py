@@ -55,7 +55,10 @@ class Tools(commands.Cog):
                 if phonetics != None:
                     try:
                         pronunciation = dict_entry[0]["phonetics"][0]["audio"]
-                        print(pronunciation)
+                        if pronunciation == "":
+                            pronunciation == None
+                        else:
+                            pass
                     except:
                         pronunctiation = None
                         print(pronunciation)
