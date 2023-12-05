@@ -48,6 +48,8 @@ class Tools(commands.Cog):
                 definition = dict_entry[0]["meanings"][0]["definitions"][0]["definition"]
                 if pronunciation != None:
                     embed = discord.Embed(title=f"{word}", description=f"[{phonetics}]({pronunciation})", color=CUSTOM_COLOR)
+                elif phonetics == None:
+                    embed=discord.Embed(title=f"{word}", description=f" ")
                 else:
                     embed = discord.Embed(title=f"{word}", description=f"{phonetics}")
                     embed.set_footer(text="No pronunciation audio available.")
