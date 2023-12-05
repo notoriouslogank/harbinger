@@ -43,7 +43,7 @@ class Tools(commands.Cog):
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://api.dictionaryapi.dev/api/v2/entries/en/{word}') as resp:
                 dict_entry = await resp.json()
-                pronunciation = None
+                pronunciation = dict_entry[0]["phonetics"][0]["audio"]
                 phonetics = None
                 await ctx.message.delete()
                 try:
@@ -52,24 +52,15 @@ class Tools(commands.Cog):
                 except:
                     phonetics = None
                     print(phonetics)
-                if phonetics != None:
-                    try:
-                        pronunciation = dict_entry[0]["phonetics"][0]["audio"]
-                        if pronunciation == "":
-                            print('1')
-                        else:
-                            pass
-                    except:
-                        pronunctiation = None
-                        print(pronunciation, "2")
-                if pronunciation != None:
+                
+                if pronunciation != "":
                     if phonetics != None:
                         embed = discord.Embed(title=f"{word}", description=f"[{phonetics}]({pronunciation})", color=CUSTOM_COLOR)
                         await ctx.send(embed=embed)
                     elif phonetics == None:
                         embed = discord.Embed(title=f"{word}", description=f"[Pronunciation]({pronunciation})")
                         await ctx.send(embed=embed)
-                elif pronunciation == None:
+                elif pronunciation == "":
                     if phonetics != None:
                         embed = discord.Embed(title=f"{word}", description=f"{phonetics}", color=CUSTOM_COLOR)
                         await ctx.send(embed=embed)
