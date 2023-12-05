@@ -50,9 +50,9 @@ class Tools(commands.Cog):
                     pronunciation = str(dict_entry[0]["phonetics"][0]["audio"])
                     phonetics = str(dict_entry[0]["phonetics"][0]["text"])
                     if pronunciation == None:
-                        print("No pronunc.")
-                    if phonetics == None:
-                        print("No phonetics.")
+                        if phonetics == None:
+                            print("No pronunc.")
+                            print("No phonetics.")
                 except:
                     print("Got both?")
                     print(phonetics + pronunciation)
