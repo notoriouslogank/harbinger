@@ -58,7 +58,7 @@ class Tools(commands.Cog):
                 if phonetics == None:
                     embed=discord.Embed(title=f"{word}", description=f"No phonetic guide available.", color=CUSTOM_COLOR)
                 elif pronunciation == None:
-                    embed = discord.Embed(title=f"{word}", description=f"{phonetics} [No example audio available.]", color=CUSTOM_COLOR)
+                    embed = discord.Embed(title=f"{word}", description=f"{phonetics}", color=CUSTOM_COLOR)
                 else:
                     embed = discord.Embed(title=f"{word}", description=f"[{phonetics}]({pronunciation})", color=CUSTOM_COLOR)
                 embed.add_field(name=" ", value=f"{definition}")
