@@ -56,12 +56,12 @@ class Tools(commands.Cog):
                     try:
                         pronunciation = dict_entry[0]["phonetics"][0]["audio"]
                         if pronunciation == "":
-                            pronunciation == None
+                            print('1')
                         else:
                             pass
                     except:
                         pronunctiation = None
-                        print(pronunciation)
+                        print(pronunciation, "2")
                 if pronunciation != None:
                     if phonetics != None:
                         embed = discord.Embed(title=f"{word}", description=f"[{phonetics}]({pronunciation})", color=CUSTOM_COLOR)
