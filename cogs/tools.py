@@ -46,7 +46,7 @@ class Tools(commands.Cog):
                 pronunciation = dict_entry[0]["phonetics"][0]["audio"]
                 phonetics = dict_entry[0]["phonetics"][0]["text"]
                 definition = dict_entry[0]["meanings"][0]["definitions"][0]["definition"]
-                if pronunciation == None:
+                if pronunciation != None:
                     embed = discord.Embed(title=f"{word}", description=f"[{phonetics}]({pronunciation})", color=CUSTOM_COLOR)
                 else:
                     embed = discord.Embed(title=f"{word}", description=f"{phonetics}")
