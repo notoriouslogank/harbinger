@@ -49,7 +49,7 @@ class Tools(commands.Cog):
                 phonetics = dict_entry[0]["phonetics"][0]["text"]
                 print(phonetics)
                 pronunciation = dict_entry[0]["phonetics"][0]["audio"]
-                print(phonetics)
+                print(pronunciation)
                 #    embed=discord.Embed(title=f"{word}", description=f"No phonetic guide available.", color=CUSTOM_COLOR)
                 #elif pronunciation == None:
                 #    print(f"pronounce: {pronunciation}")
