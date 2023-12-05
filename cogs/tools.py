@@ -62,9 +62,9 @@ class Tools(commands.Cog):
                         embed = discord.Embed(title=f"**{word}**", description=f"{phonetics}", color=CUSTOM_COLOR)
                     elif phonetics == None:
                         embed = discord.Embed(title=f"**{word}**", description=f"No phonetic information available", color=CUSTOM_COLOR)
-                embed.add_field(name="1", value=f"*{definition}*", inline=True)
+                embed.add_field(name="1", value=f"*{definition}*", inline=False)
                 if definition2 != None:
-                    embed.add_field(name="2", value=f"*{definition2}*", inline=True)
+                    embed.add_field(name="2", value=f"*{definition2}*", inline=False)
                 else:
                     pass
                 await ctx.send(embed=embed)
