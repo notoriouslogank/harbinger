@@ -49,8 +49,7 @@ class Tools(commands.Cog):
                 try:
                     pronunciation = str(dict_entry[0]["phonetics"][0]["audio"])
                 except Exception:
-                    pronunciation = ""
-                    return pronunciation
+                    pass
                 try:
                     phonetics = str(dict_entry[0]["phonetics"][0]["text"])
                 except Exception:
