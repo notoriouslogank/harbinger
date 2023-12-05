@@ -44,9 +44,12 @@ class Tools(commands.Cog):
             async with session.get(f'https://api.dictionaryapi.dev/api/v2/entries/en/{word}') as resp:
                 dict_entry = await resp.json()
                 definition = dict_entry[0]["meanings"][0]["definitions"][0]["definition"]
-                definition2 = dict_entry[0]["meanings"][1]["definitions"][0]["definition"]
                 pronunciation = dict_entry[0]["phonetics"][0]["audio"]
                 phonetics = None
+                try:
+                    definition2 = dict_entry[0]["meanings"][1]["definitions"][0]["definition"]
+                except Exception:
+                    definition2 = None
                 await ctx.message.delete()
                 try:
                     phonetics = dict_entry[0]["phonetics"][0]["text"]
