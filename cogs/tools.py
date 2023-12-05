@@ -43,16 +43,22 @@ class Tools(commands.Cog):
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://api.dictionaryapi.dev/api/v2/entries/en/{word}') as resp:
                 dict_entry = await resp.json()
-                pronunciation = dict_entry[0]["phonetics"][0]["audio"]
-                phonetics = dict_entry[0]["phonetics"][0]["text"]
+                await ctx.message.delete()
+                try:
+                    pronunciation = dict_entry[0]["phonetics"][0]["audio"]
+                except commands.errors.CommandInvokeError:
+                    pronunciation = None
+                try:
+                    phonetics = dict_entry[0]["phonetics"][0]["text"]
+                except commands.errors.CommandInvokeError:
+                    phonetics = None
                 definition = dict_entry[0]["meanings"][0]["definitions"][0]["definition"]
-                if pronunciation != None:
-                    embed = discord.Embed(title=f"{word}", description=f"[{phonetics}]({pronunciation})", color=CUSTOM_COLOR)
-                elif phonetics == None:
-                    embed=discord.Embed(title=f"{word}", description=f" ")
+                if phonetics == None:
+                    embed=discord.Embed(title=f"{word}", description=f"No phonetic guide available.")
+                elif pronunciation == None:
+                    embed = discord.Embed(title=f"{word}", description=f"{phonetics} [No example audio available.]", color=CUSTOM_COLOR)
                 else:
-                    embed = discord.Embed(title=f"{word}", description=f"{phonetics}")
-                    embed.set_footer(text="No pronunciation audio available.")
+                    embed = discord.Embed(title=f"{word}", description=f"[{phonetics}]({pronunciation})")
                 embed.add_field(name=" ", value=f"{definition}")
                 await ctx.send(embed=embed)
                 #print(word, pronunciation, phonetics, definition)
