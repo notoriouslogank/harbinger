@@ -43,8 +43,10 @@ class Tools(commands.Cog):
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://api.dictionaryapi.dev/api/v2/entries/en/{word}') as resp:
                 dict_entry = await resp.json()
-                pronunciation = dict_entry[0]["phonetics"][0]["audio"]
-                phonetics = None
+                try:
+                    pronunciation = dict_entry[0]["phonetics"][0]["audio"]
+                except Exception:
+                    pronunciation = ""
                 try:
                     definition = dict_entry[0]["meanings"][0]["definitions"][0]["definition"]
                 except:
