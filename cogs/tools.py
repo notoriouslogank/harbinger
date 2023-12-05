@@ -47,12 +47,12 @@ class Tools(commands.Cog):
                 try:
                     pronunciation = dict_entry[0]["phonetics"][0]["audio"]
                 except Exception:
-                    pronunciation == None
+                    pronunciation = None
                     return pronunciation
                 try:
                     phonetics = dict_entry[0]["phonetics"][0]["text"]
                 except Exception:
-                    phonetics == None
+                    phonetics = None
                     return phonetics
                 definition = dict_entry[0]["meanings"][0]["definitions"][0]["definition"]
                 if phonetics == None:
