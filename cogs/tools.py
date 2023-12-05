@@ -77,7 +77,7 @@ class Tools(commands.Cog):
                 if definition2 != None:
                     embed.add_field(name="2)", value=f"*{definition2}*", inline=False)
                 else:
-                    await ctx.send("Error: Bad things happened.")
+                    await ctx.send("ERROR: Something has gone horribly wrong.")
                 Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
                 await ctx.send(embed=embed)
 
