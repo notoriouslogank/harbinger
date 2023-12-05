@@ -52,8 +52,7 @@ class Tools(commands.Cog):
                 try:
                     phonetics = dict_entry[0]["phonetics"][0]["text"]
                 except Exception:
-                    phonetics = None
-                    return phonetics
+                    pass
                 definition = dict_entry[0]["meanings"][0]["definitions"][0]["definition"]
                 if phonetics == None:
                     embed=discord.Embed(title=f"{word}", description=f"No phonetic guide available.")
