@@ -40,9 +40,12 @@ class Tools(commands.Cog):
 
     @commands.command()
     async def define(self, ctx: commands.Context, word: str) -> None:
+        cmd = f"!define"
+        cmd_msg = f"Requested definition for: {word}"
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://api.dictionaryapi.dev/api/v2/entries/en/{word}') as resp:
                 dict_entry = await resp.json()
+                await ctx.message.delete()
                 try:
                     definition = dict_entry[0]["meanings"][0]["definitions"][0]["definition"]
                 except Exception:
@@ -56,7 +59,6 @@ class Tools(commands.Cog):
                     pronunciation = dict_entry[0]["phonetics"][0]["audio"]
                 except Exception:
                     pronunciation = ""
-                await ctx.message.delete()
                 try:
                     phonetics = dict_entry[0]["phonetics"][0]["text"]
                 except:
@@ -65,17 +67,18 @@ class Tools(commands.Cog):
                     if phonetics != None:
                         embed = discord.Embed(title=f"**{word}**", description=f"[{phonetics}]({pronunciation})", color=CUSTOM_COLOR)
                     elif phonetics == None:
-                        embed = discord.Embed(title=f"**{word}**", description=f"[Pronunciation]({pronunciation})")
+                        embed = discord.Embed(title=f"**{word}**", description=f"*[Pronunciation]({pronunciation})*", color=CUSTOM_COLOR)
                 elif pronunciation == "":
                     if phonetics != None:
                         embed = discord.Embed(title=f"**{word}**", description=f"{phonetics}", color=CUSTOM_COLOR)
                     elif phonetics == None:
                         embed = discord.Embed(title=f"**{word}**", description=f"No phonetic information available", color=CUSTOM_COLOR)
-                embed.add_field(name="1", value=f"*{definition}*", inline=False)
+                embed.add_field(name="1)", value=f"*{definition}*", inline=False)
                 if definition2 != None:
-                    embed.add_field(name="2", value=f"*{definition2}*", inline=False)
+                    embed.add_field(name="2)", value=f"*{definition2}*", inline=False)
                 else:
                     await ctx.send("Error: Bad things happened.")
+                Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
                 await ctx.send(embed=embed)
 
     @commands.command()
