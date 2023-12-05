@@ -43,30 +43,26 @@ class Tools(commands.Cog):
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://api.dictionaryapi.dev/api/v2/entries/en/{word}') as resp:
                 dict_entry = await resp.json()
+                definition = dict_entry[0]["meanings"][0]["definitions"][0]["definition"]
                 pronunciation = dict_entry[0]["phonetics"][0]["audio"]
                 phonetics = None
                 await ctx.message.delete()
                 try:
                     phonetics = dict_entry[0]["phonetics"][0]["text"]
-                    print(phonetics)
                 except:
                     phonetics = None
-                    print(phonetics)
-                
                 if pronunciation != "":
                     if phonetics != None:
                         embed = discord.Embed(title=f"{word}", description=f"[{phonetics}]({pronunciation})", color=CUSTOM_COLOR)
-                        await ctx.send(embed=embed)
                     elif phonetics == None:
                         embed = discord.Embed(title=f"{word}", description=f"[Pronunciation]({pronunciation})")
-                        await ctx.send(embed=embed)
                 elif pronunciation == "":
                     if phonetics != None:
                         embed = discord.Embed(title=f"{word}", description=f"{phonetics}", color=CUSTOM_COLOR)
-                        await ctx.send(embed=embed)
                     elif phonetics == None:
                         embed = discord.Embed(title=f"{word}", description=f"No phonetic information available", color=CUSTOM_COLOR)
-                        await ctx.send(embed=embed)
+                embed.add_field(name="Definition", value=f"{definition}")
+                await ctx.send(embed=embed)
                                
                 #print(phonetics)
                 #pronunciation = dict_entry[0]["phonetics"][0]["audio"]
