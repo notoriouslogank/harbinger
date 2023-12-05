@@ -47,9 +47,9 @@ class Tools(commands.Cog):
                 phonetics = None
                 await ctx.message.delete()
                 phonetics = dict_entry[0]["phonetics"][0]["text"]
-                print(phonetics)
+                print(type(phonetics))
                 pronunciation = dict_entry[0]["phonetics"][0]["audio"]
-                print(pronunciation)
+                print(type(pronunciation))
                 #    embed=discord.Embed(title=f"{word}", description=f"No phonetic guide available.", color=CUSTOM_COLOR)
                 #elif pronunciation == None:
                 #    print(f"pronounce: {pronunciation}")
