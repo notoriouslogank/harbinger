@@ -46,12 +46,12 @@ class Tools(commands.Cog):
                 await ctx.message.delete()
                 try:
                     pronunciation = dict_entry[0]["phonetics"][0]["audio"]
-                except commands.errors.CommandInvokeError:
+                except Exception:
                     pronunciation == None
                     return pronunciation
                 try:
                     phonetics = dict_entry[0]["phonetics"][0]["text"]
-                except commands.errors.CommandInvokeError:
+                except Exception:
                     phonetics == None
                     return phonetics
                 definition = dict_entry[0]["meanings"][0]["definitions"][0]["definition"]
