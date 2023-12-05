@@ -59,6 +59,21 @@ class Tools(commands.Cog):
                     except:
                         pronunctiation = None
                         print(pronunciation)
+                if pronunciation != None:
+                    if phonetics != None:
+                        embed = discord.Embed(title=f"{word}", description=f"[{phonetics}]({pronunciation})", color=CUSTOM_COLOR)
+                        await ctx.message.send(embed=embed)
+                    elif phonetics == None:
+                        embed = discord.Embed(title=f"{word}", description=f"[Pronunciation]({pronunciation})")
+                        await ctx.message.send(embed=embed)
+                elif pronunciation == None:
+                    if phonetics != None:
+                        embed = discord.Embed(title=f"{word}", description=f"{phonetics}", color=CUSTOM_COLOR)
+                        await ctx.message.send(embed=embed)
+                    elif phonetics == None:
+                        embed = discord.Embed(title=f"{word}", description=f"No phonetic information available", color=CUSTOM_COLOR)
+                        await ctx.message.send(embed=embed)
+                               
                 #print(phonetics)
                 #pronunciation = dict_entry[0]["phonetics"][0]["audio"]
                 #print(type(pronunciation))
