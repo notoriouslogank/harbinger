@@ -54,6 +54,7 @@ class Tools(commands.Cog):
                     if phonetics == None:
                         print("No phonetics.")
                 except:
+                    print("Got both?")
                     print(phonetics + pronunciation)
                 definition = dict_entry[0]["meanings"][0]["definitions"][0]["definition"]
                 #    embed=discord.Embed(title=f"{word}", description=f"No phonetic guide available.", color=CUSTOM_COLOR)
