@@ -18,27 +18,18 @@ class Cards(commands.Cog):
                 await ctx.message.delete()
                 message = await ctx.send("Dealing...")
                 cards = await cards_json.json()
-                face_cards = ["KING", "QUEEN", "JACK"]
-                dealer_hand = []
-                dealer_hand.append(cards["cards"][0]["value"])
-                dealer_hand.append(cards["cards"][1]["value"])
-                player_hand = []
-                player_hand.append(cards["cards"][2]["value"])
-                player_hand.append(cards["cards"][3]["value"])
-                print(f"Starting hand: {dealer_hand}")
+                dealer_hand = [cards["cards"][0]["value"], cards["cards"][1]["value"]]
+                player_hand = [cards["cards"][2]["value"], cards["cards"][3]["value"]]
                 
-                for card in dealer_hand:
-                    if card == "ACE":
-                        dealer_hand.append('11')
-                        dealer_hand.pop(dealer_hand.index(card))
-                    elif card in face_cards:
-                        dealer_hand.append('10')
-                        dealer_hand.pop(dealer_hand.index(card))
-                    else:
-                        pass
+                i = 0
+                while i < 4:
+                    print(cards["cards"][i]["value"])
+                    ++i
                     
-                print(dealer_hand)                
+                print(f"dealer: {dealer_hand}")
+                print(f"player: {player_hand}")
 
+                
                 
                 #for card in dealer_hand:
                 #    print(card)
@@ -73,4 +64,5 @@ class Cards(commands.Cog):
 
 
 async def setup(bot):
+    
     await bot.add_cog(Cards(bot))
