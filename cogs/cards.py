@@ -25,13 +25,16 @@ class Cards(commands.Cog):
                 player_hand = []
                 player_hand.append(cards["cards"][2]["value"])
                 player_hand.append(cards["cards"][3]["value"])
+                print(dealer_hand)
                 for card in dealer_hand:
                     if card in face_cards:
                         dealer_hand.append(10)
                         dealer_hand.remove(card)
+                        print(dealer_hand)
                     elif card == "ACE":
                         dealer_hand.append(11)
                         dealer_hand.remove(card)
+                        print(dealer_hand)
                     else:
                         dealer_hand.append(card)
                         dealer_hand.remove(card)
