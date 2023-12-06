@@ -27,11 +27,11 @@ class Cards(commands.Cog):
                 player_hand.append(cards["cards"][3]["value"])
                 for card in dealer_hand:
                     if card in face_cards:
-                        player_hand.append(10)
-                        player_hand.remove(card)
+                        dealer_hand.append(10)
+                        dealer_hand.remove(card)
                     elif card == "ACE":
-                        player_hand.append(11)
-                        player_hand.remove(card)
+                        dealer_hand.append(11)
+                        dealer_hand.remove(card)
                     else:
                         pass
                 
