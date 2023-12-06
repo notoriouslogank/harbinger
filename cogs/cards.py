@@ -24,7 +24,7 @@ class Cards(commands.Cog):
                 i = 0
                 while i < 4:
                     print(cards["cards"][i]["value"])
-                    ++i
+                    i = i+1
                     
                 print(f"dealer: {dealer_hand}")
                 print(f"player: {player_hand}")
