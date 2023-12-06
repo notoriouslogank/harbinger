@@ -18,7 +18,7 @@ class Cards(commands.Cog):
                 await ctx.message.delete()
                 message = await ctx.send("Dealing...")
                 cards = await cards_json.json()
-                dealer_hand = ()
+                dealer_hand = []
                 (cards["cards"][0]["image"]).append(dealer_hand)
                 (int(cards["cards"][0]["value"])).append(dealer_hand)
                 cards["cards"][1]["image"].append(dealer_hand)
