@@ -24,8 +24,8 @@ class Cards(commands.Cog):
                 card3_value = cards["cards"][2]["value"]
                 card4 = cards["cards"][3]["image"]
                 card4_value = cards["cards"][3]["value"]
-                dealer_total = int(card1) + int(card2)
-                player_total = int(card3) + int(card4)
+                dealer_total = int(card1_value) + int(card2_value)
+                player_total = int(card3_value) + int(card4_value)
                 await ctx.send(f'{card1}\n{card2}\n TOTAL: {dealer_total}')
                 player_hand = f'{card3}\n{card4} TOTAL: {player_hand}'
                 await Harbinger.send_dm(ctx=ctx, member=ctx.message.author, content=player_hand)
