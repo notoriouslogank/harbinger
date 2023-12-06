@@ -12,6 +12,7 @@ class Cards(commands.Cog):
 
     def sanitize_cards(hand):
             faces = "KING", "QUEEN", "JACK"
+            total = []
             
             for card in hand:
                 if card == "ACE":
@@ -20,10 +21,13 @@ class Cards(commands.Cog):
                 if card in faces:
                     hand.insert(0, 10)
                     hand.remove(card)
-
-            total = sum(hand)
-            return total
             
+            for card in hand:
+                card = int(card)
+                total.append(card)
+                
+            final = sum(total)
+            return final            
 
     @commands.command()
     async def blackjack(self, ctx: commands.Context):
@@ -40,7 +44,7 @@ class Cards(commands.Cog):
                 hands = dealer_hand, player_hand
                 for hand in hands:
                     total = Cards.sanitize_cards(hand=hand)
-                    print(total)
+                    await ctx.message.send(total)
 
                 
                 
