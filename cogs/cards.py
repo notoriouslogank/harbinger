@@ -35,8 +35,12 @@ class Cards(commands.Cog):
                         if card in faces:
                             hand.insert(0, 10)
                             hand.remove(card)
-                    
+                        else:
+                            hand.insert(int(card))
+                            hand.remove(card)
+                                
                 print(f"dealer: {dealer_hand}")
+                
                 print(f"player: {player_hand}")
 
                 
