@@ -19,9 +19,22 @@ class Cards(commands.Cog):
                 message = await ctx.send("Dealing...")
                 cards = await cards_json.json()
                 face_cards = ["KING", "QUEEN", "JACK"]
-                dealer_hand = []               
+                dealer_hand = []
+                dealer_hand.append(cards["cards"][0]["value"])
+                dealer_hand.append(cards["cards"][1]["value"])
+                player_hand = []
+                player_hand.append(cards["cards"][2]["value"])
+                player_hand.append(cards["cards"][3]["value"])
                 for card in dealer_hand:
-                    print(card)
+                    if card in face_cards:
+                        print(f"{card}")
+                    elif card == "ACE":
+                        print("ACE")
+                    else:
+                        value = player_hand.pop(card)
+                        print(value)
+                #for card in dealer_hand:
+                #    print(card)
                     #if card in face_cards:
                     #    print(f'Face card: {card}')
                     #elif card == "ACE":
