@@ -20,10 +20,18 @@ class Cards(commands.Cog):
                 cards = await cards_json.json()
                 face_cards = ["KING", "QUEEN", "JACK"]
                 dealer_hand = []               
-                dealer_hand.append((cards["cards"][0]["image"]))
-                dealer_hand.append((int(cards["cards"][0]["value"])))
-                dealer_hand.append(cards["cards"][1]["image"])
-                dealer_hand.append(int(cards["cards"][1]["value"]))
+                for card in dealer_hand:
+                    if card in face_cards:
+                        print(f'Face card: {card}')
+                    elif card == "ACE":
+                        print(f'ACE')
+                    else:
+                        print(int(card))
+                        
+                #dealer_hand.append((cards["cards"][0]["image"]))
+                #dealer_hand.append((int(cards["cards"][0]["value"])))
+                #dealer_hand.append(cards["cards"][1]["image"])
+                #dealer_hand.append(int(cards["cards"][1]["value"]))
                 
                 for card in dealer_hand:
                     if card in face_cards:
