@@ -64,6 +64,7 @@ class Tools(commands.Cog):
                     embed = discord.Embed(title=f"{word}", description=f"[{phonetics}]({pronunciation})", color=CUSTOM_COLOR)
                 embed.add_field(name=" ", value=f"{definition}")
                 await ctx.send(embed=embed)
+                await session.close()
                 #print(word, pronunciation, phonetics, definition)
                 
 #    @commands.command()
@@ -136,6 +137,10 @@ class Tools(commands.Cog):
             embedRPS.add_field(name="result", value="You lose!", inline=False)
             await ctx.send(embed=embedRPS)
 
+    @commands.command()
+    async def insult(self, ctx:commands.Context, choice: str) -> None:
+
+    
 
 async def setup(bot):
     """Load cogs into bot."""
