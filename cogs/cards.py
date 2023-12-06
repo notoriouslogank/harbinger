@@ -25,11 +25,12 @@ class Cards(commands.Cog):
                 card4 = cards["cards"][3]["image"]
                 card4_value = cards["cards"][3]["value"]
                 player_hand = f'{card3}\n{card4}'
-                player_total = int(card3_value) + int(card4_value)
-                player_message = f'{player_hand}\nTotal:{player_total}'
-                dealer_total = int(card1_value) + int(card2_value)
-                await ctx.send(f'{card1}\n{card2}\n TOTAL: {dealer_total}')
+                player_total = f'Total: {str(int(card3_value)) + int(card4_value)}'
+                player_message = f'{player_hand}\n'
+                dealer_total = f'Total: {str(int(card1_value)) + int(card2_value)}'
+                await ctx.send(f'{card1}\n{card2}')
+                await ctx.send(dealer_total)
                 await Harbinger.send_dm(ctx=ctx, member=ctx.message.author, content=player_message)
-                
+                await Harbinger.send_dm(ctx=ctx, member=ctx.message.author, content=player_total)
 async def setup(bot):
     await bot.add_cog(Cards(bot))
