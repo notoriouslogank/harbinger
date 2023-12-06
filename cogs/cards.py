@@ -9,6 +9,10 @@ CUSTOM_COLOR = configs.custom_color()
 
 class Cards(commands.Cog):
     
+    def convert_face_cards(self, ctx: commands.Context, cards):
+        
+        
+        
     @commands.command()
     async def blackjack(self, ctx: commands.Context):
         async with aiohttp.ClientSession() as session:
@@ -16,13 +20,19 @@ class Cards(commands.Cog):
                 await ctx.message.delete()
                 message = await ctx.send("Dealing...")
                 cards = await cards_json.json()
-                dealer_one_image = cards["cards"][0]["image"]
-                dealer_one_value = int(cards["cards"][0]["value"])
-                dealer_two_image = cards["cards"][1]["image"]
-                dealer_two_value = int(cards["cards"][1]["value"])
-                dealer_total = dealer_one_value+dealer_two_value
-                print(dealer_one_value, dealer_two_value, dealer_total)
+                dealer_hand = []
+                (cards["cards"][0]["image"]).append[dealer_hand]
+                (int(cards["cards"][0]["value"])).append[dealer_hand]
+                cards["cards"][1]["image"].append[dealer_hand]
+                int(cards["cards"][1]["value"]).append[dealer_hand]
+                dealer_total = dealer_hand[1]+dealer_hand[3]
+                print(f'{dealer_hand}\nTotal: {dealer_total}')
+                
+                
+                
                 # card1_value = int(cards["cards"][0]["value"])
+                
+
                 
 
 async def setup(bot):
