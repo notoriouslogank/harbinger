@@ -28,13 +28,13 @@ class Cards(commands.Cog):
                 for card in dealer_hand:
                     if card in face_cards:
                         card = 10
-                        print(card)
                     elif card == "ACE":
-                        card = 11
-                        print(card)
+                        card = 11                        
                     else:
                         card = int(card)
-                        print(card)
+                
+                print(dealer_hand)
+
                 #for card in dealer_hand:
                 #    print(card)
                     #if card in face_cards:
