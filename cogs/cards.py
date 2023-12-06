@@ -33,16 +33,16 @@ class Cards(commands.Cog):
                         print(f"Before Ace: {dealer_hand}")
                         print(dealer_hand)
                         dealer_hand.append('11')
-                        print(f"After ace: {dealer_hand}")
                         dealer_hand.remove(card)
+                        print(f"After ace: {dealer_hand}")
                     else:
                         pass
                     
                     if card in face_cards:
                         print(f"Face Card: {card}")
+                        dealer_hand.append('10')
                         dealer_hand.remove(card)
                         print(dealer_hand)
-                        dealer_hand.append('10')
                         print(dealer_hand)
                         #dealer_hand.append(10)
                         #dealer_hand.remove(card)
