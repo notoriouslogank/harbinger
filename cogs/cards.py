@@ -32,12 +32,12 @@ class Cards(commands.Cog):
                         print(f"Face Card: {card}")
                         dealer_hand.pop(card)
                         print(dealer_hand)
-                        dealer_hand.append(10)
+                        dealer_hand.append('10')
                         print(dealer_hand)
                         #dealer_hand.append(10)
                         #dealer_hand.remove(card)
                     elif card == "ACE":
-                        dealer_hand.append(11)
+                        dealer_hand.append('11')
                         dealer_hand.remove(card)
                         print(dealer_hand)
                     else:
