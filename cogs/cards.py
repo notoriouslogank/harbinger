@@ -28,22 +28,22 @@ class Cards(commands.Cog):
                 for hand in hands:
                     for card in hand:
                         if card == "ACE":
-                            hand.append(11)
+                            hand.insert(0, 11)
                             hand.remove("ACE")
                 #for hand in hands:
                 #    for card in hand:
                         if card == "KING":
-                            hand.append(10)
+                            hand.insert(0, 10)
                             hand.remove("KING")
                 #for hand in hands:
                 #    for card in hand:
                         if card == "QUEEN":
-                            hand.append(10)
+                            hand.insert(0, 10)
                             hand.remove("QUEEN")
                 #for hand in hands:
                 #    for card in hand:
                         if card == "JACK":
-                            hand.append(10)
+                            hand.insert(0, 10)
                             hand.remove("JACK")        
                     
                 print(f"dealer: {dealer_hand}")
