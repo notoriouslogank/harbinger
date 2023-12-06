@@ -68,7 +68,7 @@ class Tools(commands.Cog):
                 #print(word, pronunciation, phonetics, definition)
                 
     @commands.command()
-    async def insult(self, ctx:commands.Context, choice: str) -> None:
+    async def insult(self, ctx:commands.Context) -> None:
          async with aiohttp.ClientSession() as session:
             async with session.get(f'https://evilinsult.com/generate_insult.php?lang=en&type=json') as resp:
                 insult_json = await resp.json()
