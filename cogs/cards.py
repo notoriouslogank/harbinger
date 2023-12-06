@@ -19,10 +19,10 @@ class Cards(commands.Cog):
                 message = await ctx.send("Dealing...")
                 cards = await cards_json.json()
                 dealer_hand = []
-                (cards["cards"][0]["image"]).append(dealer_hand)
-                (int(cards["cards"][0]["value"])).append(dealer_hand)
-                cards["cards"][1]["image"].append(dealer_hand)
-                int(cards["cards"][1]["value"]).append(dealer_hand)
+                dealer_hand.append((cards["cards"][0]["image"]))
+                dealer_hand.append((int(cards["cards"][0]["value"])))
+                dealer_hand.append(cards["cards"][1]["image"])
+                dealer_hand.append(int(cards["cards"][1]["value"]))
                 dealer_total = dealer_hand[1] + dealer_hand[3]
                 print(f"{dealer_hand}\nTotal: {dealer_total}")
 
