@@ -51,9 +51,14 @@ class Cards(commands.Cog):
                 # Print Hand to player quietly
                 await ctx.send(f"{ctx.message.author.mention}\nHand: {player_hand_codes[0]} {player_hand_codes[1]}\nTotal: {player_total}")
                 # Print to bot loudly
-                await ctx.send(f"{ctx.message.author.mention}\nHand: {dealer_hand_codes[0]} {dealer_hand_codes[1]}\nTotal: {dealer_total}")
+                await ctx.send(f"{ctx.message.author.mention}\nHand:\n _____ \n|\ ~ /|\n|}}:{{|\n|}}:{{|\n|}}:{{|\n|/_~_\|\n {dealer_hand_codes[1]}\nTotal: {dealer_total}")
                 
-                
+#      _____ 
+#     |\ ~ /|
+#     |}}:{{|
+#     |}}:{{|
+#     |}}:{{|
+#     |/_~_\|
                 #for card in dealer_hand:
                 #    print(card)
                     #if card in face_cards:
