@@ -21,7 +21,10 @@ class Cards(commands.Cog):
                 card3 = cards["cards"][2]["image"]
                 card4 = cards["cards"][3]["image"]
                 await ctx.send(f'{card1}\n{card2}')
-                await ctx.message.author.send(f'{card3}\n{card4}')
+                player_hand = f'{card3}\n{card4}'
+                member = ctx.message.author
+                channel = await ctx.member.create_dm()
+                channel.send(player_hand)
                 
 async def setup(bot):
     await bot.add_cog(Cards(bot))
