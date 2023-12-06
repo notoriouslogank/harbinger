@@ -31,11 +31,14 @@ class Cards(commands.Cog):
                     print(f"Card: {card}")
                     if card == "ACE":
                         print(f"Before Ace: {dealer_hand}")
-                        dealer_hand.remove(card)
                         print(dealer_hand)
                         dealer_hand.append('11')
                         print(f"After ace: {dealer_hand}")
-                    elif card in face_cards:
+                        dealer_hand.remove(card)
+                    else:
+                        pass
+                    
+                    if card in face_cards:
                         print(f"Face Card: {card}")
                         dealer_hand.remove(card)
                         print(dealer_hand)
