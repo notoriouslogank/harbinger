@@ -47,20 +47,20 @@ class Cards(commands.Cog):
                 #dealer_hand.append(cards["cards"][1]["image"])
                 #dealer_hand.append(int(cards["cards"][1]["value"]))
                 
-                for card in dealer_hand:
-                    if card in face_cards:
-                        print(f"Face card: {card}")
-                    elif card == "ACE":
-                        print(f'Ace')
-                    else:
-                        print("ok?")
+                #for card in dealer_hand:
+                ##    if card in face_cards:
+                 #       print(f"Face card: {card}")
+                 #   elif card == "ACE":
+                 #       print(f'Ace')
+                 #   else:
+                 #       print("ok?")
                 
                 
-                dealer_total = dealer_hand[1] + dealer_hand[3]
+                #dealer_total = dealer_hand[1] + dealer_hand[3]
                         
                     
-                dealer_hand = []
-                print(f"{dealer_hand}\nTotal: {dealer_total}")
+                #dealer_hand = []
+                #print(f"{dealer_hand}\nTotal: {dealer_total}")
 
                 # card1_value = int(cards["cards"][0]["value"])
 
