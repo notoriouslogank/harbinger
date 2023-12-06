@@ -16,58 +16,12 @@ class Cards(commands.Cog):
                 await ctx.message.delete()
                 message = await ctx.send("Dealing...")
                 cards = await cards_json.json()
-                card1 = cards["cards"][0]["image"]
-                card1_value = int(cards["cards"][0]["value"])
-                if card1_value == "ACE":
-                    card1_value = 11
-                elif card1_value == "JACK":
-                    card1_value = 10
-                elif card1_value == "QUEEN":
-                    card1_value = 10
-                elif card1_value == "KING":
-                    card1_value = 10
-                else:
-                    card1_value = int(cards["cards"][0]["value"])
-                card2 = cards["cards"][1]["image"]
-                card2_value = cards["cards"][1]["value"]
-                if card2_value == "ACE":
-                    card2_value = 11
-                elif card2_value == "JACK":
-                    card2_value = 10
-                elif card2_value == "QUEEN":
-                    card2_value = 10
-                elif card2_value == "KING":
-                    card2_value = 10
-                else:
-                    card2_value = int(cards["cards"][1]["value"])
-                card3 = cards["cards"][2]["image"]
-                card3_value = cards["cards"][2]["value"]
-                if card3_value == "ACE":
-                    card3_value = 11
-                if card3_value == "JACK":
-                    card3_value = 10
-                if card3_value == "QUEEN":
-                    card3_value = 10
-                if card3_value == "KING":
-                    card3_value = 10
-                card4 = cards["cards"][3]["image"]
-                card4_value = cards["cards"][3]["value"]
-                if card4_value == "ACE":
-                    card4_int = 11
-                if card4_value == "JACK":
-                    card4_value = 10
-                if card4_value == "QUEEN":
-                    card4_value = 10
-                if card4_value == "KING":
-                    card4_value = 10
-                player_hand = f'{card3}\n{card4}'
-                player_total = card3_value + card4_value
-                player_message = f'{player_hand}\n'
-                dealer_total = card1_value + card2_value
-                await ctx.send(f'{card1}\n{card2}')
-                await ctx.send(f'Total: {dealer_total}')
-                await Harbinger.send_dm(ctx=ctx, member=ctx.message.author, content=player_message)
-                await Harbinger.send_dm(ctx=ctx, member=ctx.message.author, content=f'Total: {player_total}')
+                dealer_one = cards["cards"][0]["image"]
+                dealer_two = cards["cards"][0]["value"]
+                print(dealer_one)
+                print(dealer_two)
+                # card1_value = int(cards["cards"][0]["value"])
+                
 
 async def setup(bot):
     await bot.add_cog(Cards(bot))
