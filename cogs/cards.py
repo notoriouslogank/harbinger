@@ -40,16 +40,18 @@ class Cards(commands.Cog):
                 message = await ctx.send("Dealing...")
                 # Get cards
                 cards = await cards_json.json()
-                dealer_hand = [cards["cards"][0]["value"], cards["cards"][1]["value"]]
-                player_hand = [cards["cards"][2]["value"], cards["cards"][3]["value"]]
+                dealer_hand_codes = [cards["cards"][0]["code"], cards["cards"][1]["value"]]
+                player_hand_codes = [cards["cards"][2]["code"], cards["cards"][3]["value"]]
+                dealer_hand_values = [cards["cards"][0]["value"], cards["cards"][1]["value"]]
+                player_hand_values = [cards["cards"][2]["value"], cards["cards"][3]["value"]]
                 # Sanitize
-                dealer_total = Cards.sanitize_cards(dealer_hand)
-                player_total = Cards.sanitize_cards(player_hand)
+                dealer_total = Cards.sanitize_cards(dealer_hand_values)
+                player_total = Cards.sanitize_cards(player_hand_values)
 
                 # Print Hand to player quietly
-                await ctx.send(f"{ctx.message.author.mention}\nHand: {player_hand[0]} {player_hand[1]}\nTotal: {player_total}")
+                await ctx.send(f"{ctx.message.author.mention}\nHand: {player_hand_codes[0]} {player_hand_codes[1]}\nTotal: {player_total}")
                 # Print to bot loudly
-                
+                await ctx.send(f"{ctx.message.author.mention}\nHand: {dealer_hand_codes[0]} {dealer_hand_codes[1]}\nTotal: {dealer_total}")
                 
                 
                 #for card in dealer_hand:
