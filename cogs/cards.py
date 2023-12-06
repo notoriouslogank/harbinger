@@ -36,6 +36,8 @@ class Cards(commands.Cog):
                     card2_value = 10
                 if card2_value == "KING":
                     card2_value = 10
+                card3 = cards["cards"][2]["image"]
+                card3_value = cards["cards"][2]["value"]
                 if card3_value == "ACE":
                     card3_value = 11
                 if card3_value == "JACK":
@@ -44,6 +46,8 @@ class Cards(commands.Cog):
                     card3_value = 10
                 if card3_value == "KING":
                     card3_value = 10
+                card4 = cards["cards"][3]["image"]
+                card4_value = cards["cards"][3]["value"]
                 if card4_value == "ACE":
                     card4_value = 11
                 if card4_value == "JACK":
@@ -52,10 +56,6 @@ class Cards(commands.Cog):
                     card4_value = 10
                 if card4_value == "KING":
                     card4_value = 10
-                card3 = cards["cards"][2]["image"]
-                card3_value = cards["cards"][2]["value"]
-                card4 = cards["cards"][3]["image"]
-                card4_value = cards["cards"][3]["value"]
                 player_hand = f'{card3}\n{card4}'
                 player_total = f'Total: {str(int(card3_value)) + int(card4_value)}'
                 player_message = f'{player_hand}\n'
