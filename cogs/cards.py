@@ -30,7 +30,7 @@ class Cards(commands.Cog):
                 for card in dealer_hand:
                     if card in face_cards:
                         print(f"Face Card: {card}")
-                        dealer_hand.pop(card)
+                        dealer_hand.remove(card)
                         print(dealer_hand)
                         dealer_hand.append('10')
                         print(dealer_hand)
