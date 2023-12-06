@@ -21,6 +21,7 @@ class Cards(commands.Cog):
                 dealer_hand = [cards["cards"][0]["value"], cards["cards"][1]["value"]]
                 player_hand = [cards["cards"][2]["value"], cards["cards"][3]["value"]]
                 hands = dealer_hand, player_hand
+                faces = "KING", "QUEEN", "JACK"
                 print(f"Starting hand: {dealer_hand}")
                 print(f"Player hand: {player_hand}")
                 
@@ -31,9 +32,10 @@ class Cards(commands.Cog):
                             hand.remove("ACE")
                         
                 for hand in hands:
-                    if card in hand == "KING" or "QUEEN" or "JACK":
-                        hand.append(10)
-                        hand.remove(card)
+                    for face in faces:
+                        if card in hand == face:
+                            hand.append(10)
+                            hand.remove(card)
                     
                 print(f"dealer: {dealer_hand}")
                 print(f"player: {player_hand}")
