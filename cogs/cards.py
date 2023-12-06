@@ -9,6 +9,22 @@ CUSTOM_COLOR = configs.custom_color()
 
 
 class Cards(commands.Cog):
+
+    def sanitize_cards(hands: tuple):
+            faces = "KING", "QUEEN", "JACK"
+            
+            for hand in hands:
+                for card in hand:
+                    if card == "ACE":
+                        hand.insert(0, 11)
+                        hand.remove("ACE")
+                    if card in faces:
+                        hand.insert(0, 10)
+                        hand.remove(card)
+
+            return hands
+            
+
     @commands.command()
     async def blackjack(self, ctx: commands.Context):
         async with aiohttp.ClientSession() as session:
@@ -21,28 +37,8 @@ class Cards(commands.Cog):
                 dealer_hand = [cards["cards"][0]["value"], cards["cards"][1]["value"]]
                 player_hand = [cards["cards"][2]["value"], cards["cards"][3]["value"]]
                 hands = dealer_hand, player_hand
-                faces = "KING", "QUEEN", "JACK"
-                print(f"Starting hand: {dealer_hand}")
-                print(f"Player hand: {player_hand}")
-                
-                for hand in hands:
-                    for card in hand:
-                        if card == "ACE":
-                            hand.insert(0, 11)
-                            hand.remove("ACE")
-                #for hand in hands:
-                #    for card in hand:
-                        if card in faces:
-                            hand.insert(0, 10)
-                            hand.remove(card)
-                        else:
-                            hand.insert(0, int(card))
-                            hand.remove(card)
-                                
-                print(f"dealer: {dealer_hand}")
-                
-                print(f"player: {player_hand}")
-
+                Cards.sanitize_cards(hands=hands)
+                print(hands)
                 
                 
                 #for card in dealer_hand:
