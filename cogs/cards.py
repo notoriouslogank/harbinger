@@ -44,7 +44,7 @@ class Cards(commands.Cog):
                 hands = dealer_hand, player_hand
                 for hand in hands:
                     total = Cards.sanitize_cards(hand=hand)
-                    await ctx.message.send(total)
+                    await ctx.send({total})
 
                 
                 
