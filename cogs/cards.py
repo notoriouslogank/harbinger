@@ -21,10 +21,12 @@ class Cards(commands.Cog):
                 dealer_hand = [cards["cards"][0]["value"], cards["cards"][1]["value"]]
                 player_hand = [cards["cards"][2]["value"], cards["cards"][3]["value"]]
                 
-                i = 0
-                while i < 4:
-                    print(cards["cards"][i]["value"])
-                    i = i+1
+                for card in dealer_hand:
+                    if card == "ACE":
+                        dealer_hand.append(11)
+                        dealer_hand.remove("ACE")
+                        
+                        
                     
                 print(f"dealer: {dealer_hand}")
                 print(f"player: {player_hand}")
