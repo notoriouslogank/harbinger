@@ -68,13 +68,14 @@ class Tools(commands.Cog):
                 #print(word, pronunciation, phonetics, definition)
                 
     @commands.command()
-    async def insult(self, ctx:commands.Context) -> None:
+    async def insult(self, ctx:commands.Context, member: discord.Member.name) -> None:
          async with aiohttp.ClientSession() as session:
             async with session.get(f'https://evilinsult.com/generate_insult.php?lang=en&type=json') as resp:
                 insult_json = await resp.json()
                 await ctx.message.delete()
                 insult = str(insult_json["insult"])
-                print(insult)
+                await ctx.send(f"{member.discord.Member.mention}: {insult}")
+                await session.close()
 
 
     @commands.command()
