@@ -16,10 +16,12 @@ class Cards(commands.Cog):
                 await ctx.message.delete()
                 message = await ctx.send("Dealing...")
                 cards = await cards_json.json()
-                dealer_one = cards["cards"][0]["image"]
-                dealer_two = cards["cards"][0]["value"]
-                print(dealer_one)
-                print(dealer_two)
+                dealer_one_image = cards["cards"][0]["image"]
+                dealer_one_value = int(cards["cards"][0]["value"])
+                dealer_two_image = cards["cards"][1]["image"]
+                dealer_two_value = int(cards["cards"][1]["value"])
+                dealer_total = dealer_one_value-dealer_two_value
+                print(dealer_one_value, dealer_two_value, dealer_total)
                 # card1_value = int(cards["cards"][0]["value"])
                 
 
