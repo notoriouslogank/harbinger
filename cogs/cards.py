@@ -28,9 +28,16 @@ class Cards(commands.Cog):
                 print(f"Starting hand: {dealer_hand}")
                 
                 for card in dealer_hand:
-                    for card in face_cards:
-                        print(card)
-                
+                    if card == "ACE":
+                        dealer_hand.pop(dealer_hand.index(card))
+                        dealer_hand.append('11')
+                    elif card in face_cards:
+                        dealer_hand.pop(dealer_hand.index(card))
+                        dealer_hand.append('10')
+                    else:
+                        pass
+                    
+                print(dealer_hand)                
 
                 
                 #for card in dealer_hand:
