@@ -38,6 +38,9 @@ class Cards(commands.Cog):
                 player_hand = [cards["cards"][2]["value"], cards["cards"][3]["value"]]
                 hands = dealer_hand, player_hand
                 Cards.sanitize_cards(hands=hands)
+                dealer_total = sum(hands[0])
+                player_total = sum(hands[1])
+                print(f"Dealer total: {dealer_total}\nPlayer total:{player_total}")
                 print(hands)
                 
                 
