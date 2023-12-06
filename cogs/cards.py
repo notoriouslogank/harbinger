@@ -20,16 +20,20 @@ class Cards(commands.Cog):
                 cards = await cards_json.json()
                 dealer_hand = [cards["cards"][0]["value"], cards["cards"][1]["value"]]
                 player_hand = [cards["cards"][2]["value"], cards["cards"][3]["value"]]
+                hands = dealer_hand, player_hand
+                print(f"Starting hand: {dealer_hand}")
+                print(f"Player hand: {player_hand}")
                 
-                for card in dealer_hand:
-                    if card == "ACE":
-                        dealer_hand.append(11)
-                        dealer_hand.remove("ACE")
+                for hand in hands:
+                    for card in hand:
+                        if card == "ACE":
+                            hand.append(11)
+                            hand.remove("ACE")
                         
-                for card in dealer_hand:
-                    if card == "KING" or "QUEEN" or "JACK":
-                        dealer_hand.append(10)
-                        dealer_hand.remove(card)
+                for hand in hands:
+                    if card in hand == "KING" or "QUEEN" or "JACK":
+                        hand.append(10)
+                        hand.remove(card)
                     
                 print(f"dealer: {dealer_hand}")
                 print(f"player: {player_hand}")
