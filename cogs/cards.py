@@ -39,7 +39,7 @@ class Cards(commands.Cog):
                 player_hand = [cards["cards"][2]["value"], cards["cards"][3]["value"]]
                 hands = dealer_hand, player_hand
                 for hand in hands:
-                    total: Cards.sanitize_cards(hand=hand)
+                    total = Cards.sanitize_cards(hand=hand)
                     print(total)
 
                 
