@@ -20,7 +20,7 @@ class Cards(commands.Cog):
                 dealer_one_value = int(cards["cards"][0]["value"])
                 dealer_two_image = cards["cards"][1]["image"]
                 dealer_two_value = int(cards["cards"][1]["value"])
-                dealer_total = dealer_one_value-dealer_two_value
+                dealer_total = dealer_one_value+dealer_two_value
                 print(dealer_one_value, dealer_two_value, dealer_total)
                 # card1_value = int(cards["cards"][0]["value"])
                 
