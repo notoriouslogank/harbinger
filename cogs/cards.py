@@ -12,7 +12,7 @@ class Cards(commands.Cog):
 
     def sanitize_cards(hand):
             faces = "KING", "QUEEN", "JACK"
-            total = []
+            int_cards = []
             
             for card in hand:
                 if card == "ACE":
@@ -24,10 +24,11 @@ class Cards(commands.Cog):
             
             for card in hand:
                 card = int(card)
-                total.append(card)
+                int_cards.append(card)
                 
-            final = sum(total)
-            return final            
+            total = sum(int_cards)
+            return total
+
 
     @commands.command()
     async def blackjack(self, ctx: commands.Context):
@@ -37,15 +38,18 @@ class Cards(commands.Cog):
             ) as cards_json:
                 await ctx.message.delete()
                 message = await ctx.send("Dealing...")
+                # Get cards
                 cards = await cards_json.json()
                 dealer_hand = [cards["cards"][0]["value"], cards["cards"][1]["value"]]
-                
                 player_hand = [cards["cards"][2]["value"], cards["cards"][3]["value"]]
-                hands = dealer_hand, player_hand
-                for hand in hands:
-                    total = Cards.sanitize_cards(hand=hand)
-                    await ctx.send({total})
+                # Sanitize
+                dealer_total = Cards.sanitize_cards(dealer_hand)
+                player_total = Cards.sanitize_cards(player_hand)
 
+                # Print Hand to player quietly
+                await ctx.send(f"{ctx.message.author.mention}\nHand: {player_hand}\nTotal: {player_total}")
+                # Print to bot loudly
+                
                 
                 
                 #for card in dealer_hand:
