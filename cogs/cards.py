@@ -17,25 +17,29 @@ class Cards(commands.Cog):
                 message = await ctx.send("Dealing...")
                 cards = await cards_json.json()
                 card1 = cards["cards"][0]["image"]
-                card1_value = cards["cards"][0]["value"]
+                card1_value = int(cards["cards"][0]["value"])
                 if card1_value == "ACE":
                     card1_value = 11
-                if card1_value == "JACK":
+                elif card1_value == "JACK":
                     card1_value = 10
-                if card1_value == "QUEEN":
+                elif card1_value == "QUEEN":
                     card1_value = 10
-                if card1_value == "KING":
+                elif card1_value == "KING":
                     card1_value = 10
+                else:
+                    card1_value = int(cards["cards"][0]["value"])
                 card2 = cards["cards"][1]["image"]
                 card2_value = cards["cards"][1]["value"]
                 if card2_value == "ACE":
                     card2_value = 11
-                if card2_value == "JACK":
+                elif card2_value == "JACK":
                     card2_value = 10
-                if card2_value == "QUEEN":
+                elif card2_value == "QUEEN":
                     card2_value = 10
-                if card2_value == "KING":
+                elif card2_value == "KING":
                     card2_value = 10
+                else:
+                    card2_value = int(cards["cards"][1]["value"])
                 card3 = cards["cards"][2]["image"]
                 card3_value = cards["cards"][2]["value"]
                 if card3_value == "ACE":
@@ -49,7 +53,7 @@ class Cards(commands.Cog):
                 card4 = cards["cards"][3]["image"]
                 card4_value = cards["cards"][3]["value"]
                 if card4_value == "ACE":
-                    card4_value = 11
+                    card4_int = 11
                 if card4_value == "JACK":
                     card4_value = 10
                 if card4_value == "QUEEN":
