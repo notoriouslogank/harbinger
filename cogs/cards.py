@@ -40,8 +40,8 @@ class Cards(commands.Cog):
                 message = await ctx.send("Dealing...")
                 # Get cards
                 cards = await cards_json.json()
-                dealer_hand_codes = [cards["cards"][0]["code"], cards["cards"][1]["value"]]
-                player_hand_codes = [cards["cards"][2]["code"], cards["cards"][3]["value"]]
+                dealer_hand_codes = [cards["cards"][0]["code"], cards["cards"][1]["code"]]
+                player_hand_codes = [cards["cards"][2]["code"], cards["cards"][3]["code"]]
                 dealer_hand_values = [cards["cards"][0]["value"], cards["cards"][1]["value"]]
                 player_hand_values = [cards["cards"][2]["value"], cards["cards"][3]["value"]]
                 # Sanitize
