@@ -36,7 +36,7 @@ class Cards(commands.Cog):
                             hand.insert(0, 10)
                             hand.remove(card)
                         else:
-                            hand.insert(int(card))
+                            hand.insert(0, int(card))
                             hand.remove(card)
                                 
                 print(f"dealer: {dealer_hand}")
