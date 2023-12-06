@@ -40,46 +40,34 @@ class Tools(commands.Cog):
 
     @commands.command()
     async def define(self, ctx: commands.Context, word: str) -> None:
-        cmd = f"!define"
-        cmd_msg = f"Requested definition for: {word}"
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://api.dictionaryapi.dev/api/v2/entries/en/{word}') as resp:
                 dict_entry = await resp.json()
+                pronunciation = None
+                phonetics = None
                 await ctx.message.delete()
                 try:
-                    definition = dict_entry[0]["meanings"][0]["definitions"][0]["definition"]
+                    pronunciation = str(dict_entry[0]["phonetics"][0]["audio"])
                 except Exception:
-                    await ctx.send(f"ERROR: Could not find definition for *{word}*.\nPlease check the spelling and try again.")
-                    return
-                try:
-                    definition2 = dict_entry[0]["meanings"][1]["definitions"][0]["definition"]
-                except Exception:
-                    definition2 = None
-                try:
-                    pronunciation = dict_entry[0]["phonetics"][0]["audio"]
-                except Exception:
-                    pronunciation = ""
-                try:
-                    phonetics = dict_entry[0]["phonetics"][0]["text"]
-                except:
-                    phonetics = None
-                if pronunciation != "":
-                    if phonetics != None:
-                        embed = discord.Embed(title=f"**{word}**", description=f"[{phonetics}]({pronunciation})", color=CUSTOM_COLOR)
-                    elif phonetics == None:
-                        embed = discord.Embed(title=f"**{word}**", description=f"*[Pronunciation]({pronunciation})*", color=CUSTOM_COLOR)
-                elif pronunciation == "":
-                    if phonetics != None:
-                        embed = discord.Embed(title=f"**{word}**", description=f"{phonetics}", color=CUSTOM_COLOR)
-                    elif phonetics == None:
-                        embed = discord.Embed(title=f"**{word}**", description=f"No phonetic information available", color=CUSTOM_COLOR)
-                embed.add_field(name="1)", value=f"*{definition}*", inline=False)
-                if definition2 != None:
-                    embed.add_field(name="2)", value=f"*{definition2}*", inline=False)
-                else:
                     pass
-                Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+                try:
+                    phonetics = str(dict_entry[0]["phonetics"][0]["text"])
+                except Exception:
+                    pass
+                definition = dict_entry[0]["meanings"][0]["definitions"][0]["definition"]
+                if phonetics == None:
+                    embed=discord.Embed(title=f"{word}", description=f"No phonetic guide available.", color=CUSTOM_COLOR)
+                elif pronunciation == None:
+                    print(f"pronounce: {pronunciation}")
+                    embed = discord.Embed(title=f"{word}", description=f"{phonetics}", color=CUSTOM_COLOR)
+                else:
+                    embed = discord.Embed(title=f"{word}", description=f"[{phonetics}]({pronunciation})", color=CUSTOM_COLOR)
+                embed.add_field(name=" ", value=f"{definition}")
                 await ctx.send(embed=embed)
+                await session.close()
+                #print(word, pronunciation, phonetics, definition)
+                
+
 
     @commands.command()
     async def add(self, ctx: commands.Context, *num: int) -> None:
@@ -135,6 +123,10 @@ class Tools(commands.Cog):
             embedRPS.add_field(name="result", value="You lose!", inline=False)
             await ctx.send(embed=embedRPS)
 
+    @commands.command()
+    async def insult(self, ctx:commands.Context, choice: str) -> None:
+
+    
 
 async def setup(bot):
     """Load cogs into bot."""
