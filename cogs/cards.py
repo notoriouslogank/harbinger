@@ -10,19 +10,19 @@ CUSTOM_COLOR = configs.custom_color()
 
 class Cards(commands.Cog):
 
-    def sanitize_cards(hands: tuple):
+    def sanitize_cards(hand):
             faces = "KING", "QUEEN", "JACK"
             
-            for hand in hands:
-                for card in hand:
-                    if card == "ACE":
-                        hand.insert(0, 11)
-                        hand.remove("ACE")
-                    if card in faces:
-                        hand.insert(0, 10)
-                        hand.remove(card)
+            for card in hand:
+                if card == "ACE":
+                    hand.insert(0, 11)
+                    hand.remove("ACE")
+                if card in faces:
+                    hand.insert(0, 10)
+                    hand.remove(card)
 
-            return hands
+            total = sum(hand)
+            return total
             
 
     @commands.command()
@@ -35,13 +35,13 @@ class Cards(commands.Cog):
                 message = await ctx.send("Dealing...")
                 cards = await cards_json.json()
                 dealer_hand = [cards["cards"][0]["value"], cards["cards"][1]["value"]]
+                
                 player_hand = [cards["cards"][2]["value"], cards["cards"][3]["value"]]
                 hands = dealer_hand, player_hand
-                Cards.sanitize_cards(hands=hands)
-                dealer_total = str(sum(hands[0]))
-                player_total = str(sum(hands[1]))
-                print(f"Dealer total: {dealer_total}\nPlayer total:{player_total}")
-                print(hands)
+                for hand in hands:
+                    total: Cards.sanitize_cards(hand=hand)
+                    print(total)
+
                 
                 
                 #for card in dealer_hand:
