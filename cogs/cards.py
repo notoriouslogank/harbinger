@@ -29,11 +29,11 @@ class Cards(commands.Cog):
                 
                 for card in dealer_hand:
                     if card == "ACE":
-                        dealer_hand.pop(dealer_hand.index(card))
                         dealer_hand.append('11')
-                    elif card in face_cards:
                         dealer_hand.pop(dealer_hand.index(card))
+                    elif card in face_cards:
                         dealer_hand.append('10')
+                        dealer_hand.pop(dealer_hand.index(card))
                     else:
                         pass
                     
