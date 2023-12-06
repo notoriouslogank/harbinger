@@ -28,6 +28,12 @@ class Cards(commands.Cog):
                 print(f"Starting hand: {dealer_hand}")
                 
                 for card in dealer_hand:
+                    if card == "ACE":
+                        print(f"Before Ace: {dealer_hand}")
+                        dealer_hand.remove(card)
+                        print(dealer_hand)
+                        dealer_hand.append('11')
+                        print(f"After ace: {dealer_hand}")
                     if card in face_cards:
                         print(f"Face Card: {card}")
                         dealer_hand.remove(card)
@@ -36,12 +42,6 @@ class Cards(commands.Cog):
                         print(dealer_hand)
                         #dealer_hand.append(10)
                         #dealer_hand.remove(card)
-                    elif card == "ACE":
-                        print(f"Before Ace: {dealer_hand}")
-                        dealer_hand.remove(card)
-                        print(dealer_hand)
-                        dealer_hand.append('11')
-                        print(f"After ace: {dealer_hand}")
                     else:
                         print(f"before number: {dealer_hand}")
                         dealer_hand.append(card)
