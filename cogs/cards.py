@@ -39,8 +39,6 @@ class Cards(commands.Cog):
                 dealer_total = sum(dealer_hand)
                 
                 print(f"Total: {dealer_total}")
-                
-                print(dealer_hand)
 
                 #for card in dealer_hand:
                 #    print(card)
