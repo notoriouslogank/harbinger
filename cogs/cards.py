@@ -30,12 +30,21 @@ class Cards(commands.Cog):
                         if card == "ACE":
                             hand.append(11)
                             hand.remove("ACE")
-                        
                 for hand in hands:
-                    for face in faces:
-                        if card in hand == face:
+                    for card in hand:
+                        if card == "KING":
                             hand.append(10)
-                            hand.remove(card)
+                            hand.remove("KING")
+                for hand in hands:
+                    for card in hand:
+                        if card == "QUEEN":
+                            hand.append(10)
+                            hand.remove("QUEEN")
+                for hand in hands:
+                    for card in hand:
+                        if card == "JACK":
+                            hand.append(10)
+                            hand.remove("JACK")        
                     
                 print(f"dealer: {dealer_hand}")
                 print(f"player: {player_hand}")
