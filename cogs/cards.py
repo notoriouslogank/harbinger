@@ -18,8 +18,40 @@ class Cards(commands.Cog):
                 cards = await cards_json.json()
                 card1 = cards["cards"][0]["image"]
                 card1_value = cards["cards"][0]["value"]
+                if card1_value == "ACE":
+                    card1_value = 11
+                if card1_value == "JACK":
+                    card1_value = 10
+                if card1_value == "QUEEN":
+                    card1_value = 10
+                if card1_value == "KING":
+                    card1_value = 10
                 card2 = cards["cards"][1]["image"]
                 card2_value = cards["cards"][1]["value"]
+                if card2_value == "ACE":
+                    card2_value = 11
+                if card2_value == "JACK":
+                    card2_value = 10
+                if card2_value == "QUEEN":
+                    card2_value = 10
+                if card2_value == "KING":
+                    card2_value = 10
+                if card3_value == "ACE":
+                    card3_value = 11
+                if card3_value == "JACK":
+                    card3_value = 10
+                if card3_value == "QUEEN":
+                    card3_value = 10
+                if card3_value == "KING":
+                    card3_value = 10
+                if card4_value == "ACE":
+                    card4_value = 11
+                if card4_value == "JACK":
+                    card4_value = 10
+                if card4_value == "QUEEN":
+                    card4_value = 10
+                if card4_value == "KING":
+                    card4_value = 10
                 card3 = cards["cards"][2]["image"]
                 card3_value = cards["cards"][2]["value"]
                 card4 = cards["cards"][3]["image"]
@@ -32,5 +64,6 @@ class Cards(commands.Cog):
                 await ctx.send(dealer_total)
                 await Harbinger.send_dm(ctx=ctx, member=ctx.message.author, content=player_message)
                 await Harbinger.send_dm(ctx=ctx, member=ctx.message.author, content=player_total)
+
 async def setup(bot):
     await bot.add_cog(Cards(bot))
