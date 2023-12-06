@@ -33,9 +33,11 @@ class Cards(commands.Cog):
                         dealer_hand.append(11)
                         dealer_hand.remove(card)
                     else:
-                        pass
+                        dealer_hand.append(int(card))
+                        dealer_hand.remove(card)
                 
                 dealer_total = sum(dealer_hand)
+                
                 print(f"Total: {dealer_total}")
                 
                 print(dealer_hand)
