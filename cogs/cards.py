@@ -36,9 +36,8 @@ class Cards(commands.Cog):
                         dealer_hand.append(card)
                         dealer_hand.remove(card)
                 
-                card1 = int(dealer_hand[0])
-                print(card1)
-                
+                total = int(dealer_hand.pop())+int(dealer_hand.pop())
+                print(total)
                 print(f"{dealer_hand}")
 
                 #for card in dealer_hand:
