@@ -17,11 +17,17 @@ class Cards(commands.Cog):
                 message = await ctx.send("Dealing...")
                 cards = await cards_json.json()
                 card1 = cards["cards"][0]["image"]
+                card1_value = cards["cards"][0]["value"]
                 card2 = cards["cards"][1]["image"]
+                card2_value = cards["cards"][1]["value"]
                 card3 = cards["cards"][2]["image"]
+                card3_value = cards["cards"][2]["value"]
                 card4 = cards["cards"][3]["image"]
-                await ctx.send(f'{card1}\n{card2}')
-                player_hand = f'{card3}\n{card4}'
+                card4_value = cards["cards"][3]["value"]
+                dealer_total = int(card1) + int(card2)
+                player_total = int(card3) + int(card4)
+                await ctx.send(f'{card1}\n{card2}\n TOTAL: {dealer_total}')
+                player_hand = f'{card3}\n{card4} TOTAL: {player_hand}'
                 await Harbinger.send_dm(ctx=ctx, member=ctx.message.author, content=player_hand)
                 
 async def setup(bot):
