@@ -47,7 +47,7 @@ class Cards(commands.Cog):
                 player_total = Cards.sanitize_cards(player_hand)
 
                 # Print Hand to player quietly
-                await ctx.send(f"{ctx.message.author.mention}\nHand: {player_hand}\nTotal: {player_total}")
+                await ctx.send(f"{ctx.message.author.mention}\nHand: {player_hand[0]} {player_hand[1]}\nTotal: {player_total}")
                 # Print to bot loudly
                 
                 
