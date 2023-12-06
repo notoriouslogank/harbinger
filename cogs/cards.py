@@ -19,3 +19,6 @@ class Cards(commands.Cog):
                 card1 = cards["cards"][0]["image"]
                 card2 = cards["cards"][1]["image"]
                 await ctx.send(f'{card1}\n{card2}')
+                
+async def setup(bot):
+    await bot.add_cog(Cards(bot))
