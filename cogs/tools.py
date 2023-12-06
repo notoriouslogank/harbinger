@@ -1,9 +1,6 @@
-from curses import keyname
-import json
-from pstats import SortKey
-import aiohttp
 from random import randint
 
+import aiohttp
 import discord
 from discord.ext import commands
 
