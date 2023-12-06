@@ -29,7 +29,7 @@ class Cards(commands.Cog):
             total = sum(int_cards)
             return total
 
-
+        
     @commands.command()
     async def blackjack(self, ctx: commands.Context):
         async with aiohttp.ClientSession() as session:
@@ -40,6 +40,8 @@ class Cards(commands.Cog):
                 message = await ctx.send("Dealing...")
                 # Get cards
                 cards = await cards_json.json()
+                deck_id = [cards["deck_id"]]
+                print(deck_id)
                 dealer_hand_codes = [cards["cards"][0]["code"], cards["cards"][1]["code"]]
                 player_hand_codes = [cards["cards"][2]["code"], cards["cards"][3]["code"]]
                 dealer_hand_values = [cards["cards"][0]["value"], cards["cards"][1]["value"]]
