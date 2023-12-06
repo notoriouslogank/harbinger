@@ -67,6 +67,14 @@ class Tools(commands.Cog):
                 await session.close()
                 #print(word, pronunciation, phonetics, definition)
                 
+    @commands.command()
+    async def insult(self, ctx:commands.Context, choice: str) -> None:
+         async with aiohttp.ClientSession() as session:
+            async with session.get(f'https://evilinsult.com/generate_insult.php?lang=en&type=json') as resp:
+                insult_json = await resp.json()
+                await ctx.message.delete()
+                insult = str(insult_json["insult"])
+                print(insult)
 
 
     @commands.command()
@@ -123,10 +131,6 @@ class Tools(commands.Cog):
             embedRPS.add_field(name="result", value="You lose!", inline=False)
             await ctx.send(embed=embedRPS)
 
-    @commands.command()
-    async def insult(self, ctx:commands.Context, choice: str) -> None:
-
-    
 
 async def setup(bot):
     """Load cogs into bot."""
