@@ -7,16 +7,14 @@ from harbinger import Harbinger
 
 CUSTOM_COLOR = configs.custom_color()
 
+
 class Cards(commands.Cog):
-    
-    def convert_face_cards(self, ctx: commands.Context, cards):
-        
-        
-        
     @commands.command()
     async def blackjack(self, ctx: commands.Context):
         async with aiohttp.ClientSession() as session:
-            async with session.get(f'https://deckofcardsapi.com/api/deck/new/draw/?count=4') as cards_json:
+            async with session.get(
+                f"https://deckofcardsapi.com/api/deck/new/draw/?count=4"
+            ) as cards_json:
                 await ctx.message.delete()
                 message = await ctx.send("Dealing...")
                 cards = await cards_json.json()
@@ -25,15 +23,11 @@ class Cards(commands.Cog):
                 (int(cards["cards"][0]["value"])).append[dealer_hand]
                 cards["cards"][1]["image"].append[dealer_hand]
                 int(cards["cards"][1]["value"]).append[dealer_hand]
-                dealer_total = dealer_hand[1]+dealer_hand[3]
-                print(f'{dealer_hand}\nTotal: {dealer_total}')
-                
-                
-                
-                # card1_value = int(cards["cards"][0]["value"])
-                
+                dealer_total = dealer_hand[1] + dealer_hand[3]
+                print(f"{dealer_hand}\nTotal: {dealer_total}")
 
-                
+                # card1_value = int(cards["cards"][0]["value"])
+
 
 async def setup(bot):
     await bot.add_cog(Cards(bot))
