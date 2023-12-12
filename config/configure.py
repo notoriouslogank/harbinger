@@ -126,7 +126,7 @@ class Configure:
         }
         config["Bot"] = {
             "token": f"{Configure.obscure(Configure.get_token())}",
-            "channel": f"{Configure.obscure(Configure.get_channel_id())}",
+        #    "channel": f"{Configure.obscure(Configure.get_channel_id())}",
             "delete_after": f"{Configure.get_deletion_time()}",
             "owner_id": f'{Configure.obscure(Configure.get_owner_id())}'
         }

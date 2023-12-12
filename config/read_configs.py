@@ -68,3 +68,14 @@ class ReadConfigs:
     def delete_time() -> int:
         del_time = int(config["Bot"]["delete_after"])
         return del_time
+
+def main():
+    """Print deobfuscated config.ini."""
+    read = ReadConfigs
+    print(f"Token: {read.token()}\nOwner ID: {read.owner_id()}\nEmail Address: {read.email_address()}\nEmail Password: {read.email_password()}")
+    print(f"Moderator ID: {read.moderator_id()}\nDeveloper ID: {read.developer_id()}\nServer Directory: {read.server_dir()}")
+    print(f"Startup Script: {read.startup_script()}\nServer Local IP: {read.server_local_ip()}\nServer Public IP: {read.server_public_ip()}")
+    print(f"Custom Color: {read.custom_color()}\nDelete Time: {read.delete_time()}")
+
+if __name__ == "__main__":
+    main()
