@@ -14,6 +14,7 @@ from harbinger import Harbinger
 class Hangman(commands.Cog):
     word_dictionary = ["syzygy", "beans", "memes", "dildo", "blarney"]
     random_word = random.choice(word_dictionary)
+    bot = Harbinger.bot
 
     @commands.command()
     async def print_hangman(self, ctx, wrong: int):
