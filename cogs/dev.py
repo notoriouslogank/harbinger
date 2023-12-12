@@ -8,6 +8,7 @@ from harbinger import Harbinger
 DELETION_TIME = configs.delete_time()
 MODERATOR_ROLE_ID = configs.moderator_id()
 
+
 class Dev(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -184,4 +185,5 @@ class Dev(commands.Cog):
 
 
 async def setup(bot):
+    """Load the cog into the bot."""
     await bot.add_cog(Dev(bot))

@@ -1,6 +1,3 @@
-from curses import keyname
-import json
-from pstats import SortKey
 import aiohttp
 from random import randint
 
@@ -40,8 +37,15 @@ class Tools(commands.Cog):
 
     @commands.command()
     async def define(self, ctx: commands.Context, word: str) -> None:
+        """Return an embedded definition and pronunciation guide for a given word.
+
+        Args:
+            word (str): Word to be defined
+        """
         async with aiohttp.ClientSession() as session:
-            async with session.get(f'https://api.dictionaryapi.dev/api/v2/entries/en/{word}') as resp:
+            async with session.get(
+                f"https://api.dictionaryapi.dev/api/v2/entries/en/{word}"
+            ) as resp:
                 dict_entry = await resp.json()
                 pronunciation = None
                 phonetics = None
@@ -54,29 +58,47 @@ class Tools(commands.Cog):
                     phonetics = str(dict_entry[0]["phonetics"][0]["text"])
                 except Exception:
                     pass
-                definition = dict_entry[0]["meanings"][0]["definitions"][0]["definition"]
+                definition = dict_entry[0]["meanings"][0]["definitions"][0][
+                    "definition"
+                ]
                 if phonetics == None:
-                    embed=discord.Embed(title=f"{word}", description=f"No phonetic guide available.", color=CUSTOM_COLOR)
+                    embed = discord.Embed(
+                        title=f"{word}",
+                        description=f"No phonetic guide available.",
+                        color=CUSTOM_COLOR,
+                    )
                 elif pronunciation == None:
                     print(f"pronounce: {pronunciation}")
-                    embed = discord.Embed(title=f"{word}", description=f"{phonetics}", color=CUSTOM_COLOR)
+                    embed = discord.Embed(
+                        title=f"{word}", description=f"{phonetics}", color=CUSTOM_COLOR
+                    )
                 else:
-                    embed = discord.Embed(title=f"{word}", description=f"[{phonetics}]({pronunciation})", color=CUSTOM_COLOR)
+                    embed = discord.Embed(
+                        title=f"{word}",
+                        description=f"[{phonetics}]({pronunciation})",
+                        color=CUSTOM_COLOR,
+                    )
                 embed.add_field(name=" ", value=f"{definition}")
                 await ctx.send(embed=embed)
                 await session.close()
-                #print(word, pronunciation, phonetics, definition)
-                
+                # print(word, pronunciation, phonetics, definition)
+
     @commands.command()
-    async def insult(self, ctx:commands.Context, member: discord.Member) -> None:
-         async with aiohttp.ClientSession() as session:
-            async with session.get(f'https://evilinsult.com/generate_insult.php?lang=en&type=json') as resp:
+    async def insult(self, ctx: commands.Context, member: discord.Member) -> None:
+        """Send a random insult to (and @mention) a given user.
+
+        Args:
+            member (discord.Member): Member to insult and @mention.
+        """
+        async with aiohttp.ClientSession() as session:
+            async with session.get(
+                f"https://evilinsult.com/generate_insult.php?lang=en&type=json"
+            ) as resp:
                 insult_json = await resp.json()
                 await ctx.message.delete()
                 insult = str(insult_json["insult"])
                 await ctx.send(f"{member.mention}: {insult}")
                 await session.close()
-
 
     @commands.command()
     async def add(self, ctx: commands.Context, *num: int) -> None:

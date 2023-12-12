@@ -19,7 +19,6 @@ class Moderation(commands.Cog):
     @commands.has_role(MODERATOR_ROLE_ID)
     async def clear(self, ctx: commands.Context, amount: int = 2) -> None:
         """Delete a number of messages in channel."""
-
         cmd = f"!clear({amount})"
         cmd_msg = f"Deleted {amount} messages."
         amount = amount + 1
@@ -87,7 +86,11 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
     async def say(self, ctx: commands.Context, *message: str) -> None:
-        """Say message as bot."""
+        """Send a message as the bot.
+
+        Args:
+            message (str): Message to send as the bot
+        """
         cmd = f"!say({message})"
         string_message = ""
         for word in message:
