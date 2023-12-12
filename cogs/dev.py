@@ -123,7 +123,7 @@ class Dev(commands.Cog):
                 content=f"{self.check_cog(cog)} has been reloaded.",
                 delete_after=DELETION_TIME,
             )
-        
+
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
     async def update(self, ctx):
@@ -132,10 +132,10 @@ class Dev(commands.Cog):
         message = await ctx.send("Checking GitHub for updates...")
         await ctx.message.delete()
         subprocess.run(["git", "pull"])
-        await message.edit(content=f"Bot is now on version {Harbinger.get_ver()}", delete_after=DELETION_TIME)
-
-
-        
+        await message.edit(
+            content=f"Bot is now on version {Harbinger.get_ver()}",
+            delete_after=DELETION_TIME,
+        )
 
     @reload_all.error
     async def reload_all_error(self, ctx, error) -> None:
