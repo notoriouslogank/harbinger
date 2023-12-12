@@ -1,3 +1,7 @@
+import asyncio
+
+
+import asyncio
 import random
 
 import discord
@@ -66,6 +70,24 @@ class Hangman(commands.Cog):
         for letter in current_letters_guessed:
             await message.edit(content=letter)
         ### Prompt for input
+        embed = discord.Embed(
+            title="Guess a letter", description="This will time out after 1 minute"
+        )
+        sent = await ctx.send(embed=embed)
+        try:
+            msg = await self.bot.wait_for(
+                "message",
+                timeout=60,
+                check=lambda message: message.author == ctx.author
+                and message.channel == ctx.channel,
+            )
+            if msg:
+                await sent.delete()
+                await msg.delete()
+                await ctx.send(msg.content)
+        except asyncio.TimeoutError:
+            await sent.delete()
+            await ctx.send("Cancelling due to timeout", delete_after=60)
         letter_guessed = input("\nGuess a letter.")
         ### User is correct
         if Hangman.random_word[current_guess_index] == letter_guessed:
@@ -84,6 +106,7 @@ class Hangman(commands.Cog):
             ### Print word
             current_letters_correct = Hangman.print_word(current_letters_guessed)
             Hangman.print_lines()
+
 
 async def setup(bot):
     await bot.add_cog(Hangman(bot))
