@@ -23,6 +23,10 @@ class ReadConfigs:
         main_channel = int(ReadConfigs.reveal(config["Bot"]["channel"]))
         return main_channel
 
+    def owner_id() -> int:
+        owner_id = int(ReadConfigs.reveal(config["Bot"]["owner_id"]))
+        return owner_id
+    
     def email_address() -> str:
         email_addr = ReadConfigs.reveal(config["Email"]["address"])
         return email_addr

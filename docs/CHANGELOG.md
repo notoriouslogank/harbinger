@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.8.2] - 2023-11-12
+
+### Fixed
+
+- Defined previously-undefined variables in status cog (email, email_password, moderator_role_id)
+
+## [2.8.1] - 2023-11-12
+
+### Fixed
+
+- Dev commands (and select other commands) should now correctly verify bot owner
+
+### Changed
+
+- configs/configure.py now requests owner_id
+
 ## [2.8.0] - 2023-05-12
 
 ### Added

@@ -6,6 +6,7 @@ from random import randint
 
 import discord
 from discord.ext import commands
+from cogs.dev import MODERATOR_ROLE_ID
 
 from harbinger import Harbinger
 from config.read_configs import ReadConfigs as configs
@@ -15,6 +16,7 @@ DELETION_TIME = configs.delete_time()
 EMAIL_ADDRESS = configs.email_address()
 EMAIL_PASSWORD = configs.email_password()
 CUSTOM_COLOR = configs.custom_color()
+MODERATOR_ROLE_ID = configs.moderator_id()
 
 playing = [
     "with myself",
@@ -94,7 +96,7 @@ class Status(commands.Cog):
         Harbinger.timestamp("BOT", "INITIALIZE", "BOT IS ONLINE")
 
     @commands.command()
-    @commands.has_role(DEVELOPER_ROLE_ID)
+    @commands.has_role(MODERATOR_ROLE_ID)
     async def up(self, ctx: commands.Context) -> None:
         """Confirm bot is online and reachable."""
         cmd = "!up"
@@ -106,7 +108,7 @@ class Status(commands.Cog):
         await message.edit(delete_after=DELETION_TIME)
 
     @commands.command()
-    @commands.has_role(DEVELOPER_ROLE_ID)
+    @commands.has_role(MODERATOR_ROLE_ID)
     async def info(self, ctx: commands.Context) -> None:
         """Get information about this bot."""
         cmd = "!info"
@@ -127,7 +129,7 @@ class Status(commands.Cog):
         await ctx.send(embed=embedInfo)
 
     @commands.command()
-    @commands.has_role(DEVELOPER_ROLE_ID)
+    @commands.has_role(MODERATOR_ROLE_ID)
     async def ping(self, ctx: commands.Context) -> None:
         """Check network latency."""
         ping = (round(self.bot.latency, 2)) * 1000
@@ -139,7 +141,7 @@ class Status(commands.Cog):
         await message.edit(delete_after=DELETION_TIME)
 
     @commands.command()
-    @commands.has_role(DEVELOPER_ROLE_ID)
+    @commands.has_role(MODERATOR_ROLE_ID)
     async def uptime(self, ctx: commands.Context) -> None:
         """Get bot uptime."""
         cmd = "!uptime"
@@ -153,7 +155,7 @@ class Status(commands.Cog):
         await message.edit(delete_after=DELETION_TIME)
 
     @commands.command()
-    @commands.has_role(DEVELOPER_ROLE_ID)
+    @commands.has_role(MODERATOR_ROLE_ID)
     async def changelog(self, ctx: commands.Context) -> None:
         """Get changelog."""
         cmd = "!changelog"
@@ -170,8 +172,8 @@ class Status(commands.Cog):
         message = ""
         for word in raw_message:
             message = message + str(word) + " "
-        email_address = Harbinger.email_address
-        password = Harbinger.email_pass
+        email_address = EMAIL_ADDRESS
+        password = EMAIL_PASSWORD
         email = EmailMessage()
         email["From"] = "Harbinger"
         email["To"] = email_address
@@ -188,7 +190,7 @@ class Status(commands.Cog):
         )
 
     @commands.command()
-    @commands.has_role(DEVELOPER_ROLE_ID)
+    @commands.is_owner()
     async def shutdown(self, ctx: commands.Context) -> None:
         """Gracefully shutdown the bot."""
         cmd = "!shutdown"

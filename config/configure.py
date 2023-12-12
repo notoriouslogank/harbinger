@@ -35,6 +35,10 @@ class Configure:
         """
         token = input("Discord API Token: ")
         return token
+    
+    def get_owner_id() -> str:
+        owner_id = input("Owner ID")
+        return owner_id
 
     def get_channel_id() -> int:
         """Prompt user for Channel ID.
@@ -124,6 +128,7 @@ class Configure:
             "token": f"{Configure.obscure(Configure.get_token())}",
             "channel": f"{Configure.obscure(Configure.get_channel_id())}",
             "delete_after": f"{Configure.get_deletion_time()}",
+            "owner_id": f'{Configure.obscure(Configure.get_owner_id())}'
         }
         config["Custom Color"] = {"rgb": f"{Configure.get_custom_color()}"}
         config["Server"] = {
