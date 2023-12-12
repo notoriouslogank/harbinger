@@ -85,22 +85,23 @@ class Hangman(commands.Cog):
                 await sent.delete()
                 await msg.delete()
                 await ctx.send(msg.content)
+                return Hangman.letter_guessed
         except asyncio.TimeoutError:
             await sent.delete()
             await ctx.send("Cancelling due to timeout", delete_after=60)
-        letter_guessed = input("\nGuess a letter.")
+        #letter_guessed = input("\nGuess a letter.")
         ### User is correct
-        if Hangman.random_word[current_guess_index] == letter_guessed:
+        if Hangman.random_word[current_guess_index] == Hangman.letter_guessed:
             Hangman.print_hangman(amount_of_wrong_guesses)
             ## Print word
             current_guess_index += 1
-            current_letters_guessed.append(letter_guessed)
+            current_letters_guessed.append(Hangman.letter_guessed)
             current_letters_correct = Hangman.print_word(current_letters_guessed)
             Hangman.print_lines()
         ### User incorrect
         else:
             amount_of_wrong_guesses += 1
-            current_letters_guessed.append(letter_guessed)
+            current_letters_guessed.append(Hangman.letter_guessed)
             ### Update drawing
             Hangman.print_hangman(amount_of_wrong_guesses)
             ### Print word
