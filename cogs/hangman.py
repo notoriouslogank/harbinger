@@ -84,3 +84,6 @@ class Hangman(commands.Cog):
             ### Print word
             current_letters_correct = Hangman.print_word(current_letters_guessed)
             Hangman.print_lines()
+
+async def setup(bot):
+    await bot.add_cog(Hangman(bot))
