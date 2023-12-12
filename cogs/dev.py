@@ -1,4 +1,5 @@
 from os import listdir
+import subprocess
 
 from discord.ext import commands
 
@@ -122,6 +123,18 @@ class Dev(commands.Cog):
                 content=f"{self.check_cog(cog)} has been reloaded.",
                 delete_after=DELETION_TIME,
             )
+        
+    @commands.command()
+    @commands.has_role(MODERATOR_ROLE_ID)
+    async def update(self, ctx):
+        cmd = "!update"
+        cmd_msg = "Pulled from GitHub."
+        message = await ctx.send("Checking GitHub for updates...")
+        await ctx.message.delete()
+        subprocess.run(["git", "pull"])
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        await message.edit("Bot is up to date!", delete_after=DELETION_TIME)
+        
 
     @reload_all.error
     async def reload_all_error(self, ctx, error) -> None:
