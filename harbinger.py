@@ -7,6 +7,7 @@ from discord.ext import commands
 from config.read_configs import ReadConfigs as configs
 
 TOKEN = configs.token()
+OWNER_ID = configs.owner_id()
 
 class Harbinger:
     """Class for the main bot functions."""
@@ -31,7 +32,7 @@ class Harbinger:
     intents = discord.Intents.default()
     intents.members = True
     intents.message_content = True
-    bot = commands.Bot(command_prefix="!", intents=intents)
+    bot = commands.Bot(command_prefix="!", owner_id=OWNER_ID, intents=intents)
     bot.remove_command("help")
 
     def __init__(self, bot):
