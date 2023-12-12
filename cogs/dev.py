@@ -132,8 +132,8 @@ class Dev(commands.Cog):
         message = await ctx.send("Checking GitHub for updates...")
         await ctx.message.delete()
         subprocess.run(["git", "pull"])
-        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await message.edit(content="Bot is up to date!", delete_after=DELETION_TIME)
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         
 
     @reload_all.error
