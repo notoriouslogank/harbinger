@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.8.4] - 2023-12-12
+
+### Fixed
+
+- All role checks should function as intended now (except bot owner checks)
+- Minor formatting
+
+### Changed
+
+- Moderator and Developer role IDs now default to "Admin" and "Developer", respectively
+- Updated requirements.txt
+- read_configs.py now deobfuscates config.ini
+
 ## [2.8.3] - 2023-11-12
 
 ### Added

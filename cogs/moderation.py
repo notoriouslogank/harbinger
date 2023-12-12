@@ -4,7 +4,7 @@ from discord.ext import commands
 from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
 
-MODERATOR_ROLE_ID = configs.moderator_id()
+MODERATOR_ROLE_ID = str("Admin")
 DELETION_TIME = configs.delete_time()
 CUSTOM_COLOR = configs.custom_color()
 

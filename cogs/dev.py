@@ -134,6 +134,7 @@ class Dev(commands.Cog):
         subprocess.run(["git", "pull"])
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await message.edit(content="Bot is up to date!", delete_after=DELETION_TIME)
+
         
 
     @reload_all.error
