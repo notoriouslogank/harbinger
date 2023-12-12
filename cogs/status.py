@@ -6,6 +6,7 @@ from random import randint
 
 import discord
 from discord.ext import commands
+from cogs.dev import MODERATOR_ROLE_ID
 
 from harbinger import Harbinger
 from config.read_configs import ReadConfigs as configs
@@ -15,6 +16,7 @@ DELETION_TIME = configs.delete_time()
 EMAIL_ADDRESS = configs.email_address()
 EMAIL_PASSWORD = configs.email_password()
 CUSTOM_COLOR = configs.custom_color()
+MODERATOR_ROLE_ID = configs.moderator_id()
 
 playing = [
     "with myself",
