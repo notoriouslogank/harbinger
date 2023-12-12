@@ -134,7 +134,12 @@ class Music(commands.Cog):
             await ctx.send("Stopping...")
 
     @commands.command()
-    async def stream(self, ctx, *, url) -> None:
+    async def stream(self, ctx, *, url: str) -> None:
+        """Begin streaming audio from the given url.
+
+        Args:
+            url (str): URL from which to stream audio.
+        """
         cmd = f"!stream {url}"
         self.music_queue.append(url)
         print(self.music_queue)
@@ -150,13 +155,6 @@ class Music(commands.Cog):
                 ),
             )
 
-    @commands.command()
-    async def queue(self, ctx, *, url) -> None:
-        self.music_queue.append(url)
-        await ctx.send(f"Added to queue!")
-        await ctx.send(f"Current queue: {self.music_queue}")
-
-    # @yt.before_invoke
     @stream.before_invoke
     async def ensure_voice(self, ctx) -> None:
         """Ensure that the ctx.message.author is actively in a voice channel.

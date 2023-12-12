@@ -13,6 +13,11 @@ class HelpCommand(commands.Cog):
 
     @commands.command()
     async def help(self, ctx, *, command=None) -> None:
+        """Get help information about a given command or cog.
+
+        Args:
+            command (str, optional): Command or category (cog) to get help for. Defaults to None.
+        """
         # HELP
         if command == None:
             help_embed = discord.Embed(

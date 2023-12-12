@@ -6,10 +6,9 @@ from random import randint
 
 import discord
 from discord.ext import commands
-from cogs.dev import MODERATOR_ROLE_ID
 
-from harbinger import Harbinger
 from config.read_configs import ReadConfigs as configs
+from harbinger import Harbinger
 
 DEVELOPER_ROLE_ID = configs.developer_id()
 DELETION_TIME = configs.delete_time()
