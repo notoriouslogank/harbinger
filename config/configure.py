@@ -40,14 +40,14 @@ class Configure:
         owner_id = input("Owner ID")
         return owner_id
 
-    def get_channel_id() -> int:
-        """Prompt user for Channel ID.
-
-        Returns:
-            int: Channel ID
-        """
-        channel = input("Channel ID: ")
-        return channel
+    #def get_channel_id() -> int:
+    #    """Prompt user for Channel ID.
+    #
+    #    Returns:
+    #        int: Channel ID
+    #    """
+    #    channel = input("Channel ID: ")
+    #    return channel
 
     def get_server_dir() -> str:
         """Prompt user for directory to Minecraft server.
@@ -106,11 +106,11 @@ class Configure:
         return email_pass
 
     def get_moderator_role():
-        role_id = input("Moderator Role ID: ")
+        role_id = str(input("Administrator Role Name: ") or "Admin")
         return role_id
 
     def get_developer_role():
-        role_id = input("Developer Role ID: ")
+        role_id = str(input("Developer Role ID: ") or "Developer")
         return role_id
 
     def get_deletion_time():
@@ -126,7 +126,7 @@ class Configure:
         }
         config["Bot"] = {
             "token": f"{Configure.obscure(Configure.get_token())}",
-            "channel": f"{Configure.obscure(Configure.get_channel_id())}",
+        #    "channel": f"{Configure.obscure(Configure.get_channel_id())}",
             "delete_after": f"{Configure.get_deletion_time()}",
             "owner_id": f'{Configure.obscure(Configure.get_owner_id())}'
         }
