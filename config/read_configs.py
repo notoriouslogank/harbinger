@@ -19,9 +19,9 @@ class ReadConfigs:
         api_token = ReadConfigs.reveal(config["Bot"]["token"])
         return api_token
 
-    def channel() -> int:
-        main_channel = int(ReadConfigs.reveal(config["Bot"]["channel"]))
-        return main_channel
+    #def channel() -> int:
+    #    main_channel = int(ReadConfigs.reveal(config["Bot"]["channel"]))
+    #    return main_channel
 
     def owner_id() -> int:
         owner_id = int(ReadConfigs.reveal(config["Bot"]["owner_id"]))
@@ -51,12 +51,12 @@ class ReadConfigs:
         local_ip = ReadConfigs.reveal(config["Server"]["server_local_ip"])
         return local_ip
 
-    def moderator_id() -> int:
-        moderator_role_id = int(ReadConfigs.reveal(config["Roles"]["moderator"]))
+    def moderator_id() -> str:
+        moderator_role_id = str(ReadConfigs.reveal(config["Roles"]["moderator"]))
         return moderator_role_id
 
-    def developer_id() -> int:
-        developer_role_id = int(ReadConfigs.reveal(config["Roles"]["developer"]))
+    def developer_id() -> str:
+        developer_role_id = str(ReadConfigs.reveal(config["Roles"]["developer"]))
         return developer_role_id
 
     def custom_color() -> discord.Color:
