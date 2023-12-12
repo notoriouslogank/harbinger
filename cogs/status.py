@@ -172,8 +172,8 @@ class Status(commands.Cog):
         message = ""
         for word in raw_message:
             message = message + str(word) + " "
-        email_address = Harbinger.email_address
-        password = Harbinger.email_pass
+        email_address = EMAIL_ADDRESS
+        password = EMAIL_PASSWORD
         email = EmailMessage()
         email["From"] = "Harbinger"
         email["To"] = email_address
