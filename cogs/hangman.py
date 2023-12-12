@@ -34,10 +34,10 @@ class Hangman(commands.Cog):
         correct_letters = 0
         for char in Hangman.random_word:
             if char in guessed_letters:
-                ctx.message.send(Hangman.random_word[counter], end=" ")
+                ctx.message.send(Hangman.random_word[counter])
             correct_letters += 1
         else:
-            print(" ", end=" ")
+            ctx.message.send(" ")
         counter += 1
         return Hangman.correct_letters
 
