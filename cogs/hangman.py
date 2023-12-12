@@ -14,19 +14,19 @@ class Hangman(commands.Cog):
     @commands.command()
     async def print_hangman(self, ctx, wrong: int):
         if wrong == 0:
-            ctx.message.send(f"\n+---+\n     |\n     |\n     |\n   ===\n+---+")
+            await ctx.message.send(f"\n+---+\n     |\n     |\n     |\n   ===\n+---+")
         elif wrong == 1:
-            ctx.message.send(f"\n+---+\n O   |\n     |\n     |\n   ===\n+---+")
+            await ctx.message.send(f"\n+---+\n O   |\n     |\n     |\n   ===\n+---+")
         elif wrong == 2:
-            ctx.message.send(f"\n+---+\n O   |\n|    |\n     |\n   ===\n+---+")
+            await ctx.message.send(f"\n+---+\n O   |\n|    |\n     |\n   ===\n+---+")
         elif wrong == 3:
-            ctx.message.send(f"\n+---+\n O   |\n/|   |\n     |\n   ===\n+---+")
+            await ctx.message.send(f"\n+---+\n O   |\n/|   |\n     |\n   ===\n+---+")
         elif wrong == 4:
-            ctx.message.send(f"\n+---+\n O   |\n/|\   |\n     |\n   ===\n+---+")
+            await ctx.message.send(f"\n+---+\n O   |\n/|\   |\n     |\n   ===\n+---+")
         elif wrong == 5:
-            ctx.message.send(f"\n+---+\n O   |\n/|\   |\n/    |\n   ===\n+---+")
+            await ctx.message.send(f"\n+---+\n O   |\n/|\   |\n/    |\n   ===\n+---+")
         elif wrong == 6:
-            ctx.message.send(f"\n+---+\n O   |\n/|\   |\n/ \  |\n   ===\n+---+")
+            await ctx.message.send(f"\n+---+\n O   |\n/|\   |\n/ \  |\n   ===\n+---+")
 
     @commands.command()
     async def print_word(self, ctx, guessed_letters):
@@ -34,24 +34,24 @@ class Hangman(commands.Cog):
         correct_letters = 0
         for char in Hangman.random_word:
             if char in guessed_letters:
-                ctx.message.send(Hangman.random_word[counter])
+                await ctx.message.send(Hangman.random_word[counter])
             correct_letters += 1
         else:
-            ctx.message.send(" ")
+            await ctx.message.send(" ")
         counter += 1
         return Hangman.correct_letters
 
     @commands.command()
     async def print_lines(self, ctx):
-        ctx.send("\r")
+        await ctx.send("\r")
         for char in Hangman.random_word:
-            ctx.send("\u203E")
+            await ctx.send("\u203E")
 
     @commands.command()
     async def hangman(self, ctx: commands.Context):
         message = await ctx.send(f"Welcome to Hangman\n---------------")
         for x in Hangman.random_word:
-            ctx.message.edit(content="_")
+            await ctx.message.edit(content="_")
         length_of_word_to_guess = len(Hangman.random_word)
         amount_of_wrong_guesses = 0
         current_guess_index = 0
@@ -62,9 +62,9 @@ class Hangman(commands.Cog):
             amount_of_wrong_guesses != 6
             and current_letters_correct != length_of_word_to_guess
         ):
-            ctx.message.edit(content="\nLetters guessed so far: ")
+            await ctx.message.edit(content="\nLetters guessed so far: ")
         for letter in current_letters_guessed:
-            ctx.message.edit(content=letter)
+            await ctx.message.edit(content=letter)
         ### Prompt for input
         letter_guessed = input("\nGuess a letter.")
         ### User is correct
