@@ -4,6 +4,8 @@ from discord.ext import commands
 from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
 
+Moderator_Role = "Admin"
+
 MODERATOR_ROLE_ID = configs.moderator_id()
 DELETION_TIME = configs.delete_time()
 CUSTOM_COLOR = configs.custom_color()
@@ -16,7 +18,7 @@ class Moderation(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    @commands.has_role(MODERATOR_ROLE_ID)
+    @commands.has_role(Moderator_Role)
     async def clear(self, ctx: commands.Context, amount: int = 2) -> None:
         """Delete a number of messages in channel."""
         cmd = f"!clear({amount})"
