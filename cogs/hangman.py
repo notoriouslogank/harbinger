@@ -45,13 +45,13 @@ class Hangman(commands.Cog):
     async def print_lines(self, ctx):
         ctx.send("\r")
         for char in Hangman.random_word:
-            ctx.send("\u203E", end=" ")
+            ctx.send("\u203E")
 
     @commands.command()
     async def hangman(self, ctx: commands.Context):
         message = await ctx.send(f"Welcome to Hangman\n---------------")
         for x in Hangman.random_word:
-            ctx.message.edit("_", end=" ")
+            ctx.message.edit("_")
         length_of_word_to_guess = len(Hangman.random_word)
         amount_of_wrong_guesses = 0
         current_guess_index = 0
@@ -64,7 +64,7 @@ class Hangman(commands.Cog):
         ):
             ctx.message.edit("\nLetters guessed so far: ")
         for letter in current_letters_guessed:
-            ctx.message.edit(letter, end=" ")
+            ctx.message.edit(letter)
         ### Prompt for input
         letter_guessed = input("\nGuess a letter.")
         ### User is correct
