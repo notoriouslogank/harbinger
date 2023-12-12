@@ -1,5 +1,5 @@
-from os import listdir
 import subprocess
+from os import listdir
 
 from discord.ext import commands
 
