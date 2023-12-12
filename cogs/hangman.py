@@ -61,15 +61,6 @@ class Hangman(commands.Cog):
         current_guess_index = 0
         current_letters_guessed = []
         current_letters_correct = 0
-
-        while (
-            amount_of_wrong_guesses != 6
-            and current_letters_correct != length_of_word_to_guess
-        ):
-            await message.edit(content="\nLetters guessed so far: ")
-        for letter in current_letters_guessed:
-            await message.edit(content=letter)
-        ### Prompt for input
         embed = discord.Embed(
             title="Guess a letter", description="This will time out after 1 minute"
         )
@@ -89,7 +80,16 @@ class Hangman(commands.Cog):
         except asyncio.TimeoutError:
             await sent.delete()
             await ctx.send("Cancelling due to timeout", delete_after=60)
-        #letter_guessed = input("\nGuess a letter.")
+
+        while (
+            amount_of_wrong_guesses != 6
+            and current_letters_correct != length_of_word_to_guess
+        ):
+            await message.edit(content="\nLetters guessed so far: ")
+        for letter in current_letters_guessed:
+            await message.edit(content=letter)
+        ### Prompt for input
+        # letter_guessed = input("\nGuess a letter.")
         ### User is correct
         if Hangman.random_word[current_guess_index] == Hangman.letter_guessed:
             Hangman.print_hangman(amount_of_wrong_guesses)
