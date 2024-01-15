@@ -260,7 +260,6 @@ class HelpCommand(commands.Cog):
             )
             await ctx.send(embed=tools_embed)
         # COMMANDS
-        # TODO: changelog insult stop update up
         elif command == "add":
             embed = discord.Embed(
                 title="add", description="Add some numbers.", color=CUSTOM_COLOR
@@ -547,6 +546,7 @@ class HelpCommand(commands.Cog):
             )
             embed.add_field(name="Usage", value="!shutdown", inline=False)
             await ctx.send(embed=embed)
+#       elif command == "stop":
         elif command == "stream":
             embed = discord.Embed(
                 title="stream",
@@ -590,6 +590,14 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(name="Usage", value="!up", inline=False)
+            await ctx.send(embed=embed)
+        elif command == "update":
+            embed = discord.Embed(
+                title="update",
+                description="clone the repo from github",
+                color=CUSTOM_COLOR    
+            )
+            embed.add_field(name="Usage", value="!update", inliine=False)
             await ctx.send(embed=embed)
         elif command == "uptime":
             embed = discord.Embed(
