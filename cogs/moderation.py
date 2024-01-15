@@ -21,7 +21,7 @@ class Moderation(commands.Cog):
         result = ""
         for i in range(len(message)):
             char = message[i]
-            if (char.isupper()):
+            if char.isupper():
                 result += chr((ord(char) + shift - 65) % 26 + 65)
             else:
                 result += chr((ord(char) + shift - 97) % 26 + 97)
@@ -68,6 +68,7 @@ class Moderation(commands.Cog):
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
             await channel.send(f"``{binary_message}``")
         elif code == "csr":
+            content = content.upper()
             shift = random.randint(1, 26)
             message_record = f"Sent message to {member} using Caeser Cipher:\n``{content}``\nShift: {shift}"
             caeser_message = Moderation.caeser_cipher(content, shift)
@@ -148,16 +149,10 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
-    async def code_say(self, ctx: commands.Context, code, *message: str) -> None:
+    async def code_say(self, ctx: commands.Context, code, *, content) -> None:
         cmd = f"!code_say {code}"
-        cmd_msg = f"{message}"
-        string_message = ""
+        cmd_msg = f"{content}"
         await ctx.channel.purge(limit=1)
-        for word in message:
-            string_message = string_message + str(word) + " "
-        content = string_message.strip()
-        content = content.upper()
-        content = content.replace(" ", "")        
         if code == "bin":
             binary_message = "".join(
                 format(i, "08b") for i in bytearray(content, encoding="utf-8")
@@ -165,6 +160,7 @@ class Moderation(commands.Cog):
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
             await ctx.send(f"``{binary_message}``")
         elif code == "csr":
+            content = content.upper()
             shift = random.randint(1, 26)
             message_record = f"Sent message to {ctx.channel} using Caeser Cipher:\n``{content}``\nShift: {shift}"
             caeser_message = Moderation.caeser_cipher(content, shift)
