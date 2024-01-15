@@ -156,6 +156,8 @@ class Moderation(commands.Cog):
         for word in message:
             string_message = string_message + str(word) + " "
         content = string_message.strip()
+        content = content.upper()
+        
         if code == "bin":
             binary_message = "".join(
                 format(i, "08b") for i in bytearray(content, encoding="utf-8")
