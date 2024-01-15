@@ -17,14 +17,17 @@ class Moderation(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
-    def caeser_cipher(message, shift):
+    def caeser_cipher(key, *, message):
+        message = message.upper()
+        alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         result = ""
-        for i in range(len(message)):
-            char = message[i]
-            if char.isupper():
-                result += chr((ord(char) + shift - 65) % 26 + 65)
+
+        for letter in message:
+            if letter in alpha:
+                letter_index = (alpha.find(letter) + key) % len(alpha)
+                result = result + alpha[letter_index]
             else:
-                result += chr((ord(char) + shift - 97) % 26 + 97)
+                result = result + letter
         return result
 
     @commands.command()
@@ -68,10 +71,9 @@ class Moderation(commands.Cog):
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
             await channel.send(f"``{binary_message}``")
         elif code == "csr":
-            content = content.upper()
-            shift = random.randint(1, 26)
+            key = random.randint(1, 26)
             message_record = f"Sent message to {member} using Caeser Cipher:\n``{content}``\nShift: {shift}"
-            caeser_message = Moderation.caeser_cipher(content, shift)
+            caeser_message = Moderation.caeser_cipher(content, key)
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
             await channel.send(f"``{caeser_message}``")
             await Harbinger.send_dm(
@@ -160,10 +162,9 @@ class Moderation(commands.Cog):
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
             await ctx.send(f"``{binary_message}``")
         elif code == "csr":
-            content = content.upper()
-            shift = random.randint(1, 26)
+            key = random.randint(1, 26)
             message_record = f"Sent message to {ctx.channel} using Caeser Cipher:\n``{content}``\nShift: {shift}"
-            caeser_message = Moderation.caeser_cipher(content, shift)
+            caeser_message = Moderation.caeser_cipher(key, content)
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
             await ctx.send(f"``{caeser_message}``")
             await Harbinger.send_dm(
