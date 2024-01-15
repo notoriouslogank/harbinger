@@ -48,7 +48,7 @@ class HelpCommand(commands.Cog):
             "join",
             "leave",
             "play",
-            "stop",
+            #            "stop",
             "stream",
             "note",
             "notes",
@@ -546,7 +546,14 @@ class HelpCommand(commands.Cog):
             )
             embed.add_field(name="Usage", value="!shutdown", inline=False)
             await ctx.send(embed=embed)
-#       elif command == "stop":
+        elif command == "stop":
+            embed = discord.Embed(
+                title="stop",
+                description="Stop the currently-playing track.",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(name="Usage", value="!stop", inline=False)
+            await ctx.send(embed=embed)
         elif command == "stream":
             embed = discord.Embed(
                 title="stream",
@@ -595,7 +602,7 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="update",
                 description="clone the repo from github",
-                color=CUSTOM_COLOR    
+                color=CUSTOM_COLOR,
             )
             embed.add_field(name="Usage", value="!update", inliine=False)
             await ctx.send(embed=embed)
