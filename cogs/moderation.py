@@ -117,7 +117,7 @@ class Moderation(commands.Cog):
         elif code == "b64":
             content_bytes = content.encode("ascii")
             base64_bytes = base64.b64encode(content_bytes)
-            base64_message = str(base64_bytes)
+            base64_message = str(base64_bytes, encoding='utf-8')
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
             await ctx.send(f"``{base64_message}``")
 
