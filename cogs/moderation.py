@@ -21,8 +21,7 @@ class Moderation(commands.Cog):
         result = ""
         for i in range(len(message)):
             char = message[i]
-
-            if char.isupper():
+            if (char.isupper()):
                 result += chr((ord(char) + shift - 65) % 26 + 65)
             else:
                 result += chr((ord(char) + shift - 97) % 26 + 97)
