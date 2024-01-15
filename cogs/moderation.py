@@ -32,7 +32,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
-    async def decrypt(self, ctx: commands.Context, message, code, key=None):
+    async def decrypt(self, ctx: commands.Context, code, key=None, *message):
         if code == "b64":
             bytes_object = base64.b64decode(message)
             decrypted_message = bytes_object.decode("utf-8")
