@@ -62,10 +62,6 @@ class Harbinger:
         channel = await member.create_dm()
         await channel.send(content)
 
-    @bot.event
-    async def on_message(ctx, member: discord.Member, message):
-        print(message)
-
 
 bot = Harbinger.bot
 
