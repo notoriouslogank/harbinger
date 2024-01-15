@@ -69,9 +69,6 @@ class Moderation(commands.Cog):
                 "Please choose a valid encoding schema: binary [bin], hexadecimal [hex], or base64 [b64]."
             )
 
-        Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-        await channel.send(content)
-
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
     async def serverinfo(self, ctx: commands.Context):
