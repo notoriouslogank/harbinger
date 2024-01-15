@@ -81,7 +81,7 @@ class HelpCommand(commands.Cog):
             )
             help_embed.add_field(
                 name="Help Categories",
-                value=" ".join(sorted_categories)
+                value=" ".join(sorted_categories),
                 inline=False,
             )
             help_embed.add_field(
