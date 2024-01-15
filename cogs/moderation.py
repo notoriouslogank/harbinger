@@ -31,7 +31,7 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
     async def whisper(self, ctx: commands.Context, member, content):
-        await Harbinger.send_dm(ctx, member, content)
+        await Harbinger.send_dm(member, content)
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
