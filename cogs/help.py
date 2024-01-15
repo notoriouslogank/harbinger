@@ -18,9 +18,20 @@ class HelpCommand(commands.Cog):
         Args:
             command (str, optional): Command or category (cog) to get help for. Defaults to None.
         """
+        category_list = [
+            "8ball",
+            "dev",
+            "help",
+            # "minecraft",
+            "moderation",
+            "music",
+            "notes",
+            "status",
+            "tools",
+        ]
         command_list = [
-            #"switch",
-            #"mccmd",
+            # "switch",
+            # "mccmd",
             "insult",
             "define",
             "ask",
@@ -56,6 +67,7 @@ class HelpCommand(commands.Cog):
             "roll",
             "rps",
         ]
+        sorted_categories = sorted(category_list)
         sorted_commands = sorted(command_list)
         # HELP
         if command == None:
@@ -69,7 +81,7 @@ class HelpCommand(commands.Cog):
             )
             help_embed.add_field(
                 name="Help Categories",
-                value="dev, minecraft, moderation, music, status, tools",
+                value=" ".join(sorted_categories)
                 inline=False,
             )
             help_embed.add_field(
