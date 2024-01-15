@@ -30,7 +30,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
-    async def whisper(member: discord.Member, *, content) -> None:
+    async def whisper(self, ctx, member, *, content) -> None:
         """Create a Direct Message channel with a given member."""
         channel = await member.create_dm()
         await channel.send(content)
