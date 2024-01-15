@@ -25,7 +25,6 @@ class Moderation(commands.Cog):
         for letter in message:
             if letter in alpha:
                 letter_index = (alpha.find(letter) + key) % len(alpha)
-                print(letter_index)
                 result = result + alpha[letter_index]
             else:
                 result = result + letter
@@ -39,7 +38,6 @@ class Moderation(commands.Cog):
         for letter in message:
             if letter in alpha:
                 letter_index = (alpha.find(letter) - int(key)) % len(alpha)
-                print(letter_index)
                 result = result + alpha[letter_index]
             else:
                 result = result + letter
@@ -66,15 +64,15 @@ class Moderation(commands.Cog):
                 ctx=ctx, member=ctx.message.author, content=decryption_message
             )
         elif code == "csr":
-            decrypted_message = (
-                f"Decrypted message:\n**``{Moderation.caeser_decipher(key, message)}``**"
-            )
+            decrypted_message = f"Decrypted message:\n**``{Moderation.caeser_decipher(key, message)}``**"
             await Harbinger.send_dm(
                 ctx=ctx, member=ctx.message.author, content=decrypted_message
             )
         elif code == "hex":
             bytes_obj = bytes.fromhex(message)
-            decrypted_message = f"Decrypted message:\n**``{bytes_obj.decode('utf-8')}``**"
+            decrypted_message = (
+                f"Decrypted message:\n**``{bytes_obj.decode('utf-8')}``**"
+            )
             await Harbinger.send_dm(
                 ctx=ctx, member=ctx.message.author, content=decrypted_message
             )
@@ -125,7 +123,9 @@ class Moderation(commands.Cog):
             key = random.randint(1, 26)
             caeser_message = Moderation.caeser_cipher(key, content)
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-            message_record = f"Ecrypted message:\n**``{caeser_message}``**\nKey:\n**``{key}``**"
+            message_record = (
+                f"Ecrypted message:\n**``{caeser_message}``**\nKey:\n**``{key}``**"
+            )
             await channel.send(f"``{caeser_message}``")
             await Harbinger.send_dm(
                 ctx=ctx, member=ctx.message.author, content=message_record
@@ -216,7 +216,9 @@ class Moderation(commands.Cog):
             key = random.randint(1, 26)
             caeser_message = Moderation.caeser_cipher(key, content)
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-            message_record = f"Ecrypted message:\n**``{caeser_message}``**\nKey:\n**``{key}``**"
+            message_record = (
+                f"Ecrypted message:\n**``{caeser_message}``**\nKey:\n**``{key}``**"
+            )
             await ctx.send(f"**``{caeser_message}``**")
             await Harbinger.send_dm(
                 ctx=ctx, member=ctx.message.author, content=message_record
