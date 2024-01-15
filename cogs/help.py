@@ -56,7 +56,7 @@ class HelpCommand(commands.Cog):
             "roll",
             "rps",
         ]
-        sorted_commands = list.sort(command_list)
+        sorted_commands = sorted(command_list)
         # HELP
         if command == None:
             help_embed = discord.Embed(
