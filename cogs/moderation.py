@@ -35,7 +35,9 @@ class Moderation(commands.Cog):
     async def decrypt(self, ctx: commands.Context, code, key, *, message):
         if code == "b64":
             bytes_object = base64.b64decode(message)
-            decrypted_message = f"Decrypted message:\n``{bytes_object.decode('utf-8')}``"
+            decrypted_message = (
+                f"Decrypted message:\n``{bytes_object.decode('utf-8')}``"
+            )
             await Harbinger.send_dm(
                 ctx=ctx, member=ctx.message.author, content=decrypted_message
             )
