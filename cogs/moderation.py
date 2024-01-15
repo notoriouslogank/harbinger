@@ -66,7 +66,9 @@ class Moderation(commands.Cog):
                 ctx=ctx, member=ctx.message.author, content=decryption_message
             )
         elif code == "csr":
-            decrypted_message = Moderation.caeser_decipher(key, message)
+            decrypted_message = (
+                f"Decrypted message:\n``{Moderation.caeser_decipher(key, message)}``"
+            )
             await Harbinger.send_dm(
                 ctx=ctx, member=ctx.message.author, content=decrypted_message
             )
