@@ -36,7 +36,7 @@ class Moderation(commands.Cog):
         if code == "b64":
             bytes_object = base64.b64decode(message)
             decrypted_message = bytes_object.decode("utf-8")
-            Harbinger.send_dm(
+            await Harbinger.send_dm(
                 ctx=ctx, member=ctx.message.author, content=decrypted_message
             )
         elif code == "bin":
@@ -44,7 +44,7 @@ class Moderation(commands.Cog):
                 chr(int(message[i * 8 : i * 8 + 8], 2))
                 for i in range(len(message) // 8)
             )
-            Harbinger.send_dm(
+            await Harbinger.send_dm(
                 ctx=ctx, member=ctx.message.author, content=decrypted_message
             )
         elif code == "csr":
@@ -57,17 +57,17 @@ class Moderation(commands.Cog):
                     decrypted_message = decrypted_message + alpha[letter_index]
                 else:
                     decrypted_message = decrypted_message + letter
-            Harbinger.send_dm(
+            await Harbinger.send_dm(
                 ctx=ctx, member=ctx.message.author, content=decrypted_message
             )
         elif code == "hex":
             bytes_obj = bytes.fromhex(message)
             decrypted_message = bytes_obj.decode("utf-8")
-            Harbinger.send_dm(
+            await Harbinger.send_dm(
                 ctx=ctx, member=ctx.message.author, content=decrypted_message
             )
         else:
-            ctx.send("Not a valid encoding schema.")
+            await ctx.send("Not a valid encoding schema.")
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
