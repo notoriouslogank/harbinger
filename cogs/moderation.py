@@ -164,7 +164,7 @@ class Moderation(commands.Cog):
             await ctx.send(f"``{binary_message}``")
         elif code == "csr":
             shift = random.randint(1, 26)
-            message_record = f"Sent message to {member} using Caeser Cipher:\n``{content}``\nShift: {shift}"
+            message_record = f"Sent message to {ctx.channel} using Caeser Cipher:\n``{content}``\nShift: {shift}"
             caeser_message = Moderation.caeser_cipher(content, shift)
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
             await ctx.send(f"``{caeser_message}``")
