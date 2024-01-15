@@ -62,7 +62,7 @@ class Moderation(commands.Cog):
             )
         elif code == "hex":
             bytes_obj = bytes.fromhex(message)
-            decrypted_message = bytes_obj.decode("utf-8")
+            decrypted_message = f"Decrypted message:\n``{bytes_obj.decode('utf-8')}``"
             await Harbinger.send_dm(
                 ctx=ctx, member=ctx.message.author, content=decrypted_message
             )
