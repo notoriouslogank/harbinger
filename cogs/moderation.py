@@ -31,8 +31,7 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
     async def whisper(
-        self, ctx, member: discord.Member, code=False, *, content
-    ) -> None:
+        self, ctx, member: discord.Member, *, content, code=False) -> None:
         """Send a Direct Message to"""
         cmd = f"!whisper({member})"
         cmd_msg = f"Whispered: {content}"
