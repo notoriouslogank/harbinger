@@ -91,6 +91,16 @@ class HelpCommand(commands.Cog):
             )
             await ctx.send(embed=help_embed)
         # CATEGORIES
+        elif command == "8ball":
+            eightball_embed = discord.Embed(
+                title="Magick 8ball",
+                description=f"Ask Harbinger a question...",
+                color=CUSTOM_COLOR,
+            )
+            eightball_embed.add_field(
+                name="!ask", value="Ask Harbinger a yes/no question.", inline=True
+            )
+            await ctx.send(embed=eightball_embed)
         elif command == "dev":
             dev_embed = discord.Embed(
                 title="Developer Commands",
@@ -251,6 +261,7 @@ class HelpCommand(commands.Cog):
             )
             await ctx.send(embed=tools_embed)
         # COMMANDS
+        # TODO: changelog check_cog insult stop update up  
         elif command == "add":
             embed = discord.Embed(
                 title="add", description="Add some numbers.", color=CUSTOM_COLOR
