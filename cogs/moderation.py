@@ -25,7 +25,7 @@ class Moderation(commands.Cog):
                 result += chr((ord(char) + shift - 65) % 26 + 65)
             else:
                 result += chr((ord(char) + shift - 97) % 26 + 97)
-            return result
+        return result
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
