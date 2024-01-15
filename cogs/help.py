@@ -261,7 +261,7 @@ class HelpCommand(commands.Cog):
             )
             await ctx.send(embed=tools_embed)
         # COMMANDS
-        # TODO: changelog check_cog insult stop update up  
+        # TODO: changelog check_cog insult stop update up
         elif command == "add":
             embed = discord.Embed(
                 title="add", description="Add some numbers.", color=CUSTOM_COLOR
@@ -296,6 +296,14 @@ class HelpCommand(commands.Cog):
                 value="The content of the bug report to send.",
                 inline=True,
             )
+            await ctx.send(embed=embed)
+        elif command == "check_cog":
+            embed == discord.Embed(
+                title="check_cog",
+                description="Check whether a cog is loaded.",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(name="Usage", value="!check_cog <cog>", inline=True)
             await ctx.send(embed=embed)
         elif command == "clear":
             embed = discord.Embed(
