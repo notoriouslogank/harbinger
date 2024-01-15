@@ -74,7 +74,7 @@ class HelpCommand(commands.Cog):
             )
             help_embed.add_field(
                 name="Help Commands",
-                value=str(sorted_commands),
+                value=f"{sorted_commands}",
                 inline=False,
             )
             await ctx.send(embed=help_embed)
