@@ -96,7 +96,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
-    async def say(self, ctx: commands.Context, *message: str, code=False) -> None:
+    async def say(self, ctx: commands.Context, code=False,*message: str) -> None:
         """Send a message as the bot.
 
         Args:
