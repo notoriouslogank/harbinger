@@ -18,6 +18,41 @@ class HelpCommand(commands.Cog):
         Args:
             command (str, optional): Command or category (cog) to get help for. Defaults to None.
         """
+        command_list = [
+            "ask",
+            "reload_all",
+            "check_cog",
+            "load_cog",
+            "unload_cog",
+            "reload_cog",
+            "update",
+            "clear",
+            "serverinfo",
+            "whois",
+            "say",
+            "playing",
+            "join",
+            "leave",
+            "play",
+            "stop",
+            "stream",
+            "note",
+            "notes",
+            "cnote",
+            "info",
+            "ping",
+            "uptime",
+            "changelog",
+            "bug",
+            "shutdown",
+            "lmgtfy",
+            "define",
+            "insult",
+            "add",
+            "roll",
+            "rps",
+        ]
+        sorted_commands = list.sort(command_list)
         # HELP
         if command == None:
             help_embed = discord.Embed(
@@ -35,7 +70,7 @@ class HelpCommand(commands.Cog):
             )
             help_embed.add_field(
                 name="Help Commands",
-                value="add, ask, bug, clear, cnote, define, info, join, leave, lmgtfy, load_cog, mccmd, note, notes, pause, ping, play, playing, reload_all, reload_cog, roll, rps, say, serverinfo, shutdown, stream, switch, unload_cog, up, uptime, whois",
+                value=sorted_commands,
                 inline=False,
             )
             await ctx.send(embed=help_embed)
