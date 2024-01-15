@@ -44,8 +44,9 @@ class Moderation(commands.Cog):
                 chr(int(message[i * 8 : i * 8 + 8], 2))
                 for i in range(len(message) // 8)
             )
+            decryption_message = f"Decrypted message:\n``{decrypted_message}``"
             await Harbinger.send_dm(
-                ctx=ctx, member=ctx.message.author, content=decrypted_message
+                ctx=ctx, member=ctx.message.author, content=decryption_message
             )
         elif code == "csr":
             message = message.upper()
