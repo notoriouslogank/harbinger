@@ -73,7 +73,7 @@ class Moderation(commands.Cog):
         elif code == "csr":
             key = random.randint(1, 26)
             message_record = f"Sent message to {member} using Caeser Cipher:\n``{content}``\nKey: {key}"
-            caeser_message = Moderation.caeser_cipher(content, key)
+            caeser_message = Moderation.caeser_cipher(key, content)
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
             await channel.send(f"``{caeser_message}``")
             await Harbinger.send_dm(
