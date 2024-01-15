@@ -1,3 +1,4 @@
+from aiohttp import content_disposition_filename
 import discord
 from discord.ext import commands
 import base64
@@ -114,8 +115,9 @@ class Moderation(commands.Cog):
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
             await ctx.send(f"``{hex_message}``")
         elif code == "b64":
-            encoded_string = content.encode("ascii")
-            base64_message = base64.b64encode(encoded_string)
+            content_bytes = content.encode("ascii")
+            base64_bytes = base64.b64encode(content_bytes)
+            base64_message = content_bytes.decode("ascii")
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
             await ctx.send(f"``{base64_message}``")
 
