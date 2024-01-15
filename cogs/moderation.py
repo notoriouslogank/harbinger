@@ -30,9 +30,13 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
-    async def whisper(self, ctx, member:discord.Member, *, content) -> None:
-        """Create a Direct Message channel with a given member."""
+    async def whisper(self, ctx, member: discord.Member, *, content) -> None:
+        """Send a Direct Message to a given user as Harbinger."""
+        cmd = f"!whisper({member})"
+        cmd_msg = f"Whispered: {content}"
         channel = await member.create_dm()
+        await ctx.channel.purge(limit=1)
+        Harbinger.timestamp(ctx.author, cmd, cmd_msg)
         await channel.send(content)
 
     @commands.command()
