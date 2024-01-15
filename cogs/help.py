@@ -298,7 +298,7 @@ class HelpCommand(commands.Cog):
             )
             await ctx.send(embed=embed)
         elif command == "check_cog":
-            embed == discord.Embed(
+            embed = discord.Embed(
                 title="check_cog",
                 description="Check whether a cog is loaded.",
                 color=CUSTOM_COLOR,
