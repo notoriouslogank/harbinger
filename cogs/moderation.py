@@ -25,6 +25,7 @@ class Moderation(commands.Cog):
         for letter in message:
             if letter in alpha:
                 letter_index = (alpha.find(letter) + key) % len(alpha)
+                print(letter_index)
                 result = result + alpha[letter_index]
             else:
                 result = result + letter
@@ -38,6 +39,7 @@ class Moderation(commands.Cog):
         for letter in message:
             if letter in alpha:
                 letter_index = (alpha.find(letter) - key) % len(alpha)
+                print(letter_index)
                 result = result + alpha[letter_index]
             else:
                 result = result + letter
