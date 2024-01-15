@@ -72,9 +72,9 @@ class Moderation(commands.Cog):
             await channel.send(f"``{binary_message}``")
         elif code == "csr":
             key = random.randint(1, 26)
-            message_record = f"Sent message to {member} using Caeser Cipher:\n``{content}``\nKey: {key}"
             caeser_message = Moderation.caeser_cipher(key, content)
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
+            message_record = f"Ecrypted message:\n``{caeser_message}``\nKey:\n{key}"
             await channel.send(f"``{caeser_message}``")
             await Harbinger.send_dm(
                 ctx=ctx, member=ctx.message.author, content=message_record
@@ -163,9 +163,9 @@ class Moderation(commands.Cog):
             await ctx.send(f"``{binary_message}``")
         elif code == "csr":
             key = random.randint(1, 26)
-            message_record = f"Sent message to {ctx.channel} using Caeser Cipher:\n``{content}``\nKey: {key}"
             caeser_message = Moderation.caeser_cipher(key, content)
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
+            message_record = f"Ecrypted message:\n``{caeser_message}``\nKey:\n{key}"
             await ctx.send(f"``{caeser_message}``")
             await Harbinger.send_dm(
                 ctx=ctx, member=ctx.message.author, content=message_record
