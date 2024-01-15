@@ -260,7 +260,7 @@ class HelpCommand(commands.Cog):
             )
             await ctx.send(embed=tools_embed)
         # COMMANDS
-        # TODO: changelog check_cog insult stop update up
+        # TODO: changelog insult stop update up
         elif command == "add":
             embed = discord.Embed(
                 title="add", description="Add some numbers.", color=CUSTOM_COLOR
@@ -295,6 +295,14 @@ class HelpCommand(commands.Cog):
                 value="The content of the bug report to send.",
                 inline=True,
             )
+            await ctx.send(embed=embed)
+        elif command == "changelog":
+            embed = discord.Embed(
+                title="changelog",
+                description="Show the CHANGELOG for this version of the bot.",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(name="Usage", valeu="!changelog", inline=False)
             await ctx.send(embed=embed)
         elif command == "clear":
             embed = discord.Embed(
@@ -337,6 +345,14 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(name="Usage", value="!info", inline=False)
+            await ctx.send(embed=embed)
+        elif command == "insult":
+            embed = discord.Embed(
+                title="insult",
+                description="Have Harbinger tell someone what he really feels aout them.",
+                color=CUSTOM_COLOR
+            )
+            embed.add_field(name="Usage", value="!insult <@user>",inline=False)
             await ctx.send(embed=embed)
         elif command == "join":
             embed = discord.Embed(
