@@ -30,6 +30,19 @@ class Moderation(commands.Cog):
                 result = result + letter
         return result
 
+    def caeser_decipher(key, message):
+        message = message.upper()
+        alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        result = ""
+
+        for letter in message:
+            if letter in alpha:
+                letter_index = (alpha.find(letter) - key) % len(alpha)
+                result = result + alpha[letter_index]
+            else:
+                result = result + letter
+        return result
+
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
     async def decrypt(self, ctx: commands.Context, code, key, *, message):
@@ -51,15 +64,7 @@ class Moderation(commands.Cog):
                 ctx=ctx, member=ctx.message.author, content=decryption_message
             )
         elif code == "csr":
-            message = message.upper()
-            alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            decrypted_message = ""
-            for letter in message:
-                if letter in alpha:
-                    letter_index = (alpha.find(letter) - key) % len(alpha)
-                    decrypted_message = decrypted_message + alpha[letter_index]
-                else:
-                    decrypted_message = decrypted_message + letter
+            decrypted_message = Moderation.caeser_decipher(key, message)
             await Harbinger.send_dm(
                 ctx=ctx, member=ctx.message.author, content=decrypted_message
             )
