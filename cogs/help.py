@@ -19,6 +19,10 @@ class HelpCommand(commands.Cog):
             command (str, optional): Command or category (cog) to get help for. Defaults to None.
         """
         command_list = [
+            #"switch",
+            #"mccmd",
+            "insult",
+            "define",
             "ask",
             "reload_all",
             "check_cog",
