@@ -17,7 +17,7 @@ class Moderation(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
-    def caeser_cipher(key, *, message):
+    def caeser_cipher(key, message):
         message = message.upper()
         alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         result = ""
