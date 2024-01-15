@@ -32,6 +32,45 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
+    async def decrypt(self, ctx: commands.Context, message, code, key=None):
+        if code == "b64":
+            bytes_object = base64.b64decode(message)
+            decrypted_message = bytes_object.decode("utf-8")
+            Harbinger.send_dm(
+                ctx=ctx, member=ctx.message.author, content=decrypted_message
+            )
+        elif code == "bin":
+            decrypted_message = "".join(
+                chr(int(message[i * 8 : i * 8 + 8], 2))
+                for i in range(len(message) // 8)
+            )
+            Harbinger.send_dm(
+                ctx=ctx, member=ctx.message.author, content=decrypted_message
+            )
+        elif code == "csr":
+            message = message.upper()
+            alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            decrypted_message = ""
+            for letter in message:
+                if letter in alpha:
+                    letter_index = (alpha.find(letter) - key) % len(alpha)
+                    decrypted_message = decrypted_message + alpha[letter_index]
+                else:
+                    decrypted_message = decrypted_message + letter
+            Harbinger.send_dm(
+                ctx=ctx, member=ctx.message.author, content=decrypted_message
+            )
+        elif code == "hex":
+            bytes_obj = bytes.fromhex(message)
+            decrypted_message = bytes_obj.decode("utf-8")
+            Harbinger.send_dm(
+                ctx=ctx, member=ctx.message.author, content=decrypted_message
+            )
+        else:
+            ctx.send("Not a valid encoding schema.")
+
+    @commands.command()
+    @commands.has_role(MODERATOR_ROLE_ID)
     async def clear(self, ctx: commands.Context, amount: int = 2) -> None:
         """Delete a number of messages in channel."""
         cmd = f"!clear({amount})"
