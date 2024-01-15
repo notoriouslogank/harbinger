@@ -110,7 +110,7 @@ class Moderation(commands.Cog):
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
             await ctx.send(f"``{binary_message}``")
         elif code == "hex":
-            hex_message = content.encode("hex")
+            hex_message = content.encode("utf-8").hex()
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
             await ctx.send(f"``{hex_message}``")
         elif code == "b64":
