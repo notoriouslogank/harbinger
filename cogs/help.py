@@ -36,7 +36,6 @@ class HelpCommand(commands.Cog):
             "define",
             "ask",
             "reload_all",
-            "check_cog",
             "load_cog",
             "unload_cog",
             "reload_cog",
@@ -296,14 +295,6 @@ class HelpCommand(commands.Cog):
                 value="The content of the bug report to send.",
                 inline=True,
             )
-            await ctx.send(embed=embed)
-        elif command == "check_cog":
-            embed = discord.Embed(
-                title="check_cog",
-                description="Check whether a cog is loaded.",
-                color=CUSTOM_COLOR,
-            )
-            embed.add_field(name="Usage", value="!check_cog <cog>", inline=True)
             await ctx.send(embed=embed)
         elif command == "clear":
             embed = discord.Embed(
