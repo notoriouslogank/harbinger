@@ -162,6 +162,15 @@ class Moderation(commands.Cog):
             )
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
             await ctx.send(f"``{binary_message}``")
+        elif code == "csr":
+            shift = random.randint(1, 26)
+            message_record = f"Sent message to {member} using Caeser Cipher:\n``{content}``\nShift: {shift}"
+            caeser_message = Moderation.caeser_cipher(content, shift)
+            Harbinger.timestamp(ctx.author, cmd, cmd_msg)
+            await ctx.send(f"``{caeser_message}``")
+            await Harbinger.send_dm(
+                ctx=ctx, member=ctx.message.author, content=message_record
+            )
         elif code == "hex":
             hex_message = content.encode("utf-8").hex()
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
