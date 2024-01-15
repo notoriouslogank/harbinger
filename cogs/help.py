@@ -18,6 +18,56 @@ class HelpCommand(commands.Cog):
         Args:
             command (str, optional): Command or category (cog) to get help for. Defaults to None.
         """
+        category_list = [
+            "8ball",
+            "dev",
+            "help",
+            # "minecraft",
+            "moderation",
+            "music",
+            "notes",
+            "status",
+            "tools",
+        ]
+        command_list = [
+            # "switch",
+            # "mccmd",
+            "insult",
+            "define",
+            "ask",
+            "reload_all",
+            "load_cog",
+            "unload_cog",
+            "reload_cog",
+            "update",
+            "clear",
+            "serverinfo",
+            "whois",
+            "say",
+            "playing",
+            "join",
+            "leave",
+            "play",
+            #            "stop",
+            "stream",
+            "note",
+            "notes",
+            "cnote",
+            "info",
+            "ping",
+            "uptime",
+            "changelog",
+            "bug",
+            "shutdown",
+            "lmgtfy",
+            "define",
+            "insult",
+            "add",
+            "roll",
+            "rps",
+        ]
+        sorted_categories = sorted(category_list)
+        sorted_commands = sorted(command_list)
         # HELP
         if command == None:
             help_embed = discord.Embed(
@@ -30,16 +80,26 @@ class HelpCommand(commands.Cog):
             )
             help_embed.add_field(
                 name="Help Categories",
-                value="dev, minecraft, moderation, music, status, tools",
+                value=" ".join(sorted_categories),
                 inline=False,
             )
             help_embed.add_field(
                 name="Help Commands",
-                value="add, ask, bug, clear, cnote, define, info, join, leave, lmgtfy, load_cog, mccmd, note, notes, pause, ping, play, playing, reload_all, reload_cog, roll, rps, say, serverinfo, shutdown, stream, switch, unload_cog, up, uptime, whois",
+                value=" ".join(sorted_commands),
                 inline=False,
             )
             await ctx.send(embed=help_embed)
         # CATEGORIES
+        elif command == "8ball":
+            eightball_embed = discord.Embed(
+                title="Magick 8ball",
+                description=f"Ask Harbinger a question...",
+                color=CUSTOM_COLOR,
+            )
+            eightball_embed.add_field(
+                name="!ask", value="Ask Harbinger a yes/no question.", inline=True
+            )
+            await ctx.send(embed=eightball_embed)
         elif command == "dev":
             dev_embed = discord.Embed(
                 title="Developer Commands",
@@ -235,6 +295,14 @@ class HelpCommand(commands.Cog):
                 inline=True,
             )
             await ctx.send(embed=embed)
+        elif command == "changelog":
+            embed = discord.Embed(
+                title="changelog",
+                description="Show the CHANGELOG for this version of the bot.",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(name="Usage", value="!changelog", inline=False)
+            await ctx.send(embed=embed)
         elif command == "clear":
             embed = discord.Embed(
                 title="clear",
@@ -276,6 +344,14 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(name="Usage", value="!info", inline=False)
+            await ctx.send(embed=embed)
+        elif command == "insult":
+            embed = discord.Embed(
+                title="insult",
+                description="Have Harbinger tell someone what he really feels aout them.",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(name="Usage", value="!insult <@user>", inline=False)
             await ctx.send(embed=embed)
         elif command == "join":
             embed = discord.Embed(
@@ -470,6 +546,14 @@ class HelpCommand(commands.Cog):
             )
             embed.add_field(name="Usage", value="!shutdown", inline=False)
             await ctx.send(embed=embed)
+        elif command == "stop":
+            embed = discord.Embed(
+                title="stop",
+                description="Stop the currently-playing track.",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(name="Usage", value="!stop", inline=False)
+            await ctx.send(embed=embed)
         elif command == "stream":
             embed = discord.Embed(
                 title="stream",
@@ -513,6 +597,14 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(name="Usage", value="!up", inline=False)
+            await ctx.send(embed=embed)
+        elif command == "update":
+            embed = discord.Embed(
+                title="update",
+                description="clone the repo from github",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(name="Usage", value="!update", inliine=False)
             await ctx.send(embed=embed)
         elif command == "uptime":
             embed = discord.Embed(

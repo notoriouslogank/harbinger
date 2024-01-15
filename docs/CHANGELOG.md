@@ -4,6 +4,32 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.9.4] - 2023-14-01
+
+### Fixed
+
+- Minor formatting
+
+### Added
+
+- All currently working commands should now have a !help function associated with them
+
+### Known Issues
+
+- !help categories may not accurately display all currently-working commands
+
+## [2.9.3] - 2023-14-01
+
+### Added
+
+- Added changelog entry to !help command
+
+## [2.9.2] - 2023-14-01
+
+### Added
+
+- More entries in the !help command.
+
 ## [2.9.1] - 2023-12-12
 
 ### Added
@@ -31,7 +57,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - Moderator and Developer role IDs now default to "Admin" and "Developer", respectively
 - Updated requirements.txt
-- read_configs.py now deobfuscates config.ini
+- readconfigs.py now deobfuscates config.ini
 
 ## [2.8.3] - 2023-11-12
 
@@ -47,7 +73,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Fixed
 
-- Defined previously-undefined variables in status cog (email, email_password, moderator_role_id)
+- Defined previously-undefined variables in status cog (email, email password, moderator role id)
 
 ## [2.8.1] - 2023-11-12
 
@@ -57,7 +83,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
-- configs/configure.py now requests owner_id
+- configs/configure.py now requests owner id
 
 ## [2.8.0] - 2023-05-12
 
