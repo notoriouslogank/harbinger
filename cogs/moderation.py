@@ -51,7 +51,7 @@ class Moderation(commands.Cog):
         if code == "b64":
             bytes_object = base64.b64decode(message)
             decrypted_message = (
-                f"Decrypted message:\n``{bytes_object.decode('utf-8')}``"
+                f"Decrypted message:\n**``{bytes_object.decode('utf-8')}``**"
             )
             await Harbinger.send_dm(
                 ctx=ctx, member=ctx.message.author, content=decrypted_message
@@ -67,14 +67,14 @@ class Moderation(commands.Cog):
             )
         elif code == "csr":
             decrypted_message = (
-                f"Decrypted message:\n``{Moderation.caeser_decipher(key, message)}``"
+                f"Decrypted message:\n**``{Moderation.caeser_decipher(key, message)}``**"
             )
             await Harbinger.send_dm(
                 ctx=ctx, member=ctx.message.author, content=decrypted_message
             )
         elif code == "hex":
             bytes_obj = bytes.fromhex(message)
-            decrypted_message = f"Decrypted message:\n``{bytes_obj.decode('utf-8')}``"
+            decrypted_message = f"Decrypted message:\n**``{bytes_obj.decode('utf-8')}``**"
             await Harbinger.send_dm(
                 ctx=ctx, member=ctx.message.author, content=decrypted_message
             )
@@ -120,12 +120,12 @@ class Moderation(commands.Cog):
                 format(i, "08b") for i in bytearray(content, encoding="utf-8")
             )
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-            await channel.send(f"``{binary_message}``")
+            await channel.send(f"**``{binary_message}``**")
         elif code == "csr":
             key = random.randint(1, 26)
             caeser_message = Moderation.caeser_cipher(key, content)
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-            message_record = f"Ecrypted message:\n``{caeser_message}``\nKey:\n``{key}``"
+            message_record = f"Ecrypted message:\n**``{caeser_message}``**\nKey:\n**``{key}``**"
             await channel.send(f"``{caeser_message}``")
             await Harbinger.send_dm(
                 ctx=ctx, member=ctx.message.author, content=message_record
@@ -133,13 +133,13 @@ class Moderation(commands.Cog):
         elif code == "hex":
             hex_message = content.encode("utf-8").hex()
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-            await channel.send(f"``{hex_message}``")
+            await channel.send(f"**``{hex_message}``**")
         elif code == "b64":
             content_bytes = content.encode("ascii")
             base64_bytes = base64.b64encode(content_bytes)
             base64_message = str(base64_bytes, encoding="utf-8")
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-            await channel.send(f"``{base64_message}``")
+            await channel.send(f"**``{base64_message}``**")
         else:
             await ctx.send(
                 "Please choose a valid encoding schema: binary [bin], hexadecimal [hex], or base64 [b64]."
@@ -216,21 +216,21 @@ class Moderation(commands.Cog):
             key = random.randint(1, 26)
             caeser_message = Moderation.caeser_cipher(key, content)
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-            message_record = f"Ecrypted message:\n``{caeser_message}``\nKey:\n``{key}``"
-            await ctx.send(f"``{caeser_message}``")
+            message_record = f"Ecrypted message:\n**``{caeser_message}``**\nKey:\n**``{key}``**"
+            await ctx.send(f"**``{caeser_message}``**")
             await Harbinger.send_dm(
                 ctx=ctx, member=ctx.message.author, content=message_record
             )
         elif code == "hex":
             hex_message = content.encode("utf-8").hex()
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-            await ctx.send(f"``{hex_message}``")
+            await ctx.send(f"**``{hex_message}``**")
         elif code == "b64":
             content_bytes = content.encode("ascii")
             base64_bytes = base64.b64encode(content_bytes)
             base64_message = str(base64_bytes, encoding="utf-8")
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-            await ctx.send(f"``{base64_message}``")
+            await ctx.send(f"**``{base64_message}``**")
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
