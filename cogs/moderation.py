@@ -30,14 +30,22 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
-    async def whisper(self, ctx, member:discord.Member, *, content) -> None:
+    async def whisper(
+        self, ctx, member: discord.Member, code=False, *, content
+    ) -> None:
         """Send a Direct Message to"""
         cmd = f"!whisper({member})"
         cmd_msg = f"Whispered: {content}"
         channel = await member.create_dm()
         await ctx.channel.purge(limit=1)
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-        await channel.send(content)
+        if code == False:
+            await channel.send(content)
+        else:
+            binary_content = "".join(
+                format(i, "08b") for i in bytearray(content, encoding="utf-8")
+            )
+            await ctx.send(f"{binary_content}")
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
@@ -96,7 +104,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
-    async def say(self, ctx: commands.Context, code=False,*message: str) -> None:
+    async def say(self, ctx: commands.Context, code=False, *message: str) -> None:
         """Send a message as the bot.
 
         Args:
@@ -110,12 +118,14 @@ class Moderation(commands.Cog):
         await ctx.channel.purge(limit=1)
         cmd_msg = f"Harbinger says: {content}"
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-        if code==False:
+        if code == False:
             await ctx.send(f"{content}")
         else:
-            binary_content = ''.join(format(i, '08b') for i in bytearray(content, encoding='utf-8'))
+            binary_content = "".join(
+                format(i, "08b") for i in bytearray(content, encoding="utf-8")
+            )
             await ctx.send(f"{binary_content}")
-            
+
     @commands.command()
     async def playing(
         self, ctx: commands.Context, game, description, field, value
