@@ -32,11 +32,43 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
     async def whisper(self, ctx, member: discord.Member, *, content) -> None:
-        """Send a Direct Message to"""
+        """Send a Direct Message to a member as Harbinger."""
         cmd = f"!whisper({member})"
         cmd_msg = f"Whispered: {content}"
         channel = await member.create_dm()
         await ctx.channel.purge(limit=1)
+        Harbinger.timestamp(ctx.author, cmd, cmd_msg)
+        await channel.send(content)
+
+    @commands.command()
+    @commands.has_role(MODERATOR_ROLE_ID)
+    async def code_whisper(self, ctx, code, member: discord.Member, *, content) -> None:
+        """Send an encoded DM to a given member as Harbinger."""
+        cmd = f"!whisper({member})"
+        cmd_msg = f"Whispered: {content}"
+        channel = await member.create_dm()
+        await ctx.channel.purge(limit=1)
+        if code == "bin":
+            binary_message = "".join(
+                format(i, "08b") for i in bytearray(content, encoding="utf-8")
+            )
+            Harbinger.timestamp(ctx.author, cmd, cmd_msg)
+            await channel.send(f"``{binary_message}``")
+        elif code == "hex":
+            hex_message = content.encode("utf-8").hex()
+            Harbinger.timestamp(ctx.author, cmd, cmd_msg)
+            await channel.send(f"``{hex_message}``")
+        elif code == "b64":
+            content_bytes = content.encode("ascii")
+            base64_bytes = base64.b64encode(content_bytes)
+            base64_message = str(base64_bytes, encoding="utf-8")
+            Harbinger.timestamp(ctx.author, cmd, cmd_msg)
+            await channel.send(f"``{base64_message}``")
+        else:
+            await ctx.send(
+                "Please choose a valid encoding schema: binary [bin], hexadecimal [hex], or base64 [b64]."
+            )
+
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
         await channel.send(content)
 
@@ -101,6 +133,7 @@ class Moderation(commands.Cog):
         cmd = f"!code_say {code}"
         cmd_msg = f"{message}"
         string_message = ""
+        await ctx.channel.purge(limit=1)
         for word in message:
             string_message = string_message + str(word) + " "
         content = string_message.strip()
@@ -117,7 +150,7 @@ class Moderation(commands.Cog):
         elif code == "b64":
             content_bytes = content.encode("ascii")
             base64_bytes = base64.b64encode(content_bytes)
-            base64_message = str(base64_bytes, encoding='utf-8')
+            base64_message = str(base64_bytes, encoding="utf-8")
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
             await ctx.send(f"``{base64_message}``")
 
