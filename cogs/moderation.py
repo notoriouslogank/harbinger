@@ -17,7 +17,7 @@ class Moderation(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
-    def caeser_cipher(key, *, message):
+    def caeser_cipher(key, *message):
         message = message.upper()
         alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         result = ""
@@ -164,7 +164,7 @@ class Moderation(commands.Cog):
         elif code == "csr":
             key = random.randint(1, 26)
             message_record = f"Sent message to {ctx.channel} using Caeser Cipher:\n``{content}``\nKey: {key}"
-            caeser_message = Moderation.caeser_cipher(key, content)
+            caeser_message = Moderation.caeser_cipher(key=key, content=content)
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
             await ctx.send(f"``{caeser_message}``")
             await Harbinger.send_dm(
