@@ -302,7 +302,7 @@ class HelpCommand(commands.Cog):
                 description="Show the CHANGELOG for this version of the bot.",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", valeu="!changelog", inline=False)
+            embed.add_field(name="Usage", value="!changelog", inline=False)
             await ctx.send(embed=embed)
         elif command == "clear":
             embed = discord.Embed(
@@ -350,9 +350,9 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="insult",
                 description="Have Harbinger tell someone what he really feels aout them.",
-                color=CUSTOM_COLOR
+                color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value="!insult <@user>",inline=False)
+            embed.add_field(name="Usage", value="!insult <@user>", inline=False)
             await ctx.send(embed=embed)
         elif command == "join":
             embed = discord.Embed(
