@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-
+import base64
 from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
 
@@ -30,21 +30,14 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
-    async def whisper(
-        self, ctx, member: discord.Member, *, content, code=False) -> None:
+    async def whisper(self, ctx, member: discord.Member, *, content) -> None:
         """Send a Direct Message to"""
         cmd = f"!whisper({member})"
         cmd_msg = f"Whispered: {content}"
         channel = await member.create_dm()
         await ctx.channel.purge(limit=1)
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-        if code == False:
-            await channel.send(content)
-        else:
-            binary_content = "".join(
-                format(i, "08b") for i in bytearray(content, encoding="utf-8")
-            )
-            await channel.send(f"``{binary_content}``")
+        await channel.send(content)
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
@@ -103,13 +96,38 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
-    async def say(self, ctx: commands.Context, code=False, *message: str) -> None:
+    async def code_say(self, ctx: commands.Context, code, *message: str) -> None:
+        cmd = f"!code_say {code}"
+        cmd_msg = f"{message}"
+        string_message = ""
+        for word in message:
+            string_message = string_message + str(word) + " "
+        content = string_message.strip()
+        if code == "bin":
+            binary_message = "".join(
+                format(i, "08b") for i in bytearray(content, encoding="utf-8")
+            )
+            Harbinger.timestamp(ctx.author, cmd, cmd_msg)
+            await ctx.send(f"``{binary_message}``")
+        elif code == "hex":
+            hex_message = content.encode("hex")
+            Harbinger.timestamp(ctx.author, cmd, cmd_msg)
+            await ctx.send(f"``{hex_message}``")
+        elif code == "b64":
+            encoded_string = content.encode("ascii")
+            base64_message = base64.b64encode(encoded_string)
+            Harbinger.timestamp(ctx.author, cmd, cmd_msg)
+            await ctx.send(f"``{base64_message}``")
+
+    @commands.command()
+    @commands.has_role(MODERATOR_ROLE_ID)
+    async def say(self, ctx: commands.Context, *message: str) -> None:
         """Send a message as the bot.
 
         Args:
             message (str): Message to send as the bot
         """
-        cmd = f"!say({message}code={code})"
+        cmd = f"!say({message})"
         string_message = ""
         for word in message:
             string_message = string_message + str(word) + " "
@@ -117,13 +135,7 @@ class Moderation(commands.Cog):
         await ctx.channel.purge(limit=1)
         cmd_msg = f"Harbinger says: {content}"
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-        if code == False:
-            await ctx.send(f"{content}")
-        else:
-            binary_content = "".join(
-                format(i, "08b") for i in bytearray(content, encoding="utf-8")
-            )
-            await ctx.send(f"{binary_content}")
+        await ctx.send(f"{content}")
 
     @commands.command()
     async def playing(
