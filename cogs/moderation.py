@@ -1,3 +1,4 @@
+import random
 from aiohttp import content_disposition_filename
 import discord
 from discord.ext import commands
@@ -15,6 +16,17 @@ class Moderation(commands.Cog):
 
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
+
+    def caeser_cipher(message, shift):
+        result = ""
+        for i in range(len(message)):
+            char = message[i]
+
+            if char.isupper():
+                result += chr((ord(char) + shift - 65) % 26 + 65)
+            else:
+                result += chr((ord(char) + shift - 97) % 26 + 97)
+            return result
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
@@ -42,7 +54,9 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
-    async def code_whisper(self, ctx, code, member: discord.Member, *, content) -> None:
+    async def code_whisper(
+        self, ctx: commands.Context, code, member: discord.Member, *, content
+    ) -> None:
         """Send an encoded DM to a given member as Harbinger."""
         cmd = f"!whisper({member})"
         cmd_msg = f"Whispered: {content}"
@@ -54,6 +68,15 @@ class Moderation(commands.Cog):
             )
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
             await channel.send(f"``{binary_message}``")
+        elif code == "csr":
+            shift = random.randint(1, 26)
+            message_record = f"Sent message to {member} using Caeser Cipher:\n``{content}``\nShift: {shift}"
+            caeser_message = Moderation.caeser_cipher(content, shift)
+            Harbinger.timestamp(ctx.author, cmd, cmd_msg)
+            await channel.send(f"``{caeser_message}``")
+            await Harbinger.send_dm(
+                ctx=ctx, member=ctx.message.author, content=message_record
+            )
         elif code == "hex":
             hex_message = content.encode("utf-8").hex()
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
