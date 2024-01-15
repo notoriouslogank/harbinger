@@ -30,6 +30,11 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
+    async def whisper(self, ctx: commands.Context, member, content):
+        await Harbinger.send_dm(ctx, member, content)
+
+    @commands.command()
+    @commands.has_role(MODERATOR_ROLE_ID)
     async def serverinfo(self, ctx: commands.Context):
         """Create embeds containing server details and member information and send them to the channel."""
         cmd = "!serverinfo"
