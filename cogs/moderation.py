@@ -45,7 +45,7 @@ class Moderation(commands.Cog):
             binary_content = "".join(
                 format(i, "08b") for i in bytearray(content, encoding="utf-8")
             )
-            await ctx.send(f"{binary_content}")
+            await channel.send(f"{binary_content}")
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
