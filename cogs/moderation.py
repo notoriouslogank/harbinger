@@ -259,7 +259,7 @@ class Moderation(commands.Cog):
             )
             await ctx.send(embed=embed)
             await Harbinger.send_dm(
-                ctx=ctx, member=ctx.message.author, content=caeser_key_embed
+                ctx=ctx, member=ctx.message.author, embed=caeser_key_embed
             )
         elif code == "hex":
             hex_message = content.encode("utf-8").hex()
