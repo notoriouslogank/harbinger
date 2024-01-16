@@ -129,11 +129,24 @@ class Moderation(commands.Cog):
             key = random.randint(1, 26)
             caeser_message = Moderation.caeser_cipher(key, content)
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
+            caeser_key_embed = discord.Embed(
+                title="Caeser Cipher Key",
+                description="You will need to provide this key to your recipient for him/her to decode your message!",
+                color=CUSTOM_COLOR,
+            )
+            caeser_key_embed.add_field(
+                name="Recipient", value=f"**{member}**", inline=False
+            )
+            caeser_key_embed.add_field(
+                name="Message", value=f"**``{caeser_message}``**", inline=False
+            )
+            caeser_key_embed.add_field(name="Key", value=f"**``{key}``**")
             message_record = (
                 f"Ecrypted message:\n**``{caeser_message}``**\nKey:\n**``{key}``**"
             )
             embed.add_field(name="Message", value=f"**``{caeser_message}``**")
             await channel.send(embed=embed)
+            await Harbinger.send_dm(ctx=ctx, member=ctx.message.author, embed=embed)
         elif code == "hex":
             hex_message = content.encode("utf-8").hex()
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
@@ -227,9 +240,18 @@ class Moderation(commands.Cog):
             key = random.randint(1, 26)
             caeser_message = Moderation.caeser_cipher(key, content)
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-            message_record = (
-                f"Ecrypted message:\n**``{caeser_message}``**\nKey:\n**``{key}``**"
+            caeser_key_embed = discord.Embed(
+                title="Caeser Cipher Key",
+                description="You will need to provide this key to your recipient for him/her to decode your message!",
+                color=CUSTOM_COLOR,
             )
+            caeser_key_embed.add_field(
+                name="Recipient", value=f"**{ctx.channel}**", inline=False
+            )
+            caeser_key_embed.add_field(
+                name="Message", value=f"**``{caeser_message}``**", inline=False
+            )
+            caeser_key_embed.add_field(name="Key", value=f"**``{key}``**")
             embed = discord.Embed(
                 title="Ecrypted Transmission",
                 description=f"**``{caeser_message}``**",
@@ -237,7 +259,7 @@ class Moderation(commands.Cog):
             )
             await ctx.send(embed=embed)
             await Harbinger.send_dm(
-                ctx=ctx, member=ctx.message.author, content=message_record
+                ctx=ctx, member=ctx.message.author, content=caeser_key_embed
             )
         elif code == "hex":
             hex_message = content.encode("utf-8").hex()
