@@ -6,7 +6,7 @@ import os
 
 load_dotenv()
 KEY = (os.getenv("KEY")).encode()
-
+print(KEY)
 configfile = "config/config.ini"
 config = ConfigParser()
 config.read(configfile)
@@ -21,7 +21,7 @@ class ReadConfigs:
         return cleartext
 
     def discord_token():
-        api_token = ReadConfigs.reveal(config["Bot"]["discord_token"])
+        api_token = ReadConfigs.reveal(config["Bot"]["discord_token"]).encode()
         return api_token
 
     # def channel() -> int:
