@@ -15,7 +15,7 @@ config.read(configfile)
 
 class ReadConfigs:
     def reveal(ciphertext) -> str:
-#        print(KEY)
+        print(KEY)
         k = Fernet(KEY)
         cleartext = k.decrypt(ciphertext)
         # print(f"Token: {cleartext}")
@@ -24,7 +24,8 @@ class ReadConfigs:
 
     def discord_token():
         api_token = ReadConfigs.reveal(config["Bot"]["discord_token"])
-        return api_token
+        api_token_bytes = api_token.encode()
+        return api_token_bytes
 
     # def channel() -> int:
     #    main_channel = int(ReadConfigs.reveal(config["Bot"]["channel"]))
