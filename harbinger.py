@@ -6,7 +6,7 @@ from discord.ext import commands
 
 from config.read_configs import ReadConfigs as configs
 
-TOKEN = configs.token()
+TOKEN = configs.discord_token()
 OWNER_ID = configs.owner_id()
 
 

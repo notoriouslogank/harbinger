@@ -124,7 +124,7 @@ class Configure:
             "password": f"{Configure.obscure(Configure.get_email_pass())}",
         }
         config["Bot"] = {
-            "token": f"{Configure.obscure(Configure.get_token())}",
+            "discord_token": f"{Configure.obscure(Configure.get_token())}",
             #    "channel": f"{Configure.obscure(Configure.get_channel_id())}",
             "delete_after": f"{Configure.get_deletion_time()}",
             "owner_id": f"{Configure.obscure(Configure.get_owner_id())}",
