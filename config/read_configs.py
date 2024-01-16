@@ -5,8 +5,9 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-KEY = (os.getenv("KEY")).encode()
-print(KEY)
+key = (os.getenv("KEY"))
+KEY = key.encode()
+print(f"KEY: {KEY}")
 configfile = "config/config.ini"
 config = ConfigParser()
 config.read(configfile)
@@ -14,6 +15,7 @@ config.read(configfile)
 
 class ReadConfigs:
     def reveal(ciphertext) -> str:
+#        print(KEY)
         k = Fernet(KEY)
         cleartext = k.decrypt(ciphertext)
         # print(f"Token: {cleartext}")
