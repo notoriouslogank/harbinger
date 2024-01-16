@@ -8,7 +8,7 @@ from read_configs import ReadConfigs as configs
 from requests import get
 
 load_dotenv()
-KEY = (os.getenv("KEY")).encode()
+KEY = (os.getenv("KEY"))
 
 
 class Configure:
