@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.2.0] - 2023-15-01
+
+### Security Overhaul
+
+- All config files are now encrypted with Fernet encryption before being written to disk
+- OLD VERSIONS OF CONFIG.INI WILL NO LONGER WORK
+
+### Changed
+
+- Many functions in configure.py and readconfigs.py have been renamed, removed, or refactored
+
+### Added
+
+- .env file located at config/.env to contain cryptographic key
+
 ## [3.1.3] - 2023-14-01
 
 ### Changed
