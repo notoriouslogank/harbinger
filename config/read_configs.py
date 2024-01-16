@@ -21,7 +21,7 @@ class ReadConfigs:
         return cleartext
 
     def discord_token():
-        api_token = ReadConfigs.reveal(config["Bot"]["discord_token"])
+        api_token = ReadConfigs.reveal(config["Bot"]["token"])
         return api_token
 
     # def channel() -> int:
