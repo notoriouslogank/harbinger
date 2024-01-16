@@ -111,7 +111,8 @@ class Moderation(commands.Cog):
         """Send an encoded DM to a given member as Harbinger."""
         cmd = f"!whisper({member})"
         cmd_msg = f"Whispered: {content}"
-        channel = await member.create_dm()
+        recipient = await member.create_dm()
+        sender = await ctx.message.author.create_dm()
         await ctx.channel.purge(limit=1)
         embed = discord.Embed(
             title="Ecrypted Transmission",
@@ -124,7 +125,7 @@ class Moderation(commands.Cog):
             )
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
             embed.add_field(name="Message", value=f"**``{binary_message}``**")
-            await channel.send(embed=embed)
+            await recipient.send(embed=embed)
         elif code == "csr":
             key = random.randint(1, 26)
             caeser_message = Moderation.caeser_cipher(key, content)
@@ -145,20 +146,20 @@ class Moderation(commands.Cog):
                 f"Ecrypted message:\n**``{caeser_message}``**\nKey:\n**``{key}``**"
             )
             embed.add_field(name="Message", value=f"**``{caeser_message}``**")
-            await channel.send(embed=embed)
-            await Harbinger.send_dm(ctx=ctx, member=ctx.message.author, content=caeser_key_embed)
+            await recipient.send(embed=embed)
+            await sender.send(embed=caeser_key_embed)
         elif code == "hex":
             hex_message = content.encode("utf-8").hex()
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
             embed.add_field(name="Message", value=f"**``{hex_message}``**")
-            await channel.send(embed=embed)
+            await recipient.send(embed=embed)
         elif code == "b64":
             content_bytes = content.encode("ascii")
             base64_bytes = base64.b64encode(content_bytes)
             base64_message = str(base64_bytes, encoding="utf-8")
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
             embed.add_field(name="Message", value=f"**``{base64_message}``**")
-            await channel.send(embed=embed)
+            await recipient.send(embed=embed)
         else:
             await ctx.send(
                 "Please choose a valid encoding schema: binary [bin], hexadecimal [hex], or base64 [b64]."
@@ -237,6 +238,7 @@ class Moderation(commands.Cog):
             )
             await ctx.send(embed=embed)
         elif code == "csr":
+            sender = await ctx.author.create_dm()
             key = random.randint(1, 26)
             caeser_message = Moderation.caeser_cipher(key, content)
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
@@ -258,9 +260,8 @@ class Moderation(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             await ctx.send(embed=embed)
-            await Harbinger.send_dm(
-                ctx=ctx, member=ctx.message.author, embed=caeser_key_embed
-            )
+            await sender.send(embed=caeser_key_embed)
+
         elif code == "hex":
             hex_message = content.encode("utf-8").hex()
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
