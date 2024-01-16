@@ -21,7 +21,6 @@ class Configure:
     def obscure(plaintext: bytes):
         f = Fernet(KEY)
         ciphertext = f.encrypt(plaintext)
-        ciphertext = ciphertext.decode()
         print(ciphertext)
         return ciphertext
 
