@@ -206,12 +206,18 @@ class Moderation(commands.Cog):
         cmd = f"!code_say {code}"
         cmd_msg = f"{content}"
         await ctx.channel.purge(limit=1)
+        embed = discord.Embed(
+            title="Ecrypted Message",
+            description="Someone has sent you an encrypted message!",
+            color=CUSTOM_COLOR,
+        )
         if code == "bin":
             binary_message = "".join(
                 format(i, "08b") for i in bytearray(content, encoding="utf-8")
             )
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-            await ctx.send(f"``{binary_message}``")
+            embed.add_field(name="Message", value=f"**``{binary_message}``**")
+            await ctx.send(embed=embed)
         elif code == "csr":
             key = random.randint(1, 26)
             caeser_message = Moderation.caeser_cipher(key, content)
@@ -219,20 +225,23 @@ class Moderation(commands.Cog):
             message_record = (
                 f"Ecrypted message:\n**``{caeser_message}``**\nKey:\n**``{key}``**"
             )
-            await ctx.send(f"**``{caeser_message}``**")
+            embed.add_field(name="Message", value=f"**``{caeser_message}``**")
+            await ctx.send(embed=embed)
             await Harbinger.send_dm(
                 ctx=ctx, member=ctx.message.author, content=message_record
             )
         elif code == "hex":
             hex_message = content.encode("utf-8").hex()
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-            await ctx.send(f"**``{hex_message}``**")
+            embed.add_field(name="Message", value=f"**``{hex_message}``**")
+            await ctx.send(embed=embed)
         elif code == "b64":
             content_bytes = content.encode("ascii")
             base64_bytes = base64.b64encode(content_bytes)
             base64_message = str(base64_bytes, encoding="utf-8")
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-            await ctx.send(f"**``{base64_message}``**")
+            embed.add_field(name="Message", value=f"**``{base64_message}``**")
+            await ctx.send(embed=embed)
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
