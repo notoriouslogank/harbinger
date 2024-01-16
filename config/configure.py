@@ -1,9 +1,14 @@
-import base64
+from calendar import c
+from cryptography.fernet import Fernet
 import configparser
 import socket
-
+from dotenv import load_dotenv
+import os
 from read_configs import ReadConfigs as configs
 from requests import get
+
+load_dotenv()
+KEY = (os.getenv("KEY")).encode()
 
 
 class Configure:
@@ -13,34 +18,28 @@ class Configure:
     python_config_file = "config.ini"
     shell_config_file = "start.conf"
 
-    def obscure(data) -> bytes:
-        """Take user input and return base64-encoded string.
+    def obscure(plaintext: bytes):
+        f = Fernet(KEY)
+        ciphertext = f.encrypt(plaintext)
+        ciphertext = ciphertext.decode()
+        print(ciphertext)
+        return ciphertext
 
-        Args:
-            data (str): Data to encode as base64
-
-        Returns:
-            bytes: Base64-encoded data
-        """
-        data_bytes = data.encode("ascii")
-        base64_data_bytes = base64.b64encode(data_bytes)
-        base64_data = base64_data_bytes.decode("ascii")
-        return base64_data
-
-    def get_token() -> str:
+    def get_token():
         """Prompt user for API token.
 
         Returns:
             str: Discord API token
         """
-        token = input("Discord API Token: ")
-        return token
-    
-    def get_owner_id() -> str:
-        owner_id = input("Owner ID")
-        return owner_id
+        api_token = input("Discord API Token: ")
+        api_token = api_token.encode()
+        return api_token
 
-    #def get_channel_id() -> int:
+    def get_owner_id():
+        owner_id = input("Owner ID: ")
+        return owner_id.encode()
+
+    # def get_channel_id() -> int:
     #    """Prompt user for Channel ID.
     #
     #    Returns:
@@ -49,23 +48,23 @@ class Configure:
     #    channel = input("Channel ID: ")
     #    return channel
 
-    def get_server_dir() -> str:
+    def get_server_dir():
         """Prompt user for directory to Minecraft server.
 
         Returns:
             str: Path to Minecraft server
         """
         server_dir = input("Directory of server: ")
-        return server_dir
+        return server_dir.encode()
 
-    def get_startup_script() -> str:
+    def get_startup_script():
         """Prompt user for path to Minecraft server startup script.
 
         Returns:
             str: Path to Minecraft server startup script
         """
         startup_script = input("Path to startup script: ")
-        return startup_script
+        return startup_script.encode()
 
     def get_custom_color() -> str:
         """Prompt user for custom color as RGB values.
@@ -86,7 +85,7 @@ class Configure:
         s.connect(("8.8.8.8", 80))
         ip = s.getsockname()[0]
         s.close()
-        return ip
+        return ip.encode()
 
     def get_public_ip() -> str:
         """Query the Internet and return public IP.
@@ -95,23 +94,23 @@ class Configure:
             str: Public IP address
         """
         ip = get("https://api.ipify.org").content.decode("utf8")
-        return ip
+        return ip.encode()
 
     def get_email():
         email_address = input("Email address: ")
-        return email_address
+        return email_address.encode()
 
     def get_email_pass():
         email_pass = input("Password: ")
-        return email_pass
+        return email_pass.encode()
 
     def get_moderator_role():
-        role_id = str(input("Administrator Role Name: ") or "Admin")
-        return role_id
+        role_id = str(input("Administrator Role ID: ") or "Admin")
+        return role_id.encode()
 
     def get_developer_role():
         role_id = str(input("Developer Role ID: ") or "Developer")
-        return role_id
+        return role_id.encode()
 
     def get_deletion_time():
         delete_after = input("Time until messages auto-delete (seconds): ")
@@ -125,10 +124,10 @@ class Configure:
             "password": f"{Configure.obscure(Configure.get_email_pass())}",
         }
         config["Bot"] = {
-            "token": f"{Configure.obscure(Configure.get_token())}",
-        #    "channel": f"{Configure.obscure(Configure.get_channel_id())}",
+            "discord_token": f"{Configure.obscure(Configure.get_token())}",
+            #    "channel": f"{Configure.obscure(Configure.get_channel_id())}",
             "delete_after": f"{Configure.get_deletion_time()}",
-            "owner_id": f'{Configure.obscure(Configure.get_owner_id())}'
+            "owner_id": f"{Configure.obscure(Configure.get_owner_id())}",
         }
         config["Custom Color"] = {"rgb": f"{Configure.get_custom_color()}"}
         config["Server"] = {

@@ -1,7 +1,11 @@
-import base64
 from configparser import ConfigParser
-
+from cryptography.fernet import Fernet
 import discord
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+KEY = (os.getenv("KEY")).encode()
 
 configfile = "config/config.ini"
 config = ConfigParser()
@@ -9,24 +13,25 @@ config.read(configfile)
 
 
 class ReadConfigs:
-    def reveal(obfuscated) -> str:
-        obfuscated_as_bytes = obfuscated.encode("ascii")
-        clear_as_bytes = base64.b64decode(obfuscated_as_bytes)
-        cleartext = clear_as_bytes.decode("ascii")
+    def reveal(ciphertext) -> str:
+        k = Fernet(KEY)
+        cleartext = k.decrypt(ciphertext)
+        # print(f"Token: {cleartext}")
+        cleartext = cleartext.decode()
         return cleartext
 
-    def token() -> str:
-        api_token = ReadConfigs.reveal(config["Bot"]["token"])
+    def discord_token():
+        api_token = ReadConfigs.reveal(config["Bot"]["discord_token"])
         return api_token
 
-    #def channel() -> int:
+    # def channel() -> int:
     #    main_channel = int(ReadConfigs.reveal(config["Bot"]["channel"]))
     #    return main_channel
 
     def owner_id() -> int:
         owner_id = int(ReadConfigs.reveal(config["Bot"]["owner_id"]))
         return owner_id
-    
+
     def email_address() -> str:
         email_addr = ReadConfigs.reveal(config["Email"]["address"])
         return email_addr
@@ -69,13 +74,21 @@ class ReadConfigs:
         del_time = int(config["Bot"]["delete_after"])
         return del_time
 
+
 def main():
     """Print deobfuscated config.ini."""
     read = ReadConfigs
-    print(f"Token: {read.token()}\nOwner ID: {read.owner_id()}\nEmail Address: {read.email_address()}\nEmail Password: {read.email_password()}")
-    print(f"Moderator ID: {read.moderator_id()}\nDeveloper ID: {read.developer_id()}\nServer Directory: {read.server_dir()}")
-    print(f"Startup Script: {read.startup_script()}\nServer Local IP: {read.server_local_ip()}\nServer Public IP: {read.server_public_ip()}")
+    print(
+        f"Token: {read.discord_token()}\nOwner ID: {read.owner_id()}\nEmail Address: {read.email_address()}\nEmail Password: {read.email_password()}"
+    )
+    print(
+        f"Moderator ID: {read.moderator_id()}\nDeveloper ID: {read.developer_id()}\nServer Directory: {read.server_dir()}"
+    )
+    print(
+        f"Startup Script: {read.startup_script()}\nServer Local IP: {read.server_local_ip()}\nServer Public IP: {read.server_public_ip()}"
+    )
     print(f"Custom Color: {read.custom_color()}\nDelete Time: {read.delete_time()}")
+
 
 if __name__ == "__main__":
     main()
