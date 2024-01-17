@@ -182,14 +182,14 @@ class Moderation(commands.Cog):
                     log.write(entry)
                     counter += 1
             elif message.author == author:
-                entry = f"{counter + 1} - {message.created_at}: {message.content}"
+                entry = f"{counter + 1} - {message.created_at}: {message.content}\n"
                 author_log = Path(f"{author}.{logfile}")
                 with open(author_log, "a") as log:
                     log.write(entry)
                     counter += 1
             else:
                 pass
-            await ctx.send("Wrote logs.")
+        await ctx.send("Wrote logs.")
 
     @commands.command()
     async def history(self, ctx: commands.Context, amount: int):
