@@ -179,6 +179,7 @@ class Moderation(commands.Cog):
             elif new == True:
                 with open(logfile, "w") as log:
                     log.write(entry)
+            counter += 1
         await ctx.send("Wrote log file.")
 
     @commands.command()
