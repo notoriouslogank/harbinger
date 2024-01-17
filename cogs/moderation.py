@@ -199,7 +199,7 @@ class Moderation(commands.Cog):
                             log.write(entry)
                     counter += 1
                 else:
-                    await ctx.send(f"{author} not found.")
+                    return
         await ctx.send("Wrote log file.")
 
     @commands.command()
