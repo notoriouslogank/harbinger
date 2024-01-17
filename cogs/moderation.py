@@ -1,6 +1,8 @@
+import random
+from aiohttp import content_disposition_filename
 import discord
 from discord.ext import commands
-
+import base64
 from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
 
@@ -14,6 +16,68 @@ class Moderation(commands.Cog):
 
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
+
+    def caeser_cipher(key, message):
+        message = message.upper()
+        alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        result = ""
+
+        for letter in message:
+            if letter in alpha:
+                letter_index = (alpha.find(letter) + key) % len(alpha)
+                result = result + alpha[letter_index]
+            else:
+                result = result + letter
+        return result
+
+    def caeser_decipher(key, message):
+        message = message.upper()
+        alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        result = ""
+
+        for letter in message:
+            if letter in alpha:
+                letter_index = (alpha.find(letter) - int(key)) % len(alpha)
+                result = result + alpha[letter_index]
+            else:
+                result = result + letter
+        return result
+
+    @commands.command()
+    @commands.has_role(MODERATOR_ROLE_ID)
+    async def decrypt(self, ctx: commands.Context, code, key, *, message):
+        if code == "b64":
+            bytes_object = base64.b64decode(message)
+            decrypted_message = (
+                f"Decrypted message:\n**``{bytes_object.decode('utf-8')}``**"
+            )
+            await Harbinger.send_dm(
+                ctx=ctx, member=ctx.message.author, content=decrypted_message
+            )
+        elif code == "bin":
+            decrypted_message = "".join(
+                chr(int(message[i * 8 : i * 8 + 8], 2))
+                for i in range(len(message) // 8)
+            )
+            decryption_message = f"Decrypted message:\n``{decrypted_message}``"
+            await Harbinger.send_dm(
+                ctx=ctx, member=ctx.message.author, content=decryption_message
+            )
+        elif code == "csr":
+            decrypted_message = f"Decrypted message:\n**``{Moderation.caeser_decipher(key, message)}``**"
+            await Harbinger.send_dm(
+                ctx=ctx, member=ctx.message.author, content=decrypted_message
+            )
+        elif code == "hex":
+            bytes_obj = bytes.fromhex(message)
+            decrypted_message = (
+                f"Decrypted message:\n**``{bytes_obj.decode('utf-8')}``**"
+            )
+            await Harbinger.send_dm(
+                ctx=ctx, member=ctx.message.author, content=decrypted_message
+            )
+        else:
+            await ctx.send("Not a valid encoding schema.")
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
@@ -31,13 +95,75 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
     async def whisper(self, ctx, member: discord.Member, *, content) -> None:
-        """Send a Direct Message to a given user as Harbinger."""
+        """Send a Direct Message to a member as Harbinger."""
         cmd = f"!whisper({member})"
         cmd_msg = f"Whispered: {content}"
         channel = await member.create_dm()
         await ctx.channel.purge(limit=1)
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
         await channel.send(content)
+
+    @commands.command()
+    @commands.has_role(MODERATOR_ROLE_ID)
+    async def code_whisper(
+        self, ctx: commands.Context, code, member: discord.Member, *, content
+    ) -> None:
+        """Send an encoded DM to a given member as Harbinger."""
+        cmd = f"!whisper({member})"
+        cmd_msg = f"Whispered: {content}"
+        recipient = await member.create_dm()
+        sender = await ctx.message.author.create_dm()
+        await ctx.channel.purge(limit=1)
+        embed = discord.Embed(
+            title="Ecrypted Transmission",
+            description=f"from **{ctx.message.author}**",
+            color=CUSTOM_COLOR,
+        )
+        if code == "bin":
+            binary_message = "".join(
+                format(i, "08b") for i in bytearray(content, encoding="utf-8")
+            )
+            Harbinger.timestamp(ctx.author, cmd, cmd_msg)
+            embed.add_field(name="Message", value=f"**``{binary_message}``**")
+            await recipient.send(embed=embed)
+        elif code == "csr":
+            key = random.randint(1, 26)
+            caeser_message = Moderation.caeser_cipher(key, content)
+            Harbinger.timestamp(ctx.author, cmd, cmd_msg)
+            caeser_key_embed = discord.Embed(
+                title="Caeser Cipher Key",
+                description="You will need to provide this key to your recipient for him/her to decode your message!",
+                color=CUSTOM_COLOR,
+            )
+            caeser_key_embed.add_field(
+                name="Recipient", value=f"**{member}**", inline=False
+            )
+            caeser_key_embed.add_field(
+                name="Message", value=f"**``{caeser_message}``**", inline=False
+            )
+            caeser_key_embed.add_field(name="Key", value=f"**``{key}``**")
+            message_record = (
+                f"Ecrypted message:\n**``{caeser_message}``**\nKey:\n**``{key}``**"
+            )
+            embed.add_field(name="Message", value=f"**``{caeser_message}``**")
+            await recipient.send(embed=embed)
+            await sender.send(embed=caeser_key_embed)
+        elif code == "hex":
+            hex_message = content.encode("utf-8").hex()
+            Harbinger.timestamp(ctx.author, cmd, cmd_msg)
+            embed.add_field(name="Message", value=f"**``{hex_message}``**")
+            await recipient.send(embed=embed)
+        elif code == "b64":
+            content_bytes = content.encode("ascii")
+            base64_bytes = base64.b64encode(content_bytes)
+            base64_message = str(base64_bytes, encoding="utf-8")
+            Harbinger.timestamp(ctx.author, cmd, cmd_msg)
+            embed.add_field(name="Message", value=f"**``{base64_message}``**")
+            await recipient.send(embed=embed)
+        else:
+            await ctx.send(
+                "Please choose a valid encoding schema: binary [bin], hexadecimal [hex], or base64 [b64]."
+            )
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
@@ -93,6 +219,69 @@ class Moderation(commands.Cog):
         whois_embed.set_image(url=member.display_avatar.url)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(embed=whois_embed)
+
+    @commands.command()
+    @commands.has_role(MODERATOR_ROLE_ID)
+    async def code_say(self, ctx: commands.Context, code, *, content) -> None:
+        cmd = f"!code_say {code}"
+        cmd_msg = f"{content}"
+        await ctx.channel.purge(limit=1)
+        if code == "bin":
+            binary_message = "".join(
+                format(i, "08b") for i in bytearray(content, encoding="utf-8")
+            )
+            Harbinger.timestamp(ctx.author, cmd, cmd_msg)
+            embed = discord.Embed(
+                title="Ecrypted Transmission",
+                description=f"**``{binary_message}``**",
+                color=CUSTOM_COLOR,
+            )
+            await ctx.send(embed=embed)
+        elif code == "csr":
+            sender = await ctx.author.create_dm()
+            key = random.randint(1, 26)
+            caeser_message = Moderation.caeser_cipher(key, content)
+            Harbinger.timestamp(ctx.author, cmd, cmd_msg)
+            caeser_key_embed = discord.Embed(
+                title="Caeser Cipher Key",
+                description="You will need to provide this key to your recipient for him/her to decode your message!",
+                color=CUSTOM_COLOR,
+            )
+            caeser_key_embed.add_field(
+                name="Recipient", value=f"**{ctx.channel}**", inline=False
+            )
+            caeser_key_embed.add_field(
+                name="Message", value=f"**``{caeser_message}``**", inline=False
+            )
+            caeser_key_embed.add_field(name="Key", value=f"**``{key}``**")
+            embed = discord.Embed(
+                title="Ecrypted Transmission",
+                description=f"**``{caeser_message}``**",
+                color=CUSTOM_COLOR,
+            )
+            await ctx.send(embed=embed)
+            await sender.send(embed=caeser_key_embed)
+
+        elif code == "hex":
+            hex_message = content.encode("utf-8").hex()
+            Harbinger.timestamp(ctx.author, cmd, cmd_msg)
+            embed = discord.Embed(
+                title="Ecrypted Transmission",
+                description=f"**``{hex_message}``**",
+                color=CUSTOM_COLOR,
+            )
+            await ctx.send(embed=embed)
+        elif code == "b64":
+            content_bytes = content.encode("ascii")
+            base64_bytes = base64.b64encode(content_bytes)
+            base64_message = str(base64_bytes, encoding="utf-8")
+            Harbinger.timestamp(ctx.author, cmd, cmd_msg)
+            embed = discord.Embed(
+                title="Ecrypted Transmission",
+                description=f"**``{base64_message}``**",
+                color=CUSTOM_COLOR,
+            )
+            await ctx.send(embed=embed)
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)

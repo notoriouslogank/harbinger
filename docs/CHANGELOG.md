@@ -4,6 +4,68 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.3.0] - 2023-15-01
+
+### Fixed
+
+- Configure.py and readconfigs.py should now be able to access variables while they're encrypted
+
+## [3.2.2] - 2023-15-01
+
+### Fixed
+
+- Token name in config.ini not consistent with other stuff
+
+## [3.2.1] - 2023-15-01
+
+### Changed
+
+- Updated requirements.txt
+
+## [3.2.0] - 2023-15-01
+
+### Security Overhaul
+
+- All config files are now encrypted with Fernet encryption before being written to disk
+- OLD VERSIONS OF CONFIG.INI WILL NO LONGER WORK
+
+### Changed
+
+- Many functions in configure.py and readconfigs.py have been renamed, removed, or refactored
+
+### Added
+
+- .env file located at config/.env to contain cryptographic key
+
+## [3.1.3] - 2023-14-01
+
+### Changed
+
+- Encrypted messages are now sent as embeds to make them pop more
+
+## [3.1.2] - 2023-14-01
+
+### Fixed
+
+- Removed unneccessary print statements in moderation.py
+
+## [3.1.1] - 2023-14-01
+
+### Changed
+
+- Made encrypted messages bold
+
+## [3.1.0] - 2023-14-01
+
+### Added
+
+- !code_whisper and !code_say commands to send encoded messages.  Encoding schema supported: base64, binary, Caeser cipher, hex.
+- !decrypt command to, well, decrypt encrypted messages
+
+### Fixed
+
+- Minor formatting
+
 ## [3.0.0] - 2023-14-01
 
 ### Added
