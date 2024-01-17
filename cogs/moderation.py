@@ -351,7 +351,7 @@ class Moderation(commands.Cog):
             title=title, description=description, color=CUSTOM_COLOR, url=url
         )
         embed.set_image(url=image)
-        embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar.url)
+        #        embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar.url)
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
         await ctx.send(embed=embed)
 
