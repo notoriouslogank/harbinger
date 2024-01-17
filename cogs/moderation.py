@@ -171,7 +171,8 @@ class Moderation(commands.Cog):
         message_list = []
         async for message in ctx.channel.history(limit=amount):
             entry = f"{counter+1} {message.author}: {message.content}"
-            print(entry)
+            #print(entry)
+            message_list.append(entry)
             counter += 1
         await ctx.send(message_list)
         print(message_list)
