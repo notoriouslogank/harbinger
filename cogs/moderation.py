@@ -167,6 +167,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     async def history(self, ctx: commands.Context):
+        counter = 0
         async for message in ctx.channel.history(limit=10):
             if message.author == ctx.message.author:
                 print(message)
