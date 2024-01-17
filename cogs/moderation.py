@@ -165,6 +165,13 @@ class Moderation(commands.Cog):
                 "Please choose a valid encoding schema: binary [bin], hexadecimal [hex], or base64 [b64]."
             )
 
+    @commands.command
+    @commands.has_role(MODERATOR_ROLE_ID)
+    async def history(self, ctx: commands.Context, amount):
+        channel = await self.bot.get_channel(ctx.channel)
+        async for message in ctx.channel.history(limit=amount):
+            print(message.created_at, message.author.name, message.content)
+
     @commands.command()
     @commands.has_role(DEVELOPER_ROLE_ID)
     async def serverinfo(self, ctx: commands.Context):
@@ -316,17 +323,6 @@ class Moderation(commands.Cog):
         embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar.url)
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
         await ctx.send(embed=embed)
-
-    @commands.command()
-    @commands.has_role(MODERATOR_ROLE_ID)
-    async def history(self, ctx: commands.Context, number):
-        messages = await ctx.channel.history(limit=number)
-        [message async for message in ctx.channel.history(limit=number)]
-        messages.reverse()
-
-        await ctx.channel.send(f"Last {number} messages:")
-        print(messages)
-        #await ctx.channel.send([message.content for message in messages])
 
     @commands.command()
     async def playing(
