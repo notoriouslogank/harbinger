@@ -176,7 +176,7 @@ class Moderation(commands.Cog):
         logfile = Path(filename)
         async for message in ctx.channel.history(oldest_first=True):
             if new == True:
-                old_log = os.path.join(logfile, ".old")
+                old_log = Path(f"{logfile}.old")
                 os.rename(logfile, old_log)
             else:
                 pass
