@@ -84,14 +84,14 @@ class ReadConfigs:
     def moderator_id():
         ReadConfigs.decrypt(configfile, ReadConfigs.load_key())  # decrypt
         config.read(configfile)  # read
-        moderator_role_id = str(config["Roles"]["moderator"])
+        moderator_role_id = int(config["Roles"]["moderator"])
         Configure.encrypt(configfile, Configure.load_key())  # encrypt
         return moderator_role_id
 
     def developer_id():
         ReadConfigs.decrypt(configfile, ReadConfigs.load_key())  # decrypt
         config.read(configfile)  # read
-        developer_role_id = str(config["Roles"]["developer"])
+        developer_role_id = int(config["Roles"]["developer"])
         Configure.encrypt(configfile, Configure.load_key())  # encrypt
         return developer_role_id
 
