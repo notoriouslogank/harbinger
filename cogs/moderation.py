@@ -181,25 +181,25 @@ class Moderation(commands.Cog):
                 if new == False:
                     with open(logfile, "a") as log:
                         log.write(entry)
-                elif new == True:
-                    os.rename(logfile, "log.txt.old")
+                        counter += 1
+                else:
+                    old_log = os.path.join(logfile, ".old")
+                    os.rename(logfile, old_log)
                     with open(logfile, "a") as log:
                         log.write(entry)
-                counter += 1
-            else:
-                if author == message.author:
-                    entry = f"{counter+1} - {message.created_at}: {message.content}"
-                    if new == False:
-                        with open(logfile, "a") as log:
-                            log.write(entry)
-                    elif new == True:
-                        old_log = os.path.join(logfile, ".old")
-                        os.rename(logfile, old_log)
-                        with open(logfile, "a") as log:
-                            log.write(entry)
-                    counter += 1
+                        counter += 1
+            if author == message.author:
+                entry = f"{counter + 1} - {message.created_at}: {message.content}"
+                if new == False:
+                    with open(logfile, "a") as log:
+                        log.write(entry)
+                        counter += 1
                 else:
-                    return
+                    old_log = os.path.join(logfile, ".old")
+                    os.rename(logfile, old_log)
+                    with open(logfile, "a") as log:
+                        log.write(entry)
+                        counter += 1
         await ctx.send("Wrote log file.")
 
     @commands.command()
