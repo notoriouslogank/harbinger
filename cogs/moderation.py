@@ -325,7 +325,8 @@ class Moderation(commands.Cog):
         messages.reverse()
 
         await ctx.channel.send(f"Last {number} messages:")
-        await ctx.channel.send([message.content for message in messages])
+        print(messages)
+        #await ctx.channel.send([message.content for message in messages])
 
     @commands.command()
     async def playing(
