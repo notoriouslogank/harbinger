@@ -306,6 +306,7 @@ class Moderation(commands.Cog):
     async def embed(
         self, ctx: commands.Context, title=None, description=None, image=None, url=None
     ):
+        await ctx.channel.purge(limit=1)
         cmd = f"!embed {title},{description},{image},{url}"
         cmd_msg = f"Harbinger sent an embed."
         embed = discord.Embed(
@@ -314,7 +315,6 @@ class Moderation(commands.Cog):
         embed.set_image(url=image)
         embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar.url)
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-        await ctx.channel.purge(limit=1)
         await ctx.send(embed=embed)
 
     @commands.command()
