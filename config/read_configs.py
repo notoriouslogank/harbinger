@@ -10,7 +10,7 @@ config = ConfigParser()
 
 class ReadConfigs:
     def load_key():
-        return open("key.key", "rb").read()
+        return open("config/key.key", "rb").read()
 
     def decrypt(filename, key):
         f = Fernet(key)
