@@ -166,12 +166,28 @@ class Moderation(commands.Cog):
             )
 
     @commands.command()
+    async def log(self, ctx: commands.Context, new=False):
+        cmd = "!log {new}"
+        cmd_msg = "Wrote to log.txt"
+        counter = 0
+        logfile = "log.txt"
+        async for message in ctx.channel.history():
+            entry = f"{counter+1} {message.created_at} - {message.author}: {message.content}\n"
+            if new == False:
+                with open(logfile, "a") as log:
+                    log.write(entry)
+            elif new == True:
+                with open(logfile, "w") as log:
+                    log.write(entry)
+        await ctx.send("Wrote log file.")
+
+    @commands.command()
     async def history(self, ctx: commands.Context, amount: int):
         counter = 0
         message_list = []
         async for message in ctx.channel.history(limit=amount):
             entry = f"{counter+1} {message.author}: {message.content}"
-            #print(entry)
+            # print(entry)
             message_list.append(entry)
             counter += 1
         await ctx.send(message_list)
