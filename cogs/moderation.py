@@ -186,7 +186,6 @@ class Moderation(commands.Cog):
                     with open(logfile, "a") as log:
                         log.write(entry)
                 counter += 1
-                await ctx.send("Successfully wrote log file.")
             else:
                 if author in message.author:
                     entry = f"{counter+1} - {message.created_at}: {message.content}"
@@ -199,7 +198,6 @@ class Moderation(commands.Cog):
                         with open(logfile, "a") as log:
                             log.write(entry)
                     counter += 1
-                    await ctx.send(f"Successfully wrote log file.")
                 else:
                     await ctx.send(f"{author} not found.")
         await ctx.send("Wrote log file.")
