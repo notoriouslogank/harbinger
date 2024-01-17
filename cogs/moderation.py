@@ -187,7 +187,7 @@ class Moderation(commands.Cog):
                         log.write(entry)
                 counter += 1
             else:
-                if author in message.author:
+                if author == message.author:
                     entry = f"{counter+1} - {message.created_at}: {message.content}"
                     if new == False:
                         with open(logfile, "a") as log:
