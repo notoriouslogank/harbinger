@@ -1,5 +1,7 @@
 import random
 import discord
+from pathlib import Path
+import os
 from discord.ext import commands
 import base64
 from config.read_configs import ReadConfigs as configs
@@ -170,14 +172,16 @@ class Moderation(commands.Cog):
         cmd = "!log {new}"
         cmd_msg = "Wrote to log.txt"
         counter = 0
-        logfile = "log.txt"
+        filename = "log.txt"  # TODO: Make this part of the config.ini
+        logfile = Path(filename)
         async for message in ctx.channel.history():
             entry = f"{counter+1} {message.created_at} - {message.author}: {message.content}\n"
             if new == False:
                 with open(logfile, "a") as log:
                     log.write(entry)
             elif new == True:
-                with open(logfile, "w") as log:
+                os.rename(logfile, "log.txt.old")
+                with open(logfile, "a") as log:
                     log.write(entry)
             counter += 1
         await ctx.send("Wrote log file.")
