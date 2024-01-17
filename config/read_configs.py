@@ -1,18 +1,23 @@
 from configparser import ConfigParser
 from cryptography.fernet import Fernet
 import discord
-from config.configure import Configure
+from configure import Configure
 
 
-configfile = "config/config.ini"
+python_config_file = "config/config.ini"
+keyfile = "config/key.key"
+shell_config_file = "config/start.conf"
+
 config = ConfigParser()
 
 
 class ReadConfigs:
     def load_key():
+        """Load the Fernet key from keyfile."""
         return open("config/key.key", "rb").read()
 
     def decrypt(filename, key):
+        """Decrypt config.ini."""
         f = Fernet(key)
         with open(filename, "rb") as file:
             encrypted_data = file.read()
@@ -22,10 +27,11 @@ class ReadConfigs:
         return
 
     def discord_token():
-        ReadConfigs.decrypt(configfile, ReadConfigs.load_key())  # decrypt
-        config.read(configfile)  # read
+        """Read config file and return api_token."""
+        ReadConfigs.decrypt(python_config_file, ReadConfigs.load_key())  # decrypt
+        config.read(python_config_file)  # read
         api_token = config["Bot"]["discord_token"]  # find entry
-        Configure.encrypt(configfile, Configure.load_key())  # encrypt
+        Configure.encrypt(python_config_file, Configure.load_key())  # encrypt
         return api_token
 
     # def channel() -> int:
@@ -33,66 +39,66 @@ class ReadConfigs:
     #    return main_channel
 
     def owner_id():
-        ReadConfigs.decrypt(configfile, ReadConfigs.load_key())  # decrypt
-        config.read(configfile)  # read
+        ReadConfigs.decrypt(python_config_file, ReadConfigs.load_key())  # decrypt
+        config.read(python_config_file)  # read
         owner_id = config["Bot"]["owner_id"]
-        Configure.encrypt(configfile, Configure.load_key())  # encrypt
+        Configure.encrypt(python_config_file, Configure.load_key())  # encrypt
         return owner_id
 
     def email_address():
-        ReadConfigs.decrypt(configfile, ReadConfigs.load_key())  # decrypt
-        config.read(configfile)  # read
+        ReadConfigs.decrypt(python_config_file, ReadConfigs.load_key())  # decrypt
+        config.read(python_config_file)  # read
         email_addr = config["Email"]["address"]
-        Configure.encrypt(configfile, Configure.load_key())  # encrypt
+        Configure.encrypt(python_config_file, Configure.load_key())  # encrypt
         return email_addr
 
     def email_password():
-        ReadConfigs.decrypt(configfile, ReadConfigs.load_key())  # decrypt
-        config.read(configfile)  # read
+        ReadConfigs.decrypt(python_config_file, ReadConfigs.load_key())  # decrypt
+        config.read(python_config_file)  # read
         email_pass = config["Email"]["password"]
-        Configure.encrypt(configfile, Configure.load_key())  # encrypt
+        Configure.encrypt(python_config_file, Configure.load_key())  # encrypt
         return email_pass
 
     def server_dir():
-        ReadConfigs.decrypt(configfile, ReadConfigs.load_key())  # decrypt
-        config.read(configfile)  # read
+        ReadConfigs.decrypt(python_config_file, ReadConfigs.load_key())  # decrypt
+        config.read(python_config_file)  # read
         server_directory = config["Server"]["server_dir"]
-        Configure.encrypt(configfile, Configure.load_key())  # encrypt
+        Configure.encrypt(python_config_file, Configure.load_key())  # encrypt
         return server_directory
 
     def startup_script():
-        ReadConfigs.decrypt(configfile, ReadConfigs.load_key())  # decrypt
-        config.read(configfile)  # read
+        ReadConfigs.decrypt(python_config_file, ReadConfigs.load_key())  # decrypt
+        config.read(python_config_file)  # read
         start_script = config["Server"]["startup_script"]
-        Configure.encrypt(configfile, Configure.load_key())  # encrypt
+        Configure.encrypt(python_config_file, Configure.load_key())  # encrypt
         return start_script
 
     def server_public_ip():
-        ReadConfigs.decrypt(configfile, ReadConfigs.load_key())  # decrypt
-        config.read(configfile)  # read
+        ReadConfigs.decrypt(python_config_file, ReadConfigs.load_key())  # decrypt
+        config.read(python_config_file)  # read
         public_ip = config["Server"]["server_public_ip"]
-        Configure.encrypt(configfile, Configure.load_key())  # encrypt
+        Configure.encrypt(python_config_file, Configure.load_key())  # encrypt
         return public_ip
 
     def server_local_ip():
-        ReadConfigs.decrypt(configfile, ReadConfigs.load_key())  # decrypt
-        config.read(configfile)  # read
+        ReadConfigs.decrypt(python_config_file, ReadConfigs.load_key())  # decrypt
+        config.read(python_config_file)  # read
         local_ip = config["Server"]["server_local_ip"]
-        Configure.encrypt(configfile, Configure.load_key())  # encrypt
+        Configure.encrypt(python_config_file, Configure.load_key())  # encrypt
         return local_ip
 
     def moderator_id():
-        ReadConfigs.decrypt(configfile, ReadConfigs.load_key())  # decrypt
-        config.read(configfile)  # read
+        ReadConfigs.decrypt(python_config_file, ReadConfigs.load_key())  # decrypt
+        config.read(python_config_file)  # read
         moderator_role_id = int(config["Roles"]["moderator"])
-        Configure.encrypt(configfile, Configure.load_key())  # encrypt
+        Configure.encrypt(python_config_file, Configure.load_key())  # encrypt
         return moderator_role_id
 
     def developer_id():
-        ReadConfigs.decrypt(configfile, ReadConfigs.load_key())  # decrypt
-        config.read(configfile)  # read
+        ReadConfigs.decrypt(python_config_file, ReadConfigs.load_key())  # decrypt
+        config.read(python_config_file)  # read
         developer_role_id = int(config["Roles"]["developer"])
-        Configure.encrypt(configfile, Configure.load_key())  # encrypt
+        Configure.encrypt(python_config_file, Configure.load_key())  # encrypt
         return developer_role_id
 
     def custom_color() -> discord.Color:
@@ -108,39 +114,11 @@ class ReadConfigs:
 
 def main():
     """Print deobfuscated config.ini."""
-    c = ReadConfigs
-    key = c.load_key()
-    print(c.discord_token())
-    print(c.email_address())
-    print(c.email_password())
-    print(c.moderator_id())
-    print(c.owner_id())
-    print(c.server_dir())
-    print(c.server_local_ip())
-    print(c.server_public_ip())
-    print(c.startup_script())
-
-    file = "config/config.ini"
-
-
-#    key = ReadConfigs.load_key()
-#    ReadConfigs.decrypt(file, key)
-
-# read = ReadConfigs
-# token = read.reveal(read.discord_token())
-# print(token)
-#
-# print(ReadConfigs.reveal(ReadConfigs.discord_token()))
-# print(
-#        f"Token: {read.discord_token()}\nOwner ID: {read.owner_id()}\nEmail Address: {read.email_address()}\nEmail Password: {read.email_password()}"
-#    )
-#    print(
-#        f"Moderator ID: {read.moderator_id()}\nDeveloper ID: {read.developer_id()}\nServer Directory: {read.server_dir()}"
-#    )
-#    print(
-#        f"Startup Script: {read.startup_script()}\nServer Local IP: {read.server_local_ip()}\nServer Public IP: {read.server_public_ip()}"
-#    )
-#    print(f"Custom Color: {read.custom_color()}\nDelete Time: {read.delete_time()}")
+    config = ReadConfigs
+    key = config.load_key()
+    print(
+        f"Email Address: {config.email_address()}\nEmail Password: {config.email_password()}\nDiscord Token: {config.discord_token()}\nDelete After: {config.delete_time()}\nOwner ID: {config.owner_id()}\nCustom Color: {config.custom_color()}\nServer Directory: {config.server_dir()}\nStartup Script: {config.startup_script()}\nLocal IP: {config.server_local_ip()}\nPublic IP: {config.server_public_ip()}\nModerator Role ID: {config.moderator_id()}\nDeveloper ID: {config.developer_id()}"
+    )
 
 
 if __name__ == "__main__":

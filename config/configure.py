@@ -1,22 +1,23 @@
 import configparser
 import socket
-from calendar import c
 
 from cryptography.fernet import Fernet
 from requests import get
+
+python_config_file = "config/config.ini"
+keyfile = "config/key.key"
+shell_config_file = "config/start.conf"
 
 
 class Configure:
     """Class containing methods to create config.ini and start.conf."""
 
-    config_path = "config/"
-    python_config_file = "config.ini"
-    shell_config_file = "start.conf"
-
     def load_key():
-        return open("config/key.key", "rb").read()
+        """Load Fernet key from keyfile."""
+        return open(f"{keyfile}", "rb").read()
 
     def encrypt(filename, key):
+        """Encrypt config.ini"""
         f = Fernet(key)
 
         with open(filename, "rb") as file:
@@ -34,22 +35,12 @@ class Configure:
             str: Discord API token
         """
         api_token = input("Discord API Token: ")
-        api_token_bytes = api_token
-        return api_token_bytes
+        return api_token
 
     def get_owner_id():
-        owner_id = input("Owner ID: ")
-        owner_id_bytes = owner_id
-        return owner_id_bytes
-
-    # def get_channel_id() -> int:
-    #    """Prompt user for Channel ID.
-    #
-    #    Returns:
-    #        int: Channel ID
-    #    """
-    #    channel = input("Channel ID: ")
-    #    return channel
+        """Get owner ID for bot control."""
+        owner_id = int(input("Owner ID: "))
+        return owner_id
 
     def get_server_dir():
         """Prompt user for directory to Minecraft server.
@@ -58,8 +49,7 @@ class Configure:
             str: Path to Minecraft server
         """
         server_dir = input("Directory of server: ")
-        server_dir_bytes = server_dir
-        return server_dir_bytes
+        return server_dir
 
     def get_startup_script():
         """Prompt user for path to Minecraft server startup script.
@@ -68,8 +58,7 @@ class Configure:
             str: Path to Minecraft server startup script
         """
         startup_script = input("Path to startup script: ")
-        startup_script_bytes = startup_script
-        return startup_script_bytes
+        return startup_script
 
     def get_custom_color():
         """Prompt user for custom color as RGB values.
@@ -91,8 +80,7 @@ class Configure:
         ip = s.getsockname()[0]
         s.close()
         ip_str = str(ip)
-        ip_bytes = ip_str
-        return ip_bytes
+        return ip
 
     def get_public_ip() -> str:
         """Query the Internet and return public IP.
@@ -101,35 +89,39 @@ class Configure:
             str: Public IP address
         """
         ip = get("https://api.ipify.org").content.decode("utf8")
-        ip_str = str(ip)
-        ip_bytes = ip_str
-        return ip_bytes
+        ip = str(ip)
+        return ip
 
     def get_email():
+        """Get email address for bug reports."""
         email_address = input("Email address: ")
-        email_address_bytes = email_address
-        return email_address_bytes
+        return email_address
 
     def get_email_pass():
+        """Email password to allow bug reports to send to email."""
         email_pass = input("Password: ")
         email_pass_bytes = email_pass
         return email_pass_bytes
 
     def get_moderator_role():
+        """Get Moderator Role ID."""
         role_id = str(input("Administrator Role ID: ") or "Admin")
         role_id_bytes = role_id
         return role_id_bytes
 
     def get_developer_role():
+        """Get Developer Role ID."""
         role_id = str(input("Developer Role ID: ") or "Developer")
         role_id_bytes = role_id
         return role_id_bytes
 
     def get_deletion_time():
+        """Get time (in seconds) to wait before messages auto-delete."""
         delete_after = input("Time until messages auto-delete (seconds): ")
         return delete_after
 
     def write_keyfile():
+        """Generate a secure key and write it to keyfile."""
         key = Fernet.generate_key()
         with open("config/key.key", "wb") as key_file:
             key_file.write(key)
@@ -159,29 +151,15 @@ class Configure:
             "developer": f"{(Configure.get_developer_role())}",
         }
 
-        with open(f"{Configure.python_config_file}", "w") as configfile:
+        with open(f"{python_config_file}", "w") as configfile:
             config.write(configfile)
-
-    # def write_sh_config(configfile) -> None:
-    #     """Create start.conf configuration file.
-
-    #     Args:
-    #         configfile (str): Path to config.ini
-    #     """
-    #     server_dir = configs.server_dir()
-    #     startup_script = configs.startup_script()
-    #     text = f"#!/bin/bash\nServerDir={server_dir}\nStartupScript={startup_script}\n"
-
-    #     with open(f"{Configure.config_path}{Configure.shell_config_file}", "w") as conf:
-    #         conf.write(text)
 
 
 def main():
     # Configure.write_keyfile()
-    file = "config/config.ini"
     key = Configure.load_key()
     # Configure.write_py_config()
-    Configure.encrypt(file, key)
+    Configure.encrypt(f"{python_config_file}", key)
 
 
 if __name__ == "__main__":
