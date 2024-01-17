@@ -172,7 +172,7 @@ class Moderation(commands.Cog):
             if message.author == ctx.message.author:
                 print(message.content)
                 counter += 1
-        await ctx.send(message)
+        await ctx.send(message.content)
 
     @commands.command()
     @commands.has_role(DEVELOPER_ROLE_ID)
