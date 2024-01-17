@@ -318,6 +318,15 @@ class Moderation(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command()
+    @commands.has_role(MODERATOR_ROLE_ID)
+    async def history(self, ctx: commands.Context, number):
+        messages = await ctx.channel.history(limit=number).flatten
+        messages.reverse()
+
+        await ctx.channel.send(f"Last {number} messages:")
+        await ctx.channel.send([message.content for message in messages])
+
+    @commands.command()
     async def playing(
         self, ctx: commands.Context, game, description, field, value
     ) -> None:
