@@ -165,7 +165,7 @@ class Moderation(commands.Cog):
                 "Please choose a valid encoding schema: binary [bin], hexadecimal [hex], or base64 [b64]."
             )
 
-    @commands.command
+    @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
     async def history(self, ctx: commands.Context, amount):
         channel = await self.bot.get_channel(ctx.channel)
