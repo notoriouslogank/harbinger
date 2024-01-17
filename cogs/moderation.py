@@ -170,7 +170,7 @@ class Moderation(commands.Cog):
         counter = 0
         async for message in ctx.channel.history(limit=10):
             if message.author == ctx.message.author:
-                print(message)
+                print(message.content)
                 counter += 1
         await ctx.send(message)
 
