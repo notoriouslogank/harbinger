@@ -302,6 +302,14 @@ class Moderation(commands.Cog):
         await ctx.send(f"{content}")
 
     @commands.command()
+    @commands.has_role(DEVELOPER_ROLE_ID)
+    async def new_embed(self, ctx: commands.Context, title, description=None, url=None):
+        embed = discord.Embed(
+            title=title, description=description, url=url, color=CUSTOM_COLOR
+        )
+        await ctx.send(embed=embed)
+
+    @commands.command()
     async def playing(
         self, ctx: commands.Context, game, description, field, value
     ) -> None:
