@@ -168,22 +168,40 @@ class Moderation(commands.Cog):
             )
 
     @commands.command()
-    async def log(self, ctx: commands.Context, new=False):
+    async def log(self, ctx: commands.Context, author, new=False):
         cmd = "!log {new}"
         cmd_msg = "Wrote to log.txt"
         counter = 0
         filename = "log.txt"  # TODO: Make this part of the config.ini
-        logfile = Path(filename)
+
         async for message in ctx.channel.history():
-            entry = f"{counter+1} {message.created_at} - {message.author}: {message.content}\n"
-            if new == False:
-                with open(logfile, "a") as log:
-                    log.write(entry)
-            elif new == True:
-                os.rename(logfile, "log.txt.old")
-                with open(logfile, "a") as log:
-                    log.write(entry)
-            counter += 1
+            if author == None:
+                logfile = Path(filename)
+                entry = f"{counter+1} {message.created_at} - {message.author}: {message.content}\n"
+                if new == False:
+                    with open(logfile, "a") as log:
+                        log.write(entry)
+                elif new == True:
+                    os.rename(logfile, "log.txt.old")
+                    with open(logfile, "a") as log:
+                        log.write(entry)
+                counter += 1
+                await ctx.send("Successfully wrote log file.")
+            else:
+                if author in message.author:
+                    entry = f"{counter+1} - {message.created_at}: {message.content}"
+                    if new == False:
+                        with open(logfile, "a") as log:
+                            log.write(entry)
+                    elif new == True:
+                        old_log = os.path.join(logfile, ".old")
+                        os.rename(logfile, old_log)
+                        with open(logfile, "a") as log:
+                            log.write(entry)
+                    counter += 1
+                    await ctx.send(f"Successfully wrote log file.")
+                else:
+                    await ctx.send(f"{author} not found.")
         await ctx.send("Wrote log file.")
 
     @commands.command()
