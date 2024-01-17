@@ -191,7 +191,7 @@ class Moderation(commands.Cog):
                         counter += 1
                 else:
                     pass
-            await ctx.send("Wrote logs.")
+        await ctx.send("Wrote logs.")
 
     @commands.command()
     async def history(self, ctx: commands.Context, amount: int):
