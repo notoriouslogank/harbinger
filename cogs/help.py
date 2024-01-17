@@ -362,12 +362,12 @@ class HelpCommand(commands.Cog):
                 inline=True,
             )
             embed.add_field(
-                name="<image>: url",
+                name="<image: url>",
                 value="The url to an image to include in the embed.",
                 inline=True,
             )
             embed.add_field(
-                name="<url>: url", value="A url to create a link to.", inline=True
+                name="<url: url>", value="A url to create a link to.", inline=True
             )
             embed.set_footer(
                 text="All arguments are optional, but you must explicitly pass ``None`` to skip an argument if it is not the last one."
