@@ -174,6 +174,7 @@ class Moderation(commands.Cog):
         counter = 0
         filename = "log.txt"  # TODO: Make this part of the config.ini
         logfile = Path(filename)
+        await ctx.channel.purge(limit=1)
         async for message in ctx.channel.history():
             if message.author == author:
                 entry = f"{counter + 1} - {message.created_at}: {message.content}\n"
