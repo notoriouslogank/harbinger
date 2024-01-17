@@ -1,7 +1,7 @@
 from configparser import ConfigParser
 from cryptography.fernet import Fernet
 import discord
-from config.configure import Configure
+from configure import Configure
 
 
 configfile = "config/config.ini"
