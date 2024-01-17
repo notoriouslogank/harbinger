@@ -168,7 +168,7 @@ class Moderation(commands.Cog):
             )
 
     @commands.command()
-    async def log(self, ctx: commands.Context, author: discord.Member):
+    async def log(self, ctx: commands.Context, author: discord.Member = None):
         cmd = "!log {new}"
         cmd_msg = "Wrote to log.txt"
         counter = 0
