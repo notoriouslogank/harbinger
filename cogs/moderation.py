@@ -169,13 +169,13 @@ class Moderation(commands.Cog):
     async def history(self, ctx: commands.Context, amount: int):
         counter = 0
         messages = []
-        async for message in ctx.channel.history(limit=amount)]:
-            entry = f'{counter+1} {message.author}: {message.content}'
+        async for message in ctx.channel.history(limit=amount):
+            entry = f"{counter+1} {message.author}: {message.content}"
             messages.append[entry]
             counter += 1
         await ctx.send(messages)
         print(messages)
-        
+
     @commands.command()
     @commands.has_role(DEVELOPER_ROLE_ID)
     async def serverinfo(self, ctx: commands.Context):
