@@ -304,7 +304,7 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_role(DEVELOPER_ROLE_ID)
     async def embed(
-        self, ctx: commands.Context, title, description=None, image=None, url=None
+        self, ctx: commands.Context, title=None, description=None, image=None, url=None
     ):
         embed = discord.Embed(
             title=title, description=description, color=CUSTOM_COLOR, url=url
