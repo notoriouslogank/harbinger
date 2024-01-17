@@ -246,7 +246,7 @@ class Moderation(commands.Cog):
             await ctx.send(embed=members_embed)
 
     @commands.command()
-    @commands.has_role(MODERATOR_ROLE_ID)
+    #@commands.has_role(MODERATOR_ROLE_ID)
     async def whois(self, ctx: commands.Context, member: discord.Member) -> None:
         """Get detailed information about given member.
 
