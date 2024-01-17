@@ -167,13 +167,10 @@ class Status(commands.Cog):
         """Generate and email a bug report to the bot maintainer."""
         cmd = f"!bug {message}"
         cmd_msg = f"Sent bug report."
-        # message = ""
-        # for word in message:
-        #    message = message + str(word) + " "
         email = EmailMessage()
         email["From"] = "Harbinger"
         email["To"] = EMAIL_ADDRESS
-        email["Subject"] = f"BUG REPORT - {ctx.message.author}"
+        email["Subject"] = f"BUG REPORT - v{Harbinger.get_ver()} - {ctx.message.author}"
         email.set_content(message)
         with smtplib.SMTP(host="smtp.gmail.com", port=587) as smtp:
             smtp.ehlo()
