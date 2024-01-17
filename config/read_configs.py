@@ -1,7 +1,7 @@
 from configparser import ConfigParser
 from cryptography.fernet import Fernet
 import discord
-from configure import Configure
+from config.configure import Configure
 
 
 configfile = "config/config.ini"
@@ -10,7 +10,7 @@ config = ConfigParser()
 
 class ReadConfigs:
     def load_key():
-        return open("config/key.key", "rb").read()
+        return open("key.key", "rb").read()
 
     def decrypt(filename, key):
         f = Fernet(key)

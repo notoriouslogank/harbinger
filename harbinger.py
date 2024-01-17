@@ -5,6 +5,7 @@ import discord
 from discord.ext import commands
 
 from config.read_configs import ReadConfigs as configs
+from config import configure
 
 TOKEN = configs.discord_token()
 OWNER_ID = configs.owner_id()
