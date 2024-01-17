@@ -105,15 +105,13 @@ class Configure:
 
     def get_moderator_role():
         """Get Moderator Role ID."""
-        role_id = str(input("Administrator Role ID: ") or "Admin")
-        role_id_bytes = role_id
-        return role_id_bytes
+        role_id = int(input("Moderator Role ID: ") or "Admin")
+        return role_id
 
     def get_developer_role():
         """Get Developer Role ID."""
-        role_id = str(input("Developer Role ID: ") or "Developer")
-        role_id_bytes = role_id
-        return role_id_bytes
+        role_id = int(input("Developer Role ID: ") or "dev")
+        return role_id
 
     def get_deletion_time():
         """Get time (in seconds) to wait before messages auto-delete."""
