@@ -305,8 +305,9 @@ class Moderation(commands.Cog):
     @commands.has_role(DEVELOPER_ROLE_ID)
     async def embed(self, ctx: commands.Context, title, description=None, image=None, url=None):
         embed = discord.Embed(
-            title=title, description=description, image=image, url=url, color=CUSTOM_COLOR
+            title=title, description=description, color=CUSTOM_COLOR
         )
+        embed.set_image(url=image)
         embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar.url)
         await ctx.send(embed=embed)
 
