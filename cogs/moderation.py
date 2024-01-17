@@ -175,31 +175,25 @@ class Moderation(commands.Cog):
         filename = "log.txt"  # TODO: Make this part of the config.ini
 
         async for message in ctx.channel.history(oldest_first=True):
+            if new == True:
+                old_log = os.path.join(logfile, ".old")
+                os.rename(logfile, old_log)
+            else:
+                pass
             if author == None:
                 logfile = Path(filename)
                 entry = f"{counter+1} {message.created_at} - {message.author}: {message.content}\n"
-                if new == False:
-                    with open(logfile, "a") as log:
-                        log.write(entry)
-                        counter += 1
-                else:
-                    old_log = os.path.join(logfile, ".old")
-                    os.rename(logfile, old_log)
-                    with open(logfile, "a") as log:
-                        log.write(entry)
-                        counter += 1
+                with open(logfile, "a") as log:
+                    log.write(entry)
+                    counter += 1
+
             if author == message.author:
                 entry = f"{counter + 1} - {message.created_at}: {message.content}"
-                if new == False:
-                    with open(logfile, "a") as log:
-                        log.write(entry)
-                        counter += 1
-                else:
-                    old_log = os.path.join(logfile, ".old")
-                    os.rename(logfile, old_log)
-                    with open(logfile, "a") as log:
-                        log.write(entry)
-                        counter += 1
+                with open(logfile, "a") as log:
+                    log.write(entry)
+                    counter += 1
+            else:
+                pass
         await ctx.send("Wrote log file.")
 
     @commands.command()
