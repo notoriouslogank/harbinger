@@ -85,9 +85,7 @@ class Moderation(commands.Cog):
     @commands.has_role(MODERATOR_ROLE_ID)
     async def clear(self, ctx: commands.Context, amount: int = 2) -> None:
         """Delete a number of messages in channel."""
-        role = discord.utils.get(
-            ctx.guild.roles, name=ctx.guild.get_role(MODERATOR_ROLE_ID)
-        )
+        role = discord.utils.get(ctx.guild.get_role(MODERATOR_ROLE_ID))
         if role in ctx.author.roles:
             cmd = f"!clear({amount})"
             cmd_msg = f"Deleted {amount} messages."
