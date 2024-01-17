@@ -168,23 +168,23 @@ class Moderation(commands.Cog):
             )
 
     @commands.command()
-    async def log(self, ctx: commands.Context, author=None):
+    async def log(self, ctx: commands.Context, author: discord.Member):
         cmd = "!log {new}"
         cmd_msg = "Wrote to log.txt"
         counter = 0
         filename = "log.txt"  # TODO: Make this part of the config.ini
         logfile = Path(filename)
         async for message in ctx.channel.history(oldest_first=True):
-            if author == None:
-                logfile = Path(filename)
-                entry = f"{counter+1} {message.created_at} - {message.author}: {message.content}\n"
-                with open(logfile, "a") as log:
-                    log.write(entry)
-                    counter += 1
-            elif message.author == author:
+            if message.author == author:
                 entry = f"{counter + 1} - {message.created_at}: {message.content}\n"
                 author_log = Path(f"{author}.{logfile}")
                 with open(author_log, "a") as log:
+                    log.write(entry)
+                    counter += 1
+            elif author == None:
+                logfile = Path(filename)
+                entry = f"{counter+1} {message.created_at} - {message.author}: {message.content}\n"
+                with open(logfile, "a") as log:
                     log.write(entry)
                     counter += 1
             else:
