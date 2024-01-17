@@ -2,21 +2,21 @@ import subprocess
 from os import listdir
 
 from discord.ext import commands
-from cogs.status import DEVELOPER_ROLE_ID
+
 
 from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
 
 DELETION_TIME = configs.delete_time()
-MODERATOR_ROLE_ID = configs.moderator_id()
 DEVELOPER_ROLE_ID = configs.developer_id()
+
 
 class Dev(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command()
-    @commands.has_role(MODERATOR_ROLE_ID)
+    @commands.has_role(DEVELOPER_ROLE_ID)
     async def reload_all(self, ctx):
         """Reloads all cogs in the cogs directory."""
         cmd = "!reload_all"
@@ -51,7 +51,7 @@ class Dev(commands.Cog):
         return f"cogs.{cog.lower()}"
 
     @commands.command()
-    @commands.has_role(MODERATOR_ROLE_ID)
+    @commands.has_role(DEVELOPER_ROLE_ID)
     async def load_cog(self, ctx, *, cog: str) -> None:
         """Load a given (unloaded) cog.
 
@@ -76,7 +76,7 @@ class Dev(commands.Cog):
             )
 
     @commands.command()
-    @commands.has_role(MODERATOR_ROLE_ID)
+    @commands.has_role(DEVELOPER_ROLE_ID)
     async def unload_cog(self, ctx, *, cog: str) -> None:
         """Unload a given cog.
 
@@ -101,7 +101,7 @@ class Dev(commands.Cog):
             )
 
     @commands.command()
-    @commands.has_role(MODERATOR_ROLE_ID)
+    @commands.has_role(DEVELOPER_ROLE_ID)
     async def reload_cog(self, ctx, *, cog: str) -> None:
         """Reload a given cog.
 

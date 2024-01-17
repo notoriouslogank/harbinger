@@ -7,3 +7,4 @@ config.ini
 .markdownlint.json
 __pycache__
 ./user_notes/*
+key.key

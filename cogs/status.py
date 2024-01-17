@@ -163,24 +163,22 @@ class Status(commands.Cog):
         await ctx.send(file=file)
 
     @commands.command()
-    async def bug(self, ctx: commands.Context, *raw_message: str) -> None:
+    async def bug(self, ctx: commands.Context, *, message) -> None:
         """Generate and email a bug report to the bot maintainer."""
-        cmd = f"!bug {raw_message}"
+        cmd = f"!bug {message}"
         cmd_msg = f"Sent bug report."
-        message = ""
-        for word in raw_message:
-            message = message + str(word) + " "
-        email_address = EMAIL_ADDRESS
-        password = EMAIL_PASSWORD
+        # message = ""
+        # for word in message:
+        #    message = message + str(word) + " "
         email = EmailMessage()
         email["From"] = "Harbinger"
-        email["To"] = email_address
+        email["To"] = EMAIL_ADDRESS
         email["Subject"] = f"BUG REPORT - {ctx.message.author}"
         email.set_content(message)
         with smtplib.SMTP(host="smtp.gmail.com", port=587) as smtp:
             smtp.ehlo()
             smtp.starttls()
-            smtp.login(email_address, password)
+            smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
             smtp.send_message(email)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(
