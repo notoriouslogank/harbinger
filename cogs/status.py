@@ -95,7 +95,7 @@ class Status(commands.Cog):
         Harbinger.timestamp("BOT", "INITIALIZE", "BOT IS ONLINE")
 
     @commands.command()
-    @commands.has_role(MODERATOR_ROLE_ID)
+    @commands.has_role(DEVELOPER_ROLE_ID)
     async def up(self, ctx: commands.Context) -> None:
         """Confirm bot is online and reachable."""
         cmd = "!up"
@@ -107,7 +107,7 @@ class Status(commands.Cog):
         await message.edit(delete_after=DELETION_TIME)
 
     @commands.command()
-    @commands.has_role(MODERATOR_ROLE_ID)
+    @commands.has_role(DEVELOPER_ROLE_ID)
     async def info(self, ctx: commands.Context) -> None:
         """Get information about this bot."""
         cmd = "!info"
@@ -128,7 +128,7 @@ class Status(commands.Cog):
         await ctx.send(embed=embedInfo)
 
     @commands.command()
-    @commands.has_role(MODERATOR_ROLE_ID)
+    @commands.has_role(DEVELOPER_ROLE_ID)
     async def ping(self, ctx: commands.Context) -> None:
         """Check network latency."""
         ping = (round(self.bot.latency, 2)) * 1000
@@ -140,7 +140,7 @@ class Status(commands.Cog):
         await message.edit(delete_after=DELETION_TIME)
 
     @commands.command()
-    @commands.has_role(MODERATOR_ROLE_ID)
+    @commands.has_role(DEVELOPER_ROLE_ID)
     async def uptime(self, ctx: commands.Context) -> None:
         """Get bot uptime."""
         cmd = "!uptime"
@@ -154,7 +154,7 @@ class Status(commands.Cog):
         await message.edit(delete_after=DELETION_TIME)
 
     @commands.command()
-    @commands.has_role(MODERATOR_ROLE_ID)
+    @commands.has_role(DEVELOPER_ROLE_ID)
     async def changelog(self, ctx: commands.Context) -> None:
         """Get changelog."""
         cmd = "!changelog"
