@@ -134,8 +134,8 @@ class Tools(commands.Cog):
         choices = ["rock", "paper", "scissors"]
         botChoice = choices[randint(0, 2)]
         embedRPS = discord.Embed(color=CUSTOM_COLOR, title="rock, paper, scissors")
-        embedRPS.add_field(name="You", value=f"{choice}", inline=True)
-        embedRPS.add_field(name="Bot", value=f"{botChoice}", inline=True)
+        embedRPS.add_field(name=ctx.author, value=f"{choice}", inline=True)
+        embedRPS.add_field(name=self.bot.user, value=f"{botChoice}", inline=True)
         if choice == botChoice:
             embedRPS.add_field(name="result", value="You tied!", inline=False)
             await ctx.send(embed=embedRPS)

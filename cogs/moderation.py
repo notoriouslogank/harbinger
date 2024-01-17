@@ -177,12 +177,17 @@ class Moderation(commands.Cog):
         await ctx.channel.purge(limit=1)
         async with ctx.channel.typing():
             async for message in ctx.channel.history(limit=None):
-                if message.author == author:
-                    entry = f"{counter + 1} - {message.created_at}: {message.content}\n"
-                    author_log = Path(f"{author}.{logfile}")
-                    with open(author_log, "a") as log:
-                        log.write(entry)
-                        counter += 1
+                if author != None:
+                    if message.author == author:
+                        entry = (
+                            f"{counter + 1} - {message.created_at}: {message.content}\n"
+                        )
+                        author_log = Path(f"{author}.{logfile}")
+                        with open(author_log, "a") as log:
+                            log.write(entry)
+                            counter += 1
+                    else:
+                        await ctx.send(f"{author} not found in messages.")
                 elif author == None:
                     logfile = Path(filename)
                     entry = f"{counter+1} {message.created_at} - {message.author}: {message.content}\n"
@@ -190,7 +195,7 @@ class Moderation(commands.Cog):
                         log.write(entry)
                         counter += 1
                 else:
-                    pass
+                    await ctx.send(f"Hm, something seems to have gone wrong...")
         await ctx.send("Wrote logs.")
 
     @commands.command()
@@ -222,6 +227,7 @@ class Moderation(commands.Cog):
             description=desc,
             color=CUSTOM_COLOR,
         )
+        embed.set_thumbnail(ctx.guild.icon)
         embed.add_field(name="Owner", value=owner, inline=True)
         embed.add_field(name="Server ID", value=guild_id, inline=True)
         embed.add_field(name="Member Count", value=member_count, inline=True)
@@ -232,7 +238,7 @@ class Moderation(commands.Cog):
         async for member in ctx.guild.fetch_members(limit=150):
             members_embed = discord.Embed(
                 title=f"{member.display_name}",
-                description=f"Status: {member.status}",
+                description=f"Status: {member.raw_status}",
                 color=member.color,
             )
             members_embed.add_field(name="Member Since: ", value=f"{member.joined_at}")
@@ -251,10 +257,10 @@ class Moderation(commands.Cog):
         cmd_msg = f"Got whois info for {member}."
         whois_embed = discord.Embed(
             title=f"{member.display_name}",
-            description=f"{member.status}",
-            color=member.color,
+            description=f"{member.raw_status}",
+            color=member.accent_color,
         )
-        whois_embed.add_field(name="Roles:", value=f"{member.roles}")
+        whois_embed.add_field(name="Role:", value=f"{member.top_role}", inline=True)
         whois_embed.add_field(name="Joined:", value=f"{member.joined_at}", inline=True)
         whois_embed.set_image(url=member.display_avatar.url)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
