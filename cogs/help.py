@@ -148,7 +148,9 @@ class HelpCommand(commands.Cog):
                 value="Delete an arbitrary number of messages.",
                 inline=True,
             )
-            moderation_embed.add_field(name="!embed", value="Send an embed as Harbinger.", inline=True)
+            moderation_embed.add_field(
+                name="!embed", value="Send an embed as Harbinger.", inline=True
+            )
             moderation_embed.add_field(
                 name="!serverinfo", value="Get details about this server.", inline=True
             )
@@ -341,15 +343,36 @@ class HelpCommand(commands.Cog):
             )
             await ctx.send(embed=embed)
         elif command == "embed":
-            embed = discord.Embed(title="embed", description="Send an embed as Harbinger.", color=CUSTOM_COLOR
-                                  )
-            embed.add_field(name="Usage", value=f"!embed <title><description><image><url>", inline=False)
-            embed.add_field(name="<title: str>", value="Title for the embed.", inline=True)
-            embed.add_field(name="<description: str>", value="Text to appear in the embed.", inline=True)
-            embed.add_field(name="<image>: url", value="The url to an image to include in the embed.", inline=True )
-            embed.add_field(name="<url>: url", value="A url to create a link to.", inline=True)
-            embed.set_footer(text="All arguments are optional, but you must explicitly pass ``None`` to skip an argument if it is not the last one.")
-        
+            embed = discord.Embed(
+                title="embed",
+                description="Send an embed as Harbinger.",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(
+                name="Usage",
+                value=f"!embed <title><description><image><url>",
+                inline=False,
+            )
+            embed.add_field(
+                name="<title: str>", value="Title for the embed.", inline=True
+            )
+            embed.add_field(
+                name="<description: str>",
+                value="Text to appear in the embed.",
+                inline=True,
+            )
+            embed.add_field(
+                name="<image>: url",
+                value="The url to an image to include in the embed.",
+                inline=True,
+            )
+            embed.add_field(
+                name="<url>: url", value="A url to create a link to.", inline=True
+            )
+            embed.set_footer(
+                text="All arguments are optional, but you must explicitly pass ``None`` to skip an argument if it is not the last one."
+            )
+            await ctx.send(embed=embed)
         elif command == "info":
             embed = discord.Embed(
                 title="info",
