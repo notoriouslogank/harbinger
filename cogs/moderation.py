@@ -320,7 +320,8 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
     async def history(self, ctx: commands.Context, number):
-        messages = await ctx.channel.history(limit=number).flatten()
+        messages = await ctx.channel.history(limit=number)
+        [message async for message in ctx.channel.history(limit=number)]
         messages.reverse()
 
         await ctx.channel.send(f"Last {number} messages:")
