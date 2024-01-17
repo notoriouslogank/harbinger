@@ -2,13 +2,14 @@ import subprocess
 from os import listdir
 
 from discord.ext import commands
+from cogs.status import DEVELOPER_ROLE_ID
 
 from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
 
 DELETION_TIME = configs.delete_time()
 MODERATOR_ROLE_ID = configs.moderator_id()
-
+DEVELOPER_ROLE_ID = configs.developer_id()
 
 class Dev(commands.Cog):
     def __init__(self, bot):
@@ -125,7 +126,7 @@ class Dev(commands.Cog):
             )
 
     @commands.command()
-    @commands.has_role(MODERATOR_ROLE_ID)
+    @commands.has_role(DEVELOPER_ROLE_ID)
     async def update(self, ctx):
         cmd = "!update"
         cmd_msg = "Pulled from GitHub."

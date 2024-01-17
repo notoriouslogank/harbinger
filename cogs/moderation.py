@@ -1,12 +1,12 @@
 import random
-from aiohttp import content_disposition_filename
 import discord
 from discord.ext import commands
 import base64
 from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
 
-MODERATOR_ROLE_ID = str("Admin")
+DEVELOPER_ROLE_ID = configs.developer_id()
+MODERATOR_ROLE_ID = configs.moderator_id()
 DELETION_TIME = configs.delete_time()
 CUSTOM_COLOR = configs.custom_color()
 
@@ -166,7 +166,7 @@ class Moderation(commands.Cog):
             )
 
     @commands.command()
-    @commands.has_role(MODERATOR_ROLE_ID)
+    @commands.has_role(DEVELOPER_ROLE_ID)
     async def serverinfo(self, ctx: commands.Context):
         """Create embeds containing server details and member information and send them to the channel."""
         cmd = "!serverinfo"
@@ -284,7 +284,7 @@ class Moderation(commands.Cog):
             await ctx.send(embed=embed)
 
     @commands.command()
-    @commands.has_role(MODERATOR_ROLE_ID)
+    @commands.has_role(DEVELOPER_ROLE_ID)
     async def say(self, ctx: commands.Context, *message: str) -> None:
         """Send a message as the bot.
 
