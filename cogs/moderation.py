@@ -173,7 +173,7 @@ class Moderation(commands.Cog):
         cmd_msg = "Wrote to log.txt"
         counter = 0
         filename = "log.txt"  # TODO: Make this part of the config.ini
-
+        logfile = Path(filename)
         async for message in ctx.channel.history(oldest_first=True):
             if new == True:
                 old_log = os.path.join(logfile, ".old")
