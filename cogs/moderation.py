@@ -168,7 +168,7 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
     async def history(self, ctx: commands.Context, amount):
-        channel = await self.bot.get_channel(ctx.channel)
+        channel = await self.bot.get_channel(ctx.channel.id)
         async for message in ctx.channel.history(limit=amount):
             print(message.created_at, message.author.name, message.content)
 
