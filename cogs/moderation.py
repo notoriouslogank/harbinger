@@ -82,25 +82,16 @@ class Moderation(commands.Cog):
             await ctx.send("Not a valid encoding schema.")
 
     @commands.command()
-    @commands.has_role(MODERATOR_ROLE_ID)
     async def clear(self, ctx: commands.Context, amount: int = 2) -> None:
         """Delete a number of messages in channel."""
-        role = discord.utils.get(ctx.guild.get_role(MODERATOR_ROLE_ID))
-        print(role)
-        print(ctx.author.roles)
-        if role in ctx.author.roles:
-            cmd = f"!clear({amount})"
-            cmd_msg = f"Deleted {amount} messages."
-            amount = amount + 1
-            if amount > 100:
-                await ctx.send("Cannot delete more than 100 messages.")
-            else:
-                await ctx.channel.purge(limit=amount)
-                Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        cmd = f"!clear({amount})"
+        cmd_msg = f"Deleted {amount} messages."
+        amount = amount + 1
+        if amount > 100:
+            await ctx.send("Cannot delete more than 100 messages.")
         else:
-            await ctx.send(
-                f"You must have the {ctx.guild.get_role(MODERATOR_ROLE_ID)} to do that."
-            )
+            await ctx.channel.purge(limit=amount)
+            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
