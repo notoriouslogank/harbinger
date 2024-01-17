@@ -85,14 +85,22 @@ class Moderation(commands.Cog):
     @commands.has_role(MODERATOR_ROLE_ID)
     async def clear(self, ctx: commands.Context, amount: int = 2) -> None:
         """Delete a number of messages in channel."""
-        cmd = f"!clear({amount})"
-        cmd_msg = f"Deleted {amount} messages."
-        amount = amount + 1
-        if amount > 100:
-            await ctx.send("Cannot delete more than 100 messages.")
+        role = discord.utils.get(
+            ctx.guild.roles, name=ctx.guild.get_role(MODERATOR_ROLE_ID)
+        )
+        if role in ctx.author.roles:
+            cmd = f"!clear({amount})"
+            cmd_msg = f"Deleted {amount} messages."
+            amount = amount + 1
+            if amount > 100:
+                await ctx.send("Cannot delete more than 100 messages.")
+            else:
+                await ctx.channel.purge(limit=amount)
+                Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         else:
-            await ctx.channel.purge(limit=amount)
-            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+            await ctx.send(
+                f"You must have the {ctx.guild.get_role(MODERATOR_ROLE_ID)} to do that."
+            )
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
@@ -211,7 +219,7 @@ class Moderation(commands.Cog):
         print(message_list)
 
     @commands.command()
-    #@commands.has_role(MODERATOR_ROLE_ID)
+    # @commands.has_role(MODERATOR_ROLE_ID)
     async def serverinfo(self, ctx: commands.Context):
         """Create embeds containing server details and member information and send them to the channel."""
         cmd = "!serverinfo"
