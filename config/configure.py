@@ -156,7 +156,7 @@ class Configure:
 def main():
     # Configure.write_keyfile()
     key = Configure.load_key()
-    # Configure.write_py_config()
+    Configure.write_py_config()
     Configure.encrypt(f"{python_config_file}", key)
 
 
