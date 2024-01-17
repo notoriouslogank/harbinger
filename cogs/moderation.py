@@ -211,7 +211,7 @@ class Moderation(commands.Cog):
         print(message_list)
 
     @commands.command()
-    @commands.has_role(MODERATOR_ROLE_ID)
+    #@commands.has_role(MODERATOR_ROLE_ID)
     async def serverinfo(self, ctx: commands.Context):
         """Create embeds containing server details and member information and send them to the channel."""
         cmd = "!serverinfo"
@@ -246,7 +246,7 @@ class Moderation(commands.Cog):
             await ctx.send(embed=members_embed)
 
     @commands.command()
-    #@commands.has_role(MODERATOR_ROLE_ID)
+    @commands.has_role(MODERATOR_ROLE_ID)
     async def whois(self, ctx: commands.Context, member: discord.Member) -> None:
         """Get detailed information about given member.
 
