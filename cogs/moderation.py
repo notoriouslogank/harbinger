@@ -175,22 +175,23 @@ class Moderation(commands.Cog):
         filename = "log.txt"  # TODO: Make this part of the config.ini
         logfile = Path(filename)
         await ctx.channel.purge(limit=1)
-        async for message in ctx.channel.history(limit=None):
-            if message.author == author:
-                entry = f"{counter + 1} - {message.created_at}: {message.content}\n"
-                author_log = Path(f"{author}.{logfile}")
-                with open(author_log, "a") as log:
-                    log.write(entry)
-                    counter += 1
-            elif author == None:
-                logfile = Path(filename)
-                entry = f"{counter+1} {message.created_at} - {message.author}: {message.content}\n"
-                with open(logfile, "a") as log:
-                    log.write(entry)
-                    counter += 1
-            else:
-                pass
-        await ctx.send("Wrote logs.")
+        async with ctx.channel.typing():
+            async for message in ctx.channel.history(limit=None):
+                if message.author == author:
+                    entry = f"{counter + 1} - {message.created_at}: {message.content}\n"
+                    author_log = Path(f"{author}.{logfile}")
+                    with open(author_log, "a") as log:
+                        log.write(entry)
+                        counter += 1
+                elif author == None:
+                    logfile = Path(filename)
+                    entry = f"{counter+1} {message.created_at} - {message.author}: {message.content}\n"
+                    with open(logfile, "a") as log:
+                        log.write(entry)
+                        counter += 1
+                else:
+                    pass
+            await ctx.send("Wrote logs.")
 
     @commands.command()
     async def history(self, ctx: commands.Context, amount: int):
