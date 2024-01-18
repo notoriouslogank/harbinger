@@ -84,14 +84,21 @@ class Moderation(commands.Cog):
     @commands.command()
     async def clear(self, ctx: commands.Context, amount: int = 2) -> None:
         """Delete a number of messages in channel."""
-        cmd = f"!clear({amount})"
-        cmd_msg = f"Deleted {amount} messages."
-        amount = amount + 1
-        if amount > 100:
-            await ctx.send("Cannot delete more than 100 messages.")
-        else:
-            await ctx.channel.purge(limit=amount)
-            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+
+        for role in ctx.message.author.roles:
+            if role.id == MODERATOR_ROLE_ID:
+                await ctx.channel.purge(limit=amount)
+            else:
+                await ctx.send("Still not reading roles properly I guess.")
+
+    #        cmd = f"!clear({amount})"
+    #        cmd_msg = f"Deleted {amount} messages."
+    #        amount = amount + 1
+    #        if amount > 100:
+    #            await ctx.send("Cannot delete more than 100 messages.")
+    #        else:
+    #            await ctx.channel.purge(limit=amount)
+    #            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
