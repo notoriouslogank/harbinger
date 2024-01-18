@@ -12,8 +12,9 @@ DELETION_TIME = configs.delete_time()
 CUSTOM_COLOR = configs.custom_color()
 
 moderator_role = discord.Guild.get_role(918314126692978688, MODERATOR)
+print(moderator_role)
 developer_role = discord.Guild.get_role(918314126692978688, DEVELOPER)
-
+print(developer_role)
 
 class Moderation(commands.Cog):
     """Server moderation commands."""
