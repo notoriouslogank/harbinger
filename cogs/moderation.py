@@ -15,8 +15,8 @@ CUSTOM_COLOR = configs.custom_color()
 class Moderation(commands.Cog):
     """Server moderation commands."""
 
-    moderator_role = discord.Guild.get_role(MODERATOR)
-    developer_role = discord.Guild.get_role(DEVELOPER)
+    moderator_role = discord.Guild.get_role(918314126692978688, MODERATOR)
+    developer_role = discord.Guild.get_role(918314126692978688, DEVELOPER)
 
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
