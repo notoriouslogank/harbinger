@@ -84,11 +84,11 @@ class Moderation(commands.Cog):
     @commands.command()
     async def clear(self, ctx: commands.Context, amount: int = 2) -> None:
         """Delete a number of messages in channel."""
-
-        for role in ctx.message.author.roles:
-            print(f"Member: {role}")
-            print(f"Guild: {ctx.guild.get_role(MODERATOR_ROLE_ID)}")
-
+        role = ctx.guild.get_role(MODERATOR_ROLE_ID)
+        if role in ctx.message.author.roles:
+            print(f"you have the {role}")
+        else:
+            print(f"no")
             # if role.id == role.guild.get_role(MODERATOR_ROLE_ID):
             #    await ctx.channel.purge(limit=amount)
             # else:
