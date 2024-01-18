@@ -100,20 +100,17 @@ class Configure:
     def get_email_pass():
         """Email password to allow bug reports to send to email."""
         email_pass = input("Password: ")
-        email_pass_bytes = email_pass
-        return email_pass_bytes
+        return email_pass
 
     def get_moderator_role():
         """Get Moderator Role ID."""
-        role_id = str(input("Administrator Role ID: ") or "Admin")
-        role_id_bytes = role_id
-        return role_id_bytes
+        role_id = input("Moderator Role ID: ") or "Admin"
+        return role_id
 
     def get_developer_role():
         """Get Developer Role ID."""
-        role_id = str(input("Developer Role ID: ") or "Developer")
-        role_id_bytes = role_id
-        return role_id_bytes
+        role_id = input("Developer Role ID: ") or "dev"
+        return role_id
 
     def get_deletion_time():
         """Get time (in seconds) to wait before messages auto-delete."""
@@ -158,7 +155,7 @@ class Configure:
 def main():
     # Configure.write_keyfile()
     key = Configure.load_key()
-    # Configure.write_py_config()
+    Configure.write_py_config()
     Configure.encrypt(f"{python_config_file}", key)
 
 

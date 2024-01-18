@@ -1,12 +1,13 @@
 import random
 import discord
+from pathlib import Path
 from discord.ext import commands
 import base64
 from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
 
-DEVELOPER_ROLE_ID = configs.developer_id()
-MODERATOR_ROLE_ID = configs.moderator_id()
+DEVELOPER = configs.developer_id()
+MODERATOR = configs.moderator_id()
 DELETION_TIME = configs.delete_time()
 CUSTOM_COLOR = configs.custom_color()
 
@@ -44,7 +45,6 @@ class Moderation(commands.Cog):
         return result
 
     @commands.command()
-    @commands.has_role(MODERATOR_ROLE_ID)
     async def decrypt(self, ctx: commands.Context, code, key, *, message):
         if code == "b64":
             bytes_object = base64.b64decode(message)
@@ -80,20 +80,18 @@ class Moderation(commands.Cog):
             await ctx.send("Not a valid encoding schema.")
 
     @commands.command()
-    @commands.has_role(MODERATOR_ROLE_ID)
     async def clear(self, ctx: commands.Context, amount: int = 2) -> None:
         """Delete a number of messages in channel."""
-        cmd = f"!clear({amount})"
-        cmd_msg = f"Deleted {amount} messages."
-        amount = amount + 1
+        await ctx.message.delete()
         if amount > 100:
-            await ctx.send("Cannot delete more than 100 messages.")
+            print("You may not purge more than 99 messages.")
         else:
+            cmd = f"!clear {amount}"
+            cmd_msg = f"Deleted {amount} messages."
+            Harbinger.timestamp(ctx.author, cmd, cmd_msg)
             await ctx.channel.purge(limit=amount)
-            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
-    @commands.has_role(MODERATOR_ROLE_ID)
     async def whisper(self, ctx, member: discord.Member, *, content) -> None:
         """Send a Direct Message to a member as Harbinger."""
         cmd = f"!whisper({member})"
@@ -104,7 +102,6 @@ class Moderation(commands.Cog):
         await channel.send(content)
 
     @commands.command()
-    @commands.has_role(MODERATOR_ROLE_ID)
     async def code_whisper(
         self, ctx: commands.Context, code, member: discord.Member, *, content
     ) -> None:
@@ -166,7 +163,49 @@ class Moderation(commands.Cog):
             )
 
     @commands.command()
-    @commands.has_role(DEVELOPER_ROLE_ID)
+    async def log(self, ctx: commands.Context, author: discord.Member = None):
+        cmd = f"!log {author}"
+        cmd_msg = "Wrote to log.txt"
+        counter = 0
+        filename = "log.txt"  # TODO: Make this part of the config.ini
+        logfile = Path(filename)
+        await ctx.channel.purge(limit=1)
+        async with ctx.channel.typing():
+            async for message in ctx.channel.history(limit=None):
+                if author != None:
+                    if message.author == author:
+                        entry = (
+                            f"{counter + 1} - {message.created_at}: {message.content}\n"
+                        )
+                        author_log = Path(f"{author}.{logfile}")
+                        with open(author_log, "a") as log:
+                            log.write(entry)
+                            counter += 1
+                    else:
+                        await ctx.send(f"{author} not found in messages.")
+                elif author == None:
+                    logfile = Path(filename)
+                    entry = f"{counter+1} {message.created_at} - {message.author}: {message.content}\n"
+                    with open(logfile, "a") as log:
+                        log.write(entry)
+                        counter += 1
+                else:
+                    await ctx.send(f"Hm, something seems to have gone wrong...")
+        await ctx.send("Wrote logs.")
+
+    @commands.command()
+    async def history(self, ctx: commands.Context, amount: int):
+        counter = 0
+        message_list = []
+        async for message in ctx.channel.history(limit=amount):
+            entry = f"{counter+1} {message.author}: {message.content}"
+            # print(entry)
+            message_list.append(entry)
+            counter += 1
+        await ctx.send(message_list)
+        print(message_list)
+
+    @commands.command()
     async def serverinfo(self, ctx: commands.Context):
         """Create embeds containing server details and member information and send them to the channel."""
         cmd = "!serverinfo"
@@ -182,6 +221,7 @@ class Moderation(commands.Cog):
             description=desc,
             color=CUSTOM_COLOR,
         )
+        embed.set_thumbnail(ctx.guild.icon)
         embed.add_field(name="Owner", value=owner, inline=True)
         embed.add_field(name="Server ID", value=guild_id, inline=True)
         embed.add_field(name="Member Count", value=member_count, inline=True)
@@ -192,7 +232,7 @@ class Moderation(commands.Cog):
         async for member in ctx.guild.fetch_members(limit=150):
             members_embed = discord.Embed(
                 title=f"{member.display_name}",
-                description=f"Status: {member.status}",
+                description=f"Status: {member.raw_status}",
                 color=member.color,
             )
             members_embed.add_field(name="Member Since: ", value=f"{member.joined_at}")
@@ -200,7 +240,6 @@ class Moderation(commands.Cog):
             await ctx.send(embed=members_embed)
 
     @commands.command()
-    @commands.has_role(MODERATOR_ROLE_ID)
     async def whois(self, ctx: commands.Context, member: discord.Member) -> None:
         """Get detailed information about given member.
 
@@ -211,17 +250,16 @@ class Moderation(commands.Cog):
         cmd_msg = f"Got whois info for {member}."
         whois_embed = discord.Embed(
             title=f"{member.display_name}",
-            description=f"{member.status}",
-            color=member.color,
+            description=f"{member.raw_status}",
+            color=member.accent_color,
         )
-        whois_embed.add_field(name="Roles:", value=f"{member.roles}")
+        whois_embed.add_field(name="Role:", value=f"{member.top_role}", inline=True)
         whois_embed.add_field(name="Joined:", value=f"{member.joined_at}", inline=True)
         whois_embed.set_image(url=member.display_avatar.url)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(embed=whois_embed)
 
     @commands.command()
-    @commands.has_role(MODERATOR_ROLE_ID)
     async def code_say(self, ctx: commands.Context, code, *, content) -> None:
         cmd = f"!code_say {code}"
         cmd_msg = f"{content}"
@@ -284,7 +322,6 @@ class Moderation(commands.Cog):
             await ctx.send(embed=embed)
 
     @commands.command()
-    @commands.has_role(DEVELOPER_ROLE_ID)
     async def say(self, ctx: commands.Context, *message: str) -> None:
         """Send a message as the bot.
 
@@ -300,6 +337,21 @@ class Moderation(commands.Cog):
         cmd_msg = f"Harbinger says: {content}"
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
         await ctx.send(f"{content}")
+
+    @commands.command()
+    async def embed(
+        self, ctx: commands.Context, title=None, description=None, image=None, url=None
+    ):
+        await ctx.channel.purge(limit=1)
+        cmd = f"!embed {title},{description},{image},{url}"
+        cmd_msg = f"Harbinger sent an embed."
+        embed = discord.Embed(
+            title=title, description=description, color=CUSTOM_COLOR, url=url
+        )
+        embed.set_image(url=image)
+        #        embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar.url)
+        Harbinger.timestamp(ctx.author, cmd, cmd_msg)
+        await ctx.send(embed=embed)
 
     @commands.command()
     async def playing(

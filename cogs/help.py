@@ -30,6 +30,7 @@ class HelpCommand(commands.Cog):
             "tools",
         ]
         command_list = [
+            "embed",
             # "switch",
             # "mccmd",
             "insult",
@@ -148,6 +149,9 @@ class HelpCommand(commands.Cog):
                 inline=True,
             )
             moderation_embed.add_field(
+                name="!embed", value="Send an embed as Harbinger.", inline=True
+            )
+            moderation_embed.add_field(
                 name="!serverinfo", value="Get details about this server.", inline=True
             )
             moderation_embed.add_field(
@@ -156,7 +160,7 @@ class HelpCommand(commands.Cog):
                 inline=True,
             )
             await ctx.send(embed=moderation_embed)
-        elif command == "music":
+        elif command == "!music":
             music_embed = discord.Embed(
                 title="Music Commands",
                 description="Commands to control the music player.",
@@ -184,6 +188,7 @@ class HelpCommand(commands.Cog):
                 inline=True,
             )
             await ctx.send(embed=music_embed)
+
         elif command == "status":
             status_embed = discord.Embed(
                 title="Status Commands",
@@ -335,6 +340,37 @@ class HelpCommand(commands.Cog):
             embed.add_field(name="Usage", value="!define <word>", inline=False)
             embed.add_field(
                 name="<word: str>", value="A word to be defined.", inline=True
+            )
+            await ctx.send(embed=embed)
+        elif command == "embed":
+            embed = discord.Embed(
+                title="embed",
+                description="Send an embed as Harbinger.",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(
+                name="Usage",
+                value=f"!embed <title><description><image><url>",
+                inline=False,
+            )
+            embed.add_field(
+                name="<title: str>", value="Title for the embed.", inline=True
+            )
+            embed.add_field(
+                name="<description: str>",
+                value="Text to appear in the embed.",
+                inline=True,
+            )
+            embed.add_field(
+                name="<image: url>",
+                value="The url to an image to include in the embed.",
+                inline=True,
+            )
+            embed.add_field(
+                name="<url: url>", value="A url to create a link to.", inline=True
+            )
+            embed.set_footer(
+                text="All arguments are optional, but you must explicitly pass ``None`` to skip an argument if it is not the last one."
             )
             await ctx.send(embed=embed)
         elif command == "info":

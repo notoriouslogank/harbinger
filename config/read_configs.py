@@ -41,7 +41,7 @@ class ReadConfigs:
     def owner_id():
         ReadConfigs.decrypt(python_config_file, ReadConfigs.load_key())  # decrypt
         config.read(python_config_file)  # read
-        owner_id = config["Bot"]["owner_id"]
+        owner_id = int(config["Bot"]["owner_id"])
         Configure.encrypt(python_config_file, Configure.load_key())  # encrypt
         return owner_id
 

@@ -5,7 +5,7 @@ import discord
 from discord.ext import commands
 
 from config.read_configs import ReadConfigs as configs
-from config.configure import Configure
+#from config.configure import Configure
 
 TOKEN = configs.discord_token()
 OWNER_ID = configs.owner_id()
@@ -36,6 +36,7 @@ class Harbinger:
                     print(f"Loaded {cog}")
                 except Exception as exc:
                     print(f"An error has occured: {exc}.")
+
 
     def get_ver() -> str:
         """Check CHANGELOG.md for version info, return version string.

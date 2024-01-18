@@ -1,3 +1,4 @@
+from curses.panel import bottom_panel
 import smtplib
 import sys
 from datetime import datetime
@@ -92,6 +93,17 @@ class Status(commands.Cog):
         """Confirm bot is logged in."""
         await self.bot.change_presence(activity=get_presence())
         Harbinger.timestamp("BOT", "INITIALIZE", "BOT IS ONLINE")
+
+    @commands.Cog.listener()
+    async def on_message(self, ctx: commands.Context) -> None:
+        if ctx.author == self.bot.user:
+            return
+
+        username = str(ctx.author)
+        user_message = str(ctx.content)
+        channel = str(ctx.channel)
+
+        print(f"{channel} || {username}: {user_message}")
 
     @commands.command()
     @commands.has_role(DEVELOPER_ROLE_ID)
