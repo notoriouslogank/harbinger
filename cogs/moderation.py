@@ -86,8 +86,8 @@ class Moderation(commands.Cog):
         """Delete a number of messages in channel."""
 
         for role in ctx.message.author.roles:
-            print(role)
-            print(role.guild.get_role(MODERATOR_ROLE_ID))
+            print(f"Member: {role}")
+            print(f"Guild: {ctx.guild.get_role(MODERATOR_ROLE_ID)}")
 
             # if role.id == role.guild.get_role(MODERATOR_ROLE_ID):
             #    await ctx.channel.purge(limit=amount)
