@@ -37,6 +37,7 @@ class Harbinger:
                 except Exception as exc:
                     print(f"An error has occured: {exc}.")
 
+
     def get_ver() -> str:
         """Check CHANGELOG.md for version info, return version string.
 
