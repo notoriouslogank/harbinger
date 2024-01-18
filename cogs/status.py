@@ -95,13 +95,13 @@ class Status(commands.Cog):
         Harbinger.timestamp("BOT", "INITIALIZE", "BOT IS ONLINE")
 
     @commands.Cog.listener()
-    async def on_message(message) -> None:
-        if message.author == discord.Client.user:
+    async def on_message(self, ctx: commands.Context) -> None:
+        if ctx.message.author == self.bot.user:
             return
 
-        username = str(message.author)
-        user_message = str(message.content)
-        channel = str(message.channel)
+        username = str(ctx.message.author)
+        user_message = str(ctx.message.content)
+        channel = str(ctx.message.channel)
 
         print(f"{channel} || {username}: {user_message}")
 
