@@ -96,12 +96,12 @@ class Status(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, ctx: commands.Context) -> None:
-        if ctx.message.author == self.bot.user:
+        if ctx.author == self.bot.user:
             return
 
-        username = str(ctx.message.author)
-        user_message = str(ctx.message.content)
-        channel = str(ctx.message.channel)
+        username = str(ctx.author)
+        user_message = str(ctx.content)
+        channel = str(ctx.channel)
 
         print(f"{channel} || {username}: {user_message}")
 
