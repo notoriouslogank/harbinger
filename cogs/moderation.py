@@ -98,7 +98,7 @@ class Moderation(commands.Cog):
             cmd = f"!clear {amount}"
             cmd_msg = f"ERROR: missing {role} role."
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-            ctx.send(f"ERROR: You must have role: {role}")
+            await ctx.send(f"ERROR: You must have role: {role}")
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
