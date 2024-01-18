@@ -77,7 +77,7 @@ class HelpCommand(commands.Cog):
         misc_cmds = misc_commands.keys()
 
         categories = ["moderation", "bot", "music", "misc"]
-        categories = categories.sorted()
+        categories = categories.sort()
 
         master_commands_list = [f"{mod_cmds},{bot_cmds},{music_cmds},{misc_cmds}"]
         # USAGE
