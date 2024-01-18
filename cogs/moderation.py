@@ -1,14 +1,13 @@
 import random
 import discord
 from pathlib import Path
-import os
 from discord.ext import commands
 import base64
 from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
 
-DEVELOPER_ROLE_ID = configs.developer_id()
-MODERATOR_ROLE_ID = discord.Guild.get_role(configs.moderator_id())
+DEVELOPER = discord.Guild.get_role(configs.developer_id())
+MODERATOR = discord.Guild.get_role(configs.moderator_id())
 DELETION_TIME = configs.delete_time()
 CUSTOM_COLOR = configs.custom_color()
 
@@ -46,7 +45,7 @@ class Moderation(commands.Cog):
         return result
 
     @commands.command()
-    @commands.has_role(MODERATOR_ROLE_ID)
+    @commands.has_role(MODERATOR)
     async def decrypt(self, ctx: commands.Context, code, key, *, message):
         if code == "b64":
             bytes_object = base64.b64decode(message)
@@ -82,25 +81,20 @@ class Moderation(commands.Cog):
             await ctx.send("Not a valid encoding schema.")
 
     @commands.command()
+    @commands.has_role(MODERATOR)
     async def clear(self, ctx: commands.Context, amount: int = 2) -> None:
         """Delete a number of messages in channel."""
         await ctx.message.delete()
-        if MODERATOR_ROLE_ID in ctx.message.author.roles:
-            if amount > 100:
-                print("You may not purge more than 99 messages.")
-            else:
-                cmd = f"!clear {amount}"
-                cmd_msg = f"Deleted {amount} messages."
-                Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-                await ctx.channel.purge(limit=amount)
+        if amount > 100:
+            print("You may not purge more than 99 messages.")
         else:
             cmd = f"!clear {amount}"
-            cmd_msg = f"ERROR: missing {MODERATOR_ROLE_ID} role."
+            cmd_msg = f"Deleted {amount} messages."
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-            await ctx.send(f"ERROR: You must have role: {MODERATOR_ROLE_ID}")
+            await ctx.channel.purge(limit=amount)
 
     @commands.command()
-    @commands.has_role(MODERATOR_ROLE_ID)
+    @commands.has_role(MODERATOR)
     async def whisper(self, ctx, member: discord.Member, *, content) -> None:
         """Send a Direct Message to a member as Harbinger."""
         cmd = f"!whisper({member})"
@@ -111,7 +105,7 @@ class Moderation(commands.Cog):
         await channel.send(content)
 
     @commands.command()
-    @commands.has_role(MODERATOR_ROLE_ID)
+    @commands.has_role(MODERATOR)
     async def code_whisper(
         self, ctx: commands.Context, code, member: discord.Member, *, content
     ) -> None:
@@ -173,6 +167,7 @@ class Moderation(commands.Cog):
             )
 
     @commands.command()
+    @commands.has_role(MODERATOR)
     async def log(self, ctx: commands.Context, author: discord.Member = None):
         cmd = f"!log {author}"
         cmd_msg = "Wrote to log.txt"
@@ -204,6 +199,7 @@ class Moderation(commands.Cog):
         await ctx.send("Wrote logs.")
 
     @commands.command()
+    @commands.has_role(MODERATOR)
     async def history(self, ctx: commands.Context, amount: int):
         counter = 0
         message_list = []
@@ -216,7 +212,7 @@ class Moderation(commands.Cog):
         print(message_list)
 
     @commands.command()
-    # @commands.has_role(MODERATOR_ROLE_ID)
+    @commands.has_role(MODERATOR)
     async def serverinfo(self, ctx: commands.Context):
         """Create embeds containing server details and member information and send them to the channel."""
         cmd = "!serverinfo"
@@ -251,7 +247,7 @@ class Moderation(commands.Cog):
             await ctx.send(embed=members_embed)
 
     @commands.command()
-    @commands.has_role(MODERATOR_ROLE_ID)
+    @commands.has_role(MODERATOR)
     async def whois(self, ctx: commands.Context, member: discord.Member) -> None:
         """Get detailed information about given member.
 
@@ -272,7 +268,7 @@ class Moderation(commands.Cog):
         await ctx.send(embed=whois_embed)
 
     @commands.command()
-    @commands.has_role(MODERATOR_ROLE_ID)
+    @commands.has_role(MODERATOR)
     async def code_say(self, ctx: commands.Context, code, *, content) -> None:
         cmd = f"!code_say {code}"
         cmd_msg = f"{content}"
@@ -335,7 +331,7 @@ class Moderation(commands.Cog):
             await ctx.send(embed=embed)
 
     @commands.command()
-    @commands.has_role(DEVELOPER_ROLE_ID)
+    @commands.has_role(MODERATOR)
     async def say(self, ctx: commands.Context, *message: str) -> None:
         """Send a message as the bot.
 
@@ -353,7 +349,7 @@ class Moderation(commands.Cog):
         await ctx.send(f"{content}")
 
     @commands.command()
-    @commands.has_role(DEVELOPER_ROLE_ID)
+    @commands.has_role(MODERATOR)
     async def embed(
         self, ctx: commands.Context, title=None, description=None, image=None, url=None
     ):
