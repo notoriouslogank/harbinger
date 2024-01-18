@@ -92,11 +92,13 @@ class Moderation(commands.Cog):
             else:
                 cmd = f"!clear {amount}"
                 cmd_msg = f"Deleted {amount} messages."
+                Harbinger.timestamp(ctx.author, cmd, cmd_msg)
                 await ctx.channel.purge(limit=amount)
         else:
             cmd = f"!clear {amount}"
             cmd_msg = f"ERROR: missing {role} role."
-            print(f"ERROR: You must have role: {role}")
+            Harbinger.timestamp(ctx.author, cmd, cmd_msg)
+            ctx.send(f"ERROR: You must have role: {role}")
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
