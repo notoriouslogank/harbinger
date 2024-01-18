@@ -8,7 +8,7 @@ from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
 
 DEVELOPER_ROLE_ID = configs.developer_id()
-MODERATOR_ROLE_ID = configs.moderator_id()
+MODERATOR_ROLE_ID = discord.Guild.get_role(configs.moderator_id())
 DELETION_TIME = configs.delete_time()
 CUSTOM_COLOR = configs.custom_color()
 
@@ -85,8 +85,7 @@ class Moderation(commands.Cog):
     async def clear(self, ctx: commands.Context, amount: int = 2) -> None:
         """Delete a number of messages in channel."""
         await ctx.message.delete()
-        role = ctx.guild.get_role(MODERATOR_ROLE_ID)
-        if role in ctx.message.author.roles:
+        if MODERATOR_ROLE_ID in ctx.message.author.roles:
             if amount > 100:
                 print("You may not purge more than 99 messages.")
             else:
@@ -96,9 +95,9 @@ class Moderation(commands.Cog):
                 await ctx.channel.purge(limit=amount)
         else:
             cmd = f"!clear {amount}"
-            cmd_msg = f"ERROR: missing {role} role."
+            cmd_msg = f"ERROR: missing {MODERATOR_ROLE_ID} role."
             Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-            await ctx.send(f"ERROR: You must have role: {role}")
+            await ctx.send(f"ERROR: You must have role: {MODERATOR_ROLE_ID}")
 
     @commands.command()
     @commands.has_role(MODERATOR_ROLE_ID)
