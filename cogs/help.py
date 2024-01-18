@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-from platformdirs import user_log_dir
 
 from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
