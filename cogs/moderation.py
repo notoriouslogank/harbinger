@@ -88,12 +88,14 @@ class Moderation(commands.Cog):
         role = ctx.guild.get_role(MODERATOR_ROLE_ID)
         if role in ctx.message.author.roles:
             if amount > 100:
-                cmd = f"!clear({amount})"
-                cmd_msg = f"Deleted {amount} messages."
                 print("You may not purge more than 99 messages.")
             else:
+                cmd = f"!clear {amount}"
+                cmd_msg = f"Deleted {amount} messages."
                 await ctx.channel.purge(limit=amount)
         else:
+            cmd = f"!clear {amount}"
+            cmd_msg = f"ERROR: missing {role} role."
             print(f"ERROR: You must have role: {role}")
 
     @commands.command()
