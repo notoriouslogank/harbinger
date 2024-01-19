@@ -247,11 +247,10 @@ class HelpCommand(commands.Cog):
                     value=f"{str(value)}",
                     inline=True,
                 )
-                counter += 0
+                counter += 1
                 embed.set_footer(
                     text="*You must have Admin role or above to excecute these commands*"
                 )
-                counter += 1
             await ctx.send(embed=embed)
         if command == "bot":
             embed = discord.Embed(
@@ -302,6 +301,7 @@ class HelpCommand(commands.Cog):
                     value=f"{str(value)}",
                     inline=True,
                 )
+                counter += 1
                 embed.set_footer(
                     text="*These commands may be executed by anyone, regardless of role."
                 )
