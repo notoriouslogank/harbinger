@@ -60,10 +60,6 @@ misc_commands = {
 }
 
 
-categories = ["moderation", "bot", "music", "misc"]
-categories = categories.sort()
-
-
 class HelpCommand(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -78,6 +74,7 @@ class HelpCommand(commands.Cog):
             master_commands_list.append(cmd)
         for cmd in misc_commands:
             master_commands_list.append(cmd)
+        master_commands_list.sort()
         return master_commands_list
 
     @commands.command()
@@ -87,6 +84,8 @@ class HelpCommand(commands.Cog):
         Args:
             command (str, optional): Command or category (cog) to get help for. Defaults to None.
         """
+
+        categories = ["moderation", "bot", "music", "misc"]
 
         # USAGE
         u_ask = {
