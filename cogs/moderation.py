@@ -293,8 +293,8 @@ class Moderation(commands.Cog):
             cmd_msg = f"Got whois info for {member}."
             whois_embed = discord.Embed(
                 title=f"{member.display_name}",
-                description=f"{member.raw_status}",
-                color=member.accent_color,
+                description=f"{member.status}",
+                color=int(member.accent_color),
             )
             whois_embed.add_field(name="Role:", value=f"{member.top_role}", inline=True)
             whois_embed.add_field(
