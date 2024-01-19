@@ -119,7 +119,7 @@ class Status(commands.Cog):
         cmd = "!up"
         await ctx.channel.purge(limit=1)
         cmd_msg = "Status: online."
-        up_msg = f"```{self.bot.user} is online```."
+        up_msg = f"```{self.bot.user} is online```"
         message = await ctx.send(f"{up_msg}")
         await message.edit(delete_after=DELETION_TIME)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
@@ -154,7 +154,7 @@ class Status(commands.Cog):
         cmd = f"!ping"
         cmd_msg = "Pong!"
         channel = await self.get_bot_channel()
-        message = await channel.send(f"```{ping}```")
+        message = await channel.send(f"```{ping} ms```")
         await message.edit(delete_after=DELETION_TIME)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
