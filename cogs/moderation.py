@@ -93,11 +93,12 @@ class Moderation(commands.Cog):
     async def clear(self, ctx: commands.Context, amount: int = 1) -> None:
         """Delete a number of messages in channel."""
         await ctx.message.delete()
-        for role in ctx.author.roles:
+        roles = ctx.author.roles
+        for role in roles:
             if role == "Admin":
                 await ctx.send("Admin")
             else:
-                pass
+                await ctx.send("Not Admin")
 
     #        if amount > 100:
     #            print("You may not purge more than 99 messages.")
