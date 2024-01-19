@@ -232,6 +232,8 @@ class HelpCommand(commands.Cog):
             await ctx.send(embed=embed)
         # CATEGORIES
         if command == "moderation":
+            key_list = list(moderation_commands.keys())
+            counter = 0
             embed = discord.Embed(
                 title="MODERATION COMMANDS",
                 description="Commands for server moderation.",
@@ -239,13 +241,14 @@ class HelpCommand(commands.Cog):
             )
             for cmd in moderation_commands:
                 embed.add_field(
-                    name={moderation_commands(cmd)},
+                    name={key_list[counter]},
                     value={moderation_commands.get(cmd)},
                     inline=False,
                 )
                 embed.set_footer(
                     text="*You must have Admin role or above to excecute these commands*"
                 )
+                counter += 1
             await ctx.send(embed=embed)
         if command == "bot":
             embed = discord.Embed(
