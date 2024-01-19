@@ -46,7 +46,7 @@ class Dev(commands.Cog):
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     async def get_bot_channel(self):
-        bot_channel = await Client.get_channel(self, channel)
+        bot_channel = await Client.get_channel(self.bot, channel)
         return bot_channel
         
     def check_cog(self, cog) -> str:
