@@ -232,7 +232,7 @@ class HelpCommand(commands.Cog):
             await ctx.send(embed=embed)
         # CATEGORIES
         if command == "moderation":
-            key_list = list(moderation_commands.keys())
+            key_list = [moderation_commands.keys()]
             counter = 0
             embed = discord.Embed(
                 title="MODERATION COMMANDS",
@@ -241,8 +241,8 @@ class HelpCommand(commands.Cog):
             )
             for cmd in moderation_commands:
                 embed.add_field(
-                    name={key_list[counter]},
-                    value={moderation_commands.get(cmd)},
+                    name={str(key_list[counter])},
+                    value={str(moderation_commands.get(cmd))},
                     inline=False,
                 )
                 embed.set_footer(
