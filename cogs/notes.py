@@ -36,7 +36,7 @@ class Notes(commands.Cog):
         note_file = f"user_notes/{ctx.message.author.display_name}.txt"
         with open(note_file, "r") as n:
             all_notes = n.read()
-        await Harbinger.send_dm(ctx.message.author, f"```{all_notes}```")
+        await Harbinger.send_dm(ctx.message.author, content=f"```{all_notes}```")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
