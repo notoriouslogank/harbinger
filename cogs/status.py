@@ -196,7 +196,7 @@ class Status(commands.Cog):
         """Gracefully shutdown the bot."""
         cmd = "!shutdown"
         await ctx.channel.purge(limit=1)
-        if Harbinger.is_owner(self, ctx, ctx.message.author) == True:
+        if Harbinger.bot.is_owner(self, ctx.message.author):
             cmd_msg = f"Shutting down..."
             embedShutdown = discord.Embed(
                 title="Shutdown!",
