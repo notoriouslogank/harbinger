@@ -47,11 +47,11 @@ class Moderation(commands.Cog):
 
     @commands.command()
     async def test(self, ctx: commands.Context):
-        for role in ctx.author.roles:
-            if role.name != "Admin":
-                await ctx.send("Not Admin")
-            else:
-                await ctx.send("Admin")
+        role = "Admin"
+        if role in ctx.author.roles:
+            await ctx.send("Admin")
+        else:
+            await ctx.send("not Admin")
 
     @commands.command()
     async def decrypt(self, ctx: commands.Context, code, key, *, message):
