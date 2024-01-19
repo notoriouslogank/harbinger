@@ -45,7 +45,7 @@ class Moderation(commands.Cog):
                 result = result + letter
         return result
 
-    def is_admin(ctx: commands.Context):
+    def is_admin(self, ctx: commands.Context):
         roles = ctx.author.roles
         admin = discord.Guild.get_role(ctx.guild, MODERATOR)
         if admin in roles:
@@ -92,7 +92,7 @@ class Moderation(commands.Cog):
     async def clear(self, ctx: commands.Context, amount: int = 1) -> None:
         """Delete a number of messages in channel."""
         await ctx.message.delete()
-        if Moderation.is_admin(ctx):
+        if Moderation.is_admin(ctx.author):
             print("True")
         else:
             print("False")
