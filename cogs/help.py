@@ -1,4 +1,3 @@
-from re import M
 import discord
 from discord.ext import commands
 
@@ -158,7 +157,6 @@ class HelpCommand(commands.Cog):
             "__Args__": "**url**: url to stream from (must be ``https``)",
         }
         u_reload_all = {"__Usage__": "``!reload_all``", "__Args__": "[None]"}
-
         u_load_cog = {
             "__Usage__": "``!load_cog <cog>``",
             "__Args__": "**cog (str)**: Name of cog to load.",
