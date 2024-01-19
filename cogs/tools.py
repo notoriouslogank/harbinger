@@ -18,6 +18,21 @@ class Tools(commands.Cog):
         self.bot = bot
 
     @commands.command()
+    async def slang(self, ctx: commands.Context, *query: str) -> None:
+        cmd = f"!slang {query}"
+        await ctx.channel.purge(limit=1)
+        urban_dictionary = "https://www.urbandictionary.com/define.php?term="
+        string_query = ""
+        for word in query:
+            string_query = string_query + str(word) + " "
+        search = urban_dictionary + string_query
+        cmd_msg = f"Search: {query}"
+        await ctx.send("Let me see what I can find...")
+        async with ctx.channel.typing():
+            await ctx.send(search)
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+
+    @commands.command()
     async def lmgtfy(self, ctx: commands.Context, *query: str) -> None:
         """Let me Google that for you.
 
