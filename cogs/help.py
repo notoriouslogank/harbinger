@@ -1,3 +1,4 @@
+from re import M
 import discord
 from discord.ext import commands
 
@@ -82,6 +83,17 @@ class HelpCommand(commands.Cog):
         categories.sort()
         return categories
 
+    def sort_commands():
+        command_lists = [
+            moderation_commands,
+            bot_commands,
+            music_commands,
+            misc_commands,
+        ]
+        for i in command_lists:
+            dict(sorted(i.items()))
+        return
+
     @commands.command()
     async def help(self, ctx, *, command=None) -> None:
         """Get help information about a given command or cog.
@@ -89,7 +101,7 @@ class HelpCommand(commands.Cog):
         Args:
             command (str, optional): Command or category (cog) to get help for. Defaults to None.
         """
-
+        HelpCommand.sort_commands()
         counter = 0
         # USAGE
         u_ask = {
