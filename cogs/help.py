@@ -239,7 +239,7 @@ class HelpCommand(commands.Cog):
             )
             for cmd in moderation_commands:
                 embed.add_field(
-                    name={moderation_commands[cmd]},
+                    name={moderation_commands(cmd)},
                     value={moderation_commands.get(cmd)},
                     inline=False,
                 )
