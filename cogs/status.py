@@ -133,7 +133,7 @@ class Status(commands.Cog):
             title=f"Harbinger v{current_version}", color=CUSTOM_COLOR
         )
         embedInfo.add_field(name="uptime", value=f"``{delta}``", inline=True)
-        author = await discord.Client.get_user(self, 1154559282801549384)
+        author = await discord.Client.get_user(self.bot, 1154559282801549384)
         embedInfo.add_field(name="author", value=f"{author}", inline=True)
         embedInfo.add_field(
             name="source code",
