@@ -82,6 +82,10 @@ class Configure:
         rgb = input("RGB (000 000 000): ")
         return rgb
 
+    def get_bot_channel():
+        bot_channel = input("Channel for bot status messages: ")
+        return bot_channel
+
     def get_local_ip():
         """Fetch local IP address.
 
@@ -165,7 +169,7 @@ class Configure:
         }
         config["Bot"] = {
             "discord_token": f"{(Configure.get_token())}",
-            #    "channel": f"{(Configure.get_channel_id())}",
+            "bot_channel": f"{(Configure.get_bot_channel())}",
             "delete_after": f"{Configure.get_deletion_time()}",
             "owner_id": f"{(Configure.get_owner_id())}",
         }

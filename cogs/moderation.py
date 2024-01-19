@@ -10,6 +10,7 @@ from harbinger import Harbinger
 
 DELETION_TIME = configs.delete_time()
 CUSTOM_COLOR = configs.custom_color()
+BOT_CHANNEL = configs.bot_channel()
 
 alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
@@ -19,6 +20,10 @@ class Moderation(commands.Cog):
 
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
+
+    async def get_bot_channel(self):
+        bot_channel = discord.Client.get_channel(self.bot, BOT_CHANNEL)
+        return bot_channel
 
     def caeser_cipher(key: int, message: str) -> str:
         """Encipher the given message with a Caeser shift.
@@ -238,8 +243,9 @@ class Moderation(commands.Cog):
             counter = 0
             filename = "log.txt"  # TODO: Make this part of the config.ini
             logfile = Path(filename)
+            channel = await self.get_bot_channel()
             await ctx.channel.purge(limit=1)
-            async with ctx.channel.typing():
+            async with channel.typing():
                 async for message in ctx.channel.history(limit=None):
                     if author != None:
                         if message.author == author:
@@ -249,7 +255,7 @@ class Moderation(commands.Cog):
                                 log.write(entry)
                                 counter += 1
                         else:
-                            await ctx.send(f"{author} not found in messages.")
+                            await channel.send(f"{author} not found in messages.")
                     elif author == None:
                         logfile = Path(filename)
                         entry = f"{counter+1} {message.created_at} - {message.author}: {message.content}\n"
@@ -260,7 +266,7 @@ class Moderation(commands.Cog):
                         await ctx.send(
                             f"ERROR: If you've received this message, please file a bug report.\n!bug <exact message you attempted to send>."
                         )
-            await ctx.send("Wrote logs.")
+            await channel.send("Wrote logs.")
         else:
             cmd_msg = "ERROR: Missing Admin role."
             await ctx.send("You must have Admin role to execute this command.")
@@ -278,11 +284,12 @@ class Moderation(commands.Cog):
             cmd_msg = f"Retrieved message history."
             counter = 0
             message_list = []
+            channel = await self.get_bot_channel()
             async for message in ctx.channel.history(limit=amount):
                 entry = f"{counter+1} {message.author}: {message.content}"
                 message_list.append(entry)
                 counter += 1
-            await ctx.send(message_list)
+            await channel.send(message_list)
         else:
             cmd_msg = f"ERROR: Missing Admin role."
             await ctx.send("You must have Admin role to execute this command.")
@@ -297,7 +304,7 @@ class Moderation(commands.Cog):
             owner = str(ctx.guild.owner)
             guild_id = str(ctx.guild.id)
             member_count = str(ctx.guild.member_count)
-            # icon = str(ctx.guild.icon_url)
+            channel = await self.get_bot_channel()
             desc = ctx.guild.description
 
             embed = discord.Embed(
@@ -309,7 +316,7 @@ class Moderation(commands.Cog):
             embed.add_field(name="Owner", value=f"{owner}", inline=True)
             embed.add_field(name="Server ID", value=guild_id, inline=True)
             embed.add_field(name="Member Count", value=member_count, inline=True)
-            await ctx.send(embed=embed)
+            await channel.send(embed=embed)
             members = []
             async for member in ctx.guild.fetch_members(limit=150):
                 members_embed = discord.Embed(
@@ -321,7 +328,7 @@ class Moderation(commands.Cog):
                     name="Member Since: ", value=f"{member.joined_at}"
                 )
                 members_embed.set_thumbnail(url=member.display_avatar.url)
-                await ctx.send(embed=members_embed)
+                await channel.send(embed=members_embed)
         else:
             cmd_msg = f"ERROR: Missing Admin role."
             await ctx.send("You must have Admin role to execute this command.")
