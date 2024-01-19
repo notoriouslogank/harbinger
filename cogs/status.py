@@ -1,4 +1,3 @@
-from curses.panel import bottom_panel
 import smtplib
 import sys
 from datetime import datetime
@@ -6,9 +5,8 @@ from email.message import EmailMessage
 from random import randint
 
 import discord
-from discord.ext import commands
-
 from config.read_configs import ReadConfigs as configs
+from discord.ext import commands
 from harbinger import Harbinger
 
 DEVELOPER_ROLE_ID = configs.developer_id()
