@@ -195,12 +195,18 @@ class Status(commands.Cog):
     async def shutdown(self, ctx: commands.Context) -> None:
         """Gracefully shutdown the bot."""
         cmd = "!shutdown"
+        timestamp = datetime.now()
         await ctx.channel.purge(limit=1)
         if Harbinger.bot.is_owner(ctx.message.author):
             cmd_msg = f"Shutting down..."
+            embedGooodbye = discord.Embed(
+                title="Harbinger is offline!",
+                description=f"Shutdown by {ctx.message.author} at {timestamp}.",
+                color=CUSTOM_COLOR,
+            )
             embedShutdown = discord.Embed(
                 title="Shutdown!",
-                description=f"Shutdown message recieved. Harbinger will shutdown in {DELETION_TIME} seconds!",
+                description=f"Shutdown message recieved. Harbinger will shutdown in 5 seconds!",
                 color=0xFF0000,
                 timestamp=datetime.now(),
             )
@@ -208,8 +214,8 @@ class Status(commands.Cog):
                 name="user", value=f"{ctx.message.author}", inline=True
             )
             message = await ctx.send(embed=embedShutdown)
-            sleep(DELETION_TIME)
-            await message.edit(f"Goodbye!")
+            sleep(5)
+            await message.edit(embed=embedGooodbye)
             sys.exit()
         else:
             cmd_msg = f"ERROR: Not bot owner."
