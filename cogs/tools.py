@@ -19,8 +19,13 @@ class Tools(commands.Cog):
 
     @commands.command()
     async def lmgtfy(self, ctx: commands.Context, *query: str) -> None:
-        """Let Me Google That For You"""
+        """Let me Google that for you.
+
+        Args:
+            query (str): Search query.
+        """
         cmd = f"!lmgtfy({query})"
+        await ctx.channel.purge(limit=1)
         google = "https://google.com/search?q="
         string_query = ""
         for word in query:
@@ -28,15 +33,14 @@ class Tools(commands.Cog):
         sanitized_query = string_query.replace(" ", "+")
         search = google + sanitized_query
         cmd_msg = f"URL: {search}"
+        await ctx.send("Here, let me just Google that for you...")
+        async with ctx.channel.typing():
+            await ctx.send(search)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-        await ctx.channel.purge(limit=1)
-        await ctx.send("Here, let me just Google that for you:")
-        await ctx.send(search)
-        await Harbinger.send_dm(ctx=ctx, member=ctx.message.author, content=search)
 
     @commands.command()
     async def define(self, ctx: commands.Context, word: str) -> None:
-        """Return an embedded definition and pronunciation guide for a given word.
+        """Get definition and pronunciation (if available) for given word.
 
         Args:
             word (str): Word to be defined
@@ -89,19 +93,26 @@ class Tools(commands.Cog):
         Args:
             member (discord.Member): Member to insult and @mention.
         """
+        cmd = f"!insult {member}"
+        await ctx.channel.purge(limit=1)
         async with aiohttp.ClientSession() as session:
             async with session.get(
                 f"https://evilinsult.com/generate_insult.php?lang=en&type=json"
             ) as resp:
                 insult_json = await resp.json()
-                await ctx.message.delete()
                 insult = str(insult_json["insult"])
+                cmd_msg = f"{insult}"
                 await ctx.send(f"{member.mention}: {insult}")
                 await session.close()
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
     async def add(self, ctx: commands.Context, *num: int) -> None:
-        """Adds two integers and returns result as message."""
+        """Adds an arbitrary number of integers and returns sum.
+
+        Args:
+            num (int): Any number of integers to sum.
+        """
         cmd = f"!add({num})"
         total = 0
         for i in num:
@@ -112,7 +123,13 @@ class Tools(commands.Cog):
 
     @commands.command()
     async def roll(self, ctx: commands.Context, dice: str) -> None:
-        """Roll NdN dice and get results."""
+        """Roll an arbitrary amount of n-sided dice.
+
+        Args:
+            dice (str): A string representing the dice to roll; must be in format xdy,
+                        where (x) is the amount of dice, (d) is a mandatory separator,
+                        and (y) is the 'sidedness' of the dice to roll.
+        """
         cmd = f"!roll({dice})"
         try:
             rolls, limit = map(int, dice.split("d"))
@@ -121,15 +138,18 @@ class Tools(commands.Cog):
             return
         result = ", ".join(str(randint(1, limit)) for r in range(rolls))
         cmd_msg = f"rolled {dice}; result: {result}"
-        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(f"{result}")
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
     async def rps(self, ctx: commands.Context, choice: str) -> None:
-        """Play rock, paper, scissors against the bot."""
+        """Play rock, paper, scissors against Harbinger.
+
+        Args:
+            choice (str): Which move to play (rock|paper|scissors)
+        """
         cmd = f"!rps(choice)"
         cmd_msg = f"choice: {choice}"
-        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         choices = ["rock", "paper", "scissors"]
         botChoice = choices[randint(0, 2)]
         embedRPS = discord.Embed(color=CUSTOM_COLOR, title="rock, paper, scissors")
@@ -152,6 +172,7 @@ class Tools(commands.Cog):
         else:
             embedRPS.add_field(name="result", value="You lose!", inline=False)
             await ctx.send(embed=embedRPS)
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
 
 async def setup(bot):
