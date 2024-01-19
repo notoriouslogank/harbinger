@@ -273,7 +273,7 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(
                 title="MUSIC COMMANDS",
                 description="Commands to control Harbinger's music playing capability.",
-                inline=False,
+                color=CUSTOM_COLOR,
             )
             for cmd in music_commands:
                 key, value = list(music_commands.items())[counter]
