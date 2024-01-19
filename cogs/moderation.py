@@ -90,7 +90,7 @@ class Moderation(commands.Cog):
             await ctx.send("Not a valid encoding schema.")
 
     @commands.command()
-    async def clear(self, ctx: commands.Context, amount: int = 2) -> None:
+    async def clear(self, ctx: commands.Context, amount: int = 1) -> None:
         """Delete a number of messages in channel."""
         await ctx.message.delete()
         has_role = await Moderation.check_role("Admin")
@@ -382,20 +382,20 @@ class Moderation(commands.Cog):
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     # ERRORS
-    @clear.error
-    async def clear_error(self, ctx, error) -> None:
-        """Error raised when !clear command fails
-
-        Args:
-            error (MissingRole): Raised if user does not have developer role.
-        """
-        cmd = f"ERROR: ClearError"
-        cmd_msg = f"User does not have mod role."
-        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-        message = await ctx.send("You must be a moderator to do that!")
-        await ctx.message.delete()
-        if isinstance(error, commands.MissingRole):
-            await message.edit(delete_after=DELETION_TIME)
+    #    @clear.error
+    #    async def clear_error(self, ctx, error) -> None:
+    #        """Error raised when !clear command fails
+    #
+    #        Args:
+    #            error (MissingRole): Raised if user does not have developer role.
+    #        """
+    #        cmd = f"ERROR: ClearError"
+    #        cmd_msg = f"User does not have mod role."
+    #        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+    #        message = await ctx.send("You must be a moderator to do that!")
+    #        await ctx.message.delete()
+    #        if isinstance(error, commands.MissingRole):
+    #            await message.edit(delete_after=DELETION_TIME)
 
     @say.error
     async def say_error(self, ctx, error) -> None:
