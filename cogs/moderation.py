@@ -355,7 +355,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     async def playing(
-        self, ctx: commands.Context, game, description, field, value
+        self, ctx: commands.Context, game, description, field=None, value=None
     ) -> None:
         """Create game info embed."""
         cmd = f"!playing({game}, {field}, {value})"
