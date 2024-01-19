@@ -77,6 +77,11 @@ class HelpCommand(commands.Cog):
         master_commands_list.sort()
         return master_commands_list
 
+    def categories_list():
+        categories = ["moderation", "bot", "misc", "music"]
+        categories.sort()
+        return categories
+
     @commands.command()
     async def help(self, ctx, *, command=None) -> None:
         """Get help information about a given command or cog.
@@ -85,8 +90,6 @@ class HelpCommand(commands.Cog):
             command (str, optional): Command or category (cog) to get help for. Defaults to None.
         """
 
-        categories = ["moderation", "bot", "music", "misc"]
-        categories = categories.sort()
         # USAGE
         u_ask = {
             "Usage": "``!ask <question>``",
@@ -219,7 +222,9 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="COMMAND CATEGORIES", value=f"{categories}", inline=False
+                name="COMMAND CATEGORIES",
+                value=f"{HelpCommand.categories_list()}",
+                inline=False,
             )
             embed.add_field(
                 name="ALL COMMANDS", value=f"{HelpCommand.command_list()}", inline=False
