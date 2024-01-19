@@ -4,6 +4,8 @@ from discord.ext import commands
 from harbinger import Harbinger
 
 CUSTOM_COLOR = configs.custom_color()
+MODERATOR = configs.moderator_id()
+DEVELOPER = configs.developer_id()
 
 moderation_commands = {
     "clear": "Delete a given number of messages.",
@@ -235,6 +237,7 @@ class HelpCommand(commands.Cog):
             await ctx.send(embed=embed)
         # CATEGORIES
         if command == "moderation":
+            role = discord.Guild.get_role(MODERATOR)
             embed = discord.Embed(
                 title="MODERATION COMMANDS",
                 description="Commands for server moderation.",
@@ -249,10 +252,11 @@ class HelpCommand(commands.Cog):
                 )
                 counter += 1
                 embed.set_footer(
-                    text="*You must have Admin role or above to excecute these commands*"
+                    text=f"You must have {role} role or above to excecute these commands."
                 )
             await ctx.send(embed=embed)
         if command == "bot":
+            role = discord.Guild.get_role(DEVELOPER)
             embed = discord.Embed(
                 title="BOT COMMANDS",
                 description="Commands for maintaining the Harbinger instance.",
@@ -267,7 +271,7 @@ class HelpCommand(commands.Cog):
                 )
                 counter += 1
                 embed.set_footer(
-                    text="*You must have developer role or above to execute these commands.*"
+                    text=f"You must have {role} role or above to execute these commands."
                 )
             await ctx.send(embed=embed)
         if command == "music":
