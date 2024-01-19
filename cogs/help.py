@@ -62,10 +62,17 @@ misc_commands = {
 
 
 class HelpCommand(commands.Cog):
+    """Class for generating help information."""
+
     def __init__(self, bot):
         self.bot = bot
 
-    def command_list():
+    def command_list() -> list:
+        """Create master list of all bot commands.
+
+        Returns:
+            list: Alphebetical list of all supported bot commands.
+        """
         master_commands_list = []
         for cmd in moderation_commands:
             master_commands_list.append(cmd)
@@ -78,7 +85,12 @@ class HelpCommand(commands.Cog):
         master_commands_list.sort()
         return master_commands_list
 
-    def categories_list():
+    def categories_list() -> list:
+        """Create list of command categories.
+
+        Returns:
+            list: List of command categories.
+        """
         categories = ["moderation", "bot", "misc", "music"]
         categories.sort()
         return categories
@@ -544,6 +556,7 @@ class HelpCommand(commands.Cog):
                 name="__Usage__", value=f"{u_shutdown['__Usage__']}", inline=False
             )
             embed.add_field(name="__Args__", value=f'{u_shutdown["__Args__"]}')
+            embed.set_footer(text=f"Only the bot owner can perform this action.")
             await ctx.send(embed=embed)
         # MUSIC
         if command == "join":
