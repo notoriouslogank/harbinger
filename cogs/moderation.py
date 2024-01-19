@@ -56,7 +56,7 @@ class Moderation(commands.Cog):
     @commands.command()
     async def decrypt(self, ctx: commands.Context, code, key, *, message):
         cmd = f"!decrypt {code} {key} {message}"
-        await ctx.channel.purge(1)
+        await ctx.channel.purge(limit=1)
         if Moderation.is_admin(self, ctx, ctx.message.author) == True:
             cmd_msg = f"Decrypted {code}-encoded message."
             if code == "b64":
@@ -117,7 +117,7 @@ class Moderation(commands.Cog):
     async def whisper(self, ctx, member: discord.Member, *, content) -> None:
         """Send a Direct Message to a member as Harbinger."""
         cmd = f"!whisper({member})"
-        await ctx.channel.purge(1)
+        await ctx.channel.purge(limit=1)
         if Moderation.is_admin(self, ctx, ctx.message.author) == True:
             cmd_msg = f"Whispered: {content}"
             channel = await member.create_dm()
@@ -192,7 +192,7 @@ class Moderation(commands.Cog):
     @commands.command()
     async def log(self, ctx: commands.Context, author: discord.Member = None):
         cmd = f"!log {author}"
-        await ctx.channel.purge(1)
+        await ctx.channel.purge(limit=1)
         if Moderation.is_admin(self, ctx, ctx.message.author) == True:
             cmd_msg = "Wrote to log.txt"
             counter = 0
@@ -287,7 +287,7 @@ class Moderation(commands.Cog):
         Args:
             member (discord.Member): Member to get info for (must be exact)
         """
-        await ctx.channel.purge(1)
+        await ctx.channel.purge(limit=1)
         cmd = "!whois"
         if Moderation.is_admin(self, ctx, ctx.message.author) == True:
             cmd_msg = f"Got whois info for {member}."
