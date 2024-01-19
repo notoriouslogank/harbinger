@@ -55,7 +55,7 @@ class Harbinger:
     def timestamp(user, cmd, cmd_msg) -> None:
         """Print timestamp and end-of-command separator."""
         current_time = datetime.now()
-        print(f"++++\n{current_time}\nUSR| {user}\nCMD| {cmd}\nMSG| {cmd_msg}\n++++")
+        print(f"++++\n{current_time}\nUSR| {user}\nCMD| {cmd}\nMSG| {cmd_msg}")
 
     def start() -> None:
         """Start the bot."""

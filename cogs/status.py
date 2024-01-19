@@ -101,7 +101,8 @@ class Status(commands.Cog):
         username = str(ctx.author)
         user_message = str(ctx.content)
         channel = str(ctx.channel)
-        print(f"{channel} || {username}: {user_message}")
+        timestamp = datetime.now()
+        print(f"++++\n{timestamp}\n{channel} || {username}: {user_message}")
 
     @commands.command()
     async def up(self, ctx: commands.Context) -> None:
