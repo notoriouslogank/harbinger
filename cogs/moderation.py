@@ -11,6 +11,8 @@ from harbinger import Harbinger
 DELETION_TIME = configs.delete_time()
 CUSTOM_COLOR = configs.custom_color()
 
+alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
 
 class Moderation(commands.Cog):
     """Server moderation commands."""
@@ -18,9 +20,17 @@ class Moderation(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
-    def caeser_cipsend_dher(key, message):
+    def caeser_cipher(key: int, message: str) -> str:
+        """Encipher the given message with a Caeser shift.
+
+        Args:
+            key (int): Amount to shift
+            message (str): Message to encode
+
+        Returns:
+            str: Encoded message
+        """
         message = message.upper()
-        alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         result = ""
 
         for letter in message:
@@ -31,9 +41,17 @@ class Moderation(commands.Cog):
                 result = result + letter
         return result
 
-    def caeser_decipher(key, message):
+    def caeser_decipher(key: int, message: str) -> str:
+        """Decipher given Caser-shifted messge.
+
+        Args:
+            key (int): Amount to shift
+            message (str): Message to decode
+
+        Returns:
+            str: Decoded message
+        """
         message = message.upper()
-        alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         result = ""
 
         for letter in message:
@@ -45,7 +63,16 @@ class Moderation(commands.Cog):
         return result
 
     @commands.command()
-    async def decrypt(self, ctx: commands.Context, code, key, *, message):
+    async def decrypt(
+        self, ctx: commands.Context, code: str, key: int, *, message: str
+    ):
+        """Decrypt the given message.
+
+        Args
+            code (str): Encoding schema to use for decoding
+            key (int): Amount to shift (if Caeser cipher)
+            message (str): _description_
+        """
         cmd = f"!decrypt {code} {key} {message}"
         await ctx.channel.purge(limit=1)
         if Harbinger.is_admin(self, ctx, ctx.message.author) == True:
@@ -82,6 +109,8 @@ class Moderation(commands.Cog):
                 )
             else:
                 await ctx.send("Not a valid encoding schema.")
+            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+
         else:
             cmd_msg = "ERROR: Missing Admin role."
             await ctx.send("You must have Admin role to execute this command.")
@@ -89,7 +118,11 @@ class Moderation(commands.Cog):
 
     @commands.command()
     async def clear(self, ctx: commands.Context, amount: int = 1) -> None:
-        """Delete a number of messages in channel."""
+        """Delete given number of messages from channel.
+
+        Args
+            amount (int, optional): Number of messages to delete. Defaults to 1.
+        """
         cmd = f"!clear {amount}"
         await ctx.message.delete()
         if Harbinger.is_admin(self, ctx, ctx.message.author) == True:
@@ -105,14 +138,19 @@ class Moderation(commands.Cog):
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
 
     @commands.command()
-    async def whisper(self, ctx, member: discord.Member, *, content) -> None:
-        """Send a Direct Message to a member as Harbinger."""
+    async def whisper(self, ctx, member: discord.Member, *, message: str) -> None:
+        """Send a DM to given user as Harbinger.
+
+        Args:
+            member (discord.Member): User to send DM to
+            message (str): Message to send
+        """
         cmd = f"!whisper({member})"
         await ctx.channel.purge(limit=1)
         if Harbinger.is_admin(self, ctx, ctx.message.author) == True:
-            cmd_msg = f"Whispered: {content}"
+            cmd_msg = f"Whispered: {message}"
             channel = await member.create_dm()
-            await channel.send(content)
+            await channel.send(message)
         else:
             cmd_msg = f"ERROR: Missing Admin role."
             await ctx.send(f"You must have Admin role to execute this command.")
@@ -120,13 +158,19 @@ class Moderation(commands.Cog):
 
     @commands.command()
     async def code_whisper(
-        self, ctx: commands.Context, code, member: discord.Member, *, content
+        self, ctx: commands.Context, code: str, member: discord.Member, *, message: str
     ) -> None:
-        """Send an encoded DM to a given member as Harbinger."""
-        cmd = f"!whisper({member})"
+        """Send encoded message in DM to given user as Harbinger.
+
+        Args:
+            code (str): Encoding schema to encrypt message (bin|b64|csr|hex)
+            member (discord.Member): User to DM
+            message (str): Message to encrypt and send
+        """
+        cmd = f"!code_whisper {code}{member}{message}"
         await ctx.channel.purge(limit=1)
         if Harbinger.is_admin(self, ctx, ctx.message.author) == True:
-            cmd_msg = f"Whispered: {content}"
+            cmd_msg = f"Whispered: {message}"
             recipient = await member.create_dm()
             sender = await ctx.message.author.create_dm()
             embed = discord.Embed(
@@ -136,13 +180,13 @@ class Moderation(commands.Cog):
             )
             if code == "bin":
                 binary_message = "".join(
-                    format(i, "08b") for i in bytearray(content, encoding="utf-8")
+                    format(i, "08b") for i in bytearray(message, encoding="utf-8")
                 )
                 embed.add_field(name="Message", value=f"**``{binary_message}``**")
                 await recipient.send(embed=embed)
             elif code == "csr":
                 key = random.randint(1, 26)
-                caeser_message = Moderation.caeser_cipher(key, content)
+                caeser_message = Moderation.caeser_cipher(key, message)
                 caeser_key_embed = discord.Embed(
                     title="Caeser Cipher Key",
                     description="You will need to provide this key to your recipient for him/her to decode your message!",
@@ -162,11 +206,11 @@ class Moderation(commands.Cog):
                 await recipient.send(embed=embed)
                 await sender.send(embed=caeser_key_embed)
             elif code == "hex":
-                hex_message = content.encode("utf-8").hex()
+                hex_message = message.encode("utf-8").hex()
                 embed.add_field(name="Message", value=f"**``{hex_message}``**")
                 await recipient.send(embed=embed)
             elif code == "b64":
-                content_bytes = content.encode("ascii")
+                content_bytes = message.encode("ascii")
                 base64_bytes = base64.b64encode(content_bytes)
                 base64_message = str(base64_bytes, encoding="utf-8")
                 embed.add_field(name="Message", value=f"**``{base64_message}``**")
@@ -182,6 +226,11 @@ class Moderation(commands.Cog):
 
     @commands.command()
     async def log(self, ctx: commands.Context, author: discord.Member = None):
+        """Write channel history to log.txt file.
+
+        Args:
+            author (discord.Member, optional): User whose message history should be pulled. Defaults to None.
+        """
         cmd = f"!log {author}"
         await ctx.channel.purge(limit=1)
         if Harbinger.is_admin(self, ctx, ctx.message.author) == True:
@@ -208,7 +257,9 @@ class Moderation(commands.Cog):
                             log.write(entry)
                             counter += 1
                     else:
-                        await ctx.send(f"Hm, something seems to have gone wrong...")
+                        await ctx.send(
+                            f"ERROR: If you've received this message, please file a bug report.\n!bug <exact message you attempted to send>."
+                        )
             await ctx.send("Wrote logs.")
         else:
             cmd_msg = "ERROR: Missing Admin role."
@@ -217,6 +268,11 @@ class Moderation(commands.Cog):
 
     @commands.command()
     async def history(self, ctx: commands.Context, amount: int):
+        """Retrieve a number of messages from the channel history.
+
+        Args:
+            amount (int): Number of messages to retrieve
+        """
         cmd = f"!history {amount}"
         if Harbinger.is_admin(self, ctx, ctx.message.author) == True:
             cmd_msg = f"Retrieved message history."
@@ -299,14 +355,20 @@ class Moderation(commands.Cog):
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
-    async def code_say(self, ctx: commands.Context, code, *, content) -> None:
+    async def code_say(self, ctx: commands.Context, code: str, *, message: str) -> None:
+        """Send an encrypted message to the channel as Harbinger.
+
+        Args:
+            code (str): Encoding schema to use (bin|b64|csr|hex).
+            message (str): Message to encrypt.
+        """
         cmd = f"!code_say {code}"
         if Harbinger.is_admin(self, ctx, ctx.message.author) == True:
-            cmd_msg = f"{content}"
+            cmd_msg = f"{message}"
             await ctx.channel.purge(limit=1)
             if code == "bin":
                 binary_message = "".join(
-                    format(i, "08b") for i in bytearray(content, encoding="utf-8")
+                    format(i, "08b") for i in bytearray(message, encoding="utf-8")
                 )
                 embed = discord.Embed(
                     title="Ecrypted Transmission",
@@ -317,7 +379,7 @@ class Moderation(commands.Cog):
             elif code == "csr":
                 sender = await ctx.author.create_dm()
                 key = random.randint(1, 26)
-                caeser_message = Moderation.caeser_cipher(key, content)
+                caeser_message = Moderation.caeser_cipher(key, message)
                 caeser_key_embed = discord.Embed(
                     title="Caeser Cipher Key",
                     description="You will need to provide this key to your recipient for him/her to decode your message!",
@@ -338,7 +400,7 @@ class Moderation(commands.Cog):
                 await ctx.send(embed=embed)
                 await sender.send(embed=caeser_key_embed)
             elif code == "hex":
-                hex_message = content.encode("utf-8").hex()
+                hex_message = message.encode("utf-8").hex()
                 embed = discord.Embed(
                     title="Ecrypted Transmission",
                     description=f"**``{hex_message}``**",
@@ -346,7 +408,7 @@ class Moderation(commands.Cog):
                 )
                 await ctx.send(embed=embed)
             elif code == "b64":
-                content_bytes = content.encode("ascii")
+                content_bytes = message.encode("ascii")
                 base64_bytes = base64.b64encode(content_bytes)
                 base64_message = str(base64_bytes, encoding="utf-8")
                 embed = discord.Embed(
@@ -362,10 +424,10 @@ class Moderation(commands.Cog):
 
     @commands.command()
     async def say(self, ctx: commands.Context, *message: str) -> None:
-        """Send a message as the bot.
+        """Send a message as Harbinger.
 
         Args:
-            message (str): Message to send as the bot
+            message (str): Message to send
         """
         cmd = f"!say({message})"
         await ctx.channel.purge(limit=1)
@@ -383,8 +445,21 @@ class Moderation(commands.Cog):
 
     @commands.command()
     async def embed(
-        self, ctx: commands.Context, title=None, description=None, image=None, url=None
+        self,
+        ctx: commands.Context,
+        title: str = None,
+        description: str = None,
+        image: str = None,
+        url: str = None,
     ):
+        """Send an embed to the channel as Harbinger.
+
+        Args:
+            title (str, optional): Title of the embed. Defaults to None.
+            description (str, optional): Description of embed. Defaults to None.
+            image (str, optional): Image to embed (must be https url). Defaults to None.
+            url (str, optional): url to link (must be https). Defaults to None.
+        """
         await ctx.channel.purge(limit=1)
         cmd = f"!embed {title},{description},{image},{url}"
         if Harbinger.is_admin(self, ctx, ctx.message.author) == True:
@@ -401,9 +476,21 @@ class Moderation(commands.Cog):
 
     @commands.command()
     async def playing(
-        self, ctx: commands.Context, game, description, field=None, value=None
+        self,
+        ctx: commands.Context,
+        game: str,
+        description: str = None,
+        field=None,
+        value=None,
     ) -> None:
-        """Create game info embed."""
+        """Send an embed to the channel as Harbinger, intended to aid sharing server IPs, room codes, etc.
+
+        Args:
+            game (str): Name of game
+            description (str, optional): Further info
+            field (any, optional): Title of optional field. Defaults to None.
+            value (any, optional): Value of optional field. Defaults to None.
+        """
         cmd = f"!playing({game}, {field}, {value})"
         if Harbinger.is_admin(self, ctx, ctx.message.author) == True:
             cmd_msg = f"Created playing embed with these values: {game},{field},{value}"
@@ -414,68 +501,6 @@ class Moderation(commands.Cog):
             cmd_msg = f"ERROR: Missing Admin role."
             await ctx.send("You must have Admin role to execute this command.")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-
-    # ERRORS
-    #    @clear.error
-    #    async def clear_error(self, ctx, error) -> None:
-    #        """Error raised when !clear command fails
-    #
-    #        Args:
-    #            error (MissingRole): Raised if user does not have developer role.
-    #        """
-    #        cmd = f"ERROR: ClearError"
-    #        cmd_msg = f"User does not have mod role."
-    #        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-    #        message = await ctx.send("You must be a moderator to do that!")
-    #        await ctx.message.delete()
-    #        if isinstance(error, commands.MissingRole):
-    #            await message.edit(delete_after=DELETION_TIME)
-
-
-#    @say.error
-#    async def say_error(self, ctx, error) -> None:
-#        """Error raised when !say command fails
-#
-#        Args:
-#            error (MissingRole): Raised if user does not have developer role.
-#        """
-#        cmd = f"ERROR: SayError"
-#        cmd_msg = f"User does not have mod role."
-#        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-#        message = await ctx.send("You must be a moderator to do that!")
-#        await ctx.message.delete()
-#        if isinstance(error, commands.MissingRole):
-#            await message.edit(delete_after=DELETION_TIME)
-#
-#    @whois.error
-#    async def whois_error(self, ctx, error) -> None:
-#        """Error raised when !whois command fails
-#
-#        Args:
-#            error (MissingRole): Raised if user does not have developer role.
-#        """
-#        cmd = f"ERROR: WhoisError"
-#        cmd_msg = f"User does not have mod role."
-#        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-#        message = await ctx.send("You must be a moderator to do that!")
-#        await ctx.message.delete()
-#        if isinstance(error, commands.MissingRole):
-#            await message.edit(delete_after=DELETION_TIME)
-#
-#    @serverinfo.error
-#    async def serverinfo_error(self, ctx, error) -> None:
-#        """Error raised when !serverinfo command fails
-#
-#        Args:
-#            error (MissingRole): Raised if user does not have developer role.
-#        """
-#        cmd = f"ERROR: ServerinfoError"
-#        cmd_msg = f"User does not have mod role."
-#        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-#        message = await ctx.send("You must be a moderator to do that!")
-#        await ctx.message.delete()
-#        if isinstance(error, commands.MissingRole):
-#            await message.edit(delete_after=DELETION_TIME)
 
 
 async def setup(bot):
