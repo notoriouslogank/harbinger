@@ -92,7 +92,6 @@ class HelpCommand(commands.Cog):
         ]
         for i in command_lists:
             dict(sorted(i.items()))
-        return
 
     @commands.command()
     async def help(self, ctx, *, command=None) -> None:
