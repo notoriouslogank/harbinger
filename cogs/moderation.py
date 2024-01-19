@@ -47,7 +47,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     async def test(self, ctx: commands.Context):
-        for role in ctx.member.roles:
+        for role in ctx.author.roles:
             if role.name != "Admin":
                 await ctx.send("Not Admin")
             else:
