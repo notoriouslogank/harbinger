@@ -154,6 +154,7 @@ class Dev(commands.Cog):
 
     @commands.command()
     async def update(self, ctx):
+        """Performs a git pull against the Harbinger repository."""
         cmd = "!update"
         await ctx.channel.purge(limit=1)
         if Harbinger.is_dev(self, ctx, ctx.message.author) == True:
