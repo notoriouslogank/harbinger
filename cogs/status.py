@@ -147,7 +147,7 @@ class Status(commands.Cog):
         ping = (round(self.bot.latency, 2)) * 1000
         cmd = f"!ping"
         cmd_msg = "Pong!"
-        channel = self.get_bot_channel()
+        channel = await self.get_bot_channel()
         message = await channel.send(f"Pong! ({ping} ms)")
         await message.edit(delete_after=DELETION_TIME)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
