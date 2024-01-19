@@ -219,7 +219,7 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="COMMAND CATEGORIES", value=f"{categories}", inline=False
+                name="COMMAND CATEGORIES", value=f"{categories.sort()}", inline=False
             )
             embed.add_field(
                 name="ALL COMMANDS", value=f"{HelpCommand.command_list()}", inline=False
