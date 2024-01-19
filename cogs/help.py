@@ -224,11 +224,13 @@ class HelpCommand(commands.Cog):
             )
             embed.add_field(
                 name="COMMAND CATEGORIES",
-                value=f"{HelpCommand.categories_list()}",
+                value=f"{','.join(HelpCommand.categories_list())}",
                 inline=False,
             )
             embed.add_field(
-                name="ALL COMMANDS", value=f"{HelpCommand.command_list()}", inline=False
+                name="ALL COMMANDS",
+                value=f"{','.join(HelpCommand.command_list())}",
+                inline=False,
             )
             await ctx.send(embed=embed)
         # CATEGORIES
