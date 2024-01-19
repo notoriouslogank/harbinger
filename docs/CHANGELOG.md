@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [3.4.0] - 2023-18-01
 
+### Help Command Rewrite
+
+- Completely rewrote module
+- *All* commands now accounted for
+- Reorganized output (embeds)
+
 ### Added
 
 - All messages sent in channels to which the bot is subscribed now print to the console in real time
