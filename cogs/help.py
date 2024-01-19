@@ -93,142 +93,142 @@ class HelpCommand(commands.Cog):
         counter = 0
         # USAGE
         u_ask = {
-            "Usage": "``!ask <question>``",
-            "Args": "**question (str)**: Question to ask Harbinger [must end in ``?``].",
+            "__Usage__": "``!ask <question>``",
+            "__Args__": "**question (str)**: Question to ask Harbinger [must end in ``?``].",
         }
         u_embed = {
-            "Usage": "``!embed <title> <description> <image> <url>``",
-            "Args": "**title (str)**: Title of embed.[Optional]\n**description (str)**: Description of embed. [Optional]\n**image (url)**: Image to upload.\n**url (url)**: url to embed (must he *https*)",
+            "__Usage__": "``!embed <title> <description> <image> <url>``",
+            "__Args__": "**title (str)**: Title of embed.[Optional]\n**description (str)**: Description of embed. [Optional]\n**image (url)**: Image to upload.\n**url (url)**: url to embed (must he *https*)",
         }
         u_playing = {
-            "Usage": "``!playing <game> <description> <field> <value>``",
-            "Args": "**game (str)**: Name of game (title of embed).\n**description (str)**: Further info\n**field (str)**: Additional info field. [Optional]\n**value (str)**: Value for *field*.[Optional]",
+            "__Usage__": "``!playing <game> <description> <field> <value>``",
+            "__Args__": "**game (str)**: Name of game (title of embed).\n**description (str)**: Further info\n**field (str)**: Additional info field. [Optional]\n**value (str)**: Value for *field*.[Optional]",
         }
         u_switch = {
-            "Usage": "``!switch <state>``",
-            "Args": "**state (on|off)**: Default value is ``on``; pass ``'off'`` to turn server off.",
+            "__Usage__": "``!switch <state>``",
+            "__Args__": "**state (on|off)**: Default value is ``on``; pass ``'off'`` to turn server off.",
         }
         u_mccmd = {
-            "Usage": "``!mccmd <command>``",
-            "Args": "**command <str>**: Command to send to the Minecraft server.",
+            "__Usage__": "``!mccmd <command>``",
+            "__Args__": "**command <str>**: Command to send to the Minecraft server.",
         }
         u_note = {
-            "Usage": "``!note <message>``",
-            "Args": "**message (str)**: Message to add to user's notes file.",
+            "__Usage__": "``!note <message>``",
+            "__Args__": "**message (str)**: Message to add to user's notes file.",
         }
-        u_notes = {"Usage": "``!notes``", "Args": "[None]"}
-        u_cnote = {"Usage": "``!cnote``", "Args": "[None]"}
+        u_notes = {"__Usage__": "``!notes``", "__Args__": "[None]"}
+        u_cnote = {"__Usage__": "``!cnote``", "__Args__": "[None]"}
         u_lmgtfy = {
-            "Usage": "``!lmgtfy <query>``",
-            "Args": "**query (str)**: Search query.",
+            "__Usage__": "``!lmgtfy <query>``",
+            "__Args__": "**query (str)**: Search query.",
         }
         u_define = {
-            "Usage": "``!define <word>``",
-            "Args": "**word (str)**: Word to define.",
+            "__Usage__": "``!define <word>``",
+            "__Args__": "**word (str)**: Word to define.",
         }
         u_insult = {
-            "Usage": "``!insult <user>``",
-            "Args": "**user (discord.Member)**: Discord member to insutl (creates ``@mention``)",
+            "__Usage__": "``!insult <user>``",
+            "__Args__": "**user (discord.Member)**: Discord member to insutl (creates ``@mention``)",
         }
         u_add = {
-            "Usage": "``!add <number(s)>``",
-            "Args": "**number(s) (int)**: The value(s) to be summed; may be any number of integers.",
+            "__Usage__": "``!add <number(s)>``",
+            "__Args__": "**number(s) (int)**: The value(s) to be summed; may be any number of integers.",
         }
         u_roll = {
-            "Usage": "``!roll <x>d<y>``",
-            "Args": "**x (int)**: Quantity of dice to roll\n**y (int)**: The die to roll (eg d6, d20)",
+            "__Usage__": "``!roll <x>d<y>``",
+            "__Args__": "**x (int)**: Quantity of dice to roll\n**y (int)**: The die to roll (eg d6, d20)",
         }
         u_rps = {
-            "Usage": "``!rps <choice>``",
-            "Args": "**choice (rock|paper|scissors)**: What to play against Harbinger.",
+            "__Usage__": "``!rps <choice>``",
+            "__Args__": "**choice (rock|paper|scissors)**: What to play against Harbinger.",
         }
-        u_join = {"Usage": "``!join``", "Args": "[None]"}
-        u_leave = {"Usage": "``!leave``", "Args": "[None]"}
-        u_pause = {"Usage": "``!pause``", "Args": "[None]"}
+        u_join = {"__Usage__": "``!join``", "__Args__": "[None]"}
+        u_leave = {"__Usage__": "``!leave``", "__Args__": "[None]"}
+        u_pause = {"__Usage__": "``!pause``", "__Args__": "[None]"}
         u_play = {
-            "Usage": "``!play <url>``",
-            "Args": "**url**: url to stream from (must be ``https``)",
+            "__Usage__": "``!play <url>``",
+            "__Args__": "**url**: url to stream from (must be ``https``)",
         }
-        u_stop = {"Usage": "``!stop``", "Args": "[None]"}
+        u_stop = {"__Usage__": "``!stop``", "__Args__": "[None]"}
         u_stream = {
-            "Usage": "``!stream <url>``",
-            "Args": "**url**: url to stream from (must be ``https``)",
+            "__Usage__": "``!stream <url>``",
+            "__Args__": "**url**: url to stream from (must be ``https``)",
         }
-        u_reload_all = {"Usage": "``!reload_all``", "Args": "[None]"}
+        u_reload_all = {"__Usage__": "``!reload_all``", "__Args__": "[None]"}
 
         u_load_cog = {
-            "Usage": "``!load_cog <cog>``",
-            "Args": "**cog (str)**: Name of cog to load.",
+            "__Usage__": "``!load_cog <cog>``",
+            "__Args__": "**cog (str)**: Name of cog to load.",
         }
         u_unload_cog = {
-            "Usage": "``!unload_cog <cog>``",
-            "Args": "**cog (str)**: Name of cog to unload.",
+            "__Usage__": "``!unload_cog <cog>``",
+            "__Args__": "**cog (str)**: Name of cog to unload.",
         }
         u_reload_cog = {
-            "Usage": "``!reload_cog <cog>``",
-            "Args": "**cog (str)**: Name of cog to reload.",
+            "__Usage__": "``!reload_cog <cog>``",
+            "__Args__": "**cog (str)**: Name of cog to reload.",
         }
-        u_update = {"Usage": "``!update``", "Args": "[None]"}
-        u_up = {"Usage": "``!up``", "Args": "[None]"}
-        u_info = {"Usage": "``!info``", "Args": "[None]"}
-        u_ping = {"Usage": "``!ping``", "Args": "[None]"}
-        u_uptime = {"Usage": "``!uptime``", "Args": "[None]"}
-        u_changelog = {"Usage": "``!changelog``", "Args": "[None]"}
+        u_update = {"__Usage__": "``!update``", "__Args__": "[None]"}
+        u_up = {"__Usage__": "``!up``", "__Args__": "[None]"}
+        u_info = {"__Usage__": "``!info``", "__Args__": "[None]"}
+        u_ping = {"__Usage__": "``!ping``", "__Args__": "[None]"}
+        u_uptime = {"__Usage__": "``!uptime``", "__Args__": "[None]"}
+        u_changelog = {"__Usage__": "``!changelog``", "__Args__": "[None]"}
         u_bug = {
-            "Usage": "``!bug <message>``",
-            "Args": "**message (str)**: Content of the bug report.",
+            "__Usage__": "``!bug <message>``",
+            "__Args__": "**message (str)**: Content of the bug report.",
         }
-        u_shutdown = {"Usage": "``!shutdown``", "Args": "[None]"}
+        u_shutdown = {"__Usage__": "``!shutdown``", "__Args__": "[None]"}
         u_clear = {
-            "Usage": "``!clear <amount>``",
-            "Args": "**amount (int)**: Number of messages to delete.",
+            "__Usage__": "``!clear <amount>``",
+            "__Args__": "**amount (int)**: Number of messages to delete.",
         }
         u_history = {
-            "Usage": "``!history <amount>``",
-            "Args": "**amount (int)**: Number of messages to show.",
+            "__Usage__": "``!history <amount>``",
+            "__Args__": "**amount (int)**: Number of messages to show.",
         }
         u_serverinfo = {
-            "Usage": "``!serverinfo``",
-            "Args": "[None]",
+            "__Usage__": "``!serverinfo``",
+            "__Args__": "[None]",
         }
         u_whois = {
-            "Usage": "``!whois <user>``",
-            "Args": "**user (discord.Member)**: User name to get information about.",
+            "__Usage__": "``!whois <user>``",
+            "__Args__": "**user (discord.Member)**: User name to get information about.",
         }
         u_whisper = {
-            "Usage": "``!whisper <user> <message>``",
-            "Args": "**user (discord.Member)**: User to send DM to.\n**message (str): Message to send.",
+            "__Usage__": "``!whisper <user> <message>``",
+            "__Args__": "**user (discord.Member)**: User to send DM to.\n**message (str): Message to send.",
         }
         u_code_whisper = {
-            "Usage": "``!code_whisper <encoding> <user> <message>``",
-            "Args": "**encoding (bin|csr|hex|b64)**: Encoding schema to use.\n**user (discord.Member)**: User to DM.\n**message (str)**: Message to send.",
+            "__Usage__": "``!code_whisper <encoding> <user> <message>``",
+            "__Args__": "**encoding (bin|csr|hex|b64)**: Encoding schema to use.\n**user (discord.Member)**: User to DM.\n**message (str)**: Message to send.",
         }
         u_log = {
-            "Usage": "``!log <author>``",
-            "Args": "**author (discord.Member)**: User name to fetch messages for; leave blank to retrieve *all* messages.",
+            "__Usage__": "``!log <author>``",
+            "__Args__": "**author (discord.Member)**: User name to fetch messages for; leave blank to retrieve *all* messages.",
         }
         u_code_say = {
-            "Usage": "``!code_say <encoding> <message>``",
-            "Args": "**encoding (bin|csr|hex|b64)**: Encoding schema to use for message (binary, Caeser cipher, hex, base64).\n**message (str)**: Message to encode.",
+            "__Usage__": "``!code_say <encoding> <message>``",
+            "__Args__": "**encoding (bin|csr|hex|b64)**: Encoding schema to use for message (binary, Caeser cipher, hex, base64).\n**message (str)**: Message to encode.",
         }
         u_say = {
-            "Usage": "``!say <message>``",
-            "Args": "**message (str)**: Message to send.",
+            "__Usage__": "``!say <message>``",
+            "__Args__": "**message (str)**: Message to send.",
         }
         # GENERAL
         if command == None:
             embed = discord.Embed(
-                title="HELP!",
+                title="__HELP!__",
                 description="Further information about supported bot commands.",
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="COMMAND CATEGORIES",
+                name="__COMMAND CATEGORIES__",
                 value=f"{' '.join(HelpCommand.categories_list())}",
                 inline=False,
             )
             embed.add_field(
-                name="ALL COMMANDS",
+                name="__ALL COMMANDS__",
                 value=f"{' '.join(HelpCommand.command_list())}",
                 inline=False,
             )
@@ -313,8 +313,10 @@ class HelpCommand(commands.Cog):
                 description=f"{moderation_commands['history']}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_history['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f"{u_history['Args']}", inline=False)
+            embed.add_field(
+                name="__Usage__", value=f"{u_history['Usage']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f"{u_history['Args']}", inline=False)
             await ctx.send(embed=embed)
         if command == "clear":
             embed = discord.Embed(
@@ -322,8 +324,8 @@ class HelpCommand(commands.Cog):
                 description=f"{moderation_commands['clear']}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_clear['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f'{u_clear["Args"]}')
+            embed.add_field(name="__Usage__", value=f"{u_clear['Usage']}", inline=False)
+            embed.add_field(name="__Args__", value=f'{u_clear["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "serverinfo":
             embed = discord.Embed(
@@ -332,9 +334,9 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="Usage", value=f"{u_serverinfo['Usage']}", inline=False
+                name="__Usage__", value=f"{u_serverinfo['Usage']}", inline=False
             )
-            embed.add_field(name="Args", value=f'{u_serverinfo["Args"]}')
+            embed.add_field(name="__Args__", value=f'{u_serverinfo["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "whois":
             embed = discord.Embed(
@@ -342,8 +344,8 @@ class HelpCommand(commands.Cog):
                 description=f"{moderation_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_whois['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f'{u_whois["Args"]}')
+            embed.add_field(name="__Usage__", value=f"{u_whois['Usage']}", inline=False)
+            embed.add_field(name="__Args__", value=f'{u_whois["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "whisper":
             embed = discord.Embed(
@@ -351,8 +353,10 @@ class HelpCommand(commands.Cog):
                 description=f"{moderation_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_whisper['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f'{u_whisper["Args"]}')
+            embed.add_field(
+                name="__Usage__", value=f"{u_whisper['Usage']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f'{u_whisper["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "code_whisper":
             embed = discord.Embed(
@@ -361,9 +365,9 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="Usage", value=f"{u_code_whisper['Usage']}", inline=False
+                name="__Usage__", value=f"{u_code_whisper['Usage']}", inline=False
             )
-            embed.add_field(name="Args", value=f'{u_code_whisper["Args"]}')
+            embed.add_field(name="__Args__", value=f'{u_code_whisper["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "log":
             embed = discord.Embed(
@@ -371,8 +375,8 @@ class HelpCommand(commands.Cog):
                 description=f"{moderation_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_log['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f'{u_log["Args"]}')
+            embed.add_field(name="__Usage__", value=f"{u_log['Usage']}", inline=False)
+            embed.add_field(name="__Args__", value=f'{u_log["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "code_say":
             embed = discord.Embed(
@@ -380,8 +384,10 @@ class HelpCommand(commands.Cog):
                 description=f"{moderation_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_code_say['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f'{u_code_say["Args"]}')
+            embed.add_field(
+                name="__Usage__", value=f"{u_code_say['Usage']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f'{u_code_say["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "say":
             embed = discord.Embed(
@@ -389,8 +395,8 @@ class HelpCommand(commands.Cog):
                 description=f"{moderation_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_say['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f'{u_say["Args"]}')
+            embed.add_field(name="__Usage__", value=f"{u_say['Usage']}", inline=False)
+            embed.add_field(name="__Args__", value=f'{u_say["__Args__"]}')
             await ctx.send(embed=embed)
         # BOT
         if command == "reload_all":
@@ -400,9 +406,9 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="Usage", value=f"{u_reload_all['Usage']}", inline=False
+                name="__Usage__", value=f"{u_reload_all['Usage']}", inline=False
             )
-            embed.add_field(name="Args", value=f'{u_reload_all["Args"]}')
+            embed.add_field(name="__Args__", value=f'{u_reload_all["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "load_cog":
             embed = discord.Embed(
@@ -410,8 +416,10 @@ class HelpCommand(commands.Cog):
                 description=f"{bot_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_load_cog['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f'{u_load_cog["Args"]}')
+            embed.add_field(
+                name="__Usage__", value=f"{u_load_cog['Usage']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f'{u_load_cog["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "unload_cog":
             embed = discord.Embed(
@@ -420,9 +428,9 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="Usage", value=f"{u_unload_cog['Usage']}", inline=False
+                name="__Usage__", value=f"{u_unload_cog['Usage']}", inline=False
             )
-            embed.add_field(name="Args", value=f'{u_unload_cog["Args"]}')
+            embed.add_field(name="__Args__", value=f'{u_unload_cog["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "reload_cog":
             embed = discord.Embed(
@@ -431,9 +439,9 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="Usage", value=f"{u_reload_cog['Usage']}", inline=False
+                name="__Usage__", value=f"{u_reload_cog['Usage']}", inline=False
             )
-            embed.add_field(name="Args", value=f'{u_reload_cog["Args"]}')
+            embed.add_field(name="__Args__", value=f'{u_reload_cog["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "update":
             embed = discord.Embed(
@@ -441,8 +449,10 @@ class HelpCommand(commands.Cog):
                 description=f"{bot_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_update['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f'{u_update["Args"]}')
+            embed.add_field(
+                name="__Usage__", value=f"{u_update['Usage']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f'{u_update["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "up":
             embed = discord.Embed(
@@ -450,8 +460,8 @@ class HelpCommand(commands.Cog):
                 description=f"{bot_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_up['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f'{u_up["Args"]}')
+            embed.add_field(name="__Usage__", value=f"{u_up['Usage']}", inline=False)
+            embed.add_field(name="__Args__", value=f'{u_up["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "info":
             embed = discord.Embed(
@@ -459,8 +469,8 @@ class HelpCommand(commands.Cog):
                 description=f"{bot_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_info['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f'{u_info["Args"]}')
+            embed.add_field(name="__Usage__", value=f"{u_info['Usage']}", inline=False)
+            embed.add_field(name="__Args__", value=f'{u_info["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "ping":
             embed = discord.Embed(
@@ -468,8 +478,8 @@ class HelpCommand(commands.Cog):
                 description=f"{bot_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_ping['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f'{u_ping["Args"]}')
+            embed.add_field(name="__Usage__", value=f"{u_ping['Usage']}", inline=False)
+            embed.add_field(name="__Args__", value=f'{u_ping["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "uptime":
             embed = discord.Embed(
@@ -477,8 +487,10 @@ class HelpCommand(commands.Cog):
                 description=f"{bot_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_uptime['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f'{u_uptime["Args"]}')
+            embed.add_field(
+                name="__Usage__", value=f"{u_uptime['Usage']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f'{u_uptime["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "changelog":
             embed = discord.Embed(
@@ -486,8 +498,10 @@ class HelpCommand(commands.Cog):
                 description=f"{bot_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_changelog['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f'{u_changelog["Args"]}')
+            embed.add_field(
+                name="__Usage__", value=f"{u_changelog['Usage']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f'{u_changelog["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "bug":
             embed = discord.Embed(
@@ -495,8 +509,8 @@ class HelpCommand(commands.Cog):
                 description=f"{bot_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_bug['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f'{u_bug["Args"]}')
+            embed.add_field(name="__Usage__", value=f"{u_bug['Usage']}", inline=False)
+            embed.add_field(name="__Args__", value=f'{u_bug["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "shutdown":
             embed = discord.Embed(
@@ -504,8 +518,10 @@ class HelpCommand(commands.Cog):
                 description=f"{bot_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_shutdown['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f'{u_shutdown["Args"]}')
+            embed.add_field(
+                name="__Usage__", value=f"{u_shutdown['Usage']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f'{u_shutdown["__Args__"]}')
             await ctx.send(embed=embed)
         # MUSIC
         if command == "join":
@@ -514,8 +530,8 @@ class HelpCommand(commands.Cog):
                 description=f"{music_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_join['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f'{u_join["Args"]}')
+            embed.add_field(name="__Usage__", value=f"{u_join['Usage']}", inline=False)
+            embed.add_field(name="__Args__", value=f'{u_join["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "leave":
             embed = discord.Embed(
@@ -523,8 +539,8 @@ class HelpCommand(commands.Cog):
                 description=f"{music_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_leave['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f'{u_leave["Args"]}')
+            embed.add_field(name="__Usage__", value=f"{u_leave['Usage']}", inline=False)
+            embed.add_field(name="__Args__", value=f'{u_leave["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "pause":
             embed = discord.Embed(
@@ -532,8 +548,8 @@ class HelpCommand(commands.Cog):
                 description=f"{music_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_pause['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f'{u_pause["Args"]}')
+            embed.add_field(name="__Usage__", value=f"{u_pause['Usage']}", inline=False)
+            embed.add_field(name="__Args__", value=f'{u_pause["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "play":
             embed = discord.Embed(
@@ -541,8 +557,8 @@ class HelpCommand(commands.Cog):
                 description=f"{music_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_play['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f'{u_play["Args"]}')
+            embed.add_field(name="__Usage__", value=f"{u_play['Usage']}", inline=False)
+            embed.add_field(name="__Args__", value=f'{u_play["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "stop":
             embed = discord.Embed(
@@ -550,8 +566,8 @@ class HelpCommand(commands.Cog):
                 description=f"{music_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_stop['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f'{u_stop["Args"]}')
+            embed.add_field(name="__Usage__", value=f"{u_stop['Usage']}", inline=False)
+            embed.add_field(name="__Args__", value=f'{u_stop["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "stream":
             embed = discord.Embed(
@@ -559,8 +575,10 @@ class HelpCommand(commands.Cog):
                 description=f"{music_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_stream['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f'{u_stream["Args"]}')
+            embed.add_field(
+                name="__Usage__", value=f"{u_stream['Usage']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f'{u_stream["__Args__"]}')
             await ctx.send(embed=embed)
         # MISC
         if command == "add":
@@ -569,8 +587,8 @@ class HelpCommand(commands.Cog):
                 description=f"{misc_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_add['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f"{u_add['Args']}", inline=False)
+            embed.add_field(name="__Usage__", value=f"{u_add['Usage']}", inline=False)
+            embed.add_field(name="__Args__", value=f"{u_add['Args']}", inline=False)
             await ctx.send(embed=embed)
         if command == "ask":
             embed = discord.Embed(
@@ -578,8 +596,8 @@ class HelpCommand(commands.Cog):
                 description=f"{misc_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_ask['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f"{u_ask['Args']}", inline=False)
+            embed.add_field(name="__Usage__", value=f"{u_ask['Usage']}", inline=False)
+            embed.add_field(name="__Args__", value=f"{u_ask['Args']}", inline=False)
             await ctx.send(embed=embed)
         if command == "embed":
             embed = discord.Embed(
@@ -587,8 +605,8 @@ class HelpCommand(commands.Cog):
                 description=f"{misc_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_embed['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f"{u_embed['Args']}", inline=False)
+            embed.add_field(name="__Usage__", value=f"{u_embed['Usage']}", inline=False)
+            embed.add_field(name="__Args__", value=f"{u_embed['Args']}", inline=False)
             await ctx.send(embed=embed)
         if command == "playing":
             embed = discord.Embed(
@@ -596,8 +614,10 @@ class HelpCommand(commands.Cog):
                 description=f"{misc_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_playing['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f"{u_playing['Args']}", inline=False)
+            embed.add_field(
+                name="__Usage__", value=f"{u_playing['Usage']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f"{u_playing['Args']}", inline=False)
             await ctx.send(embed=embed)
         if command == "switch":
             embed = discord.Embed(
@@ -605,8 +625,10 @@ class HelpCommand(commands.Cog):
                 description=f"{misc_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_switch['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f"{u_switch['Args']}", inline=False)
+            embed.add_field(
+                name="__Usage__", value=f"{u_switch['Usage']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f"{u_switch['Args']}", inline=False)
             await ctx.send(embed=embed)
         if command == "mccmd":
             embed = discord.Embed(
@@ -614,8 +636,8 @@ class HelpCommand(commands.Cog):
                 description=f"{misc_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_mccmd['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f"{u_mccmd['Args']}", inline=False)
+            embed.add_field(name="__Usage__", value=f"{u_mccmd['Usage']}", inline=False)
+            embed.add_field(name="__Args__", value=f"{u_mccmd['Args']}", inline=False)
             await ctx.send(embed=embed)
         if command == "note":
             embed = discord.Embed(
@@ -623,8 +645,8 @@ class HelpCommand(commands.Cog):
                 description=f"{misc_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_note['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f"{u_note['Args']}", inline=False)
+            embed.add_field(name="__Usage__", value=f"{u_note['Usage']}", inline=False)
+            embed.add_field(name="__Args__", value=f"{u_note['Args']}", inline=False)
             await ctx.send(embed=embed)
         if command == "notes":
             embed = discord.Embed(
@@ -632,8 +654,8 @@ class HelpCommand(commands.Cog):
                 description=f"{misc_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_notes['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f"{u_notes['Args']}", inline=False)
+            embed.add_field(name="__Usage__", value=f"{u_notes['Usage']}", inline=False)
+            embed.add_field(name="__Args__", value=f"{u_notes['Args']}", inline=False)
             await ctx.send(embed=embed)
         if command == "cnote":
             embed = discord.Embed(
@@ -641,8 +663,8 @@ class HelpCommand(commands.Cog):
                 description=f"{misc_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_cnote['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f"{u_cnote['Args']}", inline=False)
+            embed.add_field(name="__Usage__", value=f"{u_cnote['Usage']}", inline=False)
+            embed.add_field(name="__Args__", value=f"{u_cnote['Args']}", inline=False)
             await ctx.send(embed=embed)
         if command == "lmgtfy":
             embed = discord.Embed(
@@ -650,8 +672,10 @@ class HelpCommand(commands.Cog):
                 description=f"{misc_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_lmgtfy['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f"{u_lmgtfy['Args']}", inline=False)
+            embed.add_field(
+                name="__Usage__", value=f"{u_lmgtfy['Usage']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f"{u_lmgtfy['Args']}", inline=False)
             await ctx.send(embed=embed)
         if command == "define":
             embed = discord.Embed(
@@ -659,8 +683,10 @@ class HelpCommand(commands.Cog):
                 description=f"{misc_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_define['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f"{u_define['Args']}", inline=False)
+            embed.add_field(
+                name="__Usage__", value=f"{u_define['Usage']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f"{u_define['Args']}", inline=False)
             await ctx.send(embed=embed)
         if command == "insult":
             embed = discord.Embed(
@@ -668,8 +694,10 @@ class HelpCommand(commands.Cog):
                 description=f"{misc_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_insult['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f"{u_insult['Args']}", inline=False)
+            embed.add_field(
+                name="__Usage__", value=f"{u_insult['Usage']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f"{u_insult['Args']}", inline=False)
             await ctx.send(embed=embed)
         if command == "roll":
             embed = discord.Embed(
@@ -677,8 +705,8 @@ class HelpCommand(commands.Cog):
                 description=f"{misc_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_roll['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f"{u_roll['Args']}", inline=False)
+            embed.add_field(name="__Usage__", value=f"{u_roll['Usage']}", inline=False)
+            embed.add_field(name="__Args__", value=f"{u_roll['Args']}", inline=False)
             await ctx.send(embed=embed)
         if command == "rps":
             embed = discord.Embed(
@@ -686,8 +714,8 @@ class HelpCommand(commands.Cog):
                 description=f"{misc_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="Usage", value=f"{u_rps['Usage']}", inline=False)
-            embed.add_field(name="Args", value=f"{u_rps['Args']}", inline=False)
+            embed.add_field(name="__Usage__", value=f"{u_rps['Usage']}", inline=False)
+            embed.add_field(name="__Args__", value=f"{u_rps['Args']}", inline=False)
             await ctx.send(embed=embed)
 
 
