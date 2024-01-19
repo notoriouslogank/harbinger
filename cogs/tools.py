@@ -25,7 +25,8 @@ class Tools(commands.Cog):
         string_query = ""
         for word in query:
             string_query = string_query + str(word) + " "
-        search = urban_dictionary + string_query
+        sanitized_query = string_query.replace(" ", "+")
+        search = urban_dictionary + sanitized_query
         cmd_msg = f"Search: {query}"
         await ctx.send("Let me see what I can find...")
         async with ctx.channel.typing():
