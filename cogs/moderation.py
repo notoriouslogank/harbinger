@@ -19,7 +19,7 @@ class Moderation(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
-    def caeser_cipher(key, message):
+    def caeser_cipsend_dher(key, message):
         message = message.upper()
         alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         result = ""
@@ -45,19 +45,11 @@ class Moderation(commands.Cog):
                 result = result + letter
         return result
 
-    #    def is_admin(self, ctx: commands.Context, member: discord.Member):
-    #        roles = member.roles
-    #        admin = discord.Guild.get_role(ctx.guild, MODERATOR)
-    #        if admin in roles:
-    #            return True
-    #        else:
-    #            return False
-
     @commands.command()
     async def decrypt(self, ctx: commands.Context, code, key, *, message):
         cmd = f"!decrypt {code} {key} {message}"
         await ctx.channel.purge(limit=1)
-        if Moderation.is_admin(self, ctx, ctx.message.author) == True:
+        if Harbinger.is_admin(self, ctx, ctx.message.author) == True:
             cmd_msg = f"Decrypted {code}-encoded message."
             if code == "b64":
                 bytes_object = base64.b64decode(message)
@@ -118,7 +110,7 @@ class Moderation(commands.Cog):
         """Send a Direct Message to a member as Harbinger."""
         cmd = f"!whisper({member})"
         await ctx.channel.purge(limit=1)
-        if Moderation.is_admin(self, ctx, ctx.message.author) == True:
+        if Harbinger.is_admin(self, ctx, ctx.message.author) == True:
             cmd_msg = f"Whispered: {content}"
             channel = await member.create_dm()
             await channel.send(content)
@@ -134,7 +126,7 @@ class Moderation(commands.Cog):
         """Send an encoded DM to a given member as Harbinger."""
         cmd = f"!whisper({member})"
         await ctx.channel.purge(limit=1)
-        if Moderation.is_admin(self, ctx, ctx.message.author) == True:
+        if Harbinger.is_admin(self, ctx, ctx.message.author) == True:
             cmd_msg = f"Whispered: {content}"
             recipient = await member.create_dm()
             sender = await ctx.message.author.create_dm()
@@ -193,7 +185,7 @@ class Moderation(commands.Cog):
     async def log(self, ctx: commands.Context, author: discord.Member = None):
         cmd = f"!log {author}"
         await ctx.channel.purge(limit=1)
-        if Moderation.is_admin(self, ctx, ctx.message.author) == True:
+        if Harbinger.is_admin(self, ctx, ctx.message.author) == True:
             cmd_msg = "Wrote to log.txt"
             counter = 0
             filename = "log.txt"  # TODO: Make this part of the config.ini
@@ -227,7 +219,7 @@ class Moderation(commands.Cog):
     @commands.command()
     async def history(self, ctx: commands.Context, amount: int):
         cmd = f"!history {amount}"
-        if Moderation.is_admin(self, ctx, ctx.message.author) == True:
+        if Harbinger.is_admin(self, ctx, ctx.message.author) == True:
             cmd_msg = f"Retrieved message history."
             counter = 0
             message_list = []
@@ -245,7 +237,7 @@ class Moderation(commands.Cog):
     async def serverinfo(self, ctx: commands.Context):
         """Create embeds containing server details and member information and send them to the channel."""
         cmd = "!serverinfo"
-        if Moderation.is_admin(self, ctx, ctx.message.author) == True:
+        if Harbinger.is_admin(self, ctx, ctx.message.author) == True:
             cmd_msg = "Get details about the server."
             owner = str(ctx.guild.owner)
             guild_id = str(ctx.guild.id)
@@ -289,7 +281,7 @@ class Moderation(commands.Cog):
         """
         await ctx.channel.purge(limit=1)
         cmd = "!whois"
-        if Moderation.is_admin(self, ctx, ctx.message.author) == True:
+        if Harbinger.is_admin(self, ctx, ctx.message.author) == True:
             cmd_msg = f"Got whois info for {member}."
             whois_embed = discord.Embed(
                 title=f"{member.display_name}",
@@ -310,7 +302,7 @@ class Moderation(commands.Cog):
     @commands.command()
     async def code_say(self, ctx: commands.Context, code, *, content) -> None:
         cmd = f"!code_say {code}"
-        if Moderation.is_admin(self, ctx, ctx.message.author) == True:
+        if Harbinger.is_admin(self, ctx, ctx.message.author) == True:
             cmd_msg = f"{content}"
             await ctx.channel.purge(limit=1)
             if code == "bin":
@@ -378,7 +370,7 @@ class Moderation(commands.Cog):
         """
         cmd = f"!say({message})"
         await ctx.channel.purge(limit=1)
-        if Moderation.is_admin(self, ctx, ctx.message.author) == True:
+        if Harbinger.is_admin(self, ctx, ctx.message.author) == True:
             cmd_msg = f"Harbinger says: {message}"
             string_message = ""
             for word in message:
@@ -396,7 +388,7 @@ class Moderation(commands.Cog):
     ):
         await ctx.channel.purge(limit=1)
         cmd = f"!embed {title},{description},{image},{url}"
-        if Moderation.is_admin(self, ctx, ctx.message.author) == True:
+        if Harbinger.is_admin(self, ctx, ctx.message.author) == True:
             cmd_msg = f"Harbinger sent an embed."
             embed = discord.Embed(
                 title=title, description=description, color=CUSTOM_COLOR, url=url
@@ -414,7 +406,7 @@ class Moderation(commands.Cog):
     ) -> None:
         """Create game info embed."""
         cmd = f"!playing({game}, {field}, {value})"
-        if Moderation.is_admin(self, ctx, ctx.message.author) == True:
+        if Harbinger.is_admin(self, ctx, ctx.message.author) == True:
             cmd_msg = f"Created playing embed with these values: {game},{field},{value}"
             playing_embed = discord.Embed(title=f"{game}", description=f"{description}")
             playing_embed.add_field(name=f"{field}", value=f"{value}")
