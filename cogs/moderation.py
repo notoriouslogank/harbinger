@@ -94,7 +94,7 @@ class Moderation(commands.Cog):
         """Delete a number of messages in channel."""
         await ctx.message.delete()
         has_role = await Moderation.check_role(self, ctx, "Admin")
-        for role in ctx.author.roles():
+        for role in ctx.author.roles:
             if has_role == True:
                 await ctx.send("True")
             else:
