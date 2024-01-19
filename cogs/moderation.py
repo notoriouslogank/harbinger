@@ -95,11 +95,10 @@ class Moderation(commands.Cog):
         await ctx.message.delete()
         roles = ctx.author.roles
         admin = discord.Guild.get_role(ctx.guild, MODERATOR)
-        for role in roles:
-            if role == admin:
-                await ctx.send("Admin")
-            else:
-                await ctx.send("Not Admin")
+        if admin in roles:
+            await ctx.send("Admin")
+        else:
+            await ctx.send("Not Admin")
 
     #        if amount > 100:
     #            print("You may not purge more than 99 messages.")
