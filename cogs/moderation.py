@@ -1,14 +1,13 @@
-from enum import member
-import random
-import discord
-from pathlib import Path
-from discord.ext import commands
 import base64
+import random
+from pathlib import Path
+
+import discord
 from config.read_configs import ReadConfigs as configs
+from discord.ext import commands
 from harbinger import Harbinger
 
-DEVELOPER = configs.developer_id()
-MODERATOR = configs.moderator_id()
+
 DELETION_TIME = configs.delete_time()
 CUSTOM_COLOR = configs.custom_color()
 
