@@ -314,9 +314,11 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="__Usage__", value=f"{u_history['Usage']}", inline=False
+                name="__Usage__", value=f"{u_history['__Usage__']}", inline=False
             )
-            embed.add_field(name="__Args__", value=f"{u_history['Args']}", inline=False)
+            embed.add_field(
+                name="__Args__", value=f"{u_history['__Args__']}", inline=False
+            )
             await ctx.send(embed=embed)
         if command == "clear":
             embed = discord.Embed(
@@ -324,7 +326,9 @@ class HelpCommand(commands.Cog):
                 description=f"{moderation_commands['clear']}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="__Usage__", value=f"{u_clear['Usage']}", inline=False)
+            embed.add_field(
+                name="__Usage__", value=f"{u_clear['__Usage__']}", inline=False
+            )
             embed.add_field(name="__Args__", value=f'{u_clear["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "serverinfo":
@@ -334,7 +338,7 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="__Usage__", value=f"{u_serverinfo['Usage']}", inline=False
+                name="__Usage__", value=f"{u_serverinfo['__Usage__']}", inline=False
             )
             embed.add_field(name="__Args__", value=f'{u_serverinfo["__Args__"]}')
             await ctx.send(embed=embed)
@@ -344,7 +348,9 @@ class HelpCommand(commands.Cog):
                 description=f"{moderation_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="__Usage__", value=f"{u_whois['Usage']}", inline=False)
+            embed.add_field(
+                name="__Usage__", value=f"{u_whois['__Usage__']}", inline=False
+            )
             embed.add_field(name="__Args__", value=f'{u_whois["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "whisper":
@@ -354,7 +360,7 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="__Usage__", value=f"{u_whisper['Usage']}", inline=False
+                name="__Usage__", value=f"{u_whisper['__Usage__']}", inline=False
             )
             embed.add_field(name="__Args__", value=f'{u_whisper["__Args__"]}')
             await ctx.send(embed=embed)
@@ -365,7 +371,7 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="__Usage__", value=f"{u_code_whisper['Usage']}", inline=False
+                name="__Usage__", value=f"{u_code_whisper['__Usage__']}", inline=False
             )
             embed.add_field(name="__Args__", value=f'{u_code_whisper["__Args__"]}')
             await ctx.send(embed=embed)
@@ -375,7 +381,9 @@ class HelpCommand(commands.Cog):
                 description=f"{moderation_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="__Usage__", value=f"{u_log['Usage']}", inline=False)
+            embed.add_field(
+                name="__Usage__", value=f"{u_log['__Usage__']}", inline=False
+            )
             embed.add_field(name="__Args__", value=f'{u_log["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "code_say":
@@ -385,7 +393,7 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="__Usage__", value=f"{u_code_say['Usage']}", inline=False
+                name="__Usage__", value=f"{u_code_say['__Usage__']}", inline=False
             )
             embed.add_field(name="__Args__", value=f'{u_code_say["__Args__"]}')
             await ctx.send(embed=embed)
@@ -395,7 +403,9 @@ class HelpCommand(commands.Cog):
                 description=f"{moderation_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="__Usage__", value=f"{u_say['Usage']}", inline=False)
+            embed.add_field(
+                name="__Usage__", value=f"{u_say['__Usage__']}", inline=False
+            )
             embed.add_field(name="__Args__", value=f'{u_say["__Args__"]}')
             await ctx.send(embed=embed)
         # BOT
@@ -406,7 +416,7 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="__Usage__", value=f"{u_reload_all['Usage']}", inline=False
+                name="__Usage__", value=f"{u_reload_all['__Usage__']}", inline=False
             )
             embed.add_field(name="__Args__", value=f'{u_reload_all["__Args__"]}')
             await ctx.send(embed=embed)
@@ -417,7 +427,7 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="__Usage__", value=f"{u_load_cog['Usage']}", inline=False
+                name="__Usage__", value=f"{u_load_cog['__Usage__']}", inline=False
             )
             embed.add_field(name="__Args__", value=f'{u_load_cog["__Args__"]}')
             await ctx.send(embed=embed)
@@ -428,7 +438,7 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="__Usage__", value=f"{u_unload_cog['Usage']}", inline=False
+                name="__Usage__", value=f"{u_unload_cog['__Usage__']}", inline=False
             )
             embed.add_field(name="__Args__", value=f'{u_unload_cog["__Args__"]}')
             await ctx.send(embed=embed)
@@ -439,7 +449,7 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="__Usage__", value=f"{u_reload_cog['Usage']}", inline=False
+                name="__Usage__", value=f"{u_reload_cog['__Usage__']}", inline=False
             )
             embed.add_field(name="__Args__", value=f'{u_reload_cog["__Args__"]}')
             await ctx.send(embed=embed)
@@ -450,7 +460,7 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="__Usage__", value=f"{u_update['Usage']}", inline=False
+                name="__Usage__", value=f"{u_update['__Usage__']}", inline=False
             )
             embed.add_field(name="__Args__", value=f'{u_update["__Args__"]}')
             await ctx.send(embed=embed)
@@ -460,7 +470,9 @@ class HelpCommand(commands.Cog):
                 description=f"{bot_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="__Usage__", value=f"{u_up['Usage']}", inline=False)
+            embed.add_field(
+                name="__Usage__", value=f"{u_up['__Usage__']}", inline=False
+            )
             embed.add_field(name="__Args__", value=f'{u_up["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "info":
@@ -469,7 +481,9 @@ class HelpCommand(commands.Cog):
                 description=f"{bot_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="__Usage__", value=f"{u_info['Usage']}", inline=False)
+            embed.add_field(
+                name="__Usage__", value=f"{u_info['__Usage__']}", inline=False
+            )
             embed.add_field(name="__Args__", value=f'{u_info["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "ping":
@@ -478,7 +492,9 @@ class HelpCommand(commands.Cog):
                 description=f"{bot_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="__Usage__", value=f"{u_ping['Usage']}", inline=False)
+            embed.add_field(
+                name="__Usage__", value=f"{u_ping['__Usage__']}", inline=False
+            )
             embed.add_field(name="__Args__", value=f'{u_ping["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "uptime":
@@ -488,7 +504,7 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="__Usage__", value=f"{u_uptime['Usage']}", inline=False
+                name="__Usage__", value=f"{u_uptime['__Usage__']}", inline=False
             )
             embed.add_field(name="__Args__", value=f'{u_uptime["__Args__"]}')
             await ctx.send(embed=embed)
@@ -499,7 +515,7 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="__Usage__", value=f"{u_changelog['Usage']}", inline=False
+                name="__Usage__", value=f"{u_changelog['__Usage__']}", inline=False
             )
             embed.add_field(name="__Args__", value=f'{u_changelog["__Args__"]}')
             await ctx.send(embed=embed)
@@ -509,7 +525,9 @@ class HelpCommand(commands.Cog):
                 description=f"{bot_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="__Usage__", value=f"{u_bug['Usage']}", inline=False)
+            embed.add_field(
+                name="__Usage__", value=f"{u_bug['__Usage__']}", inline=False
+            )
             embed.add_field(name="__Args__", value=f'{u_bug["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "shutdown":
@@ -519,7 +537,7 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="__Usage__", value=f"{u_shutdown['Usage']}", inline=False
+                name="__Usage__", value=f"{u_shutdown['__Usage__']}", inline=False
             )
             embed.add_field(name="__Args__", value=f'{u_shutdown["__Args__"]}')
             await ctx.send(embed=embed)
@@ -530,7 +548,9 @@ class HelpCommand(commands.Cog):
                 description=f"{music_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="__Usage__", value=f"{u_join['Usage']}", inline=False)
+            embed.add_field(
+                name="__Usage__", value=f"{u_join['__Usage__']}", inline=False
+            )
             embed.add_field(name="__Args__", value=f'{u_join["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "leave":
@@ -539,7 +559,9 @@ class HelpCommand(commands.Cog):
                 description=f"{music_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="__Usage__", value=f"{u_leave['Usage']}", inline=False)
+            embed.add_field(
+                name="__Usage__", value=f"{u_leave['__Usage__']}", inline=False
+            )
             embed.add_field(name="__Args__", value=f'{u_leave["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "pause":
@@ -548,7 +570,9 @@ class HelpCommand(commands.Cog):
                 description=f"{music_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="__Usage__", value=f"{u_pause['Usage']}", inline=False)
+            embed.add_field(
+                name="__Usage__", value=f"{u_pause['__Usage__']}", inline=False
+            )
             embed.add_field(name="__Args__", value=f'{u_pause["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "play":
@@ -557,7 +581,9 @@ class HelpCommand(commands.Cog):
                 description=f"{music_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="__Usage__", value=f"{u_play['Usage']}", inline=False)
+            embed.add_field(
+                name="__Usage__", value=f"{u_play['__Usage__']}", inline=False
+            )
             embed.add_field(name="__Args__", value=f'{u_play["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "stop":
@@ -566,7 +592,9 @@ class HelpCommand(commands.Cog):
                 description=f"{music_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="__Usage__", value=f"{u_stop['Usage']}", inline=False)
+            embed.add_field(
+                name="__Usage__", value=f"{u_stop['__Usage__']}", inline=False
+            )
             embed.add_field(name="__Args__", value=f'{u_stop["__Args__"]}')
             await ctx.send(embed=embed)
         if command == "stream":
@@ -576,7 +604,7 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="__Usage__", value=f"{u_stream['Usage']}", inline=False
+                name="__Usage__", value=f"{u_stream['__Usage__']}", inline=False
             )
             embed.add_field(name="__Args__", value=f'{u_stream["__Args__"]}')
             await ctx.send(embed=embed)
@@ -587,8 +615,10 @@ class HelpCommand(commands.Cog):
                 description=f"{misc_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="__Usage__", value=f"{u_add['Usage']}", inline=False)
-            embed.add_field(name="__Args__", value=f"{u_add['Args']}", inline=False)
+            embed.add_field(
+                name="__Usage__", value=f"{u_add['__Usage__']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f"{u_add['__Args__']}", inline=False)
             await ctx.send(embed=embed)
         if command == "ask":
             embed = discord.Embed(
@@ -596,8 +626,10 @@ class HelpCommand(commands.Cog):
                 description=f"{misc_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="__Usage__", value=f"{u_ask['Usage']}", inline=False)
-            embed.add_field(name="__Args__", value=f"{u_ask['Args']}", inline=False)
+            embed.add_field(
+                name="__Usage__", value=f"{u_ask['__Usage__']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f"{u_ask['__Args__']}", inline=False)
             await ctx.send(embed=embed)
         if command == "embed":
             embed = discord.Embed(
@@ -605,8 +637,12 @@ class HelpCommand(commands.Cog):
                 description=f"{misc_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="__Usage__", value=f"{u_embed['Usage']}", inline=False)
-            embed.add_field(name="__Args__", value=f"{u_embed['Args']}", inline=False)
+            embed.add_field(
+                name="__Usage__", value=f"{u_embed['__Usage__']}", inline=False
+            )
+            embed.add_field(
+                name="__Args__", value=f"{u_embed['__Args__']}", inline=False
+            )
             await ctx.send(embed=embed)
         if command == "playing":
             embed = discord.Embed(
@@ -615,9 +651,11 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="__Usage__", value=f"{u_playing['Usage']}", inline=False
+                name="__Usage__", value=f"{u_playing['__Usage__']}", inline=False
             )
-            embed.add_field(name="__Args__", value=f"{u_playing['Args']}", inline=False)
+            embed.add_field(
+                name="__Args__", value=f"{u_playing['__Args__']}", inline=False
+            )
             await ctx.send(embed=embed)
         if command == "switch":
             embed = discord.Embed(
@@ -626,9 +664,11 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="__Usage__", value=f"{u_switch['Usage']}", inline=False
+                name="__Usage__", value=f"{u_switch['__Usage__']}", inline=False
             )
-            embed.add_field(name="__Args__", value=f"{u_switch['Args']}", inline=False)
+            embed.add_field(
+                name="__Args__", value=f"{u_switch['__Args__']}", inline=False
+            )
             await ctx.send(embed=embed)
         if command == "mccmd":
             embed = discord.Embed(
@@ -636,8 +676,12 @@ class HelpCommand(commands.Cog):
                 description=f"{misc_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="__Usage__", value=f"{u_mccmd['Usage']}", inline=False)
-            embed.add_field(name="__Args__", value=f"{u_mccmd['Args']}", inline=False)
+            embed.add_field(
+                name="__Usage__", value=f"{u_mccmd['__Usage__']}", inline=False
+            )
+            embed.add_field(
+                name="__Args__", value=f"{u_mccmd['__Args__']}", inline=False
+            )
             await ctx.send(embed=embed)
         if command == "note":
             embed = discord.Embed(
@@ -645,8 +689,12 @@ class HelpCommand(commands.Cog):
                 description=f"{misc_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="__Usage__", value=f"{u_note['Usage']}", inline=False)
-            embed.add_field(name="__Args__", value=f"{u_note['Args']}", inline=False)
+            embed.add_field(
+                name="__Usage__", value=f"{u_note['__Usage__']}", inline=False
+            )
+            embed.add_field(
+                name="__Args__", value=f"{u_note['__Args__']}", inline=False
+            )
             await ctx.send(embed=embed)
         if command == "notes":
             embed = discord.Embed(
@@ -654,8 +702,12 @@ class HelpCommand(commands.Cog):
                 description=f"{misc_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="__Usage__", value=f"{u_notes['Usage']}", inline=False)
-            embed.add_field(name="__Args__", value=f"{u_notes['Args']}", inline=False)
+            embed.add_field(
+                name="__Usage__", value=f"{u_notes['__Usage__']}", inline=False
+            )
+            embed.add_field(
+                name="__Args__", value=f"{u_notes['__Args__']}", inline=False
+            )
             await ctx.send(embed=embed)
         if command == "cnote":
             embed = discord.Embed(
@@ -663,8 +715,12 @@ class HelpCommand(commands.Cog):
                 description=f"{misc_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="__Usage__", value=f"{u_cnote['Usage']}", inline=False)
-            embed.add_field(name="__Args__", value=f"{u_cnote['Args']}", inline=False)
+            embed.add_field(
+                name="__Usage__", value=f"{u_cnote['__Usage__']}", inline=False
+            )
+            embed.add_field(
+                name="__Args__", value=f"{u_cnote['__Args__']}", inline=False
+            )
             await ctx.send(embed=embed)
         if command == "lmgtfy":
             embed = discord.Embed(
@@ -673,9 +729,11 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="__Usage__", value=f"{u_lmgtfy['Usage']}", inline=False
+                name="__Usage__", value=f"{u_lmgtfy['__Usage__']}", inline=False
             )
-            embed.add_field(name="__Args__", value=f"{u_lmgtfy['Args']}", inline=False)
+            embed.add_field(
+                name="__Args__", value=f"{u_lmgtfy['__Args__']}", inline=False
+            )
             await ctx.send(embed=embed)
         if command == "define":
             embed = discord.Embed(
@@ -684,9 +742,11 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="__Usage__", value=f"{u_define['Usage']}", inline=False
+                name="__Usage__", value=f"{u_define['__Usage__']}", inline=False
             )
-            embed.add_field(name="__Args__", value=f"{u_define['Args']}", inline=False)
+            embed.add_field(
+                name="__Args__", value=f"{u_define['__Args__']}", inline=False
+            )
             await ctx.send(embed=embed)
         if command == "insult":
             embed = discord.Embed(
@@ -695,9 +755,11 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="__Usage__", value=f"{u_insult['Usage']}", inline=False
+                name="__Usage__", value=f"{u_insult['__Usage__']}", inline=False
             )
-            embed.add_field(name="__Args__", value=f"{u_insult['Args']}", inline=False)
+            embed.add_field(
+                name="__Args__", value=f"{u_insult['__Args__']}", inline=False
+            )
             await ctx.send(embed=embed)
         if command == "roll":
             embed = discord.Embed(
@@ -705,8 +767,12 @@ class HelpCommand(commands.Cog):
                 description=f"{misc_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="__Usage__", value=f"{u_roll['Usage']}", inline=False)
-            embed.add_field(name="__Args__", value=f"{u_roll['Args']}", inline=False)
+            embed.add_field(
+                name="__Usage__", value=f"{u_roll['__Usage__']}", inline=False
+            )
+            embed.add_field(
+                name="__Args__", value=f"{u_roll['__Args__']}", inline=False
+            )
             await ctx.send(embed=embed)
         if command == "rps":
             embed = discord.Embed(
@@ -714,8 +780,10 @@ class HelpCommand(commands.Cog):
                 description=f"{misc_commands[command]}",
                 color=CUSTOM_COLOR,
             )
-            embed.add_field(name="__Usage__", value=f"{u_rps['Usage']}", inline=False)
-            embed.add_field(name="__Args__", value=f"{u_rps['Args']}", inline=False)
+            embed.add_field(
+                name="__Usage__", value=f"{u_rps['__Usage__']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f"{u_rps['__Args__']}", inline=False)
             await ctx.send(embed=embed)
 
 
