@@ -86,7 +86,7 @@ class HelpCommand(commands.Cog):
         """
 
         categories = ["moderation", "bot", "music", "misc"]
-
+        categories = categories.sort()
         # USAGE
         u_ask = {
             "Usage": "``!ask <question>``",
@@ -219,7 +219,7 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="COMMAND CATEGORIES", value=f"{categories.sort()}", inline=False
+                name="COMMAND CATEGORIES", value=f"{categories}", inline=False
             )
             embed.add_field(
                 name="ALL COMMANDS", value=f"{HelpCommand.command_list()}", inline=False
