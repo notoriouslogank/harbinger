@@ -1,10 +1,11 @@
 import discord
-from discord.ext import commands
-
 from config.read_configs import ReadConfigs as configs
+from discord.ext import commands
 from harbinger import Harbinger
 
 CUSTOM_COLOR = configs.custom_color()
+MODERATOR = configs.moderator_id()
+DEVELOPER = configs.developer_id()
 
 moderation_commands = {
     "clear": "Delete a given number of messages.",
@@ -61,10 +62,17 @@ misc_commands = {
 
 
 class HelpCommand(commands.Cog):
+    """Class for generating help information."""
+
     def __init__(self, bot):
         self.bot = bot
 
-    def command_list():
+    def command_list() -> list:
+        """Create master list of all bot commands.
+
+        Returns:
+            list: Alphebetical list of all supported bot commands.
+        """
         master_commands_list = []
         for cmd in moderation_commands:
             master_commands_list.append(cmd)
@@ -77,7 +85,12 @@ class HelpCommand(commands.Cog):
         master_commands_list.sort()
         return master_commands_list
 
-    def categories_list():
+    def categories_list() -> list:
+        """Create list of command categories.
+
+        Returns:
+            list: List of command categories.
+        """
         categories = ["moderation", "bot", "misc", "music"]
         categories.sort()
         return categories
@@ -236,6 +249,7 @@ class HelpCommand(commands.Cog):
             await ctx.send(embed=embed)
         # CATEGORIES
         if command == "moderation":
+            role = discord.Guild.get_role(ctx.guild, MODERATOR)
             embed = discord.Embed(
                 title="MODERATION COMMANDS",
                 description="Commands for server moderation.",
@@ -250,10 +264,11 @@ class HelpCommand(commands.Cog):
                 )
                 counter += 1
                 embed.set_footer(
-                    text="*You must have Admin role or above to excecute these commands*"
+                    text=f"You must have {role} role or above to excecute these commands."
                 )
             await ctx.send(embed=embed)
         if command == "bot":
+            role = discord.Guild.get_role(ctx.guild, DEVELOPER)
             embed = discord.Embed(
                 title="BOT COMMANDS",
                 description="Commands for maintaining the Harbinger instance.",
@@ -268,7 +283,7 @@ class HelpCommand(commands.Cog):
                 )
                 counter += 1
                 embed.set_footer(
-                    text="*You must have developer role or above to execute these commands.*"
+                    text=f"You must have {role} role or above to execute these commands."
                 )
             await ctx.send(embed=embed)
         if command == "music":
@@ -541,6 +556,7 @@ class HelpCommand(commands.Cog):
                 name="__Usage__", value=f"{u_shutdown['__Usage__']}", inline=False
             )
             embed.add_field(name="__Args__", value=f'{u_shutdown["__Args__"]}')
+            embed.set_footer(text=f"Only the bot owner can perform this action.")
             await ctx.send(embed=embed)
         # MUSIC
         if command == "join":

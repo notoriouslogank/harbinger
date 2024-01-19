@@ -5,10 +5,12 @@ import discord
 from discord.ext import commands
 
 from config.read_configs import ReadConfigs as configs
-#from config.configure import Configure
+
 
 TOKEN = configs.discord_token()
-OWNER_ID = configs.owner_id()
+OWNER = configs.owner_id()
+MODERATOR = configs.moderator_id()
+DEVELOPER = configs.developer_id()
 
 
 class Harbinger:
@@ -19,8 +21,9 @@ class Harbinger:
     intents = discord.Intents.default()
     intents.members = True
     intents.message_content = True
-    bot = commands.Bot(command_prefix="!", owner_id=OWNER_ID, intents=intents)
-    bot.remove_command("help")
+    bot = commands.Bot(
+        command_prefix="!", owner_id=OWNER, intents=intents, help_command=None
+    )
 
     def __init__(self, bot):
         self.bot = bot
@@ -36,7 +39,6 @@ class Harbinger:
                     print(f"Loaded {cog}")
                 except Exception as exc:
                     print(f"An error has occured: {exc}.")
-
 
     def get_ver() -> str:
         """Check CHANGELOG.md for version info, return version string.
@@ -59,8 +61,45 @@ class Harbinger:
         """Start the bot."""
         bot.run(TOKEN)
 
-    async def send_dm(ctx, member: discord.Member, *, content) -> None:
-        """Create a Direct Message channel with a given member."""
+    def is_admin(self, ctx: commands.Context, member: discord.Member) -> bool:
+        """Check whether user has admin role.
+
+        Args:
+            member (discord.Member): User to check
+
+        Returns:
+            bool: True if user has admin role; False if not
+        """
+        roles = member.roles
+        admin = discord.Guild.get_role(ctx.guild, MODERATOR)
+        if admin in roles:
+            return True
+        else:
+            return False
+
+    def is_dev(self, ctx: commands.Context, member: discord.Member) -> bool:
+        """Check whether user has dev role.
+
+        Args:
+            member (discord.Member): User to check
+
+        Returns:
+            bool: True of user has dev role; False if not
+        """
+        roles = member.roles
+        dev = discord.Guild.get_role(ctx.guild, DEVELOPER)
+        if dev in roles:
+            return True
+        else:
+            return False
+
+    async def send_dm(ctx, member: discord.Member, *, content: str) -> None:
+        """Send a DM to a given user.
+
+        Args:
+            member (discord.Member): User to send DM.
+            content (str): Message to send.
+        """
         channel = await member.create_dm()
         await channel.send(content)
 

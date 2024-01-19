@@ -1,17 +1,16 @@
-from curses.panel import bottom_panel
 import smtplib
 import sys
 from datetime import datetime
 from email.message import EmailMessage
 from random import randint
+from time import sleep
 
 import discord
-from discord.ext import commands
-
 from config.read_configs import ReadConfigs as configs
+from discord.ext import commands
 from harbinger import Harbinger
 
-DEVELOPER_ROLE_ID = configs.developer_id()
+
 DELETION_TIME = configs.delete_time()
 EMAIL_ADDRESS = configs.email_address()
 EMAIL_PASSWORD = configs.email_password()
@@ -73,7 +72,7 @@ def get_presence():
     """Randomly select a bot presence from the lists.
 
     Returns:
-        obj: An activity object to set bot activity status.
+        presence: An activity object to set bot activity status.
     """
     presence = presences[randint(0, (len(presences) - 1))]
     return presence
@@ -96,32 +95,31 @@ class Status(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, ctx: commands.Context) -> None:
+        """Logs all messages to bot-subscribed channels to stdout."""
         if ctx.author == self.bot.user:
             return
-
         username = str(ctx.author)
         user_message = str(ctx.content)
         channel = str(ctx.channel)
-
-        print(f"{channel} || {username}: {user_message}")
+        timestamp = datetime.now()
+        print(f"++++\n{timestamp}\n{channel} || {username}: {user_message}")
 
     @commands.command()
-    @commands.has_role(DEVELOPER_ROLE_ID)
     async def up(self, ctx: commands.Context) -> None:
         """Confirm bot is online and reachable."""
         cmd = "!up"
+        await ctx.channel.purge(limit=1)
         cmd_msg = "Status: online."
         up_msg = f"{self.bot.user} is online."
-        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         message = await ctx.send(f"{up_msg}")
-        await ctx.message.delete()
         await message.edit(delete_after=DELETION_TIME)
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
-    @commands.has_role(DEVELOPER_ROLE_ID)
     async def info(self, ctx: commands.Context) -> None:
         """Get information about this bot."""
         cmd = "!info"
+        await ctx.channel.purge(limit=1)
         cmd_msg = f"Sent info embed to channel {ctx.channel.id}"
         current_version = Harbinger.get_ver()
         current_time = datetime.now()
@@ -135,49 +133,47 @@ class Status(commands.Cog):
             value="https://github.com/notoriouslogank/Harbinger",
             inline=False,
         )
-        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(embed=embedInfo)
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
-    @commands.has_role(DEVELOPER_ROLE_ID)
     async def ping(self, ctx: commands.Context) -> None:
         """Check network latency."""
         ping = (round(self.bot.latency, 2)) * 1000
         cmd = f"!ping"
         cmd_msg = "Pong!"
-        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         message = await ctx.send(f"Pong! ({ping} ms)")
-        await ctx.message.delete()
         await message.edit(delete_after=DELETION_TIME)
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
-    @commands.has_role(DEVELOPER_ROLE_ID)
     async def uptime(self, ctx: commands.Context) -> None:
         """Get bot uptime."""
         cmd = "!uptime"
+        await ctx.channel.purge(limit=1)
         current_time = datetime.now()
         delta = current_time - Harbinger.start_time
         up_msg = f"uptime: {delta}"
         cmd_msg = f"{up_msg}"
-        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         message = await ctx.send(f"{up_msg}")
-        await ctx.message.delete()
         await message.edit(delete_after=DELETION_TIME)
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
-    @commands.has_role(DEVELOPER_ROLE_ID)
     async def changelog(self, ctx: commands.Context) -> None:
-        """Get changelog."""
+        """Send changelog to channel."""
         cmd = "!changelog"
-        cmd_msg = f"Uploaded CHANGELOG.md to channel."
+        await ctx.channel.purge(limit=1)
+        cmd_msg = f"Uploaded CHANGELOG.md to {ctx.channel}."
         file = discord.File(fp="docs/CHANGELOG.md", filename="CHANGELOG.md")
-        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(file=file)
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
     async def bug(self, ctx: commands.Context, *, message) -> None:
         """Generate and email a bug report to the bot maintainer."""
         cmd = f"!bug {message}"
+        await ctx.channel.purge(limit=1)
         cmd_msg = f"Sent bug report."
         email = EmailMessage()
         email["From"] = "Harbinger"
@@ -189,117 +185,45 @@ class Status(commands.Cog):
             smtp.starttls()
             smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
             smtp.send_message(email)
-        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         await ctx.send(
-            "Thank you for submitting a bug report.\nIf you'd like to keep abreast of updates/bugfixes, please check out https://github.com/notoriouslogank/harbinger"
+            "Thank you for submitting a bug report.\nIf you'd like to keep abreast of updates/bugfixes, please check out https://github.com/notoriouslogank/harbinger",
+            delete_after=DELETION_TIME,
         )
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
-    @commands.is_owner()
     async def shutdown(self, ctx: commands.Context) -> None:
         """Gracefully shutdown the bot."""
         cmd = "!shutdown"
-        cmd_msg = f"Shutting down..."
-        embedShutdown = discord.Embed(
-            title="shutdown", color=0xFF0000, timestamp=datetime.now()
-        )
-        embedShutdown.add_field(name="user", value=f"{ctx.message.author}", inline=True)
-        message = await ctx.send(embed=embedShutdown)
-        await ctx.message.delete()
-        await message.edit(f"Goodbye!", delete_after=DELETION_TIME)
+        timestamp = datetime.now()
+        await ctx.channel.purge(limit=1)
+        if Harbinger.bot.is_owner(ctx.message.author):
+            cmd_msg = f"Shutting down..."
+            embedGooodbye = discord.Embed(
+                title="Harbinger is offline!",
+                description=f"Shutdown by {ctx.message.author} at {timestamp}.",
+                color=CUSTOM_COLOR,
+            )
+            embedShutdown = discord.Embed(
+                title="Shutdown!",
+                description=f"Shutdown message recieved. Harbinger will shutdown in 5 seconds!",
+                color=0xFF0000,
+                timestamp=datetime.now(),
+            )
+            embedShutdown.add_field(
+                name="user", value=f"{ctx.message.author}", inline=True
+            )
+            message = await ctx.send(embed=embedShutdown)
+            sleep(5)
+            await message.edit(embed=embedGooodbye)
+            sys.exit()
+        else:
+            cmd_msg = f"ERROR: Not bot owner."
+            await ctx.send(
+                "You must be the bot owner to execute that command.",
+                delete_after=DELETION_TIME,
+            )
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-        sys.exit()
-
-    # ERRORS
-    @changelog.error
-    async def changelog_error(self, ctx, error):
-        """Error raised when !changelog command fails.
-
-        Args:
-            error (MissingRole): Raised if user does not have developer role.
-        """
-        cmd = f"ERROR: ChangelogError"
-        cmd_msg = f"User does not have developer role."
-        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-        message = await ctx.send("You must be a developer to do that!")
-        await ctx.message.delete()
-        if isinstance(error, commands.MissingRole):
-            await message.edit(delete_after=DELETION_TIME)
-
-    @up.error
-    async def up_error(self, ctx, error):
-        """Error raised when !up command fails
-
-        Args:
-            error (MissingRole): Raised if user does not have developer role.
-        """
-        cmd = f"ERROR: UpError"
-        cmd_msg = f"User does not have developer role."
-        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-        message = await ctx.send("You must be a developer to do that!")
-        await ctx.message.delete()
-        if isinstance(error, commands.MissingRole):
-            await message.edit(delete_after=DELETION_TIME)
-
-    @info.error
-    async def info_error(self, ctx, error):
-        """Error raised when !info command fails
-
-        Args:
-            error (MissingRole): Raised if user does not have developer role.
-        """
-        cmd = f"ERROR: InfoError"
-        cmd_msg = f"User does not have developer role."
-        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-        message = await ctx.send("You must be a developer to do that!")
-        await ctx.message.delete()
-        if isinstance(error, commands.MissingRole):
-            await message.edit(delete_after=DELETION_TIME)
-
-    @ping.error
-    async def ping_error(self, ctx, error):
-        """Error raised when !ping command fails
-
-        Args:
-            error (MissingRole): Raised if user does not have developer role.
-        """
-        cmd = f"ERROR: PingError"
-        cmd_msg = f"User does not have developer role."
-        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-        message = await ctx.send("You must be a developer to do that!")
-        await ctx.message.delete()
-        if isinstance(error, commands.MissingRole):
-            await message.edit(delete_after=DELETION_TIME)
-
-    @uptime.error
-    async def uptime_error(self, ctx, error):
-        """Error raised when !uptime command fails
-
-        Args:
-            error (MissingRole): Raised if user does not have developer role.
-        """
-        cmd = f"ERROR: UptimeError"
-        cmd_msg = f"User does not have developer role."
-        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-        message = await ctx.send("You must be a developer to do that!")
-        await ctx.message.delete()
-        if isinstance(error, commands.MissingRole):
-            await message.edit(delete_after=DELETION_TIME)
-
-    @shutdown.error
-    async def shutdown_error(self, ctx, error):
-        """Error raised when !shutdown command fails
-
-        Args:
-            error (MissingRole): Raised if user does not have developer role.
-        """
-        cmd = f"ERROR: ShutdownError"
-        cmd_msg = f"User does not have developer role."
-        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-        message = await ctx.send("You must be a developer to do that!")
-        await ctx.message.delete()
-        if isinstance(error, commands.MissingRole):
-            await message.edit(delete_after=DELETION_TIME)
 
 
 async def setup(bot):

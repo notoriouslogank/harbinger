@@ -1,7 +1,6 @@
 from datetime import datetime
 
 from discord.ext import commands
-
 from harbinger import Harbinger
 
 
@@ -11,7 +10,7 @@ class Notes(commands.Cog):
 
     @commands.command()
     async def note(self, ctx: commands.Context, *content) -> None:
-        """_summary_
+        """Write a note to user notes file; creates user note file if none exists.
 
         Args:
             *content (str): The content of the user note.
@@ -37,8 +36,8 @@ class Notes(commands.Cog):
         note_file = f"user_notes/{ctx.message.author.display_name}.txt"
         with open(note_file, "r") as n:
             all_notes = n.read()
+        await Harbinger.send_dm(ctx, ctx.message.author, f"```{all_notes}```")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-        await ctx.send(f"```{all_notes}```")
 
     @commands.command()
     async def cnote(self, ctx: commands.Context) -> None:
@@ -48,8 +47,8 @@ class Notes(commands.Cog):
         clear_message = " "
         with open(f"user_notes/{ctx.message.author.display_name}.txt", "w") as n:
             n.write(clear_message)
+        await Harbinger.send_dm(ctx, ctx.message.author, "Cleared your notes!")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-        await ctx.send("Cleared your notes!")
 
 
 async def setup(bot):
