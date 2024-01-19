@@ -209,7 +209,7 @@ class Status(commands.Cog):
             )
             message = await ctx.send(embed=embedShutdown)
             sleep(DELETION_TIME)
-            await message.edit(f"Goodbye!", delete_after=DELETION_TIME)
+            await message.edit(f"Goodbye!")
             sys.exit()
         else:
             cmd_msg = f"ERROR: Not bot owner."
