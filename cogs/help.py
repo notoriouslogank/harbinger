@@ -59,10 +59,6 @@ misc_commands = {
     "rps": "Play rock, paper, scissors with Harbinger.",
 }
 
-mod_cmds = moderation_commands.keys()
-bot_cmds = bot_commands.keys()
-music_cmds = music_commands.keys()
-misc_cmds = misc_commands.keys()
 
 categories = ["moderation", "bot", "music", "misc"]
 categories = categories.sort()
@@ -74,8 +70,13 @@ class HelpCommand(commands.Cog):
 
     def command_list():
         master_commands_list = []
-        cmd_keys = [mod_cmds, bot_cmds, music_cmds, misc_cmds]
-        for cmd in cmd_keys:
+        for cmd in moderation_commands:
+            master_commands_list.append(cmd)
+        for cmd in bot_commands:
+            master_commands_list.append(cmd)
+        for cmd in music_commands:
+            master_commands_list.append(cmd)
+        for cmd in misc_commands:
             master_commands_list.append(cmd)
         return master_commands_list
 
