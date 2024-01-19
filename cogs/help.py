@@ -93,7 +93,6 @@ class HelpCommand(commands.Cog):
         cmd = f"!help {command}"
         cmd_msg = f"Requested help with {command}."
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-        HelpCommand.sort_commands()
         counter = 0
         # USAGE
         u_ask = {
