@@ -93,7 +93,7 @@ class Moderation(commands.Cog):
     async def clear(self, ctx: commands.Context, amount: int = 1) -> None:
         """Delete a number of messages in channel."""
         await ctx.message.delete()
-        has_role = await Moderation.check_role("Admin")
+        has_role = await Moderation.check_role(self, ctx, "Admin")
         if has_role == True:
             await ctx.send("True")
         else:
