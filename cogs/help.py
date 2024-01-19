@@ -241,8 +241,8 @@ class HelpCommand(commands.Cog):
             for cmd in moderation_commands:
                 key, value = list(moderation_commands.items())[counter]
                 embed.add_field(
-                    name={str(key)},
-                    value={str(value)},
+                    name=f"{str(key)}",
+                    value=f"{str(value)}",
                     inline=False,
                 )
                 counter += 0
