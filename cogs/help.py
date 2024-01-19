@@ -76,7 +76,8 @@ class HelpCommand(commands.Cog):
         master_commands_list = []
         cmd_keys = [mod_cmds, bot_cmds, music_cmds, misc_cmds]
         for cmd in cmd_keys:
-            master_commands_list.append()
+            master_commands_list.append(cmd)
+        return master_commands_list
 
     @commands.command()
     async def help(self, ctx, *, command=None) -> None:
