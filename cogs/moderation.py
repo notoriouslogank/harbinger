@@ -92,18 +92,16 @@ class Moderation(commands.Cog):
     async def clear(self, ctx: commands.Context, amount: int = 1) -> None:
         """Delete a number of messages in channel."""
         await ctx.message.delete()
-        if Moderation.is_admin(ctx.author):
-            print("True")
+        if Moderation.is_admin(ctx.author) == True:
+            if amount > 100:
+                await ctx.send("You may not purge more than 99 messages.")
+            else:
+                cmd = f"!clear {amount}"
+                cmd_msg = f"Deleted {amount} messages."
+                Harbinger.timestamp(ctx.author, cmd, cmd_msg)
+                await ctx.channel.purge(limit=amount)
         else:
-            print("False")
-
-    #        if amount > 100:
-    #            print("You may not purge more than 99 messages.")
-    #        else:
-    #            cmd = f"!clear {amount}"
-    #            cmd_msg = f"Deleted {amount} messages."
-    #            Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-    #            await ctx.channel.purge(limit=amount)
+            await ctx.send(f"You must have Admin role to execute this command.")
 
     @commands.command()
     async def whisper(self, ctx, member: discord.Member, *, content) -> None:
