@@ -5,10 +5,12 @@ import discord
 from discord.ext import commands
 
 from config.read_configs import ReadConfigs as configs
-#from config.configure import Configure
+
+# from config.configure import Configure
 
 TOKEN = configs.discord_token()
 OWNER_ID = configs.owner_id()
+MODERATOR = configs.moderator_id()
 
 
 class Harbinger:
@@ -37,7 +39,6 @@ class Harbinger:
                 except Exception as exc:
                     print(f"An error has occured: {exc}.")
 
-
     def get_ver() -> str:
         """Check CHANGELOG.md for version info, return version string.
 
@@ -53,11 +54,19 @@ class Harbinger:
     def timestamp(user, cmd, cmd_msg) -> None:
         """Print timestamp and end-of-command separator."""
         current_time = datetime.now()
-        print(f"++++\n{current_time}\nUSR| {user}\nCMD| {cmd}\nMSG| {cmd_msg}")
+        print(f"++++\n{current_time}\nUSR| {user}\nCMD| {cmd}\nMSG| {cmd_msg}\n++++")
 
     def start() -> None:
         """Start the bot."""
         bot.run(TOKEN)
+
+    def is_admin(self, ctx: commands.Context, member: discord.Member):
+        roles = member.roles
+        admin = discord.Guild.get_role(ctx.guild, MODERATOR)
+        if admin in roles:
+            return True
+        else:
+            return False
 
     async def send_dm(ctx, member: discord.Member, *, content) -> None:
         """Create a Direct Message channel with a given member."""
