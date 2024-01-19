@@ -90,6 +90,7 @@ class HelpCommand(commands.Cog):
             command (str, optional): Command or category (cog) to get help for. Defaults to None.
         """
 
+        counter = 0
         # USAGE
         u_ask = {
             "Usage": "``!ask <question>``",
@@ -232,7 +233,6 @@ class HelpCommand(commands.Cog):
             await ctx.send(embed=embed)
         # CATEGORIES
         if command == "moderation":
-            counter = 0
             embed = discord.Embed(
                 title="MODERATION COMMANDS",
                 description="Commands for server moderation.",
@@ -243,7 +243,7 @@ class HelpCommand(commands.Cog):
                 embed.add_field(
                     name=f"{str(key)}",
                     value=f"{str(value)}",
-                    inline=False,
+                    inline=True,
                 )
                 counter += 0
                 embed.set_footer(
@@ -258,11 +258,13 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             for cmd in bot_commands:
+                key, value = list(bot_commands.items())[counter]
                 embed.add_field(
-                    name={bot_commands[cmd]},
-                    value={bot_commands.get(cmd)},
-                    inline=False,
+                    name=f"{str(key)}",
+                    value=f"{str(value)}",
+                    inline=True,
                 )
+                counter += 1
                 embed.set_footer(
                     text="*You must have developer role or above to execute these commands.*"
                 )
@@ -274,11 +276,13 @@ class HelpCommand(commands.Cog):
                 inline=False,
             )
             for cmd in music_commands:
+                key, value = list(music_commands.items())[counter]
                 embed.add_field(
-                    name={music_commands[cmd]},
-                    value={music_commands.get(cmd)},
-                    inline=False,
+                    name=f"{str(key)}",
+                    value=f"{str(value)}",
+                    inline=True,
                 )
+                counter += 1
                 embed.set_footer(
                     text="*You must be in a voice channel to join the bot.*"
                 )
@@ -290,10 +294,11 @@ class HelpCommand(commands.Cog):
                 color=CUSTOM_COLOR,
             )
             for cmd in misc_commands:
+                key, value = list(misc_commands.items())[counter]
                 embed.add_field(
-                    name={misc_commands[cmd]},
-                    value={misc_commands.get(cmd)},
-                    inline=False,
+                    name=f"{str(key)}",
+                    value=f"{str(value)}",
+                    inline=True,
                 )
                 embed.set_footer(
                     text="*These commands may be executed by anyone, regardless of role."
