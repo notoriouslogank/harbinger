@@ -62,6 +62,14 @@ class Harbinger:
         bot.run(TOKEN)
 
     def is_admin(self, ctx: commands.Context, member: discord.Member) -> bool:
+        """Check whether user has admin role.
+
+        Args:
+            member (discord.Member): User to check
+
+        Returns:
+            bool: True if user has admin role; False if not
+        """
         roles = member.roles
         admin = discord.Guild.get_role(ctx.guild, MODERATOR)
         if admin in roles:
@@ -70,6 +78,14 @@ class Harbinger:
             return False
 
     def is_dev(self, ctx: commands.Context, member: discord.Member) -> bool:
+        """Check whether user has dev role.
+
+        Args:
+            member (discord.Member): User to check
+
+        Returns:
+            bool: True of user has dev role; False if not
+        """
         roles = member.roles
         dev = discord.Guild.get_role(ctx.guild, DEVELOPER)
         if dev in roles:
@@ -77,8 +93,27 @@ class Harbinger:
         else:
             return False
 
-    async def send_dm(ctx, member: discord.Member, *, content) -> None:
-        """Create a Direct Message channel with a given member."""
+    def is_owner(self, ctx: commands.Context, member: discord.Member) -> bool:
+        """Check whether user is bot owner.
+
+        Args:
+            member (discord.Member): User to check
+
+        Returns:
+            bool: True if user is owner; False if not
+        """
+        if member.id == OWNER:
+            return True
+        else:
+            return False
+
+    async def send_dm(ctx, member: discord.Member, *, content: str) -> None:
+        """Send a DM to a given user.
+
+        Args:
+            member (discord.Member): User to send DM.
+            content (str): Message to send.
+        """
         channel = await member.create_dm()
         await channel.send(content)
 
