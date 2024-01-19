@@ -94,8 +94,9 @@ class Moderation(commands.Cog):
         """Delete a number of messages in channel."""
         await ctx.message.delete()
         roles = ctx.author.roles
+        admin = discord.Guild.get_role(MODERATOR)
         for role in roles:
-            if role == "Admin":
+            if role == admin:
                 await ctx.send("Admin")
             else:
                 await ctx.send("Not Admin")
