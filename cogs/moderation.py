@@ -84,7 +84,7 @@ class Moderation(commands.Cog):
     async def clear(self, ctx: commands.Context, amount: int = 2) -> None:
         """Delete a number of messages in channel."""
         await ctx.message.delete()
-        guild = discord.Client.get_guild(id=918314126692978688)
+        guild = discord.Client.get_guild()
         role = ctx.guild.get_role(role_id=MODERATOR)
         if role in discord.Member.roles:
             if amount > 100:
