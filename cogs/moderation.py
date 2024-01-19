@@ -45,13 +45,13 @@ class Moderation(commands.Cog):
                 result = result + letter
         return result
 
-    def is_admin(self, ctx: commands.Context, member: discord.Member):
-        roles = member.roles
-        admin = discord.Guild.get_role(ctx.guild, MODERATOR)
-        if admin in roles:
-            return True
-        else:
-            return False
+    #    def is_admin(self, ctx: commands.Context, member: discord.Member):
+    #        roles = member.roles
+    #        admin = discord.Guild.get_role(ctx.guild, MODERATOR)
+    #        if admin in roles:
+    #            return True
+    #        else:
+    #            return False
 
     @commands.command()
     async def decrypt(self, ctx: commands.Context, code, key, *, message):
@@ -101,7 +101,7 @@ class Moderation(commands.Cog):
         """Delete a number of messages in channel."""
         cmd = f"!clear {amount}"
         await ctx.message.delete()
-        if Moderation.is_admin(self, ctx, ctx.message.author) == True:
+        if Harbinger.is_admin(self, ctx, ctx.message.author) == True:
             if amount > 100:
                 await ctx.send("You may not purge more than 99 messages.")
                 cmd_msg = f"ERROR: Tried to delete too many messages."
