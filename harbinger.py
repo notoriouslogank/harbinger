@@ -93,20 +93,6 @@ class Harbinger:
         else:
             return False
 
-    def is_owner(self, ctx: commands.Context, member: discord.Member) -> bool:
-        """Check whether user is bot owner.
-
-        Args:
-            member (discord.Member): User to check
-
-        Returns:
-            bool: True if user is owner; False if not
-        """
-        if member.id == OWNER:
-            return True
-        else:
-            return False
-
     async def send_dm(ctx, member: discord.Member, *, content: str) -> None:
         """Send a DM to a given user.
 
