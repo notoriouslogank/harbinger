@@ -23,7 +23,6 @@ class Dev(commands.Cog):
         if Harbinger.is_dev(self, ctx, ctx.message.author) == True:
             cmd_msg = "Reloaded all cogs."
             message = await ctx.send("Reloading cogs...")
-            await ctx.message.delete()
             try:
                 for cog in listdir("./cogs"):
                     if cog.endswith(".py") == True:
@@ -70,7 +69,6 @@ class Dev(commands.Cog):
         if Harbinger.is_dev(self, ctx, ctx.message.author) == True:
             cmd_msg = f"Loaded cog: {cog}"
             message = await ctx.send("Loading...")
-            await ctx.message.delete()
             try:
                 await self.bot.load_extension(self.check_cog(cog))
             except Exception as exc:
@@ -103,7 +101,6 @@ class Dev(commands.Cog):
         if Harbinger.is_dev(self, ctx, ctx.message.author) == True:
             cmd_msg = f"Unloaded cog: {cog}"
             message = await ctx.send("Unloading...")
-            await ctx.message.delete()
             try:
                 await self.bot.unload_extension(self.check_cog(cog))
             except Exception as exc:
@@ -136,7 +133,6 @@ class Dev(commands.Cog):
         if Harbinger.is_dev(self, ctx, ctx.message.author) == True:
             cmd_msg = f"Reloaded cog: {cog}"
             message = await ctx.send("Reloading...")
-            await ctx.message.delete()
             try:
                 await self.bot.reload_extension(self.check_cog(cog))
             except Exception as exc:
@@ -163,7 +159,6 @@ class Dev(commands.Cog):
         if Harbinger.is_dev(self, ctx, ctx.message.author) == True:
             cmd_msg = "Pulled from GitHub."
             message = await ctx.send("Checking GitHub for updates...")
-            await ctx.message.delete()
             subprocess.run(["git", "pull"])
             await message.edit(
                 content=f"Bot is now on version {Harbinger.get_ver()}",
