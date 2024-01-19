@@ -8,8 +8,9 @@ from config.read_configs import ReadConfigs as configs
 
 
 TOKEN = configs.discord_token()
-OWNER_ID = configs.owner_id()
+OWNER = configs.owner_id()
 MODERATOR = configs.moderator_id()
+DEVELOPER = configs.developer_id()
 
 
 class Harbinger:
@@ -20,8 +21,9 @@ class Harbinger:
     intents = discord.Intents.default()
     intents.members = True
     intents.message_content = True
-    bot = commands.Bot(command_prefix="!", owner_id=OWNER_ID, intents=intents)
-    bot.remove_command("help")
+    bot = commands.Bot(
+        command_prefix="!", owner_id=OWNER, intents=intents, help_command=None
+    )
 
     def __init__(self, bot):
         self.bot = bot
@@ -59,10 +61,18 @@ class Harbinger:
         """Start the bot."""
         bot.run(TOKEN)
 
-    def is_admin(self, ctx: commands.Context, member: discord.Member):
+    def is_admin(self, ctx: commands.Context, member: discord.Member) -> bool:
         roles = member.roles
         admin = discord.Guild.get_role(ctx.guild, MODERATOR)
         if admin in roles:
+            return True
+        else:
+            return False
+
+    def is_dev(self, ctx: commands.Context, member: discord.Member) -> bool:
+        roles = member.roles
+        dev = discord.Guild.get_role(ctx.guild, DEVELOPER)
+        if dev in roles:
             return True
         else:
             return False
