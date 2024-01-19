@@ -83,16 +83,6 @@ class HelpCommand(commands.Cog):
         categories.sort()
         return categories
 
-    def sort_commands():
-        command_lists = [
-            moderation_commands,
-            bot_commands,
-            music_commands,
-            misc_commands,
-        ]
-        for i in command_lists:
-            dict(sorted(i.items()))
-
     @commands.command()
     async def help(self, ctx, *, command=None) -> None:
         """Get help information about a given command or cog.
@@ -100,6 +90,9 @@ class HelpCommand(commands.Cog):
         Args:
             command (str, optional): Command or category (cog) to get help for. Defaults to None.
         """
+        cmd = f"!help {command}"
+        cmd_msg = f"Requested help with {command}."
+        Harbinger.timestamp(ctx.author, cmd, cmd_msg)
         HelpCommand.sort_commands()
         counter = 0
         # USAGE
