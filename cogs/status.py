@@ -221,7 +221,7 @@ class Status(commands.Cog):
             )
             embedShutdown = discord.Embed(
                 title="Shutdown!",
-                description=f"Shutdown message recieved. Harbinger will shutdown in 5 seconds!",
+                description=f"``Shutdown message recieved. Harbinger will shutdown in 5 seconds!``",
                 color=0xFF0000,
                 timestamp=datetime.now(),
             )
