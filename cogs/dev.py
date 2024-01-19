@@ -9,13 +9,17 @@ from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
 
 DELETION_TIME = configs.delete_time()
-
-channel = 1183811931920932984
+BOT_CHANNEL = configs.bot_channel()
+#channel = 1183811931920932984
 
 class Dev(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    async def get_bot_channel(self):
+        bot_channel = Client.get_channel(self.bot, BOT_CHANNEL)
+        return bot_channel
+    
     @commands.command()
     async def reload_all(self, ctx):
         """Reloads all cogs in the cogs directory."""
@@ -45,9 +49,6 @@ class Dev(commands.Cog):
             )
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
-    async def get_bot_channel(self):
-        bot_channel = Client.get_channel(self.bot, channel)
-        return bot_channel
         
     def check_cog(self, cog) -> str:
         """Correctly formats the cog name.
