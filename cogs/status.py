@@ -92,6 +92,10 @@ class Status(commands.Cog):
         bot_channel = discord.Client.get_channel(self.bot, BOT_CHANNEL)
         return bot_channel
 
+    async def get_bot_author(self):
+        bot_author = discord.Client.get_user(self.bot, 1154559282801549384)
+        return bot_author
+
     @commands.Cog.listener()
     async def on_ready(self) -> None:
         """Confirm bot is logged in."""
@@ -126,6 +130,7 @@ class Status(commands.Cog):
         cmd = "!info"
         await ctx.channel.purge(limit=1)
         cmd_msg = f"Sent info embed to channel {ctx.channel.id}"
+        author = await self.get_bot_author()
         current_version = Harbinger.get_ver()
         current_time = datetime.now()
         delta = current_time - Harbinger.start_time
@@ -133,7 +138,6 @@ class Status(commands.Cog):
             title=f"Harbinger v{current_version}", color=CUSTOM_COLOR
         )
         embedInfo.add_field(name="uptime", value=f"``{delta}``", inline=True)
-        author = await discord.Client.get_user(self.bot, 1154559282801549384)
         embedInfo.add_field(name="author", value=f"{author}", inline=True)
         embedInfo.add_field(
             name="source code",
