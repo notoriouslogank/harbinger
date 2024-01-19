@@ -15,6 +15,7 @@ DELETION_TIME = configs.delete_time()
 EMAIL_ADDRESS = configs.email_address()
 EMAIL_PASSWORD = configs.email_password()
 CUSTOM_COLOR = configs.custom_color()
+BOT_CHANNEL = configs.bot_channel()
 
 playing = [
     "with myself",
@@ -87,6 +88,10 @@ class Status(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
+    async def get_bot_channel(self):
+        bot_channel = discord.Client.get_channel(self.bot, BOT_CHANNEL)
+        return bot_channel
+
     @commands.Cog.listener()
     async def on_ready(self) -> None:
         """Confirm bot is logged in."""
@@ -142,7 +147,8 @@ class Status(commands.Cog):
         ping = (round(self.bot.latency, 2)) * 1000
         cmd = f"!ping"
         cmd_msg = "Pong!"
-        message = await ctx.send(f"Pong! ({ping} ms)")
+        channel = self.get_bot_channel()
+        message = await channel.send(f"Pong! ({ping} ms)")
         await message.edit(delete_after=DELETION_TIME)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
@@ -151,11 +157,12 @@ class Status(commands.Cog):
         """Get bot uptime."""
         cmd = "!uptime"
         await ctx.channel.purge(limit=1)
+        channel = await self.get_bot_channel()
         current_time = datetime.now()
         delta = current_time - Harbinger.start_time
         up_msg = f"uptime: {delta}"
         cmd_msg = f"{up_msg}"
-        message = await ctx.send(f"{up_msg}")
+        message = await channel.send(f"{up_msg}")
         await message.edit(delete_after=DELETION_TIME)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
@@ -185,9 +192,10 @@ class Status(commands.Cog):
             smtp.starttls()
             smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
             smtp.send_message(email)
-        await ctx.send(
-            "Thank you for submitting a bug report.\nIf you'd like to keep abreast of updates/bugfixes, please check out https://github.com/notoriouslogank/harbinger",
-            delete_after=DELETION_TIME,
+        await Harbinger.send_dm(
+            ctx=ctx,
+            member=ctx.message.author,
+            content=f"Thanks for submitting a bug report!  Maybe it'll get fixed someday...",
         )
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
@@ -199,6 +207,7 @@ class Status(commands.Cog):
         await ctx.channel.purge(limit=1)
         if Harbinger.bot.is_owner(ctx.message.author):
             cmd_msg = f"Shutting down..."
+            channel = await self.get_bot_channel()
             embedGooodbye = discord.Embed(
                 title="Harbinger is offline!",
                 description=f"Shutdown by {ctx.message.author} at {timestamp}.",
@@ -213,7 +222,7 @@ class Status(commands.Cog):
             embedShutdown.add_field(
                 name="user", value=f"{ctx.message.author}", inline=True
             )
-            message = await ctx.send(embed=embedShutdown)
+            message = await channel.send(embed=embedShutdown)
             sleep(5)
             await message.edit(embed=embedGooodbye)
             sys.exit()

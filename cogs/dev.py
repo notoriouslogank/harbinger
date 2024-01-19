@@ -27,7 +27,8 @@ class Dev(commands.Cog):
         cmd = "!reload_all"
         if Harbinger.is_dev(self, ctx, ctx.message.author) == True:
             cmd_msg = "Reloaded all cogs."
-            message = await ctx.send("Reloading cogs...")
+            channel = await self.get_bot_channel()
+            message = await channel.send("Reloading cogs...")
             try:
                 for cog in listdir("./cogs"):
                     if cog.endswith(".py") == True:
@@ -74,7 +75,8 @@ class Dev(commands.Cog):
         cmd = "!load_cog"
         if Harbinger.is_dev(self, ctx, ctx.message.author) == True:
             cmd_msg = f"Loaded cog: {cog}"
-            message = await ctx.send("Loading...")
+            channel = await self.get_bot_channel()
+            message = await channel.send("Loading...")
             try:
                 await self.bot.load_extension(self.check_cog(cog))
             except Exception as exc:
@@ -106,7 +108,8 @@ class Dev(commands.Cog):
         await ctx.channel.purge(limi=1)
         if Harbinger.is_dev(self, ctx, ctx.message.author) == True:
             cmd_msg = f"Unloaded cog: {cog}"
-            message = await ctx.send("Unloading...")
+            channel = await self.get_bot_channel()
+            message = await channel.send("Unloading...")
             try:
                 await self.bot.unload_extension(self.check_cog(cog))
             except Exception as exc:
@@ -138,7 +141,8 @@ class Dev(commands.Cog):
         await ctx.channel.purge(limit=1)
         if Harbinger.is_dev(self, ctx, ctx.message.author) == True:
             cmd_msg = f"Reloaded cog: {cog}"
-            message = await ctx.send("Reloading...")
+            channel = await self.get_bot_channel()
+            message = await channel.send("Reloading...")
             try:
                 await self.bot.reload_extension(self.check_cog(cog))
             except Exception as exc:
