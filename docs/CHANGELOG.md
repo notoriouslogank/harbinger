@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.0] - 2023-19-01
+
+### Breaking Change
+
+- config.ini file rewritten to include additional field(s)
+
+### Changed
+
+- Many dev and status commands now respond only to the channel designated in config.ini
+- Several commands (notes, cnote, etc) are now delivered as a DM to the user who called them
+- Stylistic changes to some command output (ping, uptime, info)
+- Minor formatting throughout
+
 ## [3.5.0] - 2023-19-01
 
 ### Changed
