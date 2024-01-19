@@ -95,6 +95,7 @@ class Moderation(commands.Cog):
         await ctx.message.delete()
         has_role = await Moderation.check_role(self, ctx, "Admin")
         for role in ctx.author.roles:
+            await ctx.send(role)
             if has_role == True:
                 await ctx.send("True")
             else:
