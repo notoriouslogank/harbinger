@@ -138,7 +138,7 @@ class Status(commands.Cog):
             title=f"Harbinger v{current_version}", color=CUSTOM_COLOR
         )
         embedInfo.add_field(name="uptime", value=f"``{delta}``", inline=True)
-        embedInfo.add_field(name="author", value=f"{author}", inline=True)
+        embedInfo.add_field(name="author", value=f"``{author}``", inline=True)
         embedInfo.add_field(
             name="source code",
             value="https://github.com/notoriouslogank/Harbinger",
@@ -166,7 +166,7 @@ class Status(commands.Cog):
         channel = await self.get_bot_channel()
         current_time = datetime.now()
         delta = current_time - Harbinger.start_time
-        up_msg = f"uptime: {delta}"
+        up_msg = f"``{delta}``"
         cmd_msg = f"{up_msg}"
         message = await channel.send(f"{up_msg}")
         await message.edit(delete_after=DELETION_TIME)
