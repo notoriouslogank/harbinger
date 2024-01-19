@@ -6,10 +6,77 @@ from harbinger import Harbinger
 
 CUSTOM_COLOR = configs.custom_color()
 
+moderation_commands = {
+    "clear": "Delete a given number of messages.",
+    "history": "Retrieve a given number of messages in this channel.",
+    "serverinfo": "Get server information (owner, members list).",
+    "whois": "Get detailed information about a given user.",
+    "whisper": "Send a DM to a given user as Harbinger.",
+    "code_whisper": "Send a an *encrypted* DM to a given user as Harbinger.",
+    "log": "Write log.txt file (all messages or by author).",
+    "code_say": "Send an *encrypted* message to the channel as Harbinger.",
+    "say": "Send a message to the channel as Harbinger.",
+}
+
+bot_commands = {
+    "reload_all": "Reload all cogs.",
+    "load_cog": "Load a given cog.",
+    "unload_cog": "Unload a given cog.",
+    "reload_cog": "Reload a given cog.",
+    "update": "Perform a ``git pull`` on the Harbinger host machine.",
+    "up": "Confirm Harbinger is online.",
+    "info": "Get Harbinger build info.",
+    "ping": "Get the server latency.",
+    "uptime": "Get the current uptime of Harbinger.",
+    "changelog": "Get the CHANGELOG.md from the Harbinger repository.",
+    "bug": "Send a bug report to Harbinger's maintainer.",
+    "shutdown": "Gracefully shut down Harbinger.",
+}
+
+music_commands = {
+    "join": "Join Harbinger to the currently-connected voice channel.",
+    "leave": "Remove Harbinger from the currently-connected voice channel.",
+    "pause": "Pause the currently-playing stream.",
+    "play": "Play from url.",
+    "stop": "Stop the currently-playing stream.",
+    "stream": "Start playing from url.",
+}
+
+misc_commands = {
+    "ask": "Ask Harbinger a yes/no question and get an answer.",
+    "embed": "Send an embed to the channel as Harbinger.",
+    "playing": "Create an embed with info about a current game.",
+    "switch": "Turn the Minecraft server on or off.",
+    "mccmd": "Send the given command to the Minecraft server.",
+    "note": "Add the given message to the user's notes file.",
+    "notes": "Get your notes.",
+    "cnote": "Clear your notes.",
+    "lmgtfy": "Let me Google that for you.",
+    "define": "Get the Meriam-Webster definition for a given word.",
+    "insult": "Insult a given user as Harbinger.",
+    "add": "Add some numbers.",
+    "roll": "Roll x amount of y-sided dice.",
+    "rps": "Play rock, paper, scissors with Harbinger.",
+}
+
+mod_cmds = moderation_commands.keys()
+bot_cmds = bot_commands.keys()
+music_cmds = music_commands.keys()
+misc_cmds = misc_commands.keys()
+
+categories = ["moderation", "bot", "music", "misc"]
+categories = categories.sort()
+
 
 class HelpCommand(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+
+    def command_list():
+        master_commands_list = []
+        cmd_keys = [mod_cmds, bot_cmds, music_cmds, misc_cmds]
+        for cmd in cmd_keys:
+            master_commands_list.append()
 
     @commands.command()
     async def help(self, ctx, *, command=None) -> None:
@@ -18,80 +85,6 @@ class HelpCommand(commands.Cog):
         Args:
             command (str, optional): Command or category (cog) to get help for. Defaults to None.
         """
-
-        moderation_commands = {
-            "clear": "Delete a given number of messages.",
-            "history": "Retrieve a given number of messages in this channel.",
-            "serverinfo": "Get server information (owner, members list).",
-            "whois": "Get detailed information about a given user.",
-            "whisper": "Send a DM to a given user as Harbinger.",
-            "code_whisper": "Send a an *encrypted* DM to a given user as Harbinger.",
-            "log": "Write log.txt file (all messages or by author).",
-            "code_say": "Send an *encrypted* message to the channel as Harbinger.",
-            "say": "Send a message to the channel as Harbinger.",
-        }
-        mod_cmds = moderation_commands.keys()
-
-        bot_commands = {
-            "reload_all": "Reload all cogs.",
-            "load_cog": "Load a given cog.",
-            "unload_cog": "Unload a given cog.",
-            "reload_cog": "Reload a given cog.",
-            "update": "Perform a ``git pull`` on the Harbinger host machine.",
-            "up": "Confirm Harbinger is online.",
-            "info": "Get Harbinger build info.",
-            "ping": "Get the server latency.",
-            "uptime": "Get the current uptime of Harbinger.",
-            "changelog": "Get the CHANGELOG.md from the Harbinger repository.",
-            "bug": "Send a bug report to Harbinger's maintainer.",
-            "shutdown": "Gracefully shut down Harbinger.",
-        }
-        bot_cmds = bot_commands.keys()
-
-        music_commands = {
-            "join": "Join Harbinger to the currently-connected voice channel.",
-            "leave": "Remove Harbinger from the currently-connected voice channel.",
-            "pause": "Pause the currently-playing stream.",
-            "play": "Play from url.",
-            "stop": "Stop the currently-playing stream.",
-            "stream": "Start playing from url.",
-        }
-        music_cmds = music_commands.keys()
-
-        misc_commands = {
-            "ask": "Ask Harbinger a yes/no question and get an answer.",
-            "embed": "Send an embed to the channel as Harbinger.",
-            "playing": "Create an embed with info about a current game.",
-            "switch": "Turn the Minecraft server on or off.",
-            "mccmd": "Send the given command to the Minecraft server.",
-            "note": "Add the given message to the user's notes file.",
-            "notes": "Get your notes.",
-            "cnote": "Clear your notes.",
-            "lmgtfy": "Let me Google that for you.",
-            "define": "Get the Meriam-Webster definition for a given word.",
-            "insult": "Insult a given user as Harbinger.",
-            "add": "Add some numbers.",
-            "roll": "Roll x amount of y-sided dice.",
-            "rps": "Play rock, paper, scissors with Harbinger.",
-        }
-        misc_cmds = misc_commands.keys()
-
-        categories = ["moderation", "bot", "music", "misc"]
-        categories = categories.sort()
-
-        master_commands_list = []
-
-        def command_list():
-            for cmd in mod_cmds:
-                master_commands_list.append(cmd)
-            for cmd in bot_cmds:
-                master_commands_list.append(cmd)
-            for cmd in music_cmds:
-                master_commands_list.append(cmd)
-            for cmd in misc_cmds:
-                master_commands_list.append(cmd)
-            master_commands_list = master_commands_list.sort()
-            return master_commands_list
 
         # USAGE
         u_ask = {
@@ -227,7 +220,9 @@ class HelpCommand(commands.Cog):
             embed.add_field(
                 name="COMMAND CATEGORIES", value=f"{categories}", inline=False
             )
-            embed.add_field(name="ALL COMMANDS", value=f"{command_list()}")
+            embed.add_field(
+                name="ALL COMMANDS", value=f"{HelpCommand.command_list()}", inline=False
+            )
             await ctx.send(embed=embed)
         # CATEGORIES
         if command == "moderation":
