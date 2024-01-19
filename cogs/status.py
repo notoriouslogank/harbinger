@@ -119,7 +119,7 @@ class Status(commands.Cog):
         cmd = "!up"
         await ctx.channel.purge(limit=1)
         cmd_msg = "Status: online."
-        up_msg = f"{self.bot.user} is online."
+        up_msg = f"```{self.bot.user} is online```."
         message = await ctx.send(f"{up_msg}")
         await message.edit(delete_after=DELETION_TIME)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
@@ -137,8 +137,8 @@ class Status(commands.Cog):
         embedInfo = discord.Embed(
             title=f"Harbinger v{current_version}", color=CUSTOM_COLOR
         )
-        embedInfo.add_field(name="uptime", value=f"``{delta}``", inline=True)
-        embedInfo.add_field(name="author", value=f"``{author}``", inline=True)
+        embedInfo.add_field(name="uptime", value=f"```{delta}```", inline=True)
+        embedInfo.add_field(name="author", value=f"```{author}```", inline=True)
         embedInfo.add_field(
             name="source code",
             value="https://github.com/notoriouslogank/Harbinger",
@@ -154,7 +154,7 @@ class Status(commands.Cog):
         cmd = f"!ping"
         cmd_msg = "Pong!"
         channel = await self.get_bot_channel()
-        message = await channel.send(f"Pong! ({ping} ms)")
+        message = await channel.send(f"```{ping}```")
         await message.edit(delete_after=DELETION_TIME)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
