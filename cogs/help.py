@@ -237,7 +237,7 @@ class HelpCommand(commands.Cog):
             await ctx.send(embed=embed)
         # CATEGORIES
         if command == "moderation":
-            role = discord.Guild.get_role(MODERATOR)
+            role = discord.Guild.get_role(ctx.guild, MODERATOR)
             embed = discord.Embed(
                 title="MODERATION COMMANDS",
                 description="Commands for server moderation.",
@@ -256,7 +256,7 @@ class HelpCommand(commands.Cog):
                 )
             await ctx.send(embed=embed)
         if command == "bot":
-            role = discord.Guild.get_role(DEVELOPER)
+            role = discord.Guild.get_role(ctx.guild, DEVELOPER)
             embed = discord.Embed(
                 title="BOT COMMANDS",
                 description="Commands for maintaining the Harbinger instance.",
