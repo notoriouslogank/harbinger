@@ -1,3 +1,4 @@
+from enum import member
 import random
 import discord
 from pathlib import Path
@@ -83,13 +84,18 @@ class Moderation(commands.Cog):
     async def clear(self, ctx: commands.Context, amount: int = 2) -> None:
         """Delete a number of messages in channel."""
         await ctx.message.delete()
-        if amount > 100:
-            print("You may not purge more than 99 messages.")
+        guild = discord.Client.get_guild(id=918314126692978688)
+        role = ctx.guild.get_role(role_id=MODERATOR)
+        if role in discord.Member.roles:
+            if amount > 100:
+                print("You may not purge more than 99 messages.")
+            else:
+                cmd = f"!clear {amount}"
+                cmd_msg = f"Deleted {amount} messages."
+                Harbinger.timestamp(ctx.author, cmd, cmd_msg)
+                await ctx.channel.purge(limit=amount)
         else:
-            cmd = f"!clear {amount}"
-            cmd_msg = f"Deleted {amount} messages."
-            Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-            await ctx.channel.purge(limit=amount)
+            await ctx.channel.send("Doesn't look like you have the right permissions.")
 
     @commands.command()
     async def whisper(self, ctx, member: discord.Member, *, content) -> None:
