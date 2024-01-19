@@ -46,6 +46,14 @@ class Moderation(commands.Cog):
         return result
 
     @commands.command()
+    async def test(self, ctx: commands.Context):
+        for role in ctx.member.roles:
+            if role.name != "Admin":
+                await ctx.send("Not Admin")
+            else:
+                await ctx.send("Admin")
+
+    @commands.command()
     async def decrypt(self, ctx: commands.Context, code, key, *, message):
         if code == "b64":
             bytes_object = base64.b64decode(message)
@@ -84,18 +92,13 @@ class Moderation(commands.Cog):
     async def clear(self, ctx: commands.Context, amount: int = 2) -> None:
         """Delete a number of messages in channel."""
         await ctx.message.delete()
-        guild = discord.Client.get_guild(918314126692978688)
-        role = ctx.guild.get_role(role_id=MODERATOR)
-        if role in discord.Member.roles:
-            if amount > 100:
-                print("You may not purge more than 99 messages.")
-            else:
-                cmd = f"!clear {amount}"
-                cmd_msg = f"Deleted {amount} messages."
-                Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-                await ctx.channel.purge(limit=amount)
+        if amount > 100:
+            print("You may not purge more than 99 messages.")
         else:
-            await ctx.channel.send("Doesn't look like you have the right permissions.")
+            cmd = f"!clear {amount}"
+            cmd_msg = f"Deleted {amount} messages."
+            Harbinger.timestamp(ctx.author, cmd, cmd_msg)
+            await ctx.channel.purge(limit=amount)
 
     @commands.command()
     async def whisper(self, ctx, member: discord.Member, *, content) -> None:
