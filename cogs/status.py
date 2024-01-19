@@ -166,7 +166,7 @@ class Status(commands.Cog):
         channel = await self.get_bot_channel()
         current_time = datetime.now()
         delta = current_time - Harbinger.start_time
-        up_msg = f"``{delta}``"
+        up_msg = f"```{delta}```"
         cmd_msg = f"{up_msg}"
         message = await channel.send(f"{up_msg}")
         await message.edit(delete_after=DELETION_TIME)
@@ -201,7 +201,7 @@ class Status(commands.Cog):
         await Harbinger.send_dm(
             ctx=ctx,
             member=ctx.message.author,
-            content=f"Thanks for submitting a bug report!  Maybe it'll get fixed someday...",
+            content=f"```Thanks for submitting a bug report!  Maybe it'll get fixed someday...```",
         )
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
