@@ -67,13 +67,13 @@ class Moderation(commands.Cog):
                 result = result + letter
         return result
 
-    def zalgo(self, message: str) -> str:
-        output = zalgo.zalgofy(self, message)
-        return output
+    # def zalgo(self, message: str) -> str:
+    #    output = zalgo.zalgofy(self, message)
+    #    return output
 
     @commands.command()
     async def zalgofy(self, ctx: commands.Context, *, message):
-        output = self.zalgo(message)
+        output = zalgo.zalgofy(self, message)
         await ctx.send(output)
 
     @commands.command()
