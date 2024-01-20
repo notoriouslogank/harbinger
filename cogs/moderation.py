@@ -67,7 +67,7 @@ class Moderation(commands.Cog):
                 result = result + letter
         return result
 
-    def zalgo(*, message):
+    def zalgo(self, message: str) -> str:
         output = zalgo.zalgofy(message)
         return output
 
