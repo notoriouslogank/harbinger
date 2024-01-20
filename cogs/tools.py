@@ -25,12 +25,9 @@ class Tools(commands.Cog):
             safe_mode=False,
             amount=1,
             response_format="txt",
+            joke_type="single",
         )
-        if joke["type"] == "single":
-            print(joke["joke"])
-        else:
-            print(joke["setup"])
-            print(joke["delivery"])
+        print(joke["joke"])
 
     @commands.command()
     async def slang(self, ctx: commands.Context, *query: str) -> None:
