@@ -21,7 +21,7 @@ class Moderation(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
-    def make_zalgo(self, text, intensity=50):
+    def make_zalgo(self, text, intensity=99):
         down_count = round(diacritics.DOWN_LEN * intensity / 100)
         up_count = round(diacritics.UP_LEN * intensity / 100)
         mid_count = round(diacritics.MID_LEN * intensity / 100)
