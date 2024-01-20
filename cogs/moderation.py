@@ -1,7 +1,7 @@
 import base64
 import random
 from pathlib import Path
-from zalgo_text import zalgo
+from zalgo_text.zalgo import zalgo
 import discord
 from config.read_configs import ReadConfigs as configs
 from discord.ext import commands
@@ -67,9 +67,13 @@ class Moderation(commands.Cog):
                 result = result + letter
         return result
 
+    def zalgo(self, *, message):
+        output = zalgo.zalgofy(self, message)
+        return output
+
     @commands.command()
-    async def zalgo(self, ctx: commands.Context, *, message: str):
-        output = zalgo.zalgo.zalgofy(text=f"{message}")
+    async def zalgofy(self, ctx: commands.Context, *, message):
+        output = self.zalgo(message)
         await ctx.send(output)
 
     @commands.command()
