@@ -111,7 +111,7 @@ class HelpCommand(commands.Cog):
         # USAGE
         u_joke = {
             "__Usage__": "``!joke <type>``",
-            "__Args__": "**type (str)**: Type of joke to tell. Categeories are ``dark``, ``pun``, ``misc``, ``programming``. Defaults to ``dark``.",
+            "__Args__": "**type (str)**: Type of joke to tell. Categeories are ``dark``, ``pun``, ``misc``, ``programming``. Defaults to ``any``.",
         }
         u_slang = {
             "__Usage__": "``!slang <query>``",
