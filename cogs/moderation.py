@@ -1,5 +1,6 @@
 import base64
 import random
+from zalgolib import diacritics
 from pathlib import Path
 import discord
 from config.read_configs import ReadConfigs as configs
@@ -19,6 +20,26 @@ class Moderation(commands.Cog):
 
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
+
+    def make_zalgo(self, text, intensity=50):
+        down_count = round(diacritics.DOWN_LEN * intensity / 100)
+        up_count = round(diacritics.UP_LEN * intensity / 100)
+        mid_count = round(diacritics.MID_LEN * intensity / 100)
+        zalgo = ""
+        for char in text:
+            downlist = random.choices(diacritics.DOWN_MARKS, k=down_count)
+            uplist = random.choices(diacritics.UP_MARKS, k=up_count)
+            midlist = random.choices(diacritics.MID_MARKS, k=mid_count)
+            zalgo += char
+            marks = [*uplist, *midlist, *downlist]
+            for mark in marks:
+                zalgo += mark.strip()
+        return zalgo
+
+    @commands.command()
+    async def zalgo(self, ctx, *, message: str):
+        zalgo_text = self.make_zalgo(message)
+        await ctx.send(zalgo_text)
 
     async def get_bot_channel(self):
         bot_channel = discord.Client.get_channel(self.bot, BOT_CHANNEL)
