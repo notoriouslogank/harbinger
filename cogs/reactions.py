@@ -79,6 +79,33 @@ class React(commands.Cog):
         self.bot = bot
 
     @commands.command()
+    async def yes(self, ctx: commands.Context):
+        cmd = "!yes"
+        cmd_msg = "Yes"
+        await ctx.channel.purge(limit=1)
+        reaction = yes[randint(0, (len(yes) - 1))]
+        await ctx.send(reaction)
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+
+    @commands.command()
+    async def no(self, ctx: commands.Context):
+        cmd = "!no"
+        cmd_msg = "No"
+        await ctx.channel.purge(limit=1)
+        reaction = no[randint(0, (len(no) - 1))]
+        await ctx.send(reaction)
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+
+    @commands.command()
+    async def lol(self, ctx: commands.Context):
+        cmd = "!lol"
+        cmd_msg = "LOL"
+        await ctx.channel.purge(limit=1)
+        reaction = lol[randint(0, (len(lol) - 1))]
+        await ctx.send(reaction)
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+
+    @commands.command()
     async def wtf(self, ctx: commands.Context):
         cmd = "!wtf"
         cmd_msg = "WTF?"
