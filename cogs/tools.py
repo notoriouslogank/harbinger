@@ -21,7 +21,10 @@ class Tools(commands.Cog):
     async def print_joke(self, ctx):
         j = await Jokes()
         joke = await j.get_joke(
-            category="Dark", safe_mode=False, amount=1, response_format="txt"
+            category=["programming", "dark"],
+            safe_mode=False,
+            amount=1,
+            response_format="txt",
         )
         if joke["type"] == "single":
             print(joke["joke"])
