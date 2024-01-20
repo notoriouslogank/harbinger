@@ -124,8 +124,9 @@ class Status(commands.Cog):
         current_version = Harbinger.get_ver()
         current_time = datetime.now()
         delta = current_time - Harbinger.start_time
-        embedInfo = discord.Embed(title="Harbinger", color=CUSTOM_COLOR)
-        embedInfo.add_field(name="version", value=f"v{current_version}", inline=True)
+        embedInfo = discord.Embed(
+            title=f"Harbinger v{current_version}", color=CUSTOM_COLOR
+        )
         embedInfo.add_field(name="uptime", value=f"{delta}", inline=True)
         embedInfo.add_field(name="author", value="notoriouslogank", inline=True)
         embedInfo.add_field(
