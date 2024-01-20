@@ -108,3 +108,7 @@ MIT
 ## Copyright
 
 notoriouslogank 2023
+
+## Acknowledgements
+
+[Jivanyatra](https://github.com/jivanyatra) for [zalgolib](https://github.com/jivanyatra/zalgolib/blob/master/src/zalgolib/zalgolib.py), which I rather shamelessly copied into this bot.
