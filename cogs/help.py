@@ -59,6 +59,7 @@ misc_commands = {
     "roll": "Roll x amount of y-sided dice.",
     "rps": "Play rock, paper, scissors with Harbinger.",
     "slang": "Search Urban Dictionary for a given word/phrase.",
+    "joke": "Have Harbinger tell a joke.",
 }
 
 
@@ -108,6 +109,10 @@ class HelpCommand(commands.Cog):
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
         counter = 0
         # USAGE
+        u_joke = {
+            "__Usage__": "``!joke <type>``",
+            "__Args__": "**type (str)**: Type of joke to tell. Categeories are ``dark``, ``pun``, ``misc``, ``programming``. Defaults to ``dark``.",
+        }
         u_slang = {
             "__Usage__": "``!slang <query>``",
             "__Args__": "**query (str)**: Word or phrase to search for on Urban Dictionary.",
@@ -631,6 +636,17 @@ class HelpCommand(commands.Cog):
             embed.add_field(name="__Args__", value=f'{u_stream["__Args__"]}')
             await ctx.send(embed=embed)
         # MISC
+        if command == "joke":
+            embed = discord.Embed(
+                title=f"{command}",
+                description=f"{misc_commands[command]}",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(
+                name="__Usage__", value=f"{u_joke['__Usage__']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f"{u_add['__Args__']}", inline=False)
+            await ctx.send(embed=embed)
         if command == "add":
             embed = discord.Embed(
                 title=f"{command}",
