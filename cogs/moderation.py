@@ -69,7 +69,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     async def zalgo(self, ctx: commands.Context, *, message: str):
-        output = zalgo.zalgo.zalgofy(message)
+        output = zalgo.zalgo.zalgofy(self, message)
         await ctx.send(output)
 
     @commands.command()
