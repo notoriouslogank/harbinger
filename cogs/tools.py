@@ -1,5 +1,5 @@
 from random import randint
-
+from jokeapi import Jokes
 import aiohttp
 import discord
 from config.read_configs import ReadConfigs as configs
@@ -16,6 +16,20 @@ class Tools(commands.Cog):
 
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
+
+    @commands.command()
+    async def joke(self, ctx, type="any"):
+        cmd = f"!joke"
+        cmd_msg = f"Told a joke."
+        await ctx.channel.purge(limit=1)
+        j = await Jokes()
+        get_joke = await j.get_joke(
+            category=[type],
+            safe_mode=False,
+            amount=1,
+            response_format="txt",
+        )
+        await ctx.send(get_joke)
 
     @commands.command()
     async def slang(self, ctx: commands.Context, *query: str) -> None:
