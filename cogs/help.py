@@ -96,6 +96,8 @@ class HelpCommand(commands.Cog):
             master_commands_list.append(cmd)
         for cmd in misc_commands:
             master_commands_list.append(cmd)
+        for cmd in reactions:
+            master_commands_list.append(cmd)
         master_commands_list.sort()
         return master_commands_list
 
