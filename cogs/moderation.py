@@ -21,7 +21,16 @@ class Moderation(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
-    def make_zalgo(self, text, intensity=99):
+    def make_zalgo(self, text: str, intensity=99) -> str:
+        """Create Zalgo text.
+
+        Args:
+            text (str): Message to Zalgo-ify
+            intensity (int, optional): How "intense" the Zalgo effect is. Defaults to 99.
+
+        Returns:
+            str: Zalgo-ified message.
+        """
         down_count = round(diacritics.DOWN_LEN * intensity / 100)
         up_count = round(diacritics.UP_LEN * intensity / 100)
         mid_count = round(diacritics.MID_LEN * intensity / 100)
@@ -38,10 +47,28 @@ class Moderation(commands.Cog):
 
     @commands.command()
     async def zalgo(self, ctx, *, message: str):
-        zalgo_text = self.make_zalgo(message)
-        await ctx.send(zalgo_text)
+        """Send Zalgo-style message to channel as Harbinger.
+
+        Args:
+            message (str): Message to send.
+        """
+        cmd = f"!zalgo"
+        await ctx.channel.purge(limit=1)
+        if Harbinger.is_admin(self, ctx, ctx.message.author) == True:
+            cmd_msg = f"Sent Zalgo message: {message}"
+            zalgo_text = self.make_zalgo(message)
+            await ctx.send(zalgo_text)
+        else:
+            cmd_msg = f"ERROR: Missing Admin role."
+            await ctx.send("You must have Admin role to execute this command!")
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     async def get_bot_channel(self):
+        """Helper function to get bot channel.
+
+        Returns:
+            discord.Channel: Channel to receive bot maintanence messages.
+        """
         bot_channel = discord.Client.get_channel(self.bot, BOT_CHANNEL)
         return bot_channel
 
