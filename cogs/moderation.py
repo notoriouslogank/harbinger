@@ -72,8 +72,8 @@ class Moderation(commands.Cog):
     #    return output
 
     @commands.command()
-    async def zalgofy(self, ctx: commands.Context, *, message):
-        output = zalgo.zalgofy(self, message)
+    async def zfy(self, ctx: commands.Context, *, message):
+        output = zalgo.zalgofy(message)
         await ctx.send(output)
 
     @commands.command()
