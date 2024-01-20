@@ -18,13 +18,13 @@ class Tools(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def joke(self, ctx):
+    async def joke(self, ctx, type="dark"):
         cmd = f"!joke"
         cmd_msg = f"Told a joke."
         await ctx.channel.purge(limit=1)
         j = await Jokes()
         get_joke = await j.get_joke(
-            category=["dark"],
+            category=[type],
             safe_mode=False,
             amount=1,
             response_format="txt",
