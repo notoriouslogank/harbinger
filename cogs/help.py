@@ -17,6 +17,7 @@ moderation_commands = {
     "log": "Write log.txt file (all messages or by author).",
     "code_say": "Send an *encrypted* message to the channel as Harbinger.",
     "say": "Send a message to the channel as Harbinger.",
+    "zalgo": "Send a Zalgo-style message as Harbinger.",
 }
 
 bot_commands = {
@@ -109,6 +110,10 @@ class HelpCommand(commands.Cog):
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
         counter = 0
         # USAGE
+        u_zalgo = {
+            "__Usage__": "``!zalgo <message>``",
+            "__Args__": "**message (str): Message to en-Zalgo-ify.",
+        }
         u_joke = {
             "__Usage__": "``!joke <type>``",
             "__Args__": "**type (str)**: Type of joke to tell. Categeories are ``dark``, ``pun``, ``misc``, ``programming``. Defaults to ``any``.",
@@ -333,6 +338,19 @@ class HelpCommand(commands.Cog):
                 )
             await ctx.send(embed=embed)
         # MODERATION
+        if command == "zalgo":
+            embed = discord.Embed(
+                title=f"{command}",
+                description=f"{moderation_commands['zalgo']}",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(
+                name="__Usage__", value=f"{u_zalgo['__Usage__']}", inline=False
+            )
+            embed.add_field(
+                name="__Args__", value=f"{u_zalgo['__Args__']}", inline=False
+            )
+            ctx.send(embed=embed)
         if command == "history":
             embed = discord.Embed(
                 title=f"{command}",
