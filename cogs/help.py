@@ -63,6 +63,17 @@ misc_commands = {
     "joke": "Have Harbinger tell a joke.",
 }
 
+reactions = {
+    "yes": "Send a ``yes`` reaction .gif.",
+    "no": "Send a ``no`` reaction .gif.",
+    "lol": "Send a ``lol`` reaction .gif.",
+    "wtf": "Send a ``wtf`` reaction .gif",
+    "sorry": "Send a ``sorry`` reaction .gif",
+    "hi": "Send a ``hi`` reaction .gif.",
+    "bye": "Send a ``bye`` reaction .gif.",
+    "fu": "Send a ``fuck you`` reaction .gif.",
+}
+
 
 class HelpCommand(commands.Cog):
     """Class for generating help information."""
@@ -85,6 +96,8 @@ class HelpCommand(commands.Cog):
             master_commands_list.append(cmd)
         for cmd in misc_commands:
             master_commands_list.append(cmd)
+        for cmd in reactions:
+            master_commands_list.append(cmd)
         master_commands_list.sort()
         return master_commands_list
 
@@ -94,7 +107,7 @@ class HelpCommand(commands.Cog):
         Returns:
             list: List of command categories.
         """
-        categories = ["moderation", "bot", "misc", "music"]
+        categories = ["reactions", "moderation", "bot", "misc", "music"]
         categories.sort()
         return categories
 
@@ -110,6 +123,38 @@ class HelpCommand(commands.Cog):
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
         counter = 0
         # USAGE
+        u_lol = {
+            "__Usage__": "``!lol``",
+            "__Args__": "**[None]**",
+        }
+        u_wtf = {
+            "__Usage__": "``!wtf``",
+            "__Args__": "**[None]**",
+        }
+        u_no = {
+            "__Usage__": "``!no``",
+            "__Args__": "**[None]**",
+        }
+        u_yes = {
+            "__Usage__": "``!yes``",
+            "__Args__": "**[None]**",
+        }
+        u_fu = {
+            "__Usage__": "``!fu``",
+            "__Args__": "**[None]**",
+        }
+        u_sorry = {
+            "__Usage__": "``!sorry``",
+            "__Args__": "**[None]**",
+        }
+        u_hi = {
+            "__Usage__": "``!hi``",
+            "__Args__": "**[None]**",
+        }
+        u_bye = {
+            "__Usage__": "``!bye``",
+            "__Args__": "**[None]**",
+        }
         u_zalgo = {
             "__Usage__": "``!zalgo <message>``",
             "__Args__": "**message (str): Message to en-Zalgo-ify.",
@@ -337,11 +382,120 @@ class HelpCommand(commands.Cog):
                     text="*These commands may be executed by anyone, regardless of role."
                 )
             await ctx.send(embed=embed)
+        if command == "reactions":
+            embed = discord.Embed(
+                title="REACTIONS",
+                description="React with a (random) .gif of the chosen sentiment.",
+                color=CUSTOM_COLOR,
+            )
+            for cmd in reactions:
+                key, value = list(reactions.items())[counter]
+                embed.add_field(
+                    name=f"{str(key)}",
+                    value=f"{str(value)}",
+                    inline=True,
+                )
+                counter += 1
+                embed.set_footer(
+                    text="*These commands may be executed by anyone, regardless of role."
+                )
+            await ctx.send(embed=embed)
+        # REACTIONS
+        if command == "lol":
+            embed = discord.Embed(
+                title=f"{command}",
+                description=f"{reactions[command]}",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(
+                name="__Usage__", value=f"{u_lol['__Usage__']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f"{u_lol['__Args__']}", inline=False)
+            await ctx.send(embed=embed)
+        if command == "wtf":
+            embed = discord.Embed(
+                title=f"{command}",
+                description=f"{reactions[command]}",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(
+                name="__Usage__", value=f"{u_wtf['__Usage__']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f"{u_wtf['__Args__']}", inline=False)
+            await ctx.send(embed=embed)
+        if command == "no":
+            embed = discord.Embed(
+                title=f"{command}",
+                description=f"{reactions[command]}",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(
+                name="__Usage__", value=f"{u_no['__Usage__']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f"{u_no['__Args__']}", inline=False)
+            await ctx.send(embed=embed)
+        if command == "yes":
+            embed = discord.Embed(
+                title=f"{command}",
+                description=f"{reactions[command]}",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(
+                name="__Usage__", value=f"{u_yes['__Usage__']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f"{u_yes['__Args__']}", inline=False)
+            await ctx.send(embed=embed)
+        if command == "fu":
+            embed = discord.Embed(
+                title=f"{command}",
+                description=f"{reactions[command]}",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(
+                name="__Usage__", value=f"{u_fu['__Usage__']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f"{u_fu['__Args__']}", inline=False)
+            await ctx.send(embed=embed)
+        if command == "sorry":
+            embed = discord.Embed(
+                title=f"{command}",
+                description=f"{reactions[command]}",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(
+                name="__Usage__", value=f"{u_sorry['__Usage__']}", inline=False
+            )
+            embed.add_field(
+                name="__Args__", value=f"{u_sorry['__Args__']}", inline=False
+            )
+            await ctx.send(embed=embed)
+        if command == "hi":
+            embed = discord.Embed(
+                title=f"{command}",
+                description=f"{reactions[command]}",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(
+                name="__Usage__", value=f"{u_hi['__Usage__']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f"{u_hi['__Args__']}", inline=False)
+            await ctx.send(embed=embed)
+        if command == "bye":
+            embed = discord.Embed(
+                title=f"{command}",
+                description=f"{reactions[command]}",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(
+                name="__Usage__", value=f"{u_bye['__Usage__']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f"{u_bye['__Args__']}", inline=False)
+            await ctx.send(embed=embed)
         # MODERATION
         if command == "zalgo":
             embed = discord.Embed(
                 title=f"{command}",
-                description=f"{moderation_commands['zalgo']}",
+                description=f"{moderation_commands[command]}",
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
@@ -350,7 +504,7 @@ class HelpCommand(commands.Cog):
             embed.add_field(
                 name="__Args__", value=f"{u_zalgo['__Args__']}", inline=False
             )
-            ctx.send(embed=embed)
+            await ctx.send(embed=embed)
         if command == "history":
             embed = discord.Embed(
                 title=f"{command}",
