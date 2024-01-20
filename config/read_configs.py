@@ -57,6 +57,13 @@ class ReadConfigs:
         Configure.encrypt(python_config_file, Configure.load_key())  # encrypt
         return owner_id
 
+    def bot_channel():
+        ReadConfigs.decrypt(python_config_file, ReadConfigs.load_key())
+        config.read(python_config_file)
+        bot_channel = int(config["Bot"]["bot_channel"])
+        Configure.encrypt(python_config_file, Configure.load_key())
+        return bot_channel
+
     def email_address() -> str:
         """Retrieve email address for bot maintainer from config.ini
 

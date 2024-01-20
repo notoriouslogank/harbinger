@@ -1,6 +1,6 @@
-from ast import Del
 import subprocess
 from os import listdir
+from discord import Client
 
 from discord.ext import commands
 
@@ -9,12 +9,17 @@ from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
 
 DELETION_TIME = configs.delete_time()
-
+BOT_CHANNEL = configs.bot_channel()
+#channel = 1183811931920932984
 
 class Dev(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    async def get_bot_channel(self):
+        bot_channel = Client.get_channel(self.bot, BOT_CHANNEL)
+        return bot_channel
+    
     @commands.command()
     async def reload_all(self, ctx):
         """Reloads all cogs in the cogs directory."""
@@ -22,7 +27,8 @@ class Dev(commands.Cog):
         cmd = "!reload_all"
         if Harbinger.is_dev(self, ctx, ctx.message.author) == True:
             cmd_msg = "Reloaded all cogs."
-            message = await ctx.send("Reloading cogs...")
+            channel = await self.get_bot_channel()
+            message = await channel.send("Reloading cogs...")
             try:
                 for cog in listdir("./cogs"):
                     if cog.endswith(".py") == True:
@@ -44,6 +50,7 @@ class Dev(commands.Cog):
             )
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
+        
     def check_cog(self, cog) -> str:
         """Correctly formats the cog name.
 
@@ -68,7 +75,8 @@ class Dev(commands.Cog):
         cmd = "!load_cog"
         if Harbinger.is_dev(self, ctx, ctx.message.author) == True:
             cmd_msg = f"Loaded cog: {cog}"
-            message = await ctx.send("Loading...")
+            channel = await self.get_bot_channel()
+            message = await channel.send("Loading...")
             try:
                 await self.bot.load_extension(self.check_cog(cog))
             except Exception as exc:
@@ -100,7 +108,8 @@ class Dev(commands.Cog):
         await ctx.channel.purge(limi=1)
         if Harbinger.is_dev(self, ctx, ctx.message.author) == True:
             cmd_msg = f"Unloaded cog: {cog}"
-            message = await ctx.send("Unloading...")
+            channel = await self.get_bot_channel()
+            message = await channel.send("Unloading...")
             try:
                 await self.bot.unload_extension(self.check_cog(cog))
             except Exception as exc:
@@ -132,7 +141,8 @@ class Dev(commands.Cog):
         await ctx.channel.purge(limit=1)
         if Harbinger.is_dev(self, ctx, ctx.message.author) == True:
             cmd_msg = f"Reloaded cog: {cog}"
-            message = await ctx.send("Reloading...")
+            channel = await self.get_bot_channel()
+            message = await channel.send("Reloading...")
             try:
                 await self.bot.reload_extension(self.check_cog(cog))
             except Exception as exc:
@@ -159,7 +169,8 @@ class Dev(commands.Cog):
         await ctx.channel.purge(limit=1)
         if Harbinger.is_dev(self, ctx, ctx.message.author) == True:
             cmd_msg = "Pulled from GitHub."
-            message = await ctx.send("Checking GitHub for updates...")
+            channel = await self.get_bot_channel()
+            message = await channel.send("Checking GitHub for updates...")
             subprocess.run(["git", "pull"])
             await message.edit(
                 content=f"Bot is now on version {Harbinger.get_ver()}",
