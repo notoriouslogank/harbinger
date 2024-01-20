@@ -1,7 +1,6 @@
 import base64
 import random
 from pathlib import Path
-from zalgo_text.zalgo import zalgo
 import discord
 from config.read_configs import ReadConfigs as configs
 from discord.ext import commands
@@ -66,15 +65,6 @@ class Moderation(commands.Cog):
             else:
                 result = result + letter
         return result
-
-    # def zalgo(self, message: str) -> str:
-    #    output = zalgo.zalgofy(self, message)
-    #    return output
-
-    @commands.command()
-    async def zfy(self, ctx: commands.Context, *, message):
-        output = zalgo.zalgofy(self, message)
-        await ctx.send(output)
 
     @commands.command()
     async def decrypt(
