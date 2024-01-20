@@ -58,6 +58,7 @@ misc_commands = {
     "add": "Add some numbers.",
     "roll": "Roll x amount of y-sided dice.",
     "rps": "Play rock, paper, scissors with Harbinger.",
+    "slang": "Search Urban Dictionary for a given word/phrase.",
 }
 
 
@@ -107,6 +108,10 @@ class HelpCommand(commands.Cog):
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
         counter = 0
         # USAGE
+        u_slang = {
+            "__Usage__": "``!slang <query>``",
+            "__Args__": "**query (str)**: Word or phrase to search for on Urban Dictionary.",
+        }
         u_ask = {
             "__Usage__": "``!ask <question>``",
             "__Args__": "**question (str)**: Question to ask Harbinger [must end in ``?``].",
@@ -750,6 +755,19 @@ class HelpCommand(commands.Cog):
             )
             embed.add_field(
                 name="__Args__", value=f"{u_lmgtfy['__Args__']}", inline=False
+            )
+            await ctx.send(embed=embed)
+        if command == "slang":
+            embed = discord.Embed(
+                title=f"{command}",
+                description=f"{misc_commands[command]}",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(
+                name="__Usage__", value=f"{u_slang['__Usage__']}", inline=False
+            )
+            embed.add_field(
+                name="__Args__", value=f"{u_slang['__Args__']}", inline=False
             )
             await ctx.send(embed=embed)
         if command == "define":

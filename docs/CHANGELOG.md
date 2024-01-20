@@ -17,6 +17,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Stylistic changes to some command output (ping, uptime, info)
 - Minor formatting throughout
 
+## [3.6.2] - 2023-19-01
+
+### Hotfix
+
+- Reformatted !info embed
+
+## [3.6.1] - 2023-19-01
+
+### Hotfix
+
+- !notes and !cnote commands now function as intended (insufficient positional args)
+
+## [3.6.0] - 2023-19-01
+
+### Added
+
+- !slang command to search Urban Dictionary
+- !help info for !slang command
+
 ## [3.5.0] - 2023-19-01
 
 ### Changed

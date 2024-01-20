@@ -137,8 +137,8 @@ class Status(commands.Cog):
         embedInfo = discord.Embed(
             title=f"Harbinger v{current_version}", color=CUSTOM_COLOR
         )
-        embedInfo.add_field(name="uptime", value=f"```{delta}```", inline=True)
-        embedInfo.add_field(name="author", value=f"```{author}```", inline=True)
+        embedInfo.add_field(name="uptime", value=f"`{delta}`", inline=True)
+        embedInfo.add_field(name="author", value="`notoriouslogank`", inline=True)
         embedInfo.add_field(
             name="source code",
             value="https://github.com/notoriouslogank/Harbinger",
