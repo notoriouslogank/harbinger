@@ -27,7 +27,7 @@ class Tools(commands.Cog):
             response_format="txt",
             joke_type="single",
         )
-        print(joke)
+        await ctx.send(joke)
 
     @commands.command()
     async def slang(self, ctx: commands.Context, *query: str) -> None:
