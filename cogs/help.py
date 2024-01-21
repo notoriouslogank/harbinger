@@ -312,17 +312,17 @@ class HelpCommand(commands.Cog):
         # GENERAL
         if command == None:
             embed = discord.Embed(
-                title="__HELP!__",
+                title="# HELP!",
                 description="Further information about supported bot commands.",
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="__COMMAND CATEGORIES__",
+                name="## COMMAND CATEGORIES",
                 value=f"{' '.join(HelpCommand.categories_list())}",
                 inline=False,
             )
             embed.add_field(
-                name="__ALL COMMANDS__",
+                name="## ALL COMMANDS",
                 value=f"{' '.join(HelpCommand.command_list())}",
                 inline=False,
             )
