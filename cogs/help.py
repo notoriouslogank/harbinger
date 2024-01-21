@@ -64,14 +64,18 @@ misc_commands = {
 }
 
 reactions = {
-    "yes": "Send a ``yes`` reaction .gif.",
-    "no": "Send a ``no`` reaction .gif.",
-    "lol": "Send a ``lol`` reaction .gif.",
-    "wtf": "Send a ``wtf`` reaction .gif",
-    "sorry": "Send a ``sorry`` reaction .gif",
-    "hi": "Send a ``hi`` reaction .gif.",
-    "bye": "Send a ``bye`` reaction .gif.",
-    "fu": "Send a ``fuck you`` reaction .gif.",
+    "yes": "Send a **yes** reaction .gif.",
+    "no": "Send a **no** reaction .gif.",
+    "lol": "Send a **lol** reaction .gif.",
+    "wtf": "Send a **wtf** reaction .gif",
+    "sorry": "Send a **sorry** reaction .gif",
+    "hi": "Send a **hi** reaction .gif.",
+    "bye": "Send a **bye** reaction .gif.",
+    "fu": "Send a **fuck you** reaction .gif.",
+    "sad": "Send a **sad** reaction .gif",
+    "angry": "Send an **angry** reaction .gif",
+    "shook": "Send a **shook** reaction .gif",
+    "bored": "Send a **bored** reaction .gif",
 }
 
 
@@ -123,6 +127,22 @@ class HelpCommand(commands.Cog):
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
         counter = 0
         # USAGE
+        u_sad = {
+            "__Usage__": "``!sad``",
+            "__Args__": "**[None]**",
+        }
+        u_angry = {
+            "__Usage__": "``!angry``",
+            "__Args__": "**[None]**",
+        }
+        u_bored = {
+            "__Usage__": "``!bored``",
+            "__Args__": "**[None]**",
+        }
+        u_shook = {
+            "__Usage__": "``!shook``",
+            "__Args__": "**[None]**",
+        }
         u_lol = {
             "__Usage__": "``!lol``",
             "__Args__": "**[None]**",
@@ -401,6 +421,56 @@ class HelpCommand(commands.Cog):
                 )
             await ctx.send(embed=embed)
         # REACTIONS
+        if command == "angry":
+            embed = discord.Embed(
+                title=f"{command}",
+                description=f"{reactions[command]}",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(
+                name="__Usage__", value=f"{u_angry['__Usage__']}", inline=False
+            )
+            embed.add_field(
+                name="__Args__", value=f"{u_angry['__Args__']}", inline=False
+            )
+            await ctx.send(embed=embed)
+        if command == "shook":
+            embed = discord.Embed(
+                title=f"{command}",
+                description=f"{reactions[command]}",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(
+                name="__Usage__", value=f"{u_shook['__Usage__']}", inline=False
+            )
+            embed.add_field(
+                name="__Args__", value=f"{u_shook['__Args__']}", inline=False
+            )
+            await ctx.send(embed=embed)
+        if command == "bored":
+            embed = discord.Embed(
+                title=f"{command}",
+                description=f"{reactions[command]}",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(
+                name="__Usage__", value=f"{u_bored['__Usage__']}", inline=False
+            )
+            embed.add_field(
+                name="__Args__", value=f"{u_bored['__Args__']}", inline=False
+            )
+            await ctx.send(embed=embed)
+        if command == "sad":
+            embed = discord.Embed(
+                title=f"{command}",
+                description=f"{reactions[command]}",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(
+                name="__Usage__", value=f"{u_sad['__Usage__']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f"{u_sad['__Args__']}", inline=False)
+            await ctx.send(embed=embed)
         if command == "lol":
             embed = discord.Embed(
                 title=f"{command}",
