@@ -2,92 +2,83 @@
 
 Harbinger, a Discord bot crafted in Python with a touch of Bash, seamlessly blends essential Discord server commands with a sophisticated integration that empowers users to effortlessly control their Minecraft server directly from within the Discord platform.
 
-## Adding Harbinger to Your Server
-
-Click [here](https://discord.com/api/oauth2/authorize?client_id=1159502288163971152&permissions=8&scope=bot) to invite Harbinger to your server.
-
-You will need to have two roles in your server named "Admin" and "Developer" -- this ensures that only users with relevant roles may use certain bot commands.
-
-Note that by adding this bot directly to your server, you are necessarily using the default bot config.  If you would prefer to run the bot on your local machine (and thus configure the bot to your specifications, add more commands, etc.), please follow the following steps:
-
 ## Installation
 
-Harbinger is written *primarily* in Python, and as such *can* be run in a platform-agnostic way: launching harbinger.py will launch the bot as a standalone application -- this will *not* launch the Minecraft server, *nor* will it support multiplexing.
-
-In order to run Harbinger *as intended*, and with all supported features, tmux will need to be installed.
-
-### Tmux
-
-Harbinger uses [tmux](https://github.com/tmux/tmux/wiki) to multiplex your Linux terminal -- this allows for multiple "panes", each containing a separate running process (ie, one Bot process and one Server process).
-
-Installing tmux is straightforward (on Debian-based systems):
-
-```bash
-sudo apt update && sudo apt install tmux -y
-```
-
-### Clone the Repository
+First, clone the repo:
 
 ```bash
 git clone https://github.com/notoriouslogank/harbinger.git
 ```
 
-### Install Minecraft Server
-
-Harbinger is designed to work with the Forge mod loader for Minecraft.  Download it [here](https://files.minecraftforge.net/net/minecraftforge/forge/), and run it:
+Next, go ahead and install the requirements.  It is highly recommended to do so in a virtual environment, but you may install on bare metal at your own risk!
 
 ```bash
-java -jar forge-x.xx.x-installer.jar --installServer
-```
-
-Detailed installation/configuration for Forge is outside the scope of this document, but more information can be found [here](https://minecraft.fandom.com/wiki/Tutorials/Setting_up_a_Minecraft_Forge_server).
-
-### Install requirements.txt
-
-```bash
-python3 -m pip install pipreqs && python3 -m pipreqs .
-```
-
-or
-
-```bash
+cd harbinger
 pip install -r requirements.txt
 ```
 
-### Setup Harbinger Configuration
+In order for Harbinger to launch, you'll need to supply it with a configuration file.  The Harbinger repository contains a tool to help you in this task: ``harbinger/config/configure.py``. Before we can generate the config file, however, we need to generate some cryptographic keys (to ensure no secret tokens, passwords, et al leak from the config file if it were erroneously (or maliciously) shared).
 
-The first time Harbinger is run on a new system, it will *fail* to connect unless there are valid configuration files.
+A detailed explanation of Fernet key cryptography -- and symmetric encryption more generally -- can be fround in the documentation for the [cryptography](https://cryptography.io/en/latest/fernet/) module we'll use to generate our key(s).
 
-By default, the configuration files for Harbinger are located in /config/:
+You will need to have a Fernet key generated and placed in the proper location: by default, Harbinger looks for the Fernet key file called ``key.key`` within the config/ directory:
 
-- config.ini: global Harbinger bot configuration file; this contains the bot API token, as well as other necessary information for Harbinger to launch properly
-- start.conf: configures paths necessary to auto-start the Minecraft server (as well as multiplex the terminal)
+```bash
+cd config
+python3
+```
 
-To ensure you have the configuration files created properly, it is recommended to run:
+From the Python interactive shell, run the following commands (if you'd rather, this can be saved as a script (with a .py extension) and run directly, ie ``python3 script_name.py``).:
+
+```python
+from cryptography.fernet import Fernet
+key = Fernet.generate_key()
+with open("config/key.key", "wb") as key_file:
+    key_file.write(key)
+```
+
+Once you've generated this file (config/key.key), make sure you *do not misplace it*: it will be required to encrypt and decrypt your configuration file as needed; if you lose this key, you will have to generate a new key (and, therefore, a new config file).  Now we can create our configuration file (Harbinger will use our keyfile by default for the encryption):
 
 ```bash
 python3 config/configure.py
 ```
 
-This will walk you step-by-step through writing your config.ini file; advanced users can edit this file directly with his/her favorite text editor.
+Follow the onscreen prompts to provide the Harbinger config file with all of the necessary data.  The config.ini key/value pairs are described in the following section.
 
-If, after creating your config.ini file, you would like to view the contents in a non-obscured format (config.ini by default base64 encodes all values to avoid inadvertently revealing sensitive data in the event that config.ini should get leaked publicly), you can run the following command:
+## config.ini
 
-```bash
-python3 config/read_configs.py
-```
+The following serves as a quick guide to the keys and values for the config.ini file:
+
+### Email
+
+- address: An email address to send/receive bug reports. (Harbinger *does not* validate this.)
+- password: The password to the email address, for automated logging in, sending mail, etc.
+
+### Bot
+
+- discord_token: The Discord API token for your bot.  You'll get that from the [Discord Developer Portal](https://discord.com/developers/docs/intro) when you're setting up your bot on the backend.
+- bot_channel: The Channel ID for the channel you'd like to receive general bot status messages that have no specific context. Must be ``int``.
+- delete_after: Amount of time, in seconds, before auto-deleting messages auto-delete. Must be ``int``.
+- owner_id: The Member ID number for the bot's registered owner. Must be ``int``.
+- custom_color: The RGB value for Harbinger's main color scheme in your server. Must be in format ``000 000 000``.
+
+### Server
+
+- server_dir: An absolute path to the directory your Minecraft server is launched from.
+- startup_script: An absolute path to the script used to launch your Minecraft server.
+- server_local_ip: The local, private IP address of the Minecraft server.
+- server_public_ip: The public IP address of the Minecraft server.
+
+### Roles
+
+- moderator: The Role ID of the highest role in your server (used for checking Harbinger command permissions)
+- developer: The Role ID of the developer role in your server (used for sending bot commands like !status, !up; can be same as moderator for higher security.)
+
+Once you've provided all the necessary information to the configuration script, it will go ahead and write your (fully-encrypted) config.ini file.  Do not share this file -- or your key.key file -- with anyone you don't want to have *full access* to all bot functionality (as well as potentially cleartext passwords in some cases).
 
 ## Usage
 
-Eventually, the goal is to have startup scripts for multiple operating systems.  At the time of this writing, however (v2.1.0), only a Linux startup script exists.  
-
-To launch via the Linux startup script (launches both Harbinger as well as the Minecraft server in a multiplexed terminal):
-
-```bash
-./start.sh
-```
-
-To launch the bot *only*:
+All that's left at this point is to run your instance and let the magic happen:
 
 ```bash
 python3 harbinger.py
