@@ -8,3 +8,4 @@ config.ini
 __pycache__
 ./user_notes/*
 key.key
+__init__
