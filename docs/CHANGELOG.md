@@ -4,27 +4,37 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [4.2.1] - 2023-19-01
+## [4.3.0] - 2024-02-02
+
+### Fixed
+
+- Corrected incorrect years entered in CHANGELOG since 2024
+
+### Changed
+
+- Rewrote installation instructions inside README
+
+## [4.2.1] - 2024-19-01
 
 ### Changed
 
 - Formatting for main !help command embed
 
-## [4.2.0] - 2023-19-01
+## [4.2.0] - 2024-19-01
 
 ### Added
 
 - Reactions for: sad, angry, shook, bored
 - Help commands for each new reaction
 
-## [4.1.0] - 2023-19-01
+## [4.1.0] - 2024-19-01
 
 ### Added
 
 - Reactions cog to send reaction .gifs based on particular sentiment (hi, by, lol, wtf, etc.)
 - Help information for all reactions
 
-## [4.0.3] - 2023-19-01
+## [4.0.3] - 2024-19-01
 
 ### Added
 
@@ -33,20 +43,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Acknowledgements section to README.md
 - Help information for !zalgo command
 
-## [4.0.2] - 2023-19-01
+## [4.0.2] - 2024-19-01
 
 ### Changed
 
 - Changed !joke default parameter to "any" to hopefully produce more variety
 
-## [4.0.1] - 2023-19-01
+## [4.0.1] - 2024-19-01
 
 ### Added
 
 - !joke command to tell jokes
 - !help information about !joke command
 
-## [4.0.0] - 2023-19-01
+## [4.0.0] - 2024-19-01
 
 ### Breaking Change
 
@@ -59,26 +69,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Stylistic changes to some command output (ping, uptime, info)
 - Minor formatting throughout
 
-## [3.6.2] - 2023-19-01
+## [3.6.2] - 2024-19-01
 
 ### Hotfix
 
 - Reformatted !info embed
 
-## [3.6.1] - 2023-19-01
+## [3.6.1] - 2024-19-01
 
 ### Hotfix
 
 - !notes and !cnote commands now function as intended (insufficient positional args)
 
-## [3.6.0] - 2023-19-01
+## [3.6.0] - 2024-19-01
 
 ### Added
 
 - !slang command to search Urban Dictionary
 - !help info for !slang command
 
-## [3.5.0] - 2023-19-01
+## [3.5.0] - 2024-19-01
 
 ### Changed
 
@@ -98,7 +108,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Sorted all imports
 - CHANGELOG.md somehow had two copies of itself in one file
 
-## [3.4.0] - 2023-18-01
+## [3.4.0] - 2024-18-01
 
 ### Help Command Rewrite
 
@@ -114,13 +124,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - Refactored a number of functions throughout just to make them cleaner-looking
 
-## [3.3.4] - 2023-15-01
+## [3.3.4] - 2024-15-01
 
 ### Added
 
 - !embed command to send an embed as Harbinger
 
-## [3.3.3] - 2023-15-01
+## [3.3.3] - 2024-15-01
 
 ### Fixed
 
@@ -131,37 +141,37 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - Role requirements for some commands (most within dev and status)
 
-## [3.3.2] - 2023-15-01
+## [3.3.2] - 2024-15-01
 
 ### Hotfix
 
 - Fixed user permissions
 
-## [3.3.1] - 2023-15-01
+## [3.3.1] - 2024-15-01
 
 ### Hotfix
 
 - Fixed some roles note reading correctly
 
-## [3.3.0] - 2023-15-01
+## [3.3.0] - 2024-15-01
 
 ### Fixed
 
 - Configure.py and readconfigs.py should now be able to access variables while they're encrypted
 
-## [3.2.2] - 2023-15-01
+## [3.2.2] - 2024-15-01
 
 ### Fixed
 
 - Token name in config.ini not consistent with other stuff
 
-## [3.2.1] - 2023-15-01
+## [3.2.1] - 2024-15-01
 
 ### Changed
 
 - Updated requirements.txt
 
-## [3.2.0] - 2023-15-01
+## [3.2.0] - 2024-15-01
 
 ### Security Overhaul
 
@@ -176,25 +186,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - .env file located at config/.env to contain cryptographic key
 
-## [3.1.3] - 2023-14-01
+## [3.1.3] - 2024-14-01
 
 ### Changed
 
 - Encrypted messages are now sent as embeds to make them pop more
 
-## [3.1.2] - 2023-14-01
+## [3.1.2] - 2024-14-01
 
 ### Fixed
 
 - Removed unneccessary print statements in moderation.py
 
-## [3.1.1] - 2023-14-01
+## [3.1.1] - 2024-14-01
 
 ### Changed
 
 - Made encrypted messages bold
 
-## [3.1.0] - 2023-14-01
+## [3.1.0] - 2024-14-01
 
 ### Added
 
@@ -205,13 +215,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - Minor formatting
 
-## [3.0.0] - 2023-14-01
+## [3.0.0] - 2024-14-01
 
 ### Added
 
 - !whisper command to send DMs as Harbinger
 
-## [2.9.4] - 2023-14-01
+## [2.9.4] - 2024-14-01
 
 ### Fixed
 
@@ -225,13 +235,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - !help categories may not accurately display all currently-working commands
 
-## [2.9.3] - 2023-14-01
+## [2.9.3] - 2024-14-01
 
 ### Added
 
 - Added changelog entry to !help command
 
-## [2.9.2] - 2023-14-01
+## [2.9.2] - 2024-14-01
 
 ### Added
 
