@@ -1,8 +1,9 @@
 from configparser import ConfigParser
-from cryptography.fernet import Fernet
-import discord
-from config.configure import Configure
 
+import discord
+from cryptography.fernet import Fernet
+
+from config.configure import Configure
 
 python_config_file = "config/config.ini"
 keyfile = "config/key.key"
