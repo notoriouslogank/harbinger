@@ -6,7 +6,6 @@ from discord.ext import commands
 
 from config.read_configs import ReadConfigs as configs
 
-
 TOKEN = configs.discord_token()
 OWNER = configs.owner_id()
 MODERATOR = configs.moderator_id()
@@ -104,12 +103,7 @@ class Harbinger:
         await channel.send(content)
 
 
-bot = Harbinger.bot
-
-
-def main():
-    Harbinger.start()
-
 
 if __name__ == "__main__":
-    main()
+    bot = Harbinger.bot
+    Harbinger.start()
