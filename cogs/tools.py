@@ -1,9 +1,11 @@
 from random import randint
-from jokeapi import Jokes
+
 import aiohttp
 import discord
-from config.read_configs import ReadConfigs as configs
 from discord.ext import commands
+from jokeapi import Jokes
+
+from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
 
 CUSTOM_COLOR = configs.custom_color()

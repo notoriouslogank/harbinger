@@ -1,8 +1,9 @@
 import subprocess
 
 import discord
-from config.read_configs import ReadConfigs as configs
 from discord.ext import commands
+
+from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
 
 SERVER_PUBLIC_IP = configs.server_public_ip()

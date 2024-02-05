@@ -1,16 +1,15 @@
 import subprocess
 from os import listdir
+
 from discord import Client
-
 from discord.ext import commands
-
 
 from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
 
 DELETION_TIME = configs.delete_time()
 BOT_CHANNEL = configs.bot_channel()
-#channel = 1183811931920932984
+
 
 class Dev(commands.Cog):
     def __init__(self, bot):

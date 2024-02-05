@@ -1,12 +1,13 @@
 import base64
 import random
-from zalgolib import diacritics
 from pathlib import Path
-import discord
-from config.read_configs import ReadConfigs as configs
-from discord.ext import commands
-from harbinger import Harbinger
 
+import discord
+from discord.ext import commands
+from zalgolib import diacritics
+
+from config.read_configs import ReadConfigs as configs
+from harbinger import Harbinger
 
 DELETION_TIME = configs.delete_time()
 CUSTOM_COLOR = configs.custom_color()

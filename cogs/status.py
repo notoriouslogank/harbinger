@@ -6,10 +6,10 @@ from random import randint
 from time import sleep
 
 import discord
-from config.read_configs import ReadConfigs as configs
 from discord.ext import commands
-from harbinger import Harbinger
 
+from config.read_configs import ReadConfigs as configs
+from harbinger import Harbinger
 
 DELETION_TIME = configs.delete_time()
 EMAIL_ADDRESS = configs.email_address()

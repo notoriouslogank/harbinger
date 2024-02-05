@@ -1,8 +1,8 @@
 import random
 
 from discord.ext import commands
-from cogs.dev import DELETION_TIME
 
+from cogs.dev import DELETION_TIME
 from harbinger import Harbinger
 
 answers = [
