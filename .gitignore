@@ -9,3 +9,4 @@ __pycache__
 ./user_notes/*
 key.key
 __init__
+config/config.ini.clear
