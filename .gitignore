@@ -10,3 +10,4 @@ __pycache__
 key.key
 __init__
 config/config.ini.clear
+start.sh
