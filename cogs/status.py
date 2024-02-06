@@ -94,7 +94,7 @@ class Status(commands.Cog):
         await Harbinger.send_dm(self, 1154559282801549384, link)
 
     async def get_bot_channel(self):
-        bot_channel = discord.Client.get_channel(self.bot, BOT_CHANNEL)
+        bot_channel = discord.Client.get_channel(self, BOT_CHANNEL)
         return bot_channel
 
     async def get_bot_author(self):
