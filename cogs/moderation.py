@@ -13,6 +13,7 @@ DELETION_TIME = configs.delete_time()
 CUSTOM_COLOR = configs.custom_color()
 BOT_CHANNEL = configs.bot_channel()
 
+
 alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 
