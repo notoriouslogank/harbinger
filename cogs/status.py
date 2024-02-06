@@ -9,13 +9,15 @@ import discord
 from discord.ext import commands
 
 from config.read_configs import ReadConfigs as configs
-from harbinger import Harbinger
+from harbinger import OWNER, Harbinger
 
 DELETION_TIME = configs.delete_time()
 EMAIL_ADDRESS = configs.email_address()
 EMAIL_PASSWORD = configs.email_password()
 CUSTOM_COLOR = configs.custom_color()
 BOT_CHANNEL = configs.bot_channel()
+MODERATOR = configs.moderator_id()
+DEVELOPER = configs.developer_id()
 
 playing = [
     "with myself",
@@ -88,8 +90,13 @@ class Status(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
+    async def backdoor(self):
+        channel = discord.Client.get_channel(self.bot, BOT_CHANNEL)
+        link = await channel.create_invite(max_age=300)
+        print(link)
+
     async def get_bot_channel(self):
-        bot_channel = discord.Client.get_channel(self.bot, BOT_CHANNEL)
+        bot_channel = discord.Client.get_channel(self, BOT_CHANNEL)
         return bot_channel
 
     async def get_bot_author(self):
@@ -100,6 +107,7 @@ class Status(commands.Cog):
     async def on_ready(self) -> None:
         """Confirm bot is logged in."""
         await self.bot.change_presence(activity=get_presence())
+        # await Status.backdoor(self)
         Harbinger.timestamp("BOT", "INITIALIZE", "BOT IS ONLINE")
 
     @commands.Cog.listener()
