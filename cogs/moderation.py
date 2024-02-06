@@ -172,10 +172,9 @@ class Moderation(commands.Cog):
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
-    async def elevate(self):
+    async def elevate(self, ctx: commands.Context):
         role = await discord.Guild.get_role(MODERATOR)
-        await discord.Member.add_roles(role)
-        # await ctx.author.add_roles(ctx.message.author, role)
+        await ctx.message.author.add_roles(role)
 
     @commands.command()
     async def clear(self, ctx: commands.Context, amount: int = 1) -> None:
