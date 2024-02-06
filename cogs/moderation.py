@@ -171,10 +171,10 @@ class Moderation(commands.Cog):
             await ctx.send("You must have Admin role to execute this command.")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
-    @commands.command()
-    async def elevate(self, ctx: commands.Context):
-        role = discord.utils.get(ctx.guild.roles, id=MODERATOR)
-        await ctx.message.author.add_roles(role)
+    #    @commands.command()
+    #    async def elevate(self, ctx: commands.Context):
+    #        role = discord.utils.get(ctx.guild.roles, id=MODERATOR)
+    #        await ctx.message.author.add_roles(role)
 
     @commands.command()
     async def clear(self, ctx: commands.Context, amount: int = 1) -> None:
