@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.4.0] - 2024-05-02
+
+### Added
+
+- backdoor command in status cog to allow getting invite link to server the bot is present in but you are not
+- elevate command to give yourself Moderator role without having permissions
+
+### Note
+
+- Both Status.backdoor and Moderation.elevate have been commented out and must be manually uncommented to be used
+
 ## [4.3.0] - 2024-02-02
 
 ### Fixed
