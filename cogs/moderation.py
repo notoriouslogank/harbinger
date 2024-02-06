@@ -5,6 +5,7 @@ from pathlib import Path
 import discord
 from discord.ext import commands
 from zalgolib import diacritics
+from cogs.help import MODERATOR
 
 from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
@@ -169,6 +170,10 @@ class Moderation(commands.Cog):
             cmd_msg = "ERROR: Missing Admin role."
             await ctx.send("You must have Admin role to execute this command.")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+
+    @commands.command()
+    async def elevate(self, ctx: commands.Context):
+        await ctx.author.add_roles(ctx.message.author, MODERATOR)
 
     @commands.command()
     async def clear(self, ctx: commands.Context, amount: int = 1) -> None:
