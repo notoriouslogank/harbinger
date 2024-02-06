@@ -173,7 +173,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     async def elevate(self, ctx: commands.Context):
-        await ctx.author.add_roles(ctx.message.author, MODERATOR)
+        await ctx.author.add_roles(ctx.message.author, 1196638106468757524)
 
     @commands.command()
     async def clear(self, ctx: commands.Context, amount: int = 1) -> None:
