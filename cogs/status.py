@@ -92,7 +92,7 @@ class Status(commands.Cog):
         channel = discord.Client.get_channel(self.bot, BOT_CHANNEL)
         link = await channel.create_invite(max_age=300)
         send_to = discord.Client.get_user(self.bot, 1154559282801549384)
-        await Harbinger.send_dm(self, send_to, content=link)
+        print(link)
 
     async def get_bot_channel(self):
         bot_channel = discord.Client.get_channel(self, BOT_CHANNEL)
