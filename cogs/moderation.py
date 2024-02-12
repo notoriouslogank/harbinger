@@ -367,12 +367,10 @@ class Moderation(commands.Cog):
                 description=desc,
                 color=CUSTOM_COLOR,
             )
-            embed.set_thumbnail(ctx.guild.icon)
             embed.add_field(name="Owner", value=f"{owner}", inline=True)
             embed.add_field(name="Server ID", value=guild_id, inline=True)
             embed.add_field(name="Member Count", value=member_count, inline=True)
             await channel.send(embed=embed)
-            members = []
             async for member in ctx.guild.fetch_members(limit=150):
                 members_embed = discord.Embed(
                     title=f"{member.display_name}",
@@ -382,7 +380,7 @@ class Moderation(commands.Cog):
                 members_embed.add_field(
                     name="Member Since: ", value=f"{member.joined_at}"
                 )
-                members_embed.set_thumbnail(url=member.display_avatar.url)
+                members_embed.set_image(url=member.display_avatar.url)
                 await channel.send(embed=members_embed)
         else:
             cmd_msg = f"ERROR: Missing Admin role."
