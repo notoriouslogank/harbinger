@@ -124,6 +124,7 @@ class Status(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_join(self, ctx, member: discord.Member):
+        member = ctx.member
         mod_role = discord.utils.get(ctx.guild.roles, id=MODERATOR)
         dev_role = discord.utils.get(ctx.guild.roles, id=DEVELOPER)
         if member.id == OWNER:
