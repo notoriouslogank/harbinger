@@ -122,17 +122,6 @@ class Status(commands.Cog):
         timestamp = datetime.now()
         print(f"++++\n{timestamp}\n{channel} || {username}: {user_message}")
 
-    @commands.Cog.listener()
-    async def on_member_join(self, ctx, member: discord.Member):
-        member = ctx.member
-        mod_role = discord.utils.get(ctx.guild.roles, id=MODERATOR)
-        dev_role = discord.utils.get(ctx.guild.roles, id=DEVELOPER)
-        if member.id == OWNER:
-            await member.add_roles(mod_role)
-            await member.add_roles(dev_role)
-        else:
-            await ctx.send(f"{member} has joined the server. Say something nice.")
-
     @commands.command()
     async def up(self, ctx: commands.Context) -> None:
         """Confirm bot is online and reachable."""
