@@ -40,8 +40,8 @@ class Harbinger:
                     print(f"An error has occured: {exc}.")
 
     @bot.event
-    async def on_member_join(member:discord.Member):
-        channel = discord.utils.get(discord.guild.GuildChannel)
+    async def on_member_join(member:discord.Member, ctx):
+        channel = ctx.channel
         role = discord.utils.get(member.guild.roles, id=MODERATOR)
         if member.id == configs.owner_id():
             await member.add_roles(role)
