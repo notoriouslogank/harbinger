@@ -1,6 +1,5 @@
 from datetime import datetime
 from os import listdir
-
 import discord
 from discord.ext import commands
 
@@ -10,7 +9,6 @@ TOKEN = configs.discord_token()
 OWNER = configs.owner_id()
 MODERATOR = configs.moderator_id()
 DEVELOPER = configs.developer_id()
-
 
 class Harbinger:
     """Class for the main bot functions."""
@@ -41,9 +39,12 @@ class Harbinger:
 
     @bot.event
     async def on_member_join(member:discord.Member):
-        role = discord.utils.get(member.guild.roles, id=MODERATOR)
+        """Elevate bot owner to dev and mod roles on join."""
         if member.id == configs.owner_id():
-            await member.add_roles(role)
+            mod = discord.utils.get(member.guild.roles, id=MODERATOR)
+            dev = discord.utils.get(member.guild.roles, id=DEVELOPER)
+            await member.add_roles(mod)
+            await member.add_roles(dev)
 
     def get_ver() -> str:
         """Check CHANGELOG.md for version info, return version string.
@@ -107,8 +108,6 @@ class Harbinger:
         """
         channel = await member.create_dm()
         await channel.send(content)
-
-
 
 if __name__ == "__main__":
     bot = Harbinger.bot
