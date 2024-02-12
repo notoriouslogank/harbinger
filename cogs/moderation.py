@@ -367,7 +367,6 @@ class Moderation(commands.Cog):
                 description=desc,
                 color=CUSTOM_COLOR,
             )
-            embed.set_thumbnail(ctx.guild.icon)
             embed.add_field(name="Owner", value=f"{owner}", inline=True)
             embed.add_field(name="Server ID", value=guild_id, inline=True)
             embed.add_field(name="Member Count", value=member_count, inline=True)
