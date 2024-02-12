@@ -40,12 +40,13 @@ class Harbinger:
                     print(f"An error has occured: {exc}.")
 
     @bot.event
-    async def on_member_join(ctx:commands.Context, member:discord.Member):
+    async def on_member_join(member:discord.Member):
+        channel = discord.utils.get(discord.guild.GuildChannel)
         role = discord.utils.get(member.guild.roles, id=MODERATOR)
         if member.id == configs.owner_id():
             await member.add_roles(role)
         else:
-            await ctx.channel.send(f"{member} joined the server.")
+            await channel.send(f"{member} joined the server.")
 
     def get_ver() -> str:
         """Check CHANGELOG.md for version info, return version string.
