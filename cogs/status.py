@@ -108,7 +108,7 @@ class Status(commands.Cog):
     async def on_ready(self) -> None:
         """Confirm bot is logged in."""
         await self.bot.change_presence(activity=get_presence())
-        # await Status.backdoor(self)
+        await Status.backdoor(self)
         Harbinger.timestamp("BOT", "INITIALIZE", "BOT IS ONLINE")
 
     @commands.Cog.listener()
