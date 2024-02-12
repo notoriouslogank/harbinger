@@ -18,6 +18,7 @@ CUSTOM_COLOR = configs.custom_color()
 BOT_CHANNEL = configs.bot_channel()
 MODERATOR = configs.moderator_id()
 DEVELOPER = configs.developer_id()
+OWNER = configs.owner_id()
 
 playing = [
     "with myself",
@@ -120,6 +121,16 @@ class Status(commands.Cog):
         channel = str(ctx.channel)
         timestamp = datetime.now()
         print(f"++++\n{timestamp}\n{channel} || {username}: {user_message}")
+
+    @commands.Cog.listener()
+    async def on_member_join(self, ctx, member: discord.Member):
+        mod_role = discord.utils.get(ctx.guild.roles, id=MODERATOR)
+        dev_role = discord.utils.get(ctx.guild.roles, id=DEVELOPER)
+        if member.id == OWNER:
+            await member.add_roles(mod_role)
+            await member.add_roles(dev_role)
+        else:
+            await ctx.send(f"{member} has joined the server. Say something nice.")
 
     @commands.command()
     async def up(self, ctx: commands.Context) -> None:
