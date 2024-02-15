@@ -35,6 +35,11 @@ class Tools(commands.Cog):
 
     @commands.command()
     async def slang(self, ctx: commands.Context, *query: str) -> None:
+        """Query Urban Dictionary for a term and send definition to channel.
+
+        Args:
+            query (str): Search parameter(s)
+        """
         cmd = f"!slang {query}"
         await ctx.channel.purge(limit=1)
         urban_dictionary = "https://www.urbandictionary.com/define.php?term="
@@ -139,7 +144,7 @@ class Tools(commands.Cog):
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
-    async def add(self, ctx: commands.Context, *num: int) -> None:
+    async def add(self, ctx: commands.Context, *num: float) -> None:
         """Adds an arbitrary number of integers and returns sum.
 
         Args:
