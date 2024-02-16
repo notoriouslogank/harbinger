@@ -152,8 +152,6 @@ class Keyfinder(commands.Cog):
             embed.add_field(name="Progression 3: i VI III VII", value=f"```{min.i} {min.vi} {min.iii} {min.vii}```", inline=False)
             embed.add_field(name="Progression 4: i VII VI VII i", value=f"```{min.i} {min.vii} {min.vi} {min.vii} {min.i}```")
             await ctx.send(embed=embed)
-        else:
-            await ctx.send("Please choose a valid key.")
 
 async def setup(bot):
     await bot.add_cog(Keyfinder(bot))
