@@ -295,7 +295,7 @@ class Chords(commands.Cog):
             choice = open_chords.get(chord)
             diagram = OpenChord.get_diagram(choice)
             content = f"{chord} {diagram}"
-            await ctx.send(content=f"``{content}``")
+            await ctx.send(content=f"```{content}```")
         else:
             await ctx.send(f"{chord} not found in the list: {open_chords.keys()}.")
 
