@@ -283,12 +283,12 @@ class Chords(commands.Cog):
         if chord in open_chords.keys():
             oc = open_chords.get(chord)
             diagram = OpenChord.get_diagram(oc)
-            chord_embed.add_field(name="Open Chord", value=f"``{diagram}``")
+            chord_embed.add_field(name="Open Chord", value=f"```{diagram}```")
             #await ctx.send(f"``{diagram}``")
         if chord in power_chords.keys():
             pc = power_chords.get(chord)
             diagram = PowerChord.get_diagram(pc)
-            chord_embed.add_field(name="Power Chord", value=f"``{diagram}``")
+            chord_embed.add_field(name="Power Chord", value=f"```{diagram}```")
             #await ctx.send(f"``{diagram}``")
         await ctx.send(embed=chord_embed)
 
