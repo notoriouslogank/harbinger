@@ -394,7 +394,7 @@ class Chords(commands.Cog):
             if scope == 'all':
                 chord_embed.add_field(name="Seventh Chord", value=f"```{diagram}```")
             if scope == 'seventh':
-                chord_embed.add_field(name="Sevent Chord", value=f"```{diagram}```")
+                chord_embed.add_field(name="Seventh Chord", value=f"```{diagram}```")
             else:
                 pass
         await ctx.send(embed=chord_embed)
