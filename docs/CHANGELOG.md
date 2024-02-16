@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.5.0] - 2024-15-02
+
+### Added
+
+- !keyfinder command to retrieve all chords in a given key as well as four common progressions for that key
+- !help information for !keyfinder command
+
+### Changed
+
+- added entry to .gitignore
+
 ## [4.4.2] - 2024-12-02
 
 ### Added
