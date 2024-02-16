@@ -62,6 +62,7 @@ misc_commands = {
     "rps": "Play rock, paper, scissors with Harbinger.",
     "slang": "Search Urban Dictionary for a given word/phrase.",
     "joke": "Have Harbinger tell a joke.",
+    "keyfinder": "Get all chords in a given key (as well as common progressions).",
 }
 
 reactions = {
@@ -128,6 +129,8 @@ class HelpCommand(commands.Cog):
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
         counter = 0
         # USAGE
+        u_keyfinder = {"__Usage__":"``!keyfinder <key>``",
+                       "__Args__":"**key** (str): The key to get information for."}
         u_sad = {
             "__Usage__": "``!sad``",
             "__Args__": "**[None]**",
@@ -206,7 +209,7 @@ class HelpCommand(commands.Cog):
         }
         u_mccmd = {
             "__Usage__": "``!mccmd <command>``",
-            "__Args__": "**command <str>**: Command to send to the Minecraft server.",
+            "__Args__": "**command (str)**: Command to send to the Minecraft server.",
         }
         u_note = {
             "__Usage__": "``!note <message>``",
@@ -879,6 +882,13 @@ class HelpCommand(commands.Cog):
             embed.add_field(name="__Args__", value=f'{u_stream["__Args__"]}')
             await ctx.send(embed=embed)
         # MISC
+        if command == "keyfinder":
+            embed = discord.Embed(title=f"{command}",
+                                  description=f"{misc_commands[command]}",
+                                  color=CUSTOM_COLOR)
+            embed.add_field(name="__Usage__", value=f"{u_keyfinder['__Usage__']}", inline=False)
+            embed.add_field(name="__Args__", value=f"{u_keyfinder['__Args__']}", inline=False)
+            await ctx.send(embed=embed)
         if command == "joke":
             embed = discord.Embed(
                 title=f"{command}",
