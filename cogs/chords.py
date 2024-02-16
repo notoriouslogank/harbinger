@@ -277,7 +277,7 @@ class Chords(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def chords(self, ctx, chord):
+    async def chords(self, ctx, chord, scope='all'):
         chord = chord.capitalize()
         if chord in open_chords.keys() | power_chords.keys():
             get_chord = open_chords.get(chord)
@@ -289,12 +289,22 @@ class Chords(commands.Cog):
             diagram = OpenChord.get_diagram(oc)
             get_triad = OpenChord(oc)
             triad = get_triad.triad
-            chord_embed.add_field(name="Open Chord", value=f"```{diagram}```")
+            if scope == 'all':
+                chord_embed.add_field(name="Open Chord", value=f"```{diagram}```")
+            if scope == 'open':
+                chord_embed.add_field(name="Open Chord", value=f"```{diagram}```")
+            elif scope == 'power':
+                pass
             #await ctx.send(f"``{diagram}``")
         if chord in power_chords.keys():
             pc = power_chords.get(chord)
             diagram = PowerChord.get_diagram(pc)
-            chord_embed.add_field(name="Power Chord", value=f"```{diagram}```")
+            if scope == 'all':
+                chord_embed.add_field(name="Power Chord", value=f"```{diagram}```")
+            if scope == 'power':
+                chord_embed.add_field(name="Power Choord", value=f"```{diagram}```")
+            elif scope == 'oopen':
+                pass
             #await ctx.send(f"``{diagram}``")
         await ctx.send(embed=chord_embed)
 
