@@ -284,7 +284,7 @@ class Chords(commands.Cog):
             choice = power_chords.get(chord)
             diagram = PowerChord.get_diagram(choice)
             content = f"{chord} {diagram}"
-            await ctx.send(content=f"``{content}``")
+            await ctx.send(content=f"```{content}```")
         else:
             await ctx.send(f"{chord} not found in the list: {power_chords.keys()}.")
 
