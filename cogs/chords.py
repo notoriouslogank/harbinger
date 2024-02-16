@@ -297,7 +297,7 @@ class Chords(commands.Cog):
             content = f"{chord} {diagram}"
             await ctx.send(content=f"``{content}``")
         else:
-            await ctx.send(f"{chord} not found in the list: {open_chords.keys().}")
+            await ctx.send(f"{chord} not found in the list: {open_chords.keys()}.")
 
 async def setup(bot):
     await bot.add_cog(Chords(bot))
