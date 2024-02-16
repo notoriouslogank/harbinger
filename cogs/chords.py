@@ -300,23 +300,22 @@ class Chords(commands.Cog):
 
     @commands.command()
     async def chordlist(self, ctx, scope="all"):
-            chordlist_embed = discord.Embed(title=f"{scope.capitalize()} Chords", description="The following chord diagrams are available within this scope: ", color=CUSTOM_COLOR)
             if scope == "all":
                 chordlist = Chords.chord_list()
-                chordlist_embed.add_field(name="All", value=chordlist)
+                chordlist_embed = discord.Embed(title=f"All Chords", description=chordlist, color=CUSTOM_COLOR)
                 await ctx.send(embed=chordlist_embed)
             if scope == "p":
-                get_chords = power_chords.keys()
                 pclist = []
                 for chord in get_chords:
                     pclist.append(chord)
-                chordlist_embed.add_field(name="Power", value=pclist)
+                get_chords = power_chords.keys()
+                chordlist_embed = discord.Embed(title=f"Power Chords", description=pclist, color=CUSTOM_COLOR)
                 await ctx.send(embed=chordlist_embed)
             if scope == "o":
                 oclist = []
                 for chord in open_chords.keys():
                     oclist.append(chord)
-                chordlist_embed.add_field(name="Open", value=oclist)
+                chordlist_embed = discord.Embed(title=f"Open Chords", description=oclist, color=CUSTOM_COLOR)
                 await ctx.send(embed=chordlist_embed)
 
 async def setup(bot):
