@@ -1,6 +1,9 @@
 import discord
 from discord.ext import commands
 from harbinger import Harbinger
+from config.read_configs import ReadConfigs as configs
+
+CUSTOM_COLOR = configs.custom_color()
 
 # Major Keys
 
@@ -133,7 +136,7 @@ class Keyfinder(commands.Cog):
             maj = MajorKeys(major_keys.pop(key))
             embed_title = f"Key of {key}"
             embed_descrpition = maj.chords()
-            embed = discord.Embed(title=embed_title, description=embed_descrpition)
+            embed = discord.Embed(title=embed_title, description=embed_descrpition, color=CUSTOM_COLOR)
             embed.add_field(name="I IV vi V", value=f"{maj.i} {maj.iv} {maj.vi} {maj.v}", inline=False)
             embed.add_field(name="I IV I V", value=f"{maj.i} {maj.iv} {maj.i} {maj.v}", inline=False)
             embed.add_field(name="I V IV V", value=f"{maj.i} {maj.v} {maj.iv} {maj.v}", inline=False)
@@ -143,7 +146,7 @@ class Keyfinder(commands.Cog):
             min = MinorKeys(minor_keys.pop(key))
             embed_title = f"Key of {key}"
             embed_description = min.chords()
-            embed = discord.Embed(title=embed_title, description=embed_description)
+            embed = discord.Embed(title=embed_title, description=embed_description, color=CUSTOM_COLOR)
             embed.add_field(name="i iv v i", value=f"{min.i} {min.iv} {min.v} {min.i}", inline=False)
             embed.add_field(name="i ii v i", value=f"{min.i} {min.ii} {min.v} {min.i}", inline=False)
             embed.add_field(name="i VI III VII", value=f"{min.i} {min.vi} {min.iii} {min.vii}", inline=False)
