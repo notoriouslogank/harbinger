@@ -300,7 +300,7 @@ class Chords(commands.Cog):
 
     @commands.command()
     async def chordlist(self, ctx, scope="all"):
-            chordlist_embed = discord.Embed(title=f"{scope.capitalize} Chords", description="The following chord diagrams are available within this scope: ", color=CUSTOM_COLOR)
+            chordlist_embed = discord.Embed(title=f"{scope.capitalize()} Chords", description="The following chord diagrams are available within this scope: ", color=CUSTOM_COLOR)
             if scope == "all":
                 chordlist = Chords.chord_list()
                 chordlist_embed.add_field(name="All", value=chordlist)
