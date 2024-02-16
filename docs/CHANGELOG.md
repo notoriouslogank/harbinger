@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - cogs/chords.py
 - !chords command to print chord diagram(s) for given chord
 - !chordlist command to list all chords with diagrams
+- !help information for !chords command
 
 ### Changed
 
