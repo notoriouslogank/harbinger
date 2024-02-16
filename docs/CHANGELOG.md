@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - !keyfinder command to retrieve all chords in a given key as well as four common progressions for that key
 
+### Changed
+
+- added entry to .gitignore
+
 ## [4.4.2] - 2024-12-02
 
 ### Added
