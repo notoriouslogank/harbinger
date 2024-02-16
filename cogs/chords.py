@@ -306,9 +306,9 @@ class Chords(commands.Cog):
                 await ctx.send(embed=chordlist_embed)
             if scope == "p":
                 pclist = []
+                get_chords = power_chords.keys()
                 for chord in get_chords:
                     pclist.append(chord)
-                get_chords = power_chords.keys()
                 chordlist_embed = discord.Embed(title=f"Power Chords", description=pclist, color=CUSTOM_COLOR)
                 await ctx.send(embed=chordlist_embed)
             if scope == "o":
