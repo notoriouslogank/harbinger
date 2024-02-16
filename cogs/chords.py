@@ -302,7 +302,7 @@ class Chords(commands.Cog):
             if scope == 'all':
                 chord_embed.add_field(name="Power Chord", value=f"```{diagram}```")
             if scope == 'power':
-                chord_embed.add_field(name="Power Choord", value=f"```{diagram}```")
+                chord_embed.add_field(name="Power Chord", value=f"```{diagram}```")
             elif scope == 'oopen':
                 pass
             #await ctx.send(f"``{diagram}``")
@@ -325,14 +325,14 @@ class Chords(commands.Cog):
                 chordlist_embed = discord.Embed(title=f"All Chords", description=chordlist, color=CUSTOM_COLOR)
                 chordlist_embed.add_field(name="All", value=chordlist)
                 await ctx.send(embed=chordlist_embed)
-            if scope == "p":
+            if scope == "power":
                 pclist = []
+                get_chords = power_chords.keys()
                 for chord in get_chords:
                     pclist.append(chord)
-                get_chords = power_chords.keys()
                 chordlist_embed = discord.Embed(title=f"Power Chords", description=pclist, color=CUSTOM_COLOR)
                 await ctx.send(embed=chordlist_embed)
-            if scope == "o":
+            if scope == "open":
                 oclist = []
                 for chord in open_chords.keys():
                     oclist.append(chord)
