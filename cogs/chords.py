@@ -282,7 +282,7 @@ class Chords(commands.Cog):
         chord = chord.capitalize()
         if chord in power_chords.keys():
             choice = power_chords.get(chord)
-            diagram = print(PowerChord.get_diagram(choice))
+            diagram = PowerChord.get_diagram(choice)
             content = f"{chord} {diagram}"
             await ctx.send(content=f"```{content}```")
         else:
@@ -293,11 +293,23 @@ class Chords(commands.Cog):
         chord = chord.capitalize()
         if chord in open_chords.keys():
             choice = open_chords.get(chord)
-            diagram = print(OpenChord.get_diagram(choice))
+            diagram = OpenChord.get_diagram(choice)
             content = f"{chord} {diagram}"
             await ctx.send(content=f"```{content}```")
         else:
             await ctx.send(f"{chord} not found in the list: {open_chords.keys()}.")
+
+    @commands.command()
+    async def chords(self, ctx, chord):
+        chord = chord.capitalize()
+        if chord in open_chords.keys():
+            oc = open_chords.get(chord)
+            diagram = OpenChord.get_diagram(oc)
+            await ctx.send(f"``{diagram}``")
+        if chord in power_chords.keys():
+            pc = power_chords.get(chord)
+            diagram = PowerChord.get_diagram(pc)
+            await ctx.send(f"``{diagram}``")
 
 async def setup(bot):
     await bot.add_cog(Chords(bot))
