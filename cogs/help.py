@@ -889,6 +889,7 @@ class HelpCommand(commands.Cog):
             embed = discord.Embed(title=f"{command}", description=f"{misc_commands[command]}", color=CUSTOM_COLOR)
             embed.add_field(name="__Usage__", value=f"{u_chords['__Usage__']}", inline=False)
             embed.add_field(name="__Args__", value=f"{u_chords['__Args__']}", inline=False)
+            await ctx.send(embed=embed)
         if command == "keyfinder":
             embed = discord.Embed(title=f"{command}",
                                   description=f"{misc_commands[command]}",
