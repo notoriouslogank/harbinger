@@ -232,12 +232,12 @@ class OpenChord:
         for chord in open_chords.keys():
             open_chord = OpenChord(chord)
             print(
-                f"{open_chord.e}\n{open_chord.B}\n{open_chord.G}\n{open_chord.D}\n{open_chord.A}\n{open_chord.E}\n"
+                f"\n{open_chord.e}\n{open_chord.B}\n{open_chord.G}\n{open_chord.D}\n{open_chord.A}\n{open_chord.E}\n"
             )
 
     def get_diagram(chord):
         open_chord = OpenChord(chord)
-        result = f"{open_chord.e}\n{open_chord.B}\n{open_chord.G}\n{open_chord.D}\n{open_chord.A}\n{open_chord.E}\n"
+        result = f"\n{open_chord.e}\n{open_chord.B}\n{open_chord.G}\n{open_chord.D}\n{open_chord.A}\n{open_chord.E}\n"
         return result
 
     def usr_choice():
@@ -268,7 +268,7 @@ class PowerChord:
     def get_diagram(chord):
         power_chord = PowerChord(chord)
         result = (
-            f"{power_chord.e}\n{power_chord.B}\n{power_chord.G}\n{power_chord.D}\n{power_chord.A}\n{power_chord.E}\n"
+            f"\n{power_chord.e}\n{power_chord.B}\n{power_chord.G}\n{power_chord.D}\n{power_chord.A}\n{power_chord.E}\n"
         )
         return result
 
