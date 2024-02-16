@@ -287,5 +287,14 @@ class Chords(commands.Cog):
             diagram = PowerChord.get_diagram(pc)
             await ctx.send(f"``{diagram}``")
 
+    @commands.command()
+    async def listchords(self, ctx):
+        chords = []
+        for chord in open_chords.keys():
+            chords.append(chord)
+        for chord in power_chords.keys():
+            chords.append(chord)
+        await ctx.send(f"{chords}")
+
 async def setup(bot):
     await bot.add_cog(Chords(bot))
