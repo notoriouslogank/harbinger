@@ -282,7 +282,7 @@ class Chords(commands.Cog):
         chord = chord.capitalize()
         if chord in power_chords.keys():
             choice = power_chords.get(chord)
-            diagram = PowerChord.get_diagram(choice)
+            diagram = print(PowerChord.get_diagram(choice))
             content = f"{chord} {diagram}"
             await ctx.send(content=f"```{content}```")
         else:
@@ -293,7 +293,7 @@ class Chords(commands.Cog):
         chord = chord.capitalize()
         if chord in open_chords.keys():
             choice = open_chords.get(chord)
-            diagram = OpenChord.get_diagram(choice)
+            diagram = print(OpenChord.get_diagram(choice))
             content = f"{chord} {diagram}"
             await ctx.send(content=f"```{content}```")
         else:
