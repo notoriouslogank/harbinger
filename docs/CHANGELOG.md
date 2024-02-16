@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 - !keyfinder command to retrieve all chords in a given key as well as four common progressions for that key
+- !help information for !keyfinder command
 
 ### Changed
 
