@@ -278,7 +278,7 @@ class Chords(commands.Cog):
 
     @commands.command()
     async def chords(self, ctx, chord):
-        chord = chord.capitalize()
+        #chord = chord.capitalize()
         if chord in open_chords.keys():
             oc = open_chords.get(chord)
             diagram1 = OpenChord.get_diagram(oc)
