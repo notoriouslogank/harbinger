@@ -294,7 +294,8 @@ class Chords(commands.Cog):
             chords.append(chord)
         for chord in power_chords.keys():
             chords.append(chord)
-            result = list(set(chords)).sort()
+            result = list(set(chords))
+            result.sort()
         await ctx.send(f"{result}")
 
 async def setup(bot):
