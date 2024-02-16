@@ -268,10 +268,10 @@ class PowerChord:
 
     def get_diagram(chord):
         power_chord = PowerChord(chord)
-        print(
+        result = (
             f"Power Chord:\n{power_chord.e}\n{power_chord.B}\n{power_chord.G}\n{power_chord.D}\n{power_chord.A}\n{power_chord.E}\n"
         )
-
+        return result
 
 #def usr_choice():
 #    chord = input("Chord: ")
@@ -300,9 +300,9 @@ class Chords(commands.Cog):
     async def chords(self, ctx, chord):
         chord = chord.capitalize()
         if chord in power_chords.keys():
-            diagram = power_chords.get(chord)
-            result = PowerChord.get_diagram(diagram)
-            content = f"{chord} {result}"
+            choice = power_chords.get(chord)
+            diagram = PowerChord.get_diagram(choice)
+            content = f"{chord} {diagram}"
             await ctx.send(content=content)
         else:
             await ctx.send(f"{chord} not found in the list: {power_chords.keys()}.")
