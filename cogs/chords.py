@@ -1,3 +1,4 @@
+import discord
 from discord.ext import commands
 from harbinger import Harbinger
 from config.read_configs import ReadConfigs as configs
@@ -299,20 +300,24 @@ class Chords(commands.Cog):
 
     @commands.command()
     async def chordlist(self, ctx, scope="all"):
+            chordlist_embed = discord.Embed(title=f"{scope.capitalize} Chords", description="The following chord diagrams are available within this scope: ", color=CUSTOM_COLOR)
             if scope == "all":
                 chordlist = Chords.chord_list()
-                await ctx.send(f"{chordlist}")
+                chordlist_embed.add_field(name="All", value=chordlist)
+                await ctx.send(embed=chordlist_embed)
             if scope == "p":
                 get_chords = power_chords.keys()
                 pclist = []
                 for chord in get_chords:
                     pclist.append(chord)
-                    await ctx.send(f"{pclist}")
+                chordlist_embed.add_field(name="Power", value=pclist)
+                await ctx.send(embed=chordlist_embed)
             if scope == "o":
                 oclist = []
                 for chord in open_chords.keys():
                     oclist.append(chord)
-                    await ctx.send(f"{oclist}")
+                chordlist_embed.add_field(name="Open", value=oclist)
+                await ctx.send(embed=chordlist_embed)
 
 async def setup(bot):
     await bot.add_cog(Chords(bot))
