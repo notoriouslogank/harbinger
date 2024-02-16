@@ -273,51 +273,31 @@ class PowerChord:
         )
         return result
 
-#def usr_choice():
-#    chord = input("Chord: ")
-#    chord = chord.capitalize()
-#    power_chord = power_chords.get(chord)
-#    open_chord = open_chords.get(chord)
-#    return chord, power_chord, open_chord
-#
-#
-#def get_diagrams(chord, power_chord, open_chord):
-#    pc = PowerChord(power_chord)
-#    oc = OpenChord(open_chord)
-#    triad = oc.triad
-#    header = f"{chord.center(80, '*')}\n\nNotes: {triad}"
-#    content = f"{header}\n\nPower:\tOpen:\n{pc.e}\t{oc.e}\n{pc.B}\t{oc.B}\n{pc.G}\t{oc.G}\n{pc.D}\t{oc.D}\n{pc.A}\t{oc.A}\n{pc.E}\t{oc.E}\n"
-#    '''print(
-#        f"{header}\n\nPower:\tOpen:\n{pc.e}\t{oc.e}\n{pc.B}\t{oc.B}\n{pc.G}\t{oc.G}\n{pc.D}\t{oc.D}\n{pc.A}\t{oc.A}\n{pc.E}\t{oc.E}\n"
-#    )'''
-#    return content
-#
 class Chords(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
     @commands.command()
-    async def chords(self, ctx, chord):
+    async def powerchords(self, ctx, chord):
         chord = chord.capitalize()
         if chord in power_chords.keys():
             choice = power_chords.get(chord)
             diagram = PowerChord.get_diagram(choice)
             content = f"{chord} {diagram}"
-            await ctx.send(content=content)
+            await ctx.send(content=f"``{content}``")
         else:
             await ctx.send(f"{chord} not found in the list: {power_chords.keys()}.")
 
+    @commands.command()
+    async def openchords(self, ctx, chord):
+        chord = chord.capitalize()
+        if chord in open_chords.keys():
+            choice = open_chords.get(chord)
+            diagram = OpenChord.get_diagram(choice)
+            content = f"{chord} {diagram}"
+            await ctx.send(content=f"``{content}``")
+        else:
+            await ctx.send(f"{chord} not found in the list: {open_chords.keys().}")
+
 async def setup(bot):
     await bot.add_cog(Chords(bot))
-#    @commands.command()
-#    async def openchords(self, ctx, chord):
-#        pass
-#
-#    @commands.command()
-#    async def allchords(self, ctx, chord):
-#        pass
-#
-#    @commands.command()
-#    async def listchords(self, ctx, chord):
-#        pass
-#
