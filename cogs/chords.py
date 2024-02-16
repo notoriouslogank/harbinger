@@ -236,15 +236,13 @@ class OpenChord:
 
     def get_diagram(chord):
         open_chord = OpenChord(chord)
-        print(
-            f"Open Chord:\n{open_chord.e}\n{open_chord.B}\n{open_chord.G}\n{open_chord.D}\n{open_chord.A}\n{open_chord.E}\n"
-        )
+        result = f"Open Chord:\n{open_chord.e}\n{open_chord.B}\n{open_chord.G}\n{open_chord.D}\n{open_chord.A}\n{open_chord.E}\n"
+        return result
 
     def usr_choice():
         chord = input("Chord: ")
         chord = chord.capitalize()
         open_chord = open_chords.get(chord)
-        print(chord)
         return open_chord
 
 
