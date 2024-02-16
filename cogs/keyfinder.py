@@ -137,10 +137,10 @@ class Keyfinder(commands.Cog):
             embed_title = f"Key of {key}"
             embed_descrpition = maj.chords()
             embed = discord.Embed(title=embed_title, description=embed_descrpition, color=CUSTOM_COLOR)
-            embed.add_field(name="I IV vi V", value=f"{maj.i} {maj.iv} {maj.vi} {maj.v}", inline=False)
-            embed.add_field(name="I IV I V", value=f"{maj.i} {maj.iv} {maj.i} {maj.v}", inline=False)
-            embed.add_field(name="I V IV V", value=f"{maj.i} {maj.v} {maj.iv} {maj.v}", inline=False)
-            embed.add_field(name="I vi IV V", value=f"{maj.i} {maj.vi} {maj.iv} {maj.v}", inline=False)
+            embed.add_field(name="I IV vi V", value=f"```{maj.i} {maj.iv} {maj.vi} {maj.v}```", inline=False)
+            embed.add_field(name="I IV I V", value=f"```{maj.i} {maj.iv} {maj.i} {maj.v}```", inline=False)
+            embed.add_field(name="I V IV V", value=f"```{maj.i} {maj.v} {maj.iv} {maj.v}```", inline=False)
+            embed.add_field(name="I vi IV V", value=f"```{maj.i} {maj.vi} {maj.iv} {maj.v}```", inline=False)
             await ctx.send(embed=embed)
         if key in minor_keys.keys():
             min = MinorKeys(minor_keys.pop(key))
