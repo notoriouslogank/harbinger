@@ -279,10 +279,16 @@ class Chords(commands.Cog):
     @commands.command()
     async def chords(self, ctx, chord):
         chord = chord.capitalize()
-        chord_embed = discord.Embed(title=f"{chord}", color=CUSTOM_COLOR)
+        if chord in open_chords.keys() | power_chords.keys():
+            get_chord = open_chords.keys(chord)
+            get_triad = OpenChord(get_chord)
+            triad = get_triad.triad
+            chord_embed = discord.Embed(title=f"{chord}", description=f"{triad}", color=CUSTOM_COLOR)
         if chord in open_chords.keys():
             oc = open_chords.get(chord)
             diagram = OpenChord.get_diagram(oc)
+            get_triad = OpenChord(oc)
+            triad = get_triad.triad
             chord_embed.add_field(name="Open Chord", value=f"```{diagram}```")
             #await ctx.send(f"``{diagram}``")
         if chord in power_chords.keys():
