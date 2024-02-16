@@ -135,7 +135,7 @@ class Keyfinder(commands.Cog):
         if key in major_keys.keys():
             maj = MajorKeys(major_keys.pop(key))
             embed_title = f"Key of {key}"
-            embed_descrpition = maj.chords()
+            embed_descrpition = f"```{maj.chords()}```"
             embed = discord.Embed(title=embed_title, description=embed_descrpition, color=CUSTOM_COLOR)
             embed.add_field(name="I IV vi V", value=f"```{maj.i} {maj.iv} {maj.vi} {maj.v}```", inline=False)
             embed.add_field(name="I IV I V", value=f"```{maj.i} {maj.iv} {maj.i} {maj.v}```", inline=False)
