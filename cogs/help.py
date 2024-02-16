@@ -130,7 +130,7 @@ class HelpCommand(commands.Cog):
         counter = 0
         # USAGE
         u_keyfinder = {"__Usage__":"``!keyfinder <key>``",
-                       "__Args__":"**key** (str): The key to get information for."}
+                       "__Args__":"**key** (str): The key to get information for (eg ``C#m`` or ``E``)"}
         u_sad = {
             "__Usage__": "``!sad``",
             "__Args__": "**[None]**",
