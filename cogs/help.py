@@ -63,6 +63,7 @@ misc_commands = {
     "slang": "Search Urban Dictionary for a given word/phrase.",
     "joke": "Have Harbinger tell a joke.",
     "keyfinder": "Get all chords in a given key (as well as common progressions).",
+    "chords": "Get guitar ``TAB`` diagram(s) of given chord.",
 }
 
 reactions = {
@@ -129,6 +130,8 @@ class HelpCommand(commands.Cog):
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
         counter = 0
         # USAGE
+        u_chords = {"__Usage__":"``!chords <chord> <scope>``",
+                    "__Args__":"**chord** (str): The chord to get diagram(s) for, eg ``Am`` or ``F#m``.\n**scope** (str): Which type of chord diagrams to return (``all|power|open|seventh``). Defaults to ``all``."}
         u_keyfinder = {"__Usage__":"``!keyfinder <key>``",
                        "__Args__":"**key** (str): The key to get information for (eg ``C#m`` or ``E``)"}
         u_sad = {
@@ -882,6 +885,10 @@ class HelpCommand(commands.Cog):
             embed.add_field(name="__Args__", value=f'{u_stream["__Args__"]}')
             await ctx.send(embed=embed)
         # MISC
+        if command == "chords":
+            embed = discord.Embed(title=f"{command}", description=f"{misc_commands[command]}", color=CUSTOM_COLOR)
+            embed.add_field(name="__Usage__", value=f"{u_chords['__Usage__']}", inline=False)
+            embed.add_field(name="__Args__", value=f"{u_chords['__Args__']}", inline=False)
         if command == "keyfinder":
             embed = discord.Embed(title=f"{command}",
                                   description=f"{misc_commands[command]}",
