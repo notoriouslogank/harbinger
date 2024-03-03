@@ -16,6 +16,7 @@ class Release(commands.Cog):
 
     @commands.command()
     async def release(self, ctx, text):
+        await ctx.channel.purge(limit=1)
         await ctx.send(embed=self.release_embed(ctx, text))
 
     def release_embed(self, ctx, text):
