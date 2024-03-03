@@ -4,7 +4,7 @@ from discord.ext import commands
 
 from harbinger import Harbinger
 
-note_dir = 'assets/user_notes/'
+note_dir = 'assets/user_notes'
 
 class Notes(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
