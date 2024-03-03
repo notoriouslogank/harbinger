@@ -25,7 +25,7 @@ class Notes(commands.Cog):
         for word in content:
             note_content = note_content + word + " "
         with open(f"{note_dir}/{note_author}.txt", "a") as n:
-            n.write(f"\n{timestamp}\n\n{note_content}\n--------------------\n")
+            n.write(f"\n{timestamp}\n\n{note_content}\n\n--------------------\n\n")
             n.close()
         await ctx.send("Noted!")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
