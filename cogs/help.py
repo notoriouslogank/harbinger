@@ -34,6 +34,7 @@ bot_commands = {
     "changelog": "Get the CHANGELOG.md from the Harbinger repository.",
     "bug": "Send a bug report to Harbinger's maintainer.",
     "shutdown": "Gracefully shut down Harbinger.",
+    "release": "Announce a new release of Harbinger.",
 }
 
 music_commands = {
@@ -130,6 +131,7 @@ class HelpCommand(commands.Cog):
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
         counter = 0
         # USAGE
+        u_release = {"__Usage__":"``!release <text>``", "__Args__":"**text** (str): Body text for the new release embed."}
         u_chords = {"__Usage__":"``!chords <chord> <scope>``",
                     "__Args__":"**chord** (str): The chord to get diagram(s) for, eg ``Am`` or ``F#m``.\n**scope** (str): Which type of chord diagrams to return (``all|power|open|seventh``). Defaults to ``all``."}
         u_keyfinder = {"__Usage__":"``!keyfinder <key>``",
@@ -684,6 +686,16 @@ class HelpCommand(commands.Cog):
             embed.add_field(name="__Args__", value=f'{u_say["__Args__"]}')
             await ctx.send(embed=embed)
         # BOT
+        if command == "release":
+            embed = discord.Embed(title=f"{command}",
+                                  description=f"{bot_commands[command]}",
+                                  color=CUSTOM_COLOR)
+            embed.add_field(name="__Usage__",
+                            value=f"{u_release['__Usage__']}",
+                            inline=False)
+            embed.add_field(name="__Args__",
+                            value=f"{u_release['__Args__']}")
+            await ctx.send(embed=embed)
         if command == "reload_all":
             embed = discord.Embed(
                 title=f"{command}",
@@ -704,7 +716,7 @@ class HelpCommand(commands.Cog):
             embed.add_field(
                 name="__Usage__", value=f"{u_load_cog['__Usage__']}", inline=False
             )
-            embed.add_field(name="__Args__", value=f'{u_load_cog["__Args__"]}')
+            embed.add_field(name="__Args__", value=f'{u_load_cog["__Args__"]}', inline=False)
             await ctx.send(embed=embed)
         if command == "unload_cog":
             embed = discord.Embed(
