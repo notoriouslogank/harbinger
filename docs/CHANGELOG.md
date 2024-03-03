@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased] - 2024-02-03
+## [5.0.0] - 2024-02-03
 
 ### Breaking Changes
 
@@ -17,6 +17,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - New assets dir to contain Harbinger responses (strings and urls); this should make it much easier to quickly add or remove canned bot responses
 - README now contains a Table of Contents
+- !release command to quickly, easily, and deterministically create embeds to announce new release versions of Harbinger
+- !help entry for new !release command
 
 ### Removed
 
