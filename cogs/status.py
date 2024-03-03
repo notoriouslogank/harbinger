@@ -10,6 +10,7 @@ from discord.ext import commands
 
 from config.read_configs import ReadConfigs as configs
 from harbinger import OWNER, Harbinger
+from assets import strings
 
 DELETION_TIME = configs.delete_time()
 EMAIL_ADDRESS = configs.email_address()
@@ -20,44 +21,9 @@ MODERATOR = configs.moderator_id()
 DEVELOPER = configs.developer_id()
 OWNER = configs.owner_id()
 
-playing = [
-    "with myself",
-    "the synth",
-    "bass",
-    "with fire",
-    "with my food",
-    "games with my heart",
-    "God",
-    "Half Life 3",
-    "Notepad",
-    "grab ass with your mom",
-    "knifey-stabby",
-    "Find the Open Network Port",
-    "dead",
-]
-listening = [
-    "the screams of my enemies",
-    "your phonecalls",
-    "the voices",
-    "complaints",
-    "the national anthem",
-    "some guy bloody ramble",
-    "that new Olivia Rodrigo jam",
-]
-watching = [
-    "you sleep",
-    "my mouth",
-    "the world burn",
-    "you",
-    "Star Trek probably",
-    "the horror unfold",
-    "you",
-    "it all come crashing down",
-    "from within the walls of your home",
-    "in abject terror",
-    "from the shadows",
-    "your Internet traffic",
-]
+playing = strings.PLAYING
+listening = strings.LISTENING
+watching = strings.WATCHING
 
 Watching = discord.Activity(
     type=discord.ActivityType.watching,

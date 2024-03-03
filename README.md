@@ -1,6 +1,19 @@
-# Harbinger
+# Harbinger <!-- omit from toc -->
 
 Harbinger, a Discord bot crafted in Python with a touch of Bash, seamlessly blends essential Discord server commands with a sophisticated integration that empowers users to effortlessly control their Minecraft server directly from within the Discord platform.
+
+- [Installation](#installation)
+- [Configuration](#configuration)
+  - [Email](#email)
+  - [Bot](#bot)
+  - [Server](#server)
+  - [Roles](#roles)
+- [Usage](#usage)
+- [Support](#support)
+- [Contributing](#contributing)
+- [License](#license)
+- [Copyright](#copyright)
+- [Acknowledgements](#acknowledgements)
 
 ## Installation
 
@@ -45,7 +58,7 @@ python3 config/configure.py
 
 Follow the onscreen prompts to provide the Harbinger config file with all of the necessary data.  The config.ini key/value pairs are described in the following section.
 
-## config.ini
+## Configuration
 
 The following serves as a quick guide to the keys and values for the config.ini file:
 

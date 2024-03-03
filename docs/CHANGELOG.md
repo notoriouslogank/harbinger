@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased] - 2024-02-03
+
+### Breaking Changes
+
+- All commands within reactions.py now source their urls from assets/urls.py rather than being instantiated within the cog
+- All presence messages in cogs/status.py now source their message content from assets/strings.py rather than being instantiated within the cog
+- start.sh script has been removed; if you were previously using this script to start Harbinger, please see the README for details on how to start the bot going forward
+- Moved user_notes to assets/user_notes
+
+### Added
+
+- New assets dir to contain Harbinger responses (strings and urls); this should make it much easier to quickly add or remove canned bot responses
+- README now contains a Table of Contents
+
+### Removed
+
+- Removed unused start.sh (this will very likely return in a future update with a better implementation)
+
 ## [4.6.0] - 2024-16-02
 
 ### Added

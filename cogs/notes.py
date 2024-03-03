@@ -4,6 +4,7 @@ from discord.ext import commands
 
 from harbinger import Harbinger
 
+note_dir = 'assets/user_notes/'
 
 class Notes(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
@@ -23,8 +24,8 @@ class Notes(commands.Cog):
         timestamp = datetime.now()
         for word in content:
             note_content = note_content + word + " "
-        with open(f"user_notes/{note_author}.txt", "a") as n:
-            n.writelines(f"{timestamp}\n\n{note_content}\n--------------------\n")
+        with open(f"{note_dir}/{note_author}.txt", "a") as n:
+            n.write(f"\n{timestamp}\n\n{note_content}\n--------------------\n")
             n.close()
         await ctx.send("Noted!")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
@@ -34,7 +35,7 @@ class Notes(commands.Cog):
         """Print user's notes to the channel."""
         cmd = "!notes"
         cmd_msg = f"{ctx.message.author} checked their notes."
-        note_file = f"user_notes/{ctx.message.author.display_name}.txt"
+        note_file = f"{note_dir}/{ctx.message.author.display_name}.txt"
         with open(note_file, "r") as n:
             all_notes = n.read()
         await Harbinger.send_dm(
@@ -48,7 +49,7 @@ class Notes(commands.Cog):
         cmd = "!cnote"
         cmd_msg = f"{ctx.message.author} deleted their notes."
         clear_message = " "
-        with open(f"user_notes/{ctx.message.author.display_name}.txt", "w") as n:
+        with open(f"{note_dir}/{ctx.message.author.display_name}.txt", "w") as n:
             n.write(clear_message)
         await Harbinger.send_dm(
             ctx=ctx, member=ctx.message.author, content="Cleared your notes!"
