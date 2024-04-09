@@ -186,9 +186,7 @@ def main():
     """Print deobfuscated config.ini."""
     config = ReadConfigs
     key = config.load_key()
-    print(
-        f"Email Address: {config.email_address()}\nEmail Password: {config.email_password()}\nDiscord Token: {config.discord_token()}\nDelete After: {config.delete_time()}\nOwner ID: {config.owner_id()}\nCustom Color: {config.custom_color()}\nServer Directory: {config.server_dir()}\nStartup Script: {config.startup_script()}\nLocal IP: {config.server_local_ip()}\nPublic IP: {config.server_public_ip()}\nModerator Role ID: {config.moderator_id()}\nDeveloper ID: {config.developer_id()}"
-    )
+    config.show_configs()
 
 
 if __name__ == "__main__":
