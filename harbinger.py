@@ -2,13 +2,68 @@ from datetime import datetime
 from os import listdir
 import discord
 from discord.ext import commands
+import argparse
+import sys
 
 from config.read_configs import ReadConfigs as configs
+from config.configure import Configure
+
+
+def get_version():
+    with open("docs/CHANGELOG.md", "r") as f:
+        changelog = f.readlines()
+        version_line = changelog[6]
+        version = version_line[4:9]
+        print(f"Harbinger v{version}")
+
+
+parser = argparse.ArgumentParser(prog="Harbinger", description="Harbinger Discord bot.")
+
+parser.add_argument(
+    "-c",
+    "--configure",
+    help="write configuration and encryption files for this Harbinger instance",
+    action="store_true",
+)
+
+parser.add_argument(
+    "-s",
+    "--show",
+    help="show decrypted contents of configfile",
+    action="store_true",
+)
+
+parser.add_argument(
+    "-v",
+    "--version",
+    help="show version info",
+    action="store_true",
+)
+
+args = parser.parse_args()
+
+if args.version == True:
+    get_version()
+    sys.exit()
+
+if args.configure == True:
+    Configure.check_config(
+        keyfile="config/key.key", python_config_file="config/config.ini"
+    )
+    print("Created config.ini.")
+    sys.exit()
+
+if args.show == True:
+    print(
+        f"Email Address: {configs.email_address()}\nEmail Password: {configs.email_password()}\nDiscord Token: {configs.discord_token()}\nDelete After: {configs.delete_time()}\nOwner ID: {configs.owner_id()}\nCustom Color: {configs.custom_color()}\nServer Directory: {configs.server_dir()}\nStartup Script: {configs.startup_script()}\nLocal IP: {configs.server_local_ip()}\nPublic IP: {configs.server_public_ip()}\nModerator Role ID: {configs.moderator_id()}\nDeveloper ID: {configs.developer_id()}"
+    )
+    sys.exit()
 
 TOKEN = configs.discord_token()
 OWNER = configs.owner_id()
 MODERATOR = configs.moderator_id()
 DEVELOPER = configs.developer_id()
+
 
 class Harbinger:
     """Class for the main bot functions."""
@@ -38,7 +93,7 @@ class Harbinger:
                     print(f"An error has occured: {exc}.")
 
     @bot.event
-    async def on_member_join(member:discord.Member):
+    async def on_member_join(member: discord.Member):
         """Elevate bot owner to dev and mod roles on join."""
         if member.id == configs.owner_id():
             mod = discord.utils.get(member.guild.roles, id=MODERATOR)
@@ -108,6 +163,7 @@ class Harbinger:
         """
         channel = await member.create_dm()
         await channel.send(content)
+
 
 if __name__ == "__main__":
     bot = Harbinger.bot

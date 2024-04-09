@@ -1,5 +1,6 @@
 import configparser
 import socket
+from os.path import isfile
 
 from cryptography.fernet import Fernet
 from requests import get
@@ -188,12 +189,23 @@ class Configure:
         with open(f"{python_config_file}", "w") as configfile:
             config.write(configfile)
 
+    def check_config(keyfile, python_config_file):
+        if isfile(keyfile) == True:
+            print(f"Keyfile found: {keyfile}.")
+        else:
+            print(f"No keyfile found.\nCreating key.key now...")
+            Configure.write_keyfile()
+        if isfile(python_config_file):
+            print(f"Configfile found: {python_config_file}.")
+        else:
+            print("No Python config file located.\nCreating config.ini now...")
+            key = Configure.load_key()
+            Configure.write_py_config()
+            Configure.encrypt(f"{python_config_file}", key)
+
 
 def main():
-    # Configure.write_keyfile()
-    key = Configure.load_key()
-    Configure.write_py_config()
-    Configure.encrypt(f"{python_config_file}", key)
+    Configure.check_config(keyfile=keyfile, python_config_file=python_config_file)
 
 
 if __name__ == "__main__":

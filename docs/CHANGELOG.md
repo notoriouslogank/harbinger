@@ -4,7 +4,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.1.0] - 2024-04-09
+
+### Added
+
+- Multiple command-line arguments:
+        - c, configure: Creates config.ini
+        - s, show: Show the contents of config.ini in plaintext
+        - v, version: Show current Harbinger version
+
 ## [5.0.1] - 2024-03-03
+
+### Fixed
 
 - !release command should now correctly auto-remove user command message before sending embed
 
@@ -15,7 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - All commands within reactions.py now source their urls from assets/urls.py rather than being instantiated within the cog
 - All presence messages in cogs/status.py now source their message content from assets/strings.py rather than being instantiated within the cog
 - start.sh script has been removed; if you were previously using this script to start Harbinger, please see the README for details on how to start the bot going forward
-- Moved user_notes to assets/user_notes
+- Moved usernotes to assets/usernotes
 
 ### Added
 
@@ -70,7 +81,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Fixed
 
-- moderator role now automatically given to new member if member.id == configs.owner_id()
+- moderator role now automatically given to new member if member.id == configs.owner-id()
 - serverinfo now works as expected
 
 ## [4.4.0] - 2024-05-02
@@ -288,7 +299,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
-- !code_whisper and !code_say commands to send encoded messages.  Encoding schema supported: base64, binary, Caeser cipher, hex.
+- !codewhisper and !codesay commands to send encoded messages.  Encoding schema supported: base64, binary, Caeser cipher, hex.
 - !decrypt command to, well, decrypt encrypted messages
 
 ### Fixed
