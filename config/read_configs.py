@@ -1,3 +1,4 @@
+import pathlib
 from configparser import ConfigParser
 
 import discord
@@ -100,7 +101,8 @@ class ReadConfigs:
         server_directory = config["Server"]["server_dir"]
         Configure.encrypt(python_config_file, Configure.load_key())  # encrypt
         raw_server_directory = repr(server_directory)[1:-1]
-        return raw_server_directory
+        server_dir = pathlib.Path.expanduser(raw_server_directory)
+        return server_dir
 
     def startup_script() -> str:
         """Retrieve path to Minecraft server startup script from config.ini.
