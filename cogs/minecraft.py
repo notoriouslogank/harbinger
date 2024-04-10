@@ -39,7 +39,14 @@ class Minecraft(commands.Cog):
         cmd = f"!startmc"
         cmd_msg = f"Started Minecraft server."
         subprocess.run(
-            ["tmux", "send", "-t", "Harbinger.1", f"zsh {SERVER_STARTUP_SCRIPT}"]
+            [
+                "tmux",
+                "send",
+                "-t",
+                "Harbinger.1",
+                f"zsh {SERVER_STARTUP_SCRIPT}",
+                "ENTER",
+            ]
         )
         await ctx.send(f"Starting Minecraft server...")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
