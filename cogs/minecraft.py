@@ -30,8 +30,9 @@ class Minecraft(commands.Cog):
 
     def get_mc_version(self):
         with open(fname) as f:
-            contents = f.readlines()
-            return contents[3]
+            line = f.readlines()
+            version = line[6]
+            return version[-6:-1]
 
     @commands.command()
     async def startmc(self, ctx: commands.Context):
