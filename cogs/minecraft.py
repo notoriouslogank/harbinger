@@ -56,9 +56,10 @@ class Minecraft(commands.Cog):
         if command == None:
             mc_embed = discord.Embed(
                 title="Minecraft Server",
-                description=f"{self.get_mc_version()}",
+                description="",
                 color=CUSTOM_COLOR,
             )
+            mc_embed.add_field(name="Client Version", value=f"{self.get_mc_version()}")
             mc_embed.add_field(name="Server Address", value=f"{SERVER_PUBLIC_IP}")
             await ctx.send(embed=mc_embed)
             Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
