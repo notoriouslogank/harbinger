@@ -8,7 +8,7 @@ from harbinger import Harbinger
 SERVER_PUBLIC_IP = configs.server_public_ip()
 SERVER_STARTUP_SCRIPT = configs.startup_script()
 SERVER_DIR = configs.server_dir()
-mc_log = "logs/latest.log"
+MC_LOG = os.path.join(SERVER_DIR, "logs/latest.log")
 
 bot = Harbinger.bot
 
@@ -43,7 +43,7 @@ class Minecraft(commands.Cog):
             ["tmux", "send", "-t", "Harbinger.1", f"{command}", "C-m"],
         )
         await ctx.send(f"Sending command: {command} to server...")
-        await ctx.send(f"{Minecraft.get_cmd_stdout(mc_log)}")
+        await ctx.send(f"{self.get_cmd_stdout(MC_LOG)}")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
 
