@@ -19,8 +19,8 @@ class Minecraft(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
-    def get_cmd_stdout(self, logfile):
-        with open(logfile, "rb") as f:
+    def get_cmd_stdout(self):
+        with open(MC_LOG, "rb") as f:
             try:
                 f.seek(-2, os.SEEK_END)
                 while f.read(1) != b"\n":
@@ -43,7 +43,7 @@ class Minecraft(commands.Cog):
             ["tmux", "send", "-t", "Harbinger.1", f"{command}", "C-m"],
         )
         await ctx.send(f"Sending command: {command} to server...")
-        await ctx.send(f"{self.get_cmd_stdout(MC_LOG)}")
+        await ctx.send(f"{self.get_cmd_stdout()}")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
 
