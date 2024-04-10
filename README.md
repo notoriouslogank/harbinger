@@ -30,35 +30,23 @@ cd harbinger
 pip install -r requirements.txt
 ```
 
-In order for Harbinger to launch, you'll need to supply it with a configuration file.  The Harbinger repository contains a tool to help you in this task: ``harbinger/config/configure.py``. Before we can generate the config file, however, we need to generate some cryptographic keys (to ensure no secret tokens, passwords, et al leak from the config file if it were erroneously (or maliciously) shared).
-
-A detailed explanation of Fernet key cryptography -- and symmetric encryption more generally -- can be fround in the documentation for the [cryptography](https://cryptography.io/en/latest/fernet/) module we'll use to generate our key(s).
-
-You will need to have a Fernet key generated and placed in the proper location: by default, Harbinger looks for the Fernet key file called ``key.key`` within the config/ directory:
+In order for Harbinger to launch, you'll need to generate a configuration file.  This can be done in one of two (quite similar) manners:
 
 ```bash
-cd config
-python3
+python3 harbinger.py -c
 ```
 
-From the Python interactive shell, run the following commands (if you'd rather, this can be saved as a script (with a .py extension) and run directly, ie ``python3 script_name.py``).:
-
-```python
-from cryptography.fernet import Fernet
-key = Fernet.generate_key()
-with open("config/key.key", "wb") as key_file:
-    key_file.write(key)
-```
-
-Once you've generated this file (config/key.key), make sure you *do not misplace it*: it will be required to encrypt and decrypt your configuration file as needed; if you lose this key, you will have to generate a new key (and, therefore, a new config file).  Now we can create our configuration file (Harbinger will use our keyfile by default for the encryption):
+or
 
 ```bash
-python3 config/configure.py
+python3 harbinger.py -C
 ```
 
-Follow the onscreen prompts to provide the Harbinger config file with all of the necessary data.  The config.ini key/value pairs are described in the following section.
+The only difference between the two above listed methods is whether or not Harbinger subsequently launches once configuration is complete: '-c' flag to generate the configuration file only; '-C' flag to generate this configuration file and then launch Harbinger immediately afterward.
 
 ## Configuration
+
+Once the configuration script has started, simply follow the onscreen prompts until the configuration completes.
 
 The following serves as a quick guide to the keys and values for the config.ini file:
 
@@ -77,8 +65,8 @@ The following serves as a quick guide to the keys and values for the config.ini 
 
 ### Server
 
-- server_dir: An absolute path to the directory your Minecraft server is launched from.
-- startup_script: An absolute path to the script used to launch your Minecraft server.
+- server_dir: Path to the directory your Minecraft server is launched from. (Works with ~/ file paths.)
+- startup_script: Path to the script used to launch your Minecraft server. (Works with ~/ file paths.)
 - server_local_ip: The local, private IP address of the Minecraft server.
 - server_public_ip: The public IP address of the Minecraft server.
 
@@ -91,11 +79,23 @@ Once you've provided all the necessary information to the configuration script, 
 
 ## Usage
 
-All that's left at this point is to run your instance and let the magic happen:
+All that's left at this point is to run your instance and let the magic happen.
+
+This can be performed with two separate methods, listed below (beginning with the autorun method):
+
+```bash
+python3 run.py
+```
+
+When launched in this manner, Harbinger will automatically create a new tmux session with two panes and attach to it.  In the first pane, the Minecraft Server instance will launch; in the second pane, the Harbinger bot instance will launch simultaneously.  At this point, the tmux session can be safely detached and continue running in the background.
+
+Please see the [tmux Github repository](https://github.com/tmux/tmux/wiki) for more information.
 
 ```bash
 python3 harbinger.py
 ```
+
+Using this method, Harbinger will start.  However, when launched directly in this way, it will *not* automatically begin a tmux session, nor will it launch the Minecraft Server instance (these must be done manually).
 
 ## Support
 

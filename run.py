@@ -28,5 +28,6 @@ commands = [
     attach_tmux,
 ]
 
-for command in commands:
-    subprocess.run(command)
+if __name__ == "__main__":
+    for command in commands:
+        subprocess.run(command)
