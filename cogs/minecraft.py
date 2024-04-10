@@ -32,7 +32,7 @@ class Minecraft(commands.Cog):
             capture_output=True,
             text=True,
         )
-        mccommand
+        print(mccommand.stdout)
         await ctx.send(f"Sending command: {command} to server...")
         await ctx.send(f"{mccommand.stdout}")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
