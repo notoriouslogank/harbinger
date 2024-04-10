@@ -8,8 +8,8 @@ from harbinger import Harbinger
 SERVER_PUBLIC_IP = configs.server_public_ip()
 SERVER_STARTUP_SCRIPT = configs.startup_script()
 SERVER_DIR = configs.server_dir()
-MC_LOG = os.path.join("~/jaylogankminecraft/logs/latest.log")
-
+LOG_NAME = r"latest.log"
+fname = os.path.join(SERVER_DIR, LOG_NAME)
 bot = Harbinger.bot
 
 
@@ -20,7 +20,7 @@ class Minecraft(commands.Cog):
         self.bot = bot
 
     def get_cmd_stdout(self):
-        with open(MC_LOG) as f:
+        with open(fname) as f:
             for line in f:
                 pass
             last_line = line
