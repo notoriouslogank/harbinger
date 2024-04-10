@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.2.1] - 2024-04-10
+
+### Changed
+
+- Updated README to reflect new workflow (run.py launcher)
+
+### Fixed
+
+- Launcher commands all moved into main function to avoid any potential conflicts
+
 ## [5.2.0] - 2024-04-10
 
 ### Added
