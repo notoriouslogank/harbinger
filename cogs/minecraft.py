@@ -27,8 +27,13 @@ class Minecraft(commands.Cog):
         """
         cmd = f"!mccmd({command})"
         cmd_msg = f"Sent following command to server: {command}"
-        subprocess.run(["tmux", "send", "-t", "Harbinger.1", f"{command}", "C-m"])
+        mccommand = subprocess.run(
+            ["tmux", "send", "-t", "Harbinger.1", f"{command}", "C-m"],
+            capture_output=True,
+            text=True,
+        )
         await ctx.send(f"Sending command: {command} to server...")
+        await ctx.send(f"{mccommand.stdout}")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
 
