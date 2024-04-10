@@ -24,7 +24,6 @@ class Tools(commands.Cog):
         cmd = f"!bw"
         cmd_msg = f"Unspooled some bubble wrap."
         await ctx.channel.purge(limit=1)
-        await ctx.channel.send(f"Here's some bubble wrap.  Enjoy.")
         await ctx.channel.send(f"{bubble_wrap}")
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
 
