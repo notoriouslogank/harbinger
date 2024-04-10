@@ -18,7 +18,14 @@ cd_mc = ("tmux", "send", "-t", "Harbinger.1", f"cd {SERVER_DIR}", "ENTER")
 start_minecraft = ("tmux", "send", "-t", "Harbinger.1", f"{STARTUP_SCRIPT}", "ENTER")
 attach_tmux = ("tmux", "a")
 
-commands = [start_tmux, split_window, start_harbinger, start_minecraft, attach_tmux]
+commands = [
+    start_tmux,
+    split_window,
+    start_harbinger,
+    cd_mc,
+    start_minecraft,
+    attach_tmux,
+]
 
 for command in commands:
     subprocess.run(command)
