@@ -11,6 +11,7 @@ from config.read_configs import ReadConfigs as configs
 
 
 def get_version():
+    """Get Harbinger version."""
     with open("docs/CHANGELOG.md", "r") as f:
         changelog = f.readlines()
         version_line = changelog[6]
