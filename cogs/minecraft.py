@@ -29,13 +29,14 @@ class Minecraft(commands.Cog):
         cmd_msg = f"Sent following command to server: {command}"
         mccommand = subprocess.run(
             ["tmux", "send", "-t", "Harbinger.1", f"{command}", "C-m"],
-            capture_output=True,
-            text=True,
+            stdout=subprocess.PIPE,
         )
-        print(mccommand.stdout)
         await ctx.send(f"Sending command: {command} to server...")
         await ctx.send(f"{mccommand.stdout}")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        while True:
+            line = mccommand.stdout.readline()
+            print(line.strip())
 
 
 """     def create_embed(version):
