@@ -30,6 +30,7 @@ class Minecraft(commands.Cog):
         mccommand = subprocess.run(
             ["tmux", "send", "-t", "Harbinger.1", f"{command}", "C-m"],
             stdout=subprocess.PIPE,
+            text=True,
         )
         await ctx.send(f"Sending command: {command} to server...")
         await ctx.send(f"{mccommand.stdout}")
