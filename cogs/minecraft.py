@@ -20,15 +20,11 @@ class Minecraft(commands.Cog):
         self.bot = bot
 
     def get_cmd_stdout(self):
-        with open(MC_LOG, "rb") as f:
-            try:
-                f.seek(-2, os.SEEK_END)
-                while f.read(1) != b"\n":
-                    f.seek(-2, os.SEEK_CUR)
-            except OSError:
-                f.seek(0)
-            command_output = f.readline().decode()
-            return command_output
+        with open(MC_LOG) as f:
+            for line in f:
+                pass
+            last_line = line
+            return last_line
 
     @commands.command()
     async def mc(self, ctx: commands.Context, command: str) -> None:
