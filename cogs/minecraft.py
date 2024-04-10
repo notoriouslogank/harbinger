@@ -23,13 +23,23 @@ class Minecraft(commands.Cog):
         self.bot = bot
 
     def get_cmd_stdout(self):
+        """Parse and return final line of latest.log (simulating STDOUT).
+
+        Returns:
+            str: Final line of log file
+        """
         with open(fname) as f:
             for line in f:
                 pass
             last_line = line
             return last_line
 
-    def get_mc_version(self):
+    def get_mc_version(self) -> str:
+        """Retrieve Minecraft client version from log file.
+
+        Returns:
+            str: Minecraft client version
+        """
         with open(fname) as f:
             line = f.readlines()
             version = line[3]
@@ -37,6 +47,7 @@ class Minecraft(commands.Cog):
 
     @commands.command()
     async def startmc(self, ctx: commands.Context):
+        """Start the Minecraft server."""
         cmd = f"!startmc"
         cmd_msg = f"Started Minecraft server."
         subprocess.run(
