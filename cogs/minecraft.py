@@ -31,7 +31,7 @@ class Minecraft(commands.Cog):
     def get_mc_version(self):
         with open(fname) as f:
             line = f.readlines()
-            version = line[4]
+            version = line[3]
             return version[-6:-1]
 
     @commands.command()
