@@ -82,6 +82,11 @@ reactions = {
     "bored": "Send a **bored** reaction .gif",
 }
 
+minecraft_commands = {
+    "mc": "Send command(s) to Minecraft Server.",
+    "startmc": "Start the Minecraft Server.",
+}
+
 
 class HelpCommand(commands.Cog):
     """Class for generating help information."""
@@ -96,6 +101,8 @@ class HelpCommand(commands.Cog):
             list: Alphebetical list of all supported bot commands.
         """
         master_commands_list = []
+        for cmd in minecraft_commands:
+            master_commands_list.append(cmd)
         for cmd in moderation_commands:
             master_commands_list.append(cmd)
         for cmd in bot_commands:
@@ -115,7 +122,7 @@ class HelpCommand(commands.Cog):
         Returns:
             list: List of command categories.
         """
-        categories = ["reactions", "moderation", "bot", "misc", "music"]
+        categories = ["reactions", "moderation", "bot", "misc", "music", "minecraft"]
         categories.sort()
         return categories
 
@@ -131,11 +138,18 @@ class HelpCommand(commands.Cog):
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
         counter = 0
         # USAGE
-        u_release = {"__Usage__":"``!release <text>``", "__Args__":"**text** (str): Body text for the new release embed."}
-        u_chords = {"__Usage__":"``!chords <chord> <scope>``",
-                    "__Args__":"**chord** (str): The chord to get diagram(s) for, eg ``Am`` or ``F#m``.\n**scope** (str): Which type of chord diagrams to return (``all|power|open|seventh``). Defaults to ``all``."}
-        u_keyfinder = {"__Usage__":"``!keyfinder <key>``",
-                       "__Args__":"**key** (str): The key to get information for (eg ``C#m`` or ``E``)"}
+        u_release = {
+            "__Usage__": "``!release <text>``",
+            "__Args__": "**text** (str): Body text for the new release embed.",
+        }
+        u_chords = {
+            "__Usage__": "``!chords <chord> <scope>``",
+            "__Args__": "**chord** (str): The chord to get diagram(s) for, eg ``Am`` or ``F#m``.\n**scope** (str): Which type of chord diagrams to return (``all|power|open|seventh``). Defaults to ``all``.",
+        }
+        u_keyfinder = {
+            "__Usage__": "``!keyfinder <key>``",
+            "__Args__": "**key** (str): The key to get information for (eg ``C#m`` or ``E``)",
+        }
         u_sad = {
             "__Usage__": "``!sad``",
             "__Args__": "**[None]**",
@@ -212,9 +226,9 @@ class HelpCommand(commands.Cog):
             "__Usage__": "``!switch <state>``",
             "__Args__": "**state (on|off)**: Default value is ``on``; pass ``'off'`` to turn server off.",
         }
-        u_mccmd = {
-            "__Usage__": "``!mccmd <command>``",
-            "__Args__": "**command (str)**: Command to send to the Minecraft server.",
+        u_mc = {
+            "__Usage__": "``!mc <command>``",
+            "__Args__": "**command (str)**: Command to send to the Minecraft server. If *no* argument is given, returns an embed with server information.",
         }
         u_note = {
             "__Usage__": "``!note <message>``",
@@ -318,6 +332,7 @@ class HelpCommand(commands.Cog):
             "__Usage__": "``!say <message>``",
             "__Args__": "**message (str)**: Message to send.",
         }
+        u_startmc = {"__Usage__": "``!startmc``", "__Args__": "**[None]**"}
         # GENERAL
         if command == None:
             embed = discord.Embed(
@@ -337,6 +352,20 @@ class HelpCommand(commands.Cog):
             )
             await ctx.send(embed=embed)
         # CATEGORIES
+        if command == "minecraft":
+            embed = discord.Embed(
+                title="MINECRAFT SERVER COMMANDS",
+                description="Commands for Minecraft Server administration.",
+                color=CUSTOM_COLOR,
+            )
+            for cmd in minecraft_commands:
+                key, value = list(minecraft_commands.items())[counter]
+                embed.add_field(name=f"{str(key)}", value=f"{str(value)}", inline=True)
+                counter += 1
+                embed.set_footer(
+                    text=f"Please visit https://learn.microsoft.com/en-us/minecraft/creator/commands/commands?view=minecraft-bedrock-stable for a full list of Minecraft Server commands."
+                )
+            await ctx.send(embed=embed)
         if command == "moderation":
             role = discord.Guild.get_role(ctx.guild, MODERATOR)
             embed = discord.Embed(
@@ -428,6 +457,31 @@ class HelpCommand(commands.Cog):
                 embed.set_footer(
                     text="*These commands may be executed by anyone, regardless of role."
                 )
+            await ctx.send(embed=embed)
+        # MINECRAFT
+        if command == "mc":
+            embed = discord.Embed(
+                title=f"{command}",
+                description=f"{minecraft_commands[command]}",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(
+                name="__Usage__", value=f"{u_mc['__Usage__']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f"{u_mc['__Args__']}", inline=False)
+            await ctx.send(embed=embed)
+        if command == "startmc":
+            embed = discord.Embed(
+                title=f"{command}",
+                description=f"{minecraft_commands[command]}",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(
+                name="__Usage__", value=f"{u_startmc['__Usage__']}", inline=False
+            )
+            embed.add_field(
+                name="__Args__", value=f"{u_startmc['__Args__']}", inline=False
+            )
             await ctx.send(embed=embed)
         # REACTIONS
         if command == "angry":
@@ -687,14 +741,15 @@ class HelpCommand(commands.Cog):
             await ctx.send(embed=embed)
         # BOT
         if command == "release":
-            embed = discord.Embed(title=f"{command}",
-                                  description=f"{bot_commands[command]}",
-                                  color=CUSTOM_COLOR)
-            embed.add_field(name="__Usage__",
-                            value=f"{u_release['__Usage__']}",
-                            inline=False)
-            embed.add_field(name="__Args__",
-                            value=f"{u_release['__Args__']}")
+            embed = discord.Embed(
+                title=f"{command}",
+                description=f"{bot_commands[command]}",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(
+                name="__Usage__", value=f"{u_release['__Usage__']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f"{u_release['__Args__']}")
             await ctx.send(embed=embed)
         if command == "reload_all":
             embed = discord.Embed(
@@ -716,7 +771,9 @@ class HelpCommand(commands.Cog):
             embed.add_field(
                 name="__Usage__", value=f"{u_load_cog['__Usage__']}", inline=False
             )
-            embed.add_field(name="__Args__", value=f'{u_load_cog["__Args__"]}', inline=False)
+            embed.add_field(
+                name="__Args__", value=f'{u_load_cog["__Args__"]}', inline=False
+            )
             await ctx.send(embed=embed)
         if command == "unload_cog":
             embed = discord.Embed(
@@ -898,16 +955,30 @@ class HelpCommand(commands.Cog):
             await ctx.send(embed=embed)
         # MISC
         if command == "chords":
-            embed = discord.Embed(title=f"{command}", description=f"{misc_commands[command]}", color=CUSTOM_COLOR)
-            embed.add_field(name="__Usage__", value=f"{u_chords['__Usage__']}", inline=False)
-            embed.add_field(name="__Args__", value=f"{u_chords['__Args__']}", inline=False)
+            embed = discord.Embed(
+                title=f"{command}",
+                description=f"{misc_commands[command]}",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(
+                name="__Usage__", value=f"{u_chords['__Usage__']}", inline=False
+            )
+            embed.add_field(
+                name="__Args__", value=f"{u_chords['__Args__']}", inline=False
+            )
             await ctx.send(embed=embed)
         if command == "keyfinder":
-            embed = discord.Embed(title=f"{command}",
-                                  description=f"{misc_commands[command]}",
-                                  color=CUSTOM_COLOR)
-            embed.add_field(name="__Usage__", value=f"{u_keyfinder['__Usage__']}", inline=False)
-            embed.add_field(name="__Args__", value=f"{u_keyfinder['__Args__']}", inline=False)
+            embed = discord.Embed(
+                title=f"{command}",
+                description=f"{misc_commands[command]}",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(
+                name="__Usage__", value=f"{u_keyfinder['__Usage__']}", inline=False
+            )
+            embed.add_field(
+                name="__Args__", value=f"{u_keyfinder['__Args__']}", inline=False
+            )
             await ctx.send(embed=embed)
         if command == "joke":
             embed = discord.Embed(
@@ -968,32 +1039,6 @@ class HelpCommand(commands.Cog):
             )
             embed.add_field(
                 name="__Args__", value=f"{u_playing['__Args__']}", inline=False
-            )
-            await ctx.send(embed=embed)
-        if command == "switch":
-            embed = discord.Embed(
-                title=f"{command}",
-                description=f"{misc_commands[command]}",
-                color=CUSTOM_COLOR,
-            )
-            embed.add_field(
-                name="__Usage__", value=f"{u_switch['__Usage__']}", inline=False
-            )
-            embed.add_field(
-                name="__Args__", value=f"{u_switch['__Args__']}", inline=False
-            )
-            await ctx.send(embed=embed)
-        if command == "mccmd":
-            embed = discord.Embed(
-                title=f"{command}",
-                description=f"{misc_commands[command]}",
-                color=CUSTOM_COLOR,
-            )
-            embed.add_field(
-                name="__Usage__", value=f"{u_mccmd['__Usage__']}", inline=False
-            )
-            embed.add_field(
-                name="__Args__", value=f"{u_mccmd['__Args__']}", inline=False
             )
             await ctx.send(embed=embed)
         if command == "note":
