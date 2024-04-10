@@ -1,5 +1,5 @@
 import subprocess
-
+import os
 from discord.ext import commands
 
 from config.read_configs import ReadConfigs as configs
@@ -7,6 +7,8 @@ from harbinger import Harbinger
 
 SERVER_PUBLIC_IP = configs.server_public_ip()
 SERVER_STARTUP_SCRIPT = configs.startup_script()
+SERVER_DIR = configs.server_dir()
+mc_log = f"{SERVER_DIR}/logs/latest.log"
 
 bot = Harbinger.bot
 
@@ -16,6 +18,17 @@ class Minecraft(commands.Cog):
 
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
+
+    def get_cmd_stdout(logfile):
+        with open(logfile, "rb") as f:
+            try:
+                f.seek(-2, os.SEEK_END)
+                while f.read(1) != b"\n":
+                    f.seek(-2, os.SEEK_CUR)
+            except OSError:
+                f.seek(0)
+            command_output = f.readline().decode()
+            return command_output
 
     @commands.command()
     async def mc(self, ctx: commands.Context, command: str) -> None:
@@ -30,6 +43,7 @@ class Minecraft(commands.Cog):
             ["tmux", "send", "-t", "Harbinger.1", f"{command}", "C-m"],
         )
         await ctx.send(f"Sending command: {command} to server...")
+        await ctx.send(f"{Minecraft.get_cmd_stdout(mc_log)}")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
 
