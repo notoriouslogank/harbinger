@@ -1,10 +1,12 @@
 import subprocess
 import os
 from discord.ext import commands
+import discord
 
 from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
 
+CUSTOM_COLOR = configs.custom_color()
 SERVER_PUBLIC_IP = configs.server_public_ip()
 SERVER_STARTUP_SCRIPT = configs.startup_script()
 SERVER_DIR = r"/home/logank/jaylogankminecraft/logs"
@@ -26,8 +28,23 @@ class Minecraft(commands.Cog):
             last_line = line
             return last_line
 
+    def get_mc_version(self):
+        with open(fname) as f:
+            contents = f.readlines()
+            return contents[5]
+
     @commands.command()
-    async def mc(self, ctx: commands.Context, command: str) -> None:
+    async def startmc(self, ctx: commands.Context):
+        cmd = f"!startmc"
+        cmd_msg = f"Started Minecraft server."
+        subprocess.run(
+            ["tmux", "send", "-t", "Harbinger.1", f"zsh {SERVER_STARTUP_SCRIPT}"]
+        )
+        await ctx.send(f"Starting Minecraft server...")
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+
+    @commands.command()
+    async def mc(self, ctx: commands.Context, command=None) -> None:
         """Send an arbitrary command to the Minecraft server.
 
         Args:
@@ -35,13 +52,23 @@ class Minecraft(commands.Cog):
         """
         cmd = f"!mccmd({command})"
         cmd_msg = f"Sent following command to server: {command}"
-        subprocess.run(
-            ["tmux", "send", "-t", "Harbinger.1", f"{command}", "C-m"],
-        )
-        await ctx.send(f"Sending command: {command} to server...")
-        stdout = self.get_cmd_stdout()
-        await ctx.send(f"``{stdout}``")
-        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        if command == None:
+            mc_embed = discord.Embed(
+                title="Minecraft Server",
+                description=f"{self.get_mc_version()}",
+                color=CUSTOM_COLOR,
+            )
+            mc_embed.add_field(name="Server Address", value=f"{SERVER_PUBLIC_IP}")
+            await ctx.send(embed=mc_embed)
+            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        else:
+            subprocess.run(
+                ["tmux", "send", "-t", "Harbinger.1", f"{command}", "C-m"],
+            )
+            await ctx.send(f"Sending command: {command} to server...")
+            stdout = self.get_cmd_stdout()
+            await ctx.send(f"``{stdout}``")
+            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
 
 """     def create_embed(version):
