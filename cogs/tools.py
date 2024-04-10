@@ -4,12 +4,12 @@ import aiohttp
 import discord
 from discord.ext import commands
 from jokeapi import Jokes
-
+from assets import strings
 from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
 
 CUSTOM_COLOR = configs.custom_color()
-
+bubble_wrap = strings.BUBBLE_WRAP
 bot = Harbinger.bot
 
 
@@ -23,7 +23,6 @@ class Tools(commands.Cog):
     async def bw(self, ctx):
         cmd = f"!bw"
         cmd_msg = f"Unspooled some bubble wrap."
-        bubble_wrap = f"||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||"
         await ctx.channel.purge(limit=1)
         await ctx.channel.send(f"Here's some bubble wrap.  Enjoy.")
         await ctx.channel.send(f"{bubble_wrap}")
