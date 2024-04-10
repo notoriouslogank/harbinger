@@ -8,7 +8,7 @@ from harbinger import Harbinger
 SERVER_PUBLIC_IP = configs.server_public_ip()
 SERVER_STARTUP_SCRIPT = configs.startup_script()
 SERVER_DIR = configs.server_dir()
-mc_log = f"{SERVER_DIR}/logs/latest.log"
+mc_log = "logs/latest.log"
 
 bot = Harbinger.bot
 
