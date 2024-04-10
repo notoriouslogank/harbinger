@@ -8,8 +8,8 @@ from harbinger import Harbinger
 SERVER_PUBLIC_IP = configs.server_public_ip()
 SERVER_STARTUP_SCRIPT = configs.startup_script()
 SERVER_DIR = configs.server_dir()
-MC_LOG = os.path.join("~/jaylogankminecraft/logs/latest.log")
-
+MC_LOG = os.path.isfile("~/jaylogankminecraft/logs/latest.log")
+print(MC_LOG)
 bot = Harbinger.bot
 
 
