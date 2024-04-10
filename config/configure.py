@@ -1,6 +1,6 @@
 import configparser
-import socket
 import os
+import socket
 
 from cryptography.fernet import Fernet
 from requests import get
