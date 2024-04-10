@@ -20,6 +20,16 @@ class Tools(commands.Cog):
         self.bot = bot
 
     @commands.command()
+    async def bw(self, ctx):
+        cmd = f"!bw"
+        cmd_msg = f"Unspooled some bubble wrap."
+        bubble_wrap = f"||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||||pop!||"
+        await ctx.channel.purge(limit=1)
+        await ctx.channel.send(f"Here's some bubble wrap.  Enjoy.")
+        await ctx.channel.send(f"{bubble_wrap}")
+        Harbinger.timestamp(ctx.author, cmd, cmd_msg)
+
+    @commands.command()
     async def joke(self, ctx, type="any"):
         cmd = f"!joke"
         cmd_msg = f"Told a joke."
@@ -32,6 +42,7 @@ class Tools(commands.Cog):
             response_format="txt",
         )
         await ctx.send(get_joke)
+        Harbinger.timestamp(ctx.author, cmd, cmd_msg)
 
     @commands.command()
     async def slang(self, ctx: commands.Context, *query: str) -> None:
