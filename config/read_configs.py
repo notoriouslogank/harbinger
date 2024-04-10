@@ -99,7 +99,8 @@ class ReadConfigs:
         config.read(python_config_file)  # read
         server_directory = config["Server"]["server_dir"]
         Configure.encrypt(python_config_file, Configure.load_key())  # encrypt
-        return server_directory
+        raw_server_directory = repr(server_directory)[1:-1]
+        return raw_server_directory
 
     def startup_script() -> str:
         """Retrieve path to Minecraft server startup script from config.ini.
