@@ -50,8 +50,6 @@ misc_commands = {
     "ask": "Ask Harbinger a yes/no question and get an answer.",
     "embed": "Send an embed to the channel as Harbinger.",
     "playing": "Create an embed with info about a current game.",
-    "switch": "Turn the Minecraft server on or off.",
-    "mccmd": "Send the given command to the Minecraft server.",
     "note": "Add the given message to the user's notes file.",
     "notes": "Get your notes.",
     "cnote": "Clear your notes.",
@@ -222,10 +220,6 @@ class HelpCommand(commands.Cog):
             "__Usage__": "``!playing <game> <description> <field> <value>``",
             "__Args__": "**game (str)**: Name of game (title of embed).\n**description (str)**: Further info\n**field (str)**: Additional info field. [Optional]\n**value (str)**: Value for *field*.[Optional]",
         }
-        u_switch = {
-            "__Usage__": "``!switch <state>``",
-            "__Args__": "**state (on|off)**: Default value is ``on``; pass ``'off'`` to turn server off.",
-        }
         u_mc = {
             "__Usage__": "``!mc <command>``",
             "__Args__": "**command (str)**: Command to send to the Minecraft server. If *no* argument is given, returns an embed with server information.",
@@ -336,17 +330,17 @@ class HelpCommand(commands.Cog):
         # GENERAL
         if command == None:
             embed = discord.Embed(
-                title="# HELP!",
+                title="HELP!",
                 description="Further information about supported bot commands.",
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="## COMMAND CATEGORIES",
+                name="COMMAND CATEGORIES",
                 value=f"{' '.join(HelpCommand.categories_list())}",
                 inline=False,
             )
             embed.add_field(
-                name="## ALL COMMANDS",
+                name="ALL COMMANDS",
                 value=f"{' '.join(HelpCommand.command_list())}",
                 inline=False,
             )
