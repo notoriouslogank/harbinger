@@ -1,4 +1,5 @@
 import subprocess
+
 from config.read_configs import ReadConfigs as configs
 
 STARTUP_SCRIPT = configs.startup_script()
@@ -29,5 +30,3 @@ commands = [
 
 for command in commands:
     subprocess.run(command)
-
-# subprocess.run(("tmux", "new-session", "-d", "-s", "Harbinger"), shell="True")

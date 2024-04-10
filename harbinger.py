@@ -1,12 +1,13 @@
-from datetime import datetime
-from os import listdir
-import discord
-from discord.ext import commands
 import argparse
 import sys
+from datetime import datetime
+from os import listdir
 
-from config.read_configs import ReadConfigs as configs
+import discord
+from discord.ext import commands
+
 from config.configure import Configure
+from config.read_configs import ReadConfigs as configs
 
 
 def get_version():
