@@ -73,7 +73,8 @@ class Configure:
             str: Path to Minecraft server startup script
         """
         startup_script = input("Path to startup script: ")
-        return startup_script
+        expanded_startup_script = os.path.expanduser(startup_script)
+        return expanded_startup_script
 
     def get_custom_color():
         """Prompt user for custom color as RGB values.
@@ -98,7 +99,7 @@ class Configure:
         s.connect(("8.8.8.8", 80))
         ip = s.getsockname()[0]
         s.close()
-        ip_str = str(ip)
+        ip = str(ip)
         return ip
 
     def get_public_ip() -> str:

@@ -11,8 +11,6 @@ SERVER_PUBLIC_IP = configs.server_public_ip()
 SERVER_STARTUP_SCRIPT = configs.startup_script()
 SERVER_DIR = configs.server_dir()
 LOG_NAME = r"logs/latest.log"
-# SERVER_DIR = r"/home/logank/jaylogankminecraft/logs"
-# LOG_NAME = r"latest.log"
 fname = os.path.join(SERVER_DIR, LOG_NAME)
 bot = Harbinger.bot
 
