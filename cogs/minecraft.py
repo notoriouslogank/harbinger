@@ -32,7 +32,7 @@ class Minecraft(commands.Cog):
         with open(fname) as f:
             line = f.readlines()
             version = line[3]
-            return version[-6:-1]
+            return version[-7:-1]
 
     @commands.command()
     async def startmc(self, ctx: commands.Context):
