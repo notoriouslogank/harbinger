@@ -1,15 +1,17 @@
-from datetime import datetime
-from os import listdir
-import discord
-from discord.ext import commands
 import argparse
 import sys
+from datetime import datetime
+from os import listdir
 
-from config.read_configs import ReadConfigs as configs
+import discord
+from discord.ext import commands
+
 from config.configure import Configure
+from config.read_configs import ReadConfigs as configs
 
 
 def get_version():
+    """Get Harbinger version."""
     with open("docs/CHANGELOG.md", "r") as f:
         changelog = f.readlines()
         version_line = changelog[6]
@@ -22,7 +24,14 @@ parser = argparse.ArgumentParser(prog="Harbinger", description="Harbinger Discor
 parser.add_argument(
     "-c",
     "--configure",
-    help="write configuration and encryption files for this Harbinger instance",
+    help="create configuration file(s) for Harbinger",
+    action="store_true",
+)
+
+parser.add_argument(
+    "-C",
+    "--Configure",
+    help="create configuration file(s) for Harbinger and launch Harbinger using new configuration",
     action="store_true",
 )
 
@@ -50,8 +59,13 @@ if args.configure == True:
     Configure.check_config(
         keyfile="config/key.key", python_config_file="config/config.ini"
     )
-    print("Created config.ini.")
     sys.exit()
+
+if args.Configure == True:
+    Configure.check_config(
+        keyfile="config/key.key", python_config_file="config/config.ini"
+    )
+
 
 if args.show == True:
     print(

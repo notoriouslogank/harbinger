@@ -1,3 +1,4 @@
+import os
 import subprocess
 
 import discord
@@ -6,9 +7,12 @@ from discord.ext import commands
 from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
 
+CUSTOM_COLOR = configs.custom_color()
 SERVER_PUBLIC_IP = configs.server_public_ip()
 SERVER_STARTUP_SCRIPT = configs.startup_script()
-
+SERVER_DIR = configs.server_dir()
+LOG_NAME = r"logs/latest.log"
+fname = os.path.join(SERVER_DIR, LOG_NAME)
 bot = Harbinger.bot
 
 
@@ -18,52 +22,49 @@ class Minecraft(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
-    def create_embed(version):
-        """Create an embed with the Minecraft server information.
-
-        Args:
-            version (str): The Minecraft version of the current server instance.
+    def get_cmd_stdout(self):
+        """Parse and return final line of latest.log (simulating STDOUT).
 
         Returns:
-            embed: An embed object containing the Minecraft server version and IP address.
+            str: Final line of log file
         """
-        minecraft_embed = discord.Embed(title="Minecraft", description=f"{version}")
-        minecraft_embed.add_field(name="Server Address", value=f"{SERVER_PUBLIC_IP}")
-        return minecraft_embed
+        with open(fname) as f:
+            for line in f:
+                pass
+            last_line = line
+            return last_line
+
+    def get_mc_version(self) -> str:
+        """Retrieve Minecraft client version from log file.
+
+        Returns:
+            str: Minecraft client version
+        """
+        with open(fname) as f:
+            line = f.readlines()
+            version = line[3]
+            return version[-7:-1]
 
     @commands.command()
-    async def switch(self, ctx: commands.Context, state="on"):
-        """Toggle the state of the Minecraft server.
-
-        Args:
-            state (str, optional): Whether to turn the server on or off. Defaults to "on".
-        """
-        cmd = f"!switch({state})"
-        cmd_msg = f"Switched Minecraft server {state}."
-        embed = Minecraft.create_embed("v1.20.1")
-        if state == "on":
-            subprocess.run(
-                [
-                    "tmux",
-                    "send",
-                    "-t",
-                    "harbinger:0",
-                    f"zsh {SERVER_STARTUP_SCRIPT}",
-                    "C-m",
-                ]
-            )
-            await ctx.send("Server is starting...")
-            await ctx.send(embed=embed)
-            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-        elif state == "off":
-            subprocess.run(["tmux", "send", "-t", "harbinger:0", "stop", "C-m"])
-            await ctx.send("Stopping server...")
-            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-        else:
-            await ctx.send("Invalid argument.")
+    async def startmc(self, ctx: commands.Context):
+        """Start the Minecraft server."""
+        cmd = f"!startmc"
+        cmd_msg = f"Started Minecraft server."
+        subprocess.run(
+            [
+                "tmux",
+                "send",
+                "-t",
+                "Harbinger.1",
+                f"zsh {SERVER_STARTUP_SCRIPT}",
+                "ENTER",
+            ]
+        )
+        await ctx.send(f"Starting Minecraft server...")
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
-    async def mccmd(self, ctx: commands.Context, command: str) -> None:
+    async def mc(self, ctx: commands.Context, command=None) -> None:
         """Send an arbitrary command to the Minecraft server.
 
         Args:
@@ -71,9 +72,26 @@ class Minecraft(commands.Cog):
         """
         cmd = f"!mccmd({command})"
         cmd_msg = f"Sent following command to server: {command}"
-        subprocess.run(["tmux", "send", "-t", "harbinger:0", f"{command}", "C-m"])
-        await ctx.send(f"Sending command: {command} to server...")
-        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        if command == None:
+            mc_embed = discord.Embed(
+                title="Minecraft Server",
+                description="",
+                color=CUSTOM_COLOR,
+            )
+            mc_embed.add_field(
+                name="Client Version", value=f"``{self.get_mc_version()}``"
+            )
+            mc_embed.add_field(name="Server Address", value=f"``{SERVER_PUBLIC_IP}``")
+            await ctx.send(embed=mc_embed)
+            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        else:
+            subprocess.run(
+                ["tmux", "send", "-t", "Harbinger.1", f"{command}", "C-m"],
+            )
+            await ctx.send(f"Sending command: {command} to server...")
+            stdout = self.get_cmd_stdout()
+            await ctx.send(f"``{stdout}``")
+            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
 
 async def setup(bot):

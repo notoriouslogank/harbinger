@@ -12,3 +12,4 @@ __init__
 config/config.ini.clear
 start.sh
 test.sh
+.markdownlint.jsonc

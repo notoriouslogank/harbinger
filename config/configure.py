@@ -1,6 +1,6 @@
 import configparser
+import os
 import socket
-from os.path import isfile
 
 from cryptography.fernet import Fernet
 from requests import get
@@ -63,7 +63,8 @@ class Configure:
             str: Path to Minecraft server
         """
         server_dir = input("Directory of server: ")
-        return server_dir
+        expanded_server_dir = os.path.expanduser(server_dir)
+        return expanded_server_dir
 
     def get_startup_script():
         """Prompt user for path to Minecraft server startup script.
@@ -72,7 +73,8 @@ class Configure:
             str: Path to Minecraft server startup script
         """
         startup_script = input("Path to startup script: ")
-        return startup_script
+        expanded_startup_script = os.path.expanduser(startup_script)
+        return expanded_startup_script
 
     def get_custom_color():
         """Prompt user for custom color as RGB values.
@@ -97,7 +99,7 @@ class Configure:
         s.connect(("8.8.8.8", 80))
         ip = s.getsockname()[0]
         s.close()
-        ip_str = str(ip)
+        ip = str(ip)
         return ip
 
     def get_public_ip() -> str:
@@ -190,12 +192,12 @@ class Configure:
             config.write(configfile)
 
     def check_config(keyfile, python_config_file):
-        if isfile(keyfile) == True:
+        if os.path.isfile(keyfile) == True:
             print(f"Keyfile found: {keyfile}.")
         else:
             print(f"No keyfile found.\nCreating key.key now...")
             Configure.write_keyfile()
-        if isfile(python_config_file):
+        if os.path.isfile(python_config_file):
             print(f"Configfile found: {python_config_file}.")
         else:
             print("No Python config file located.\nCreating config.ini now...")
