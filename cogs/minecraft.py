@@ -19,7 +19,7 @@ class Minecraft(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
-    def get_cmd_stdout(logfile):
+    def get_cmd_stdout(self, logfile):
         with open(logfile, "rb") as f:
             try:
                 f.seek(-2, os.SEEK_END)
