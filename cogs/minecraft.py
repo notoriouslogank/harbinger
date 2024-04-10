@@ -32,12 +32,10 @@ class Minecraft(commands.Cog):
             stdout=subprocess.PIPE,
             text=True,
         )
-        await ctx.send(f"Sending command: {command} to server...")
-        await ctx.send(f"{mccommand.stdout}")
+        print(mccommand.stdout)
+        # await ctx.send(f"Sending command: {command} to server...")
+        # await ctx.send(f"{mccommand.stdout}")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-        while True:
-            line = mccommand.stdout.readline()
-            print(line.strip())
 
 
 """     def create_embed(version):
