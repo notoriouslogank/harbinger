@@ -1,8 +1,5 @@
 import subprocess
-import io
-import selectors
-import sys
-import discord
+
 from discord.ext import commands
 
 from config.read_configs import ReadConfigs as configs
@@ -12,41 +9,6 @@ SERVER_PUBLIC_IP = configs.server_public_ip()
 SERVER_STARTUP_SCRIPT = configs.startup_script()
 
 bot = Harbinger.bot
-
-
-def capture_subprocess_output(subprocess_args):
-    process = subprocess.Popen(
-        subprocess_args,
-        bufsize=1,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        universal_newlines=True,
-    )
-
-    buf = io.StringIO()
-
-    def handle_output(stream, mask):
-        line = stream.readline()
-        buf.write(line)
-        sys.stdout.write(line)
-
-    selector = selectors.DefaultSelector()
-    selector.register(process.stdout, selectors.EVENT_READ, handle_output)
-
-    while process.poll() is None:
-        events = selector.select()
-        for key, mask in events:
-            callback = key.data
-            callback(key.fileobj, mask)
-
-    return_code = process.wait()
-    selector.close()
-    success = return_code == 0
-
-    output = buf.getvalue()
-    buf.close()
-
-    return (success, output)
 
 
 class Minecraft(commands.Cog):
@@ -64,16 +26,10 @@ class Minecraft(commands.Cog):
         """
         cmd = f"!mccmd({command})"
         cmd_msg = f"Sent following command to server: {command}"
-        capture_subprocess_output(
-            ["tmux", "send", "-t", "Harbinger.1", f"{command}", "C-m"]
+        subprocess.run(
+            ["tmux", "send", "-t", "Harbinger.1", f"{command}", "C-m"],
         )
-        # mccommand = subprocess.run(
-        #    ["tmux", "send", "-t", "Harbinger.1", f"{command}", "C-m"],
-        #    stdout=subprocess.PIPE,
-        #    text=True,
-        # )
-        # await ctx.send(f"Sending command: {command} to server...")
-        # await ctx.send(f"{mccommand.stdout}")
+        await ctx.send(f"Sending command: {command} to server...")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
 
