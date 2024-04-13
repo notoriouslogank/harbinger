@@ -64,7 +64,7 @@ class Minecraft(commands.Cog):
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
-    async def mc(self, ctx: commands.Context, command) -> None:
+    async def mc(self, ctx: commands.Context, command=None) -> None:
         """Send an arbitrary command to the Minecraft server.
 
         Args:
