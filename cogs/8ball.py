@@ -2,11 +2,12 @@ import random
 
 from discord.ext import commands
 
+from assets import strings
 from cogs.dev import DELETION_TIME
 from harbinger import Harbinger
-from assets import strings
 
 answers = strings.ANSWERS
+
 
 class Eightball(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
