@@ -1,7 +1,8 @@
 import discord
 from discord.ext import commands
-from harbinger import Harbinger
+
 from config.read_configs import ReadConfigs as configs
+from harbinger import Harbinger
 
 CUSTOM_COLOR = configs.custom_color()
 
@@ -57,36 +58,36 @@ space = "-"
 
 ## Seventh Chords
 # major
-a7 = {"e": o, "B": '-2', "G": o, "D":'-2' , "A":o , "E": x}
-b7 = {"e": '-2', "B": o, "G": '-2', "D": '-1', "A": '-2', "E": x}
-c7 = {"e": o, "B": '-1', "G": '-3', "D": '-2', "A": '-3', "E":x}
-d7 = {"e": '-2', "B": '-1', "G": '-2', "D": o, "A": x, "E":x}
-e7 = {"e":o , "B":o , "G":'-1' , "D": o, "A":'-2', "E":o }
-f7 = {"e": '-1', "B":'-1' , "G": '-2', "D":'-1' , "A":'-3' , "E":'-1' }
-g7 = {"e": '-1', "B":o , "G":o , "D": o, "A": x, "E":'-3' }
+a7 = {"e": o, "B": "-2", "G": o, "D": "-2", "A": o, "E": x}
+b7 = {"e": "-2", "B": o, "G": "-2", "D": "-1", "A": "-2", "E": x}
+c7 = {"e": o, "B": "-1", "G": "-3", "D": "-2", "A": "-3", "E": x}
+d7 = {"e": "-2", "B": "-1", "G": "-2", "D": o, "A": x, "E": x}
+e7 = {"e": o, "B": o, "G": "-1", "D": o, "A": "-2", "E": o}
+f7 = {"e": "-1", "B": "-1", "G": "-2", "D": "-1", "A": "-3", "E": "-1"}
+g7 = {"e": "-1", "B": o, "G": o, "D": o, "A": x, "E": "-3"}
 
-#minor
-am7 = {"e": o, "B": '-1', "G": o, "D":'-2' , "A":o , "E": x}
-bm7 = {"e": '-2', "B": '-3', "G": '-2', "D":'-4' , "A":'-2' , "E": x}
-cm7 = {"e": '-6', "B": '-4', "G": o, "D":'-5' , "A":'-3' , "E": x}
-dm7 = {"e": '-1', "B": '-1', "G": '-2', "D":o , "A":x, "E": x}
-em7 = {"e": o, "B": '-3', "G": o, "D":x , "A":'-2' , "E": o}
-fm7 = {"e": x, "B": '-1', "G": '-1', "D":'-1' , "A":x , "E": '-1'}
-gm7 = {"e": x, "B": '-3', "G": '-3', "D":'-3' , "A":x , "E": '-3'}
+# minor
+am7 = {"e": o, "B": "-1", "G": o, "D": "-2", "A": o, "E": x}
+bm7 = {"e": "-2", "B": "-3", "G": "-2", "D": "-4", "A": "-2", "E": x}
+cm7 = {"e": "-6", "B": "-4", "G": o, "D": "-5", "A": "-3", "E": x}
+dm7 = {"e": "-1", "B": "-1", "G": "-2", "D": o, "A": x, "E": x}
+em7 = {"e": o, "B": "-3", "G": o, "D": x, "A": "-2", "E": o}
+fm7 = {"e": x, "B": "-1", "G": "-1", "D": "-1", "A": x, "E": "-1"}
+gm7 = {"e": x, "B": "-3", "G": "-3", "D": "-3", "A": x, "E": "-3"}
 
 # sharp major
-ash7 = {"e": '-1', "B": '-3', "G": '-1', "D":'-3' , "A":'-1' , "E": x}
-csh7 = {"e": x, "B": '-2', "G": '-4', "D":'-3' , "A":'-4' , "E": x}
-dsh7 = {"e": '-3', "B": '-2', "G": '-3', "D":'-1' , "A":x , "E": x}
-fsh7 = {"e": '-2', "B": '-2', "G": '-3', "D":'-2' , "A":'-4' , "E": '-2'}
-gsh7 = {"e": '-4', "B": '-4', "G": '-5', "D":'-4' , "A":'-6' , "E": '-4'}
+ash7 = {"e": "-1", "B": "-3", "G": "-1", "D": "-3", "A": "-1", "E": x}
+csh7 = {"e": x, "B": "-2", "G": "-4", "D": "-3", "A": "-4", "E": x}
+dsh7 = {"e": "-3", "B": "-2", "G": "-3", "D": "-1", "A": x, "E": x}
+fsh7 = {"e": "-2", "B": "-2", "G": "-3", "D": "-2", "A": "-4", "E": "-2"}
+gsh7 = {"e": "-4", "B": "-4", "G": "-5", "D": "-4", "A": "-6", "E": "-4"}
 
 # sharp minor
-ashm7 = {"e": '-1', "B": '-2', "G": '-1', "D":'-3' , "A":'-1' , "E": x}
-cshm7 = {"e": '-4', "B": '-5', "G": '-4', "D":'-6' , "A":'-4' , "E": x}
-dshm7 = {"e": '-6', "B": '-7', "G": '-6', "D":'-8' , "A":'-6' , "E": x}
-fshm7 = {"e": x, "B": '-2', "G": '-2', "D":'-2' , "A":x , "E": '-2'}
-gshm7 = {"e": x, "B": '-4', "G": '-4', "D":'-4' , "A":x , "E": '-4'}
+ashm7 = {"e": "-1", "B": "-2", "G": "-1", "D": "-3", "A": "-1", "E": x}
+cshm7 = {"e": "-4", "B": "-5", "G": "-4", "D": "-6", "A": "-4", "E": x}
+dshm7 = {"e": "-6", "B": "-7", "G": "-6", "D": "-8", "A": "-6", "E": x}
+fshm7 = {"e": x, "B": "-2", "G": "-2", "D": "-2", "A": x, "E": "-2"}
+gshm7 = {"e": x, "B": "-4", "G": "-4", "D": "-4", "A": x, "E": "-4"}
 seventh_chords = {
     "A": a7,
     "A#": ash7,
@@ -314,19 +315,21 @@ class OpenChord:
         open_chord = open_chords.get(chord)
         return open_chord
 
+
 class SeventhChord:
     def __init__(self, chord):
-        self.e = "".join(["e", space, chord.get("e"), space,"|"])
-        self.B = "".join(["B", space, chord.get("B"), space,"|"])
-        self.G = "".join(["G", space, chord.get("G"), space,"|"])
-        self.D = "".join(["D", space, chord.get("D"), space,"|"])
-        self.A = "".join(["A", space, chord.get("A"), space,"|"])
-        self.E = "".join(["E", space, chord.get("E"), space,"|"])
+        self.e = "".join(["e", space, chord.get("e"), space, "|"])
+        self.B = "".join(["B", space, chord.get("B"), space, "|"])
+        self.G = "".join(["G", space, chord.get("G"), space, "|"])
+        self.D = "".join(["D", space, chord.get("D"), space, "|"])
+        self.A = "".join(["A", space, chord.get("A"), space, "|"])
+        self.E = "".join(["E", space, chord.get("E"), space, "|"])
 
     def get_diagram(chord):
         seventh_chord = SeventhChord(chord)
         result = f"\n{seventh_chord.e}\n{seventh_chord.B}\n{seventh_chord.G}\n{seventh_chord.D}\n{seventh_chord.A}\n{seventh_chord.E}\n"
         return result
+
 
 class PowerChord:
 
@@ -348,17 +351,16 @@ class PowerChord:
 
     def get_diagram(chord):
         power_chord = PowerChord(chord)
-        result = (
-            f"\n{power_chord.e}\n{power_chord.B}\n{power_chord.G}\n{power_chord.D}\n{power_chord.A}\n{power_chord.E}\n"
-        )
+        result = f"\n{power_chord.e}\n{power_chord.B}\n{power_chord.G}\n{power_chord.D}\n{power_chord.A}\n{power_chord.E}\n"
         return result
+
 
 class Chords(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
     @commands.command()
-    async def chords(self, ctx, chord, scope='all'):
+    async def chords(self, ctx, chord, scope="all"):
         cmd = f"!chords {chord} {scope}"
         cmd_msg = f"Got {scope} chord diagrams for {chord}."
         Harbinger.timestamp(user=ctx.author, cmd=cmd, cmd_msg=cmd_msg)
@@ -367,33 +369,35 @@ class Chords(commands.Cog):
             get_chord = open_chords.get(chord)
             get_triad = OpenChord(get_chord)
             triad = get_triad.triad
-            chord_embed = discord.Embed(title=f"{chord}", description=f"{triad}", color=CUSTOM_COLOR)
+            chord_embed = discord.Embed(
+                title=f"{chord}", description=f"{triad}", color=CUSTOM_COLOR
+            )
         if chord in open_chords.keys():
             oc = open_chords.get(chord)
             diagram = OpenChord.get_diagram(oc)
             get_triad = OpenChord(oc)
             triad = get_triad.triad
-            if scope == 'all':
+            if scope == "all":
                 chord_embed.add_field(name="Open Chord", value=f"```{diagram}```")
-            if scope == 'open':
+            if scope == "open":
                 chord_embed.add_field(name="Open Chord", value=f"```{diagram}```")
-            elif scope == 'power':
+            elif scope == "power":
                 pass
         if chord in power_chords.keys():
             pc = power_chords.get(chord)
             diagram = PowerChord.get_diagram(pc)
-            if scope == 'all':
+            if scope == "all":
                 chord_embed.add_field(name="Power Chord", value=f"```{diagram}```")
-            if scope == 'power':
+            if scope == "power":
                 chord_embed.add_field(name="Power Chord", value=f"```{diagram}```")
             else:
                 pass
         if chord in seventh_chords.keys():
             sc = seventh_chords.get(chord)
             diagram = SeventhChord.get_diagram(sc)
-            if scope == 'all':
+            if scope == "all":
                 chord_embed.add_field(name="Seventh Chord", value=f"```{diagram}```")
-            if scope == 'seventh':
+            if scope == "seventh":
                 chord_embed.add_field(name="Seventh Chord", value=f"```{diagram}```")
             else:
                 pass
@@ -413,33 +417,42 @@ class Chords(commands.Cog):
 
     @commands.command()
     async def chordlist(self, ctx, scope="all"):
-            cmd = f"!chordlist {scope}"
-            cmd_msg = f"Got {scope} chord list."
-            Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-            if scope == "all":
-                chordlist = Chords.chord_list()
-                chordlist_embed = discord.Embed(title=f"All Chords", description=chordlist, color=CUSTOM_COLOR)
-                chordlist_embed.add_field(name="All", value=chordlist)
-                await ctx.send(embed=chordlist_embed)
-            if scope == "power":
-                pclist = []
-                get_chords = power_chords.keys()
-                for chord in get_chords:
-                    pclist.append(chord)
-                chordlist_embed = discord.Embed(title=f"Power Chords", description=pclist, color=CUSTOM_COLOR)
-                await ctx.send(embed=chordlist_embed)
-            if scope == "open":
-                oclist = []
-                for chord in open_chords.keys():
-                    oclist.append(chord)
-                chordlist_embed = discord.Embed(title=f"Open Chords", description=oclist, color=CUSTOM_COLOR)
-                await ctx.send(embed=chordlist_embed)
-            if scope == "seventh":
-                sclist = []
-                for chord in seventh_chords.keys():
-                    sclist.append(chord)
-                chordlist_embed = discord.Embed(title=f"Seventh Chords", description=sclist, color=CUSTOM_COLOR)
-                await ctx.send(embed=chordlist_embed)
+        cmd = f"!chordlist {scope}"
+        cmd_msg = f"Got {scope} chord list."
+        Harbinger.timestamp(ctx.author, cmd, cmd_msg)
+        if scope == "all":
+            chordlist = Chords.chord_list()
+            chordlist_embed = discord.Embed(
+                title=f"All Chords", description=chordlist, color=CUSTOM_COLOR
+            )
+            chordlist_embed.add_field(name="All", value=chordlist)
+            await ctx.send(embed=chordlist_embed)
+        if scope == "power":
+            pclist = []
+            get_chords = power_chords.keys()
+            for chord in get_chords:
+                pclist.append(chord)
+            chordlist_embed = discord.Embed(
+                title=f"Power Chords", description=pclist, color=CUSTOM_COLOR
+            )
+            await ctx.send(embed=chordlist_embed)
+        if scope == "open":
+            oclist = []
+            for chord in open_chords.keys():
+                oclist.append(chord)
+            chordlist_embed = discord.Embed(
+                title=f"Open Chords", description=oclist, color=CUSTOM_COLOR
+            )
+            await ctx.send(embed=chordlist_embed)
+        if scope == "seventh":
+            sclist = []
+            for chord in seventh_chords.keys():
+                sclist.append(chord)
+            chordlist_embed = discord.Embed(
+                title=f"Seventh Chords", description=sclist, color=CUSTOM_COLOR
+            )
+            await ctx.send(embed=chordlist_embed)
+
 
 async def setup(bot):
     await bot.add_cog(Chords(bot))
