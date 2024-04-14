@@ -5,7 +5,6 @@ from pathlib import Path
 import discord
 from discord.ext import commands
 from zalgolib import diacritics
-from cogs.help import MODERATOR
 
 from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
