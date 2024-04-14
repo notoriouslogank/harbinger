@@ -1,7 +1,8 @@
 import discord
 from discord.ext import commands
-from harbinger import Harbinger
+
 from config.read_configs import ReadConfigs as configs
+from harbinger import Harbinger
 
 CUSTOM_COLOR = configs.custom_color()
 
@@ -77,7 +78,9 @@ class MajorKeys:
         self.vii = key[6]
 
     def chords(self):
-        chords = f"{self.i} {self.ii} {self.iii} {self.iv} {self.v} {self.vi} {self.vii}"
+        chords = (
+            f"{self.i} {self.ii} {self.iii} {self.iv} {self.v} {self.vi} {self.vii}"
+        )
         return chords
 
     def progressions(self):
@@ -107,7 +110,9 @@ class MinorKeys:
         self.vii = key[6]
 
     def chords(self):
-        chords = f"{self.i} {self.ii} {self.iii} {self.iv} {self.v} {self.vi} {self.vii}"
+        chords = (
+            f"{self.i} {self.ii} {self.iii} {self.iv} {self.v} {self.vi} {self.vii}"
+        )
         return chords
 
     def progressions(self):
@@ -136,22 +141,58 @@ class Keyfinder(commands.Cog):
             maj = MajorKeys(major_keys.pop(key))
             embed_title = f"Key of {key}"
             embed_descrpition = f"```{maj.chords()}```"
-            embed = discord.Embed(title=embed_title, description=embed_descrpition, color=CUSTOM_COLOR)
-            embed.add_field(name="Progression 1: I IV vi V", value=f"```{maj.i} {maj.iv} {maj.vi} {maj.v}```", inline=False)
-            embed.add_field(name="Progression 2: I IV I V", value=f"```{maj.i} {maj.iv} {maj.i} {maj.v}```", inline=False)
-            embed.add_field(name="Progression 3: I V IV V", value=f"```{maj.i} {maj.v} {maj.iv} {maj.v}```", inline=False)
-            embed.add_field(name="Progression 4: I vi IV V", value=f"```{maj.i} {maj.vi} {maj.iv} {maj.v}```", inline=False)
+            embed = discord.Embed(
+                title=embed_title, description=embed_descrpition, color=CUSTOM_COLOR
+            )
+            embed.add_field(
+                name="Progression 1: I IV vi V",
+                value=f"```{maj.i} {maj.iv} {maj.vi} {maj.v}```",
+                inline=False,
+            )
+            embed.add_field(
+                name="Progression 2: I IV I V",
+                value=f"```{maj.i} {maj.iv} {maj.i} {maj.v}```",
+                inline=False,
+            )
+            embed.add_field(
+                name="Progression 3: I V IV V",
+                value=f"```{maj.i} {maj.v} {maj.iv} {maj.v}```",
+                inline=False,
+            )
+            embed.add_field(
+                name="Progression 4: I vi IV V",
+                value=f"```{maj.i} {maj.vi} {maj.iv} {maj.v}```",
+                inline=False,
+            )
             await ctx.send(embed=embed)
         if key in minor_keys.keys():
             min = MinorKeys(minor_keys.pop(key))
             embed_title = f"Key of {key}"
             embed_description = min.chords()
-            embed = discord.Embed(title=embed_title, description=embed_description, color=CUSTOM_COLOR)
-            embed.add_field(name="Progression 1: i iv v i", value=f"```{min.i} {min.iv} {min.v} {min.i}```", inline=False)
-            embed.add_field(name="Progression 2: i ii v i", value=f"```{min.i} {min.ii} {min.v} {min.i}```", inline=False)
-            embed.add_field(name="Progression 3: i VI III VII", value=f"```{min.i} {min.vi} {min.iii} {min.vii}```", inline=False)
-            embed.add_field(name="Progression 4: i VII VI VII i", value=f"```{min.i} {min.vii} {min.vi} {min.vii} {min.i}```")
+            embed = discord.Embed(
+                title=embed_title, description=embed_description, color=CUSTOM_COLOR
+            )
+            embed.add_field(
+                name="Progression 1: i iv v i",
+                value=f"```{min.i} {min.iv} {min.v} {min.i}```",
+                inline=False,
+            )
+            embed.add_field(
+                name="Progression 2: i ii v i",
+                value=f"```{min.i} {min.ii} {min.v} {min.i}```",
+                inline=False,
+            )
+            embed.add_field(
+                name="Progression 3: i VI III VII",
+                value=f"```{min.i} {min.vi} {min.iii} {min.vii}```",
+                inline=False,
+            )
+            embed.add_field(
+                name="Progression 4: i VII VI VII i",
+                value=f"```{min.i} {min.vii} {min.vi} {min.vii} {min.i}```",
+            )
             await ctx.send(embed=embed)
+
 
 async def setup(bot):
     await bot.add_cog(Keyfinder(bot))
