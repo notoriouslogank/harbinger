@@ -1,4 +1,5 @@
 import argparse
+import subprocess
 import sys
 from datetime import datetime
 from os import listdir
@@ -43,6 +44,13 @@ parser.add_argument(
 )
 
 parser.add_argument(
+    "-u",
+    "--update",
+    help="perform a git pull from the Harbinger repo (main branch)",
+    action="store_true",
+)
+
+parser.add_argument(
     "-v",
     "--version",
     help="show version info",
@@ -50,6 +58,11 @@ parser.add_argument(
 )
 
 args = parser.parse_args()
+
+if args.update == True:
+    subprocess.run(["git", "switch", "main"])
+    subprocess.run(["git", "pull"])
+    sys.exit()
 
 if args.version == True:
     get_version()
