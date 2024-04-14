@@ -1,7 +1,8 @@
 from random import randint
-from assets import urls
+
 from discord.ext import commands
 
+from assets import urls
 from harbinger import Harbinger
 
 lol = urls.LOL
