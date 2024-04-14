@@ -4,12 +4,12 @@ import aiohttp
 import discord
 from discord.ext import commands
 from jokeapi import Jokes
-
+from assets import strings
 from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
 
 CUSTOM_COLOR = configs.custom_color()
-
+bubble_wrap = strings.BUBBLE_WRAP
 bot = Harbinger.bot
 
 
@@ -18,6 +18,14 @@ class Tools(commands.Cog):
 
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
+
+    @commands.command()
+    async def bw(self, ctx):
+        cmd = f"!bw"
+        cmd_msg = f"Unspooled some bubble wrap."
+        await ctx.channel.purge(limit=1)
+        await ctx.channel.send(f"{bubble_wrap}")
+        Harbinger.timestamp(ctx.author, cmd, cmd_msg)
 
     @commands.command()
     async def joke(self, ctx, type="any"):
@@ -32,6 +40,7 @@ class Tools(commands.Cog):
             response_format="txt",
         )
         await ctx.send(get_joke)
+        Harbinger.timestamp(ctx.author, cmd, cmd_msg)
 
     @commands.command()
     async def slang(self, ctx: commands.Context, *query: str) -> None:
