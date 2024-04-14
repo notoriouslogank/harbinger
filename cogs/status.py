@@ -8,9 +8,9 @@ from time import sleep
 import discord
 from discord.ext import commands
 
-from config.read_configs import ReadConfigs as configs
-from harbinger import OWNER, Harbinger
 from assets import strings
+from config.read_configs import ReadConfigs as configs
+from harbinger import Harbinger
 
 DELETION_TIME = configs.delete_time()
 EMAIL_ADDRESS = configs.email_address()
@@ -66,9 +66,9 @@ class Status(commands.Cog):
         bot_channel = discord.Client.get_channel(self, BOT_CHANNEL)
         return bot_channel
 
-    async def get_bot_author(self):
-        bot_author = discord.Client.get_user(self.bot, 1154559282801549384)
-        return bot_author
+    #    async def get_bot_author(self):
+    #        bot_author = discord.Client.get_user(self.bot, 1154559282801549384)
+    #        return bot_author
 
     @commands.Cog.listener()
     async def on_ready(self) -> None:
@@ -105,7 +105,6 @@ class Status(commands.Cog):
         cmd = "!info"
         await ctx.channel.purge(limit=1)
         cmd_msg = f"Sent info embed to channel {ctx.channel.id}"
-        author = await self.get_bot_author()
         current_version = Harbinger.get_ver()
         current_time = datetime.now()
         delta = current_time - Harbinger.start_time
@@ -206,6 +205,7 @@ class Status(commands.Cog):
             message = await channel.send(embed=embedShutdown)
             sleep(5)
             await message.edit(embed=embedGooodbye)
+            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
             sys.exit()
         else:
             cmd_msg = f"ERROR: Not bot owner."
@@ -213,7 +213,7 @@ class Status(commands.Cog):
                 "You must be the bot owner to execute that command.",
                 delete_after=DELETION_TIME,
             )
-        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
 
 async def setup(bot):
