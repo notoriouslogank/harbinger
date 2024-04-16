@@ -76,6 +76,11 @@ class Configure:
         expanded_startup_script = os.path.expanduser(startup_script)
         return expanded_startup_script
 
+    def get_backup_dir():
+        server_dir = input("Directory for backups: ")
+        expanded_server_dir = os.path.expanduser(server_dir)
+        return expanded_server_dir
+
     def get_custom_color():
         """Prompt user for custom color as RGB values.
 
@@ -180,6 +185,7 @@ class Configure:
         config["Server"] = {
             "server_dir": f"{(Configure.get_server_dir())}",
             "startup_script": f"{(Configure.get_startup_script())}",
+            "backup_dir": f"{(Configure.get_backup_dir())}",
             "server_local_ip": f"{(Configure.get_local_ip())}",
             "server_public_ip": f"{(Configure.get_public_ip())}",
         }
