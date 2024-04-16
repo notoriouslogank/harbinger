@@ -73,16 +73,16 @@ class Minecraft(commands.Cog):
         backup_20 = "Server will shutdown in 20 seconds to backup files.  Please disconnect or you will be kicked."
         backup_10 = "Server will shutdown in 10 seconds to backup files.  Please disconnect or you will be kicked."
         await ctx.channel.purge(limit=1)
-        await ctx.send(message=backup_30)
+        await ctx.send(backup_30)
         sleep(10)
         await ctx.channel.purge(limit=1)
-        await ctx.send(message=backup_20)
+        await ctx.send(backup_20)
         sleep(10)
         await ctx.channel.purge(limit=1)
-        await ctx.send(message=backup_10)
+        await ctx.send(backup_10)
         sleep(10)
         await ctx.channel.purge(limit=1)
-        await ctx.send(message=f"Minecraft server saving and shutting down...")
+        await ctx.send(f"Minecraft server saving and shutting down...")
         subprocess.run(["tmux", "send", "-t", "Harbinger.1", f"stop", "ENTER"])
         filename = date.today()
         await ctx.channel.purge(limit=1)
@@ -98,7 +98,7 @@ class Minecraft(commands.Cog):
         )
         await ctx.channel.purge(limit=1)
         await ctx.channel.send(
-            message=f"Successfully created server backup: ../{filename}.tar.gz"
+            f"Successfully created server backup: ../{filename}.tar.gz"
         )
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
 
