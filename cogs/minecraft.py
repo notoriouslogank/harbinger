@@ -1,5 +1,7 @@
 import os
 import subprocess
+from datetime import date
+from time import sleep
 
 import discord
 from discord.ext import commands
@@ -62,6 +64,45 @@ class Minecraft(commands.Cog):
         )
         await ctx.send(f"Starting Minecraft server...")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+
+    @commands.command()
+    async def backupmc(self, ctx: commands.Context) -> None:
+        cmd = f"!backupmc"
+        cmd_msg = f"Backing up Minecraft server data."
+        backup_30 = "Server will shutdown in 30 seconds to backup files.  Please disconnect or you will be kicked."
+        backup_20 = "Server will shutdown in 20 seconds to backup files.  Please disconnect or you will be kicked."
+        backup_10 = "Server will shutdown in 10 seconds to backup files.  Please disconnect or you will be kicked."
+        await ctx.channel.purge(limit=1)
+        await ctx.send(message=backup_30)
+        sleep(10)
+        await ctx.channel.purge(limit=1)
+        await ctx.send(message=backup_20)
+        sleep(10)
+        await ctx.channel.purge(limit=1)
+        await ctx.send(message=backup_10)
+        sleep(10)
+        await ctx.channel.purge(limit=1)
+        await ctx.send(message=f"Minecraft server saving and shutting down...")
+        subprocess.run(["tmux", "send", "-t", "Harbinger.1", f"stop", "ENTER"])
+        filename = date.today()
+        await ctx.channel.purge(limit=1)
+        await ctx.channel.send("Creating server backup, please standby.")
+        subprocess.run(
+            [
+                "tmux",
+                "send",
+                "-t",
+                "Harbinger.1",
+                f"tar -czvf ../{filename}.tar.gz {SERVER_DIR}",
+            ]
+        )
+        await ctx.channel.purge(limit=1)
+        await ctx.channel.send(
+            message=f"Successfully created server backup: ../{filename}.tar.gz"
+        )
+        Harbinger.timestamp(ctx.author, cmd, cmd_msg)
+
+    # tar -czvf backup_date.tar.gz /[path]/
 
     @commands.command()
     async def mc(self, ctx: commands.Context, command=None) -> None:
