@@ -1,3 +1,8 @@
+# GITHUB
+SOURCE_CODE = "https://github.com/notoriouslogank/harbinger/releases"
+ISSUES = "https://github.com/notoriouslogank/harbinger/issues"
+FOOTER = "For more information about a particular command, say !help <command>."
+
 # REACTIONS
 LOL = [
     "https://64.media.tumblr.com/80ce2d4f77c4ddc5d9e395a43e37c532/tumblr_o5r3vkiaGo1qh9nffo3_250.gifv",
