@@ -63,10 +63,7 @@ class Minecraft(commands.Cog):
         subprocess.run(["tmux", "send", "-t", "Harbinger.1", "stop", "ENTER"])
         sleep(10)
         # create backup
-        try:
-            os.makedirs("backups", exist_ok=False)
-        except:
-            Exception()
+        os.makedirs("backups")
         backup_fname = os.path.join("backups", backup_name)
         self.make_backup_tarball(f"{backup_fname}", source)
 
