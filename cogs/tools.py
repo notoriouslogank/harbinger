@@ -26,8 +26,9 @@ class Tools(commands.Cog):
     async def wiki(self, ctx: commands.Context, query: str):
         wiki = wikipediaapi.Wikipedia(f"{EMAIL_ADDRESS}", "en")
         page = wiki.page(query)
-        exist_msg = "Page Exists: %s" % page.exists()
-        await ctx.send(exist_msg)
+        # exist_msg = "Page Exists: %s" % page.exists()
+        summary = page.summary[0:1999]
+        await ctx.send(summary)
 
     @commands.command()
     async def bw(self, ctx):
