@@ -50,30 +50,7 @@ class Minecraft(commands.Cog):
             version = line[3]
             return version[-7:-1]
 
-    @commands.command()
-    async def backmc(self, ctx: commands.Context):
-        filename = datetime.datetime.strftime(datetime.datetime.now(), f"%d%m%Y-%H%M")
-        # stop the server
-        subprocess.run(["tmux", "send", "-t", "Harbinger.1", "stop", "ENTER"])
-        await ctx.send("Shutting down Minecraft server...")
-        sleep(10)
-
-        # backup
-
-        if os.path.exists(f"backups"):
-            os.chdir("backups")
-            make_archive(filename, "gztar", root_dir=SERVER_DIR)
-            await ctx.send("Making backup")
-        else:
-            os.mkdir("backups")
-            os.chdir("backups")
-            make_archive(filename, "gztar", root_dir=SERVER_DIR)
-            await ctx.send("Making backup")
-
-        os.chdir("..")
-
-        # start server
-
+    def start_server():
         subprocess.run(
             [
                 "tmux",
@@ -84,23 +61,54 @@ class Minecraft(commands.Cog):
                 "ENTER",
             ]
         )
-        await ctx.send("Starting Minecraft server...")
+
+    def save_all():
+        subprocess.run(["tmux", "send", "-t", "Harbinger.1", "save-all", "ENTER"])
+
+    def stop_server():
+        subprocess.run(["tmux", "send", "-t", "Harbinger.1", "stop", "ENTER"])
+
+    @commands.command()
+    async def backmc(self, ctx: commands.Context):
+        filename = datetime.datetime.strftime(datetime.datetime.now(), f"%d%m%Y-%H%M")
+        await ctx.channel.purge(limit=1)
+        self.save_all()
+        message = await ctx.channel.send(
+            "The Minecraft server will be shutting down in 30s for server backup.  Please save and disconnect to avoid and lost progress..."
+        )
+        sleep(30)
+        # stop the server
+        message.edit("Minecraft server shutting down NOW!")
+        # await ctx.send("Shutting down Minecraft server NOW!")
+        sleep(0.5)
+        self.stop_server()
+        sleep(10)
+        # backup
+        message.edit("Backing up server, please standby...", delete_after=30)
+        # await ctx.send("Making server backup, please wait...")
+        if os.path.exists(f"backups"):
+            os.chdir("backups")
+            make_archive(filename, "gztar", root_dir=SERVER_DIR)
+            message.edit("Backup complete!")
+        else:
+            os.mkdir("backups")
+            os.chdir("backups")
+            make_archive(filename, "gztar", root_dir=SERVER_DIR)
+            message.edit("Backup complete!")
+
+        os.chdir("..")
+
+        # start server
+        startup_message = await ctx.send(f"Minecraft server starting up...")
+        self.start_server()
+        startup_message.edit("Minecraft server online.")
 
     @commands.command()
     async def startmc(self, ctx: commands.Context):
         """Start the Minecraft server."""
         cmd = f"!startmc"
         cmd_msg = f"Started Minecraft server."
-        subprocess.run(
-            [
-                "tmux",
-                "send",
-                "-t",
-                "Harbinger.1",
-                f"zsh {SERVER_STARTUP_SCRIPT}",
-                "ENTER",
-            ]
-        )
+        self.start_server()
         await ctx.send(f"Starting Minecraft server...")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
