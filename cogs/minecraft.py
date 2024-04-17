@@ -66,7 +66,7 @@ class Minecraft(commands.Cog):
         sleep(10)
         # create backup
         backup_fname = os.path.join(backup_directory, backup_time)
-        self.make_backup_tarball(f"{backup_fname}", source)
+        self.make_backup_tarball(backup_fname, source)
 
     @commands.command()
     async def startmc(self, ctx: commands.Context):
