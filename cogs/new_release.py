@@ -17,12 +17,7 @@ class Release(commands.Cog):
         self.bot = bot
         self.version = Harbinger.get_ver()
 
-    @commands.command()
-    async def release(self, ctx, text):
-        await ctx.channel.purge(limit=1)
-        await ctx.send(embed=self.release_embed(ctx, text))
-
-    def release_embed(self, ctx, text):
+    def release_embed(self, text):
         embed = discord.Embed(
             title="Harbinger: Release Notes",
             description=f"v{self.version}",
@@ -38,6 +33,11 @@ class Release(commands.Cog):
         embed.add_field(name="Report a Bug", value=f"{issues}", inline=False)
         embed.set_footer(text=f"{footer}")
         return embed
+
+    @commands.command()
+    async def release(self, ctx: commands.Context, text):
+        await ctx.channel.purge(limit=1)
+        await ctx.send(embed=self.release_embed(ctx, text))
 
 
 async def setup(bot):
