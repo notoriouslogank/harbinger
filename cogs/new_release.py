@@ -2,14 +2,15 @@ from datetime import date
 
 import discord
 from discord.ext import commands
+from assets import urls
 
 from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
 
 CUSTOM_COLOR = configs.custom_color()
-source_code = "https://github.com/notoriouslogank/harbinger/releases"
-issues = "https://github.com/notoriouslogank/harbinger/issues"
-footer = "For information about new commands, say !help <command>."
+source_code = urls.SOURCE_CODE
+issues = urls.ISSUES
+footer = urls.FOOTER
 
 
 class Release(commands.Cog):
