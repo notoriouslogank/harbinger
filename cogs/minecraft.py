@@ -3,6 +3,7 @@ import os
 import subprocess
 import tarfile
 from time import sleep
+from shutil import make_archive
 
 import discord
 from discord.ext import commands
@@ -49,24 +50,41 @@ class Minecraft(commands.Cog):
             version = line[3]
             return version[-7:-1]
 
-    def make_backup_tarball(self, output, source):
-        with tarfile.open(output, "w:gz") as tar:
-            tar.add(source, arcname=output)
-
     @commands.command()
     async def backmc(self, ctx: commands.Context):
-        source = SERVER_DIR
-        backup_time = datetime.datetime.strftime(
-            datetime.datetime.now(), f"%d%m%Y-%H%M"
-        )
-        backup_directory = os.path.join(f"{SERVER_DIR}", "backups")
-
+        filename = datetime.datetime.strftime(datetime.datetime.now(), f"%d%m%Y-%H%M")
         # stop the server
         subprocess.run(["tmux", "send", "-t", "Harbinger.1", "stop", "ENTER"])
+        await ctx.send("Shutting down Minecraft server...")
         sleep(10)
-        # create backup
-        backup_fname = os.path.join(backup_directory, backup_time)
-        self.make_backup_tarball(backup_fname, source)
+
+        # backup
+
+        if os.path.exists(f"backups"):
+            os.chdir("backups")
+            make_archive(filename, "gzip", root_dir=SERVER_DIR)
+            await ctx.send("Making backup")
+        else:
+            os.makedir("backups")
+            os.chdir("backups")
+            make_archive(filename, "gzip", root_dir=SERVER_DIR)
+            await ctx.send("Making backup")
+
+        os.chdir("..")
+
+        # start server
+
+        subprocess.run(
+            [
+                "tmux",
+                "send",
+                "-t",
+                "Harbinger.1",
+                f"zsh {SERVER_STARTUP_SCRIPT}",
+                "ENTER",
+            ]
+        )
+        await ctx.send("Starting Minecraft server...")
 
     @commands.command()
     async def startmc(self, ctx: commands.Context):
