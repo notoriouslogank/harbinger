@@ -73,35 +73,40 @@ class Minecraft(commands.Cog):
         filename = datetime.datetime.strftime(datetime.datetime.now(), f"%d%m%Y-%H%M")
         await ctx.channel.purge(limit=1)
         self.save_all()
-        message = await ctx.channel.send(
+        await ctx.channel.send(
             "The Minecraft server will be shutting down in 30s for server backup.  Please save and disconnect to avoid and lost progress..."
         )
         sleep(30)
         # stop the server
-        await message.edit("Minecraft server shutting down NOW!")
+        await ctx.channel.purge(limit=1)
+        await ctx.send("Minecraft server shutting down NOW!")
         # await ctx.send("Shutting down Minecraft server NOW!")
         sleep(0.5)
         self.stop_server()
         sleep(10)
         # backup
-        await message.edit("Backing up server, please standby...", delete_after=30)
+        await ctx.channel.purge(limit=1)
+        await ctx.send("Backing up server, please standby...", delete_after=30)
         # await ctx.send("Making server backup, please wait...")
         if os.path.exists(f"backups"):
             os.chdir("backups")
             make_archive(filename, "gztar", root_dir=SERVER_DIR)
-            await message.edit("Backup complete!")
+            await ctx.channel.purge(limit=1)
+            await ctx.send("Backup complete!")
         else:
             os.mkdir("backups")
             os.chdir("backups")
             make_archive(filename, "gztar", root_dir=SERVER_DIR)
-            await message.edit("Backup complete!")
+            await ctx.channel.purge(limit=1)
+            await ctx.send("Backup complete!")
 
         os.chdir("..")
 
         # start server
-        startup_message = await ctx.send(f"Minecraft server starting up...")
+        await ctx.send(f"Minecraft server starting up...")
         self.start_server()
-        await startup_message.edit("Minecraft server online.")
+        await ctx.channel.purge(limit=1)
+        await ctx.send("Minecraft server online.")
 
     @commands.command()
     async def startmc(self, ctx: commands.Context):
