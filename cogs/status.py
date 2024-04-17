@@ -8,7 +8,7 @@ from time import sleep
 import discord
 from discord.ext import commands
 
-from assets import strings
+from assets import strings, urls
 from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
 
@@ -115,7 +115,7 @@ class Status(commands.Cog):
         embedInfo.add_field(name="author", value="`notoriouslogank`", inline=True)
         embedInfo.add_field(
             name="source code",
-            value="https://github.com/notoriouslogank/Harbinger",
+            value=f"{urls.SOURCE_CODE}",
             inline=False,
         )
         await ctx.send(embed=embedInfo)
