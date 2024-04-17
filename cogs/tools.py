@@ -32,7 +32,6 @@ class Tools(commands.Cog):
         wiki_embed = discord.Embed(
             title=f"{wiki_title}", description=f"> {wiki_summary}"
         )
-        wiki_embed.add_field(name="Sections", value=page.sections)
         await ctx.send(embed=wiki_embed)
 
     @commands.command()
