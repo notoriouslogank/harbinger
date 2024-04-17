@@ -65,7 +65,7 @@ class Minecraft(commands.Cog):
             make_archive(filename, "gzip", root_dir=SERVER_DIR)
             await ctx.send("Making backup")
         else:
-            os.makedir("backups")
+            os.mkdir("backups")
             os.chdir("backups")
             make_archive(filename, "gzip", root_dir=SERVER_DIR)
             await ctx.send("Making backup")
