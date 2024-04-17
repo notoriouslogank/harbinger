@@ -62,7 +62,7 @@ class Minecraft(commands.Cog):
 
         if os.path.exists(f"backups"):
             os.chdir("backups")
-            make_archive(filename, "gzip", root_dir=SERVER_DIR)
+            make_archive(filename, "gztar", root_dir=SERVER_DIR)
             await ctx.send("Making backup")
         else:
             os.mkdir("backups")
