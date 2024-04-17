@@ -27,8 +27,10 @@ class Tools(commands.Cog):
         wiki = wikipediaapi.Wikipedia(f"{EMAIL_ADDRESS}", "en")
         page = wiki.page(query)
         # exist_msg = "Page Exists: %s" % page.exists()
-        summary = page.summary[0:1999]
-        await ctx.send(f"```{summary}```")
+        # summary = page.summary[0:1999]
+        text = page.text
+        await ctx.send(f"```{text}```")
+        # page.text
 
     @commands.command()
     async def bw(self, ctx):
