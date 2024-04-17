@@ -28,8 +28,8 @@ class Tools(commands.Cog):
         page = wiki.page(query)
         # exist_msg = "Page Exists: %s" % page.exists()
         # summary = page.summary[0:1999]
-        text = page.text[0:1999]
-        await ctx.send(f"```{text}```")
+        summary = page.summary[0:1999]
+        await ctx.send(f"```{summary}```")
         # page.text
 
     @commands.command()
