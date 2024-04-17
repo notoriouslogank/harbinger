@@ -50,7 +50,7 @@ class Minecraft(commands.Cog):
             version = line[3]
             return version[-7:-1]
 
-    def start_server():
+    def start_server(self):
         subprocess.run(
             [
                 "tmux",
@@ -62,10 +62,10 @@ class Minecraft(commands.Cog):
             ]
         )
 
-    def save_all():
+    def save_all(self):
         subprocess.run(["tmux", "send", "-t", "Harbinger.1", "save-all", "ENTER"])
 
-    def stop_server():
+    def stop_server(self):
         subprocess.run(["tmux", "send", "-t", "Harbinger.1", "stop", "ENTER"])
 
     @commands.command()
