@@ -1,6 +1,7 @@
+import datetime
 import os
 import subprocess
-from datetime import date
+import tarfile
 from time import sleep
 
 import discord
@@ -13,6 +14,7 @@ CUSTOM_COLOR = configs.custom_color()
 SERVER_PUBLIC_IP = configs.server_public_ip()
 SERVER_STARTUP_SCRIPT = configs.startup_script()
 SERVER_DIR = configs.server_dir()
+BACKUP_DIR = configs.backup_dir()
 LOG_NAME = r"logs/latest.log"
 fname = os.path.join(SERVER_DIR, LOG_NAME)
 bot = Harbinger.bot
@@ -25,7 +27,7 @@ class Minecraft(commands.Cog):
         self.bot = bot
 
     def get_cmd_stdout(self):
-        """Parse and return final line of latest.log (simulating STDOUT).
+        """Print final line of latest.log (simulating STDOUT).
 
         Returns:
             str: Final line of log file
@@ -47,6 +49,25 @@ class Minecraft(commands.Cog):
             version = line[3]
             return version[-7:-1]
 
+    def make_backup_tarball(output, source):
+        with tarfile.open(output, "w:gz") as tar:
+            tar.add(source, arcname=output)
+
+    @commands.command()
+    async def backmc(self, ctx: commands.Context):
+        source = SERVER_DIR
+        backup_name = datetime.datetime.strftime(datetime.datetime.now())
+        # stop the server
+        subprocess.run(["tmux", "send", "-t", "Harbinger.1", "stop", "ENTER"])
+        sleep(10)
+        # create backup
+        try:
+            os.makedirs("backups", exist_ok=False)
+        except:
+            Exception()
+        backup_fname = os.path.join("backups", backup_name)
+        self.make_backup_tarball(f"{backup_fname}", source)
+
     @commands.command()
     async def startmc(self, ctx: commands.Context):
         """Start the Minecraft server."""
@@ -64,45 +85,6 @@ class Minecraft(commands.Cog):
         )
         await ctx.send(f"Starting Minecraft server...")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-
-    @commands.command()
-    async def backupmc(self, ctx: commands.Context) -> None:
-        cmd = f"!backupmc"
-        cmd_msg = f"Backing up Minecraft server data."
-        backup_30 = "Server will shutdown in 30 seconds to backup files.  Please disconnect or you will be kicked."
-        backup_20 = "Server will shutdown in 20 seconds to backup files.  Please disconnect or you will be kicked."
-        backup_10 = "Server will shutdown in 10 seconds to backup files.  Please disconnect or you will be kicked."
-        await ctx.channel.purge(limit=1)
-        await ctx.send(backup_30)
-        sleep(10)
-        await ctx.channel.purge(limit=1)
-        await ctx.send(backup_20)
-        sleep(10)
-        await ctx.channel.purge(limit=1)
-        await ctx.send(backup_10)
-        sleep(10)
-        await ctx.channel.purge(limit=1)
-        await ctx.send(f"Minecraft server saving and shutting down...")
-        subprocess.run(["tmux", "send", "-t", "Harbinger.1", f"stop", "ENTER"])
-        filename = date.today()
-        await ctx.channel.purge(limit=1)
-        await ctx.channel.send("Creating server backup, please standby.")
-        subprocess.run(
-            [
-                "tmux",
-                "send",
-                "-t",
-                "Harbinger.1",
-                f"tar -czvf ../{filename}.tar.gz {SERVER_DIR}",
-            ]
-        )
-        await ctx.channel.purge(limit=1)
-        await ctx.channel.send(
-            f"Successfully created server backup: ../{filename}.tar.gz"
-        )
-        Harbinger.timestamp(ctx.author, cmd, cmd_msg)
-
-    # tar -czvf backup_date.tar.gz /[path]/
 
     @commands.command()
     async def mc(self, ctx: commands.Context, command=None) -> None:
