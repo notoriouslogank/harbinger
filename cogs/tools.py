@@ -30,8 +30,9 @@ class Tools(commands.Cog):
         summary_length = 1999 - len(wiki_title)
         wiki_summary = page.summary[0:summary_length]
         wiki_embed = discord.Embed(
-            title=f"{wiki_title}", description=f"```{wiki_summary}```"
+            title=f"{wiki_title}", description=f"> {wiki_summary}"
         )
+        wiki_embed.add_field(name="Sections", value=page.sections)
         await ctx.send(embed=wiki_embed)
 
     @commands.command()
