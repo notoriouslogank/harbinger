@@ -80,40 +80,29 @@ class Minecraft(commands.Cog):
         )
         sleep(30)
         await bak_msg.edit(content="Minecraft server shutting down NOW!")
-        # await ctx.channel.purge(limit=1)
-        # await ctx.send("Minecraft server shutting down NOW!")
 
         sleep(0.5)
         self.stop_server()
         sleep(10)
 
         await bak_msg.edit(content="Backing up Minecraft server, please standby...")
-        # await ctx.channel.purge(limit=1)
-        # await ctx.send("Backing up server, please standby...", delete_after=30)
 
         if os.path.exists(f"backups"):
             os.chdir("backups")
             make_archive(filename, "gztar", root_dir=SERVER_DIR)
             await bak_msg.edit(content="Backup complete!")
-            # await ctx.channel.purge(limit=1)
-            # await ctx.send("Backup complete!")
         else:
             os.mkdir("backups")
             os.chdir("backups")
             make_archive(filename, "gztar", root_dir=SERVER_DIR)
             await bak_msg.edit(content="Backup complete!")
-            # await ctx.channel.purge(limit=1)
-            # await ctx.send("Backup complete!")
 
         os.chdir("..")
 
         await bak_msg.edit(content="Minecraft server starting up...")
-        # await ctx.send(f"Minecraft server starting up...")
         self.start_server()
-        sleep(10)
+        sleep(20)
         await bak_msg.edit(content="Minecraft server online.")
-        # await ctx.channel.purge(limit=1)
-        # await ctx.send("Minecraft server online.")
 
     @commands.command()
     async def startmc(self, ctx: commands.Context):
