@@ -26,11 +26,13 @@ class Tools(commands.Cog):
     async def wiki(self, ctx: commands.Context, query: str):
         wiki = wikipediaapi.Wikipedia(f"{EMAIL_ADDRESS}", "en")
         page = wiki.page(query)
-        # exist_msg = "Page Exists: %s" % page.exists()
-        # summary = page.summary[0:1999]
-        summary = page.summary[0:1999]
-        await ctx.send(f"```{summary}```")
-        # page.text
+        wiki_title = page.title
+        summary_length = 1999 - len(wiki_title)
+        wiki_summary = page.summary[0:summary_length]
+        wiki_embed = discord.Embed(
+            title=f"{wiki_title}", description=f"```{wiki_summary}```"
+        )
+        await ctx.send(embed=wiki_embed)
 
     @commands.command()
     async def bw(self, ctx):
