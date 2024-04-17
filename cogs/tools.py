@@ -28,7 +28,7 @@ class Tools(commands.Cog):
         page = wiki.page(query)
         # exist_msg = "Page Exists: %s" % page.exists()
         summary = page.summary[0:1999]
-        await ctx.send(f"``{summary}``")
+        await ctx.send(f"```{summary}```")
 
     @commands.command()
     async def bw(self, ctx):
