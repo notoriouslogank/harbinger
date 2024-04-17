@@ -56,15 +56,16 @@ class Minecraft(commands.Cog):
     @commands.command()
     async def backmc(self, ctx: commands.Context):
         source = SERVER_DIR
-        backup_name = datetime.datetime.strftime(
+        backup_time = datetime.datetime.strftime(
             datetime.datetime.now(), f"%d%m%Y-%H%M"
         )
+        backup_directory = os.path.join(f"{SERVER_DIR}", "backups")
+
         # stop the server
         subprocess.run(["tmux", "send", "-t", "Harbinger.1", "stop", "ENTER"])
         sleep(10)
         # create backup
-        os.makedirs("backups")
-        backup_fname = os.path.join("backups", backup_name)
+        backup_fname = os.path.join(backup_directory, backup_time)
         self.make_backup_tarball(f"{backup_fname}", source)
 
     @commands.command()
