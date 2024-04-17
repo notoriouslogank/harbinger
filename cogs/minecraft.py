@@ -49,7 +49,7 @@ class Minecraft(commands.Cog):
             version = line[3]
             return version[-7:-1]
 
-    def make_backup_tarball(output, source):
+    def make_backup_tarball(self, output, source):
         with tarfile.open(output, "w:gz") as tar:
             tar.add(source, arcname=output)
 
