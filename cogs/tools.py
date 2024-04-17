@@ -8,8 +8,10 @@ from jokeapi import Jokes
 from assets import strings
 from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
+import wikipediaapi
 
 CUSTOM_COLOR = configs.custom_color()
+EMAIL_ADDRESS = configs.email_address()
 bubble_wrap = strings.BUBBLE_WRAP
 bot = Harbinger.bot
 
@@ -19,6 +21,13 @@ class Tools(commands.Cog):
 
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
+
+    @commands.command()
+    async def wiki(self, ctx: commands.Context, query: str):
+        wiki = wikipediaapi.Wikipedia(f"{EMAIL_ADDRESS}", "en")
+        page = wiki.page(query)
+        exist_msg = "Page Exists: %s" % page.exists()
+        await ctx.send(exist_msg)
 
     @commands.command()
     async def bw(self, ctx):
