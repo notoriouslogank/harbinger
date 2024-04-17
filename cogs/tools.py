@@ -31,7 +31,7 @@ class Tools(commands.Cog):
         wiki_summary = page.summary[0:summary_length]
         wiki_embed = discord.Embed(
             title=f"{wiki_title}",
-            description=f"`` {wiki_summary}``",
+            description=f"{wiki_summary}",
             color=CUSTOM_COLOR,
         )
         await ctx.send(embed=wiki_embed)
