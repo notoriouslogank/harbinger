@@ -89,6 +89,13 @@ class ReadConfigs:
         Configure.encrypt(python_config_file, Configure.load_key())  # encrypt
         return email_pass
 
+    def backup_dir() -> str:
+        ReadConfigs.decrypt(python_config_file, ReadConfigs.load_key())
+        config.read(python_config_file)
+        server_directory = config["Server"]["backup_dir"]
+        Configure.encrypt(python_config_file, Configure.load_key())
+        return server_directory
+
     def server_dir() -> str:
         """Retrieve path of Minecraft server from config.ini.
 
