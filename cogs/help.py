@@ -143,7 +143,7 @@ class HelpCommand(commands.Cog):
             "__Args__": "**[None]**",
         }
         u_wiki = {
-            "__Usage__": "``!wiki <query>",
+            "__Usage__": "``!wiki <query>``",
             "__Args__": "**query** (str): Topic to search for on Wikipedia. Must quote multiword search queries.",
         }
         u_release = {
