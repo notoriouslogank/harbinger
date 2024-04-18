@@ -24,6 +24,11 @@ class Tools(commands.Cog):
 
     @commands.command()
     async def wiki(self, ctx: commands.Context, query: str):
+        """Return the summary of a given Wikipedia article.
+
+        Args:
+            query (str): Topic to search for on Wikipedia
+        """
         wiki = wikipediaapi.Wikipedia(f"{EMAIL_ADDRESS}", "en")
         page = wiki.page(
             query,
