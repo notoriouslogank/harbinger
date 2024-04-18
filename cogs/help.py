@@ -63,6 +63,7 @@ misc_commands = {
     "joke": "Have Harbinger tell a joke.",
     "keyfinder": "Get all chords in a given key (as well as common progressions).",
     "chords": "Get guitar ``TAB`` diagram(s) of given chord.",
+    "wiki": "Get the article summary on a given topic from Wikipedia.org",
 }
 
 reactions = {
@@ -83,6 +84,7 @@ reactions = {
 minecraft_commands = {
     "mc": "Send command(s) to Minecraft Server.",
     "startmc": "Start the Minecraft Server.",
+    "backmc": "Backup the Minecraft server to a *.tar.gz archive.",
 }
 
 
@@ -136,6 +138,14 @@ class HelpCommand(commands.Cog):
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
         counter = 0
         # USAGE
+        u_backmc = {
+            "__Usage__": "``!backmc``",
+            "__Args__": "**[None]**",
+        }
+        u_wiki = {
+            "__Usage__": "``!wiki <query>``",
+            "__Args__": "**query** (str): Topic to search for on Wikipedia. Must quote multiword search queries.",
+        }
         u_release = {
             "__Usage__": "``!release <text>``",
             "__Args__": "**text** (str): Body text for the new release embed.",
@@ -453,6 +463,19 @@ class HelpCommand(commands.Cog):
                 )
             await ctx.send(embed=embed)
         # MINECRAFT
+        if command == "backmc":
+            embed = discord.Embed(
+                title=f"{command}",
+                description=f"{minecraft_commands[command]}",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(
+                name="__Usage__", value=f"{u_backmc['__Usage__']}", inline=False
+            )
+            embed.add_field(
+                name="__Usage__", value=f"{u_backmc['__Args__']}", inline=False
+            )
+            await ctx.send(embed=embed)
         if command == "mc":
             embed = discord.Embed(
                 title=f"{command}",
@@ -948,6 +971,19 @@ class HelpCommand(commands.Cog):
             embed.add_field(name="__Args__", value=f'{u_stream["__Args__"]}')
             await ctx.send(embed=embed)
         # MISC
+        if command == "wiki":
+            embed = discord.Embed(
+                title=f"{command}",
+                description=f"{misc_commands[command]}",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(
+                name="__Usage__", value=f"{u_wiki['__Usage__']}", inline=False
+            )
+            embed.add_field(
+                name="__Args__", value=f"{u_wiki['__Args__']}", inline=False
+            )
+            await ctx.send(embed=embed)
         if command == "chords":
             embed = discord.Embed(
                 title=f"{command}",

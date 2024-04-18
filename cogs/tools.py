@@ -24,10 +24,26 @@ class Tools(commands.Cog):
 
     @commands.command()
     async def wiki(self, ctx: commands.Context, query: str):
+        """Return the summary of a given Wikipedia article.
+
+        Args:
+            query (str): Topic to search for on Wikipedia
+        """
         wiki = wikipediaapi.Wikipedia(f"{EMAIL_ADDRESS}", "en")
-        page = wiki.page(query)
-        exist_msg = "Page Exists: %s" % page.exists()
-        await ctx.send(exist_msg)
+        page = wiki.page(
+            query,
+        )
+        wiki_title = page.title
+        summary_length = 1999 - len(wiki_title)
+        wiki_summary = page.summary[0:summary_length]
+        wiki_embed = discord.Embed(
+            title=f"{wiki_title}",
+            description=f"{wiki_summary}",
+            color=CUSTOM_COLOR,
+            url=f"https://wikipedia.org/wiki/{wiki_title}",
+        )
+        # wiki_embed.set_footer(text=f"From Wikipedia.org/wiki/{wiki_title}")
+        await ctx.send(embed=wiki_embed)
 
     @commands.command()
     async def bw(self, ctx):
