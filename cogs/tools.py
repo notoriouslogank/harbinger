@@ -25,7 +25,9 @@ class Tools(commands.Cog):
     @commands.command()
     async def wiki(self, ctx: commands.Context, query: str):
         wiki = wikipediaapi.Wikipedia(f"{EMAIL_ADDRESS}", "en")
-        page = wiki.page(query)
+        page = wiki.page(
+            query,
+        )
         wiki_title = page.title
         summary_length = 1999 - len(wiki_title)
         wiki_summary = page.summary[0:summary_length]
@@ -34,6 +36,7 @@ class Tools(commands.Cog):
             description=f"{wiki_summary}",
             color=CUSTOM_COLOR,
         )
+        wiki_embed.set_footer(text=f"From Wikipedia.com/wiki/{wiki_title}")
         await ctx.send(embed=wiki_embed)
 
     @commands.command()
