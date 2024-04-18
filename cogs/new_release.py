@@ -38,7 +38,7 @@ class Release(commands.Cog):
     @commands.command()
     async def release(self, ctx: commands.Context, text):
         await ctx.channel.purge(limit=1)
-        await ctx.send(embed=self.release_embed(ctx, text))
+        await ctx.send(embed=self.release_embed(self, text))
 
 
 async def setup(bot):
