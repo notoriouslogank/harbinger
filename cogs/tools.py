@@ -40,8 +40,9 @@ class Tools(commands.Cog):
             title=f"{wiki_title}",
             description=f"{wiki_summary}",
             color=CUSTOM_COLOR,
+            url=f"https://wikipedia.org/wiki/{wiki_title}",
         )
-        wiki_embed.set_footer(text=f"From Wikipedia.com/wiki/{wiki_title}")
+        # wiki_embed.set_footer(text=f"From Wikipedia.org/wiki/{wiki_title}")
         await ctx.send(embed=wiki_embed)
 
     @commands.command()
