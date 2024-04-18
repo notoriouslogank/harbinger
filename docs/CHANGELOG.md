@@ -8,6 +8,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
+- !wiki command to search for and return the article summary for a given Wikipedia topic
+- !help command messages for !backmc and !wiki commands
+
+## [5.4.0] - 2024-04-17
+
+### Added
+
 - !backmc command to create a backup of the Minecraft server
 - Various support functions for !backmc in cogs/minecraft.py
 
