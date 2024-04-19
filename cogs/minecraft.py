@@ -74,6 +74,11 @@ class Minecraft(commands.Cog):
         )  # Closes tmux terminal to avoid VERY DANGEROUS bug allowing command execution on host machine
 
     @commands.command()
+    async def stopmc(self, ctx: commands.Context):
+        await ctx.channel.send("Stopping mc...")
+        self.stop_server(self)
+
+    @commands.command()
     async def backmc(self, ctx: commands.Context):
         """Create backup of Minecraft server (saves as *.tar.gz)"""
         filename = datetime.datetime.strftime(datetime.datetime.now(), f"%d%m%Y-%H%M")
