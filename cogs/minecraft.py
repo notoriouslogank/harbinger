@@ -51,7 +51,7 @@ class Minecraft(commands.Cog):
     def start_server(self):
         """Run server startup script via tmux."""
         subprocess.run(["tmux", "split-window" "-v"])
-        subprocess.run(["tmux", "split-pane", "-D"])
+        subprocess.run(["tmux", "swap-pane", "-D"])
         subprocess.run(
             [
                 "tmux",
