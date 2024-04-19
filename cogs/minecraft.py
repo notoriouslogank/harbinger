@@ -50,6 +50,7 @@ class Minecraft(commands.Cog):
 
     def start_server(self):
         """Run server startup script via tmux."""
+        subprocess.run(["tmux", "split-window", "-v", "ENTER"])
         subprocess.run(
             [
                 "tmux",
@@ -68,6 +69,9 @@ class Minecraft(commands.Cog):
     def stop_server(self):
         """Send 'stop' command to Minecraft server via tmux."""
         subprocess.run(["tmux", "send", "-t", "Harbinger.1", "stop", "ENTER"])
+        subprocess.run(
+            ["tmux", "send", "-t", "Harbinger.1", "exit", "ENTER"]
+        )  # Closes tmux terminal to avoid VERY DANGEROUS bug allowing command execution on host machine
 
     @commands.command()
     async def backmc(self, ctx: commands.Context):
