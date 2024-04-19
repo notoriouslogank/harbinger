@@ -76,7 +76,7 @@ class Minecraft(commands.Cog):
     @commands.command()
     async def stopmc(self, ctx: commands.Context):
         await ctx.channel.send("Stopping mc...")
-        self.stop_server(self)
+        self.stop_server()
 
     @commands.command()
     async def backmc(self, ctx: commands.Context):
