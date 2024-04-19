@@ -70,6 +70,7 @@ class Minecraft(commands.Cog):
     def stop_server(self):
         """Send 'stop' command to Minecraft server via tmux."""
         subprocess.run(["tmux", "send", "-t", "Harbinger.1", "stop", "ENTER"])
+        sleep(10)
         subprocess.run(
             ["tmux", "send", "-t", "Harbinger.1", "exit", "ENTER"]
         )  # Closes tmux terminal to avoid VERY DANGEROUS bug allowing command execution on host machine
@@ -93,7 +94,6 @@ class Minecraft(commands.Cog):
 
         sleep(0.5)
         self.stop_server()
-        sleep(10)
 
         await bak_msg.edit(content="Backing up Minecraft server, please standby...")
 
