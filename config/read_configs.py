@@ -168,6 +168,13 @@ class ReadConfigs:
         Configure.encrypt(python_config_file, Configure.load_key())  # encrypt
         return developer_role_id
 
+    def minecraft_id() -> int:
+        ReadConfigs.decrypt(python_config_file, ReadConfigs.load_key())
+        config.read(python_config_file)
+        minecraft_role_id = int(config["Roles"]["minecraft"])
+        Configure.encrypt(python_config_file, Configure.load_key * ())
+        return minecraft_role_id
+
     def custom_color() -> discord.Color:
         """Retrieve custom color from config.ini.
 
