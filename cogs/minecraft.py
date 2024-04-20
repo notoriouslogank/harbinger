@@ -134,19 +134,11 @@ class Minecraft(commands.Cog):
         if Harbinger.is_minecraft(self, ctx, ctx.message.author) == True:
 
             if command == None:
-                mc_embed = discord.Embed(
-                    title="Minecraft Server",
-                    description="",
-                    color=CUSTOM_COLOR,
-                )
-                mc_embed.add_field(
-                    name="Client Version", value=f"``{self.get_mc_version()}``"
-                )
-                mc_embed.add_field(
-                    name="Server Address", value=f"``{SERVER_PUBLIC_IP}``"
-                )
+                version = f"Client Version: {self.get_mc_version()}"
+                ip_address = f"Server IP: {SERVER_PUBLIC_IP}"
+                message_contents = f"``Minecraft Server Info\n{version}\n{ip_address}``"
                 await Harbinger.send_dm(
-                    ctx=ctx, member=ctx.message.author, content=mc_embed
+                    ctx=ctx, member=ctx.message.author, content=message_contents
                 )
                 Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
             else:
