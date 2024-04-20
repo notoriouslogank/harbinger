@@ -64,6 +64,7 @@ misc_commands = {
     "keyfinder": "Get all chords in a given key (as well as common progressions).",
     "chords": "Get guitar ``TAB`` diagram(s) of given chord.",
     "wiki": "Get the article summary on a given topic from Wikipedia.org",
+    "bw": "Pop some bubblewrap.",
 }
 
 reactions = {
@@ -138,6 +139,10 @@ class HelpCommand(commands.Cog):
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
         counter = 0
         # USAGE
+        u_bw = {
+            "__Usage__": "``!bw``",
+            "__Args__": "**[None]**",
+        }
         u_backmc = {
             "__Usage__": "``!backmc``",
             "__Args__": "**[None]**",
@@ -971,6 +976,17 @@ class HelpCommand(commands.Cog):
             embed.add_field(name="__Args__", value=f'{u_stream["__Args__"]}')
             await ctx.send(embed=embed)
         # MISC
+        if command == "bw":
+            embed = discord.Embed(
+                title=f"{command}",
+                description=f"{misc_commands['bw']}",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(
+                name="__Usage__", value=f"{u_bw['__Usage__']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f"{u_bw['__Args__']}", inline=False)
+            await ctx.send(embed=embed)
         if command == "wiki":
             embed = discord.Embed(
                 title=f"{command}",

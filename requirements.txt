@@ -1,7 +1,8 @@
 aiohttp==3.8.6
-cryptography==3.4.8
+cryptography==41.0.5
 discord.py==2.3.2
 jokeapi==1.0.5
 Requests==2.31.0
-yt_dlp==2023.12.30
+Wikipedia_API==0.6.0
+yt_dlp==2024.4.9
 zalgolib==0.2.2

@@ -153,6 +153,10 @@ class Configure:
         role_id = input("Developer Role ID: ") or "dev"
         return role_id
 
+    def get_minecraft_role() -> int:
+        role_id = input("Minecraft Role ID: ") or "minecraft"
+        return role_id
+
     def get_deletion_time() -> int:
         """Prompt user for time until Harbinger auto-deletes system messages.
 
@@ -192,6 +196,7 @@ class Configure:
         config["Roles"] = {
             "moderator": f"{(Configure.get_moderator_role())}",
             "developer": f"{(Configure.get_developer_role())}",
+            "minecraft": f"{(Configure.get_minecraft_role())}",
         }
 
         with open(f"{python_config_file}", "w") as configfile:

@@ -68,6 +68,15 @@ class Minecraft(commands.Cog):
     def stop_server(self):
         """Send 'stop' command to Minecraft server via tmux."""
         subprocess.run(["tmux", "send", "-t", "Harbinger.1", "stop", "ENTER"])
+        sleep(10)
+        subprocess.run(
+            ["tmux", "send", "-t", "Harbinger.1", "exit", "ENTER"]
+        )  # Closes tmux terminal to avoid VERY DANGEROUS bug allowing command execution on host machine
+
+    @commands.command()
+    async def stopmc(self, ctx: commands.Context):
+        await ctx.channel.send("Stopping mc...")
+        self.stop_server()
 
     @commands.command()
     async def backmc(self, ctx: commands.Context):
@@ -83,7 +92,6 @@ class Minecraft(commands.Cog):
 
         sleep(0.5)
         self.stop_server()
-        sleep(10)
 
         await bak_msg.edit(content="Backing up Minecraft server, please standby...")
 
@@ -122,27 +130,26 @@ class Minecraft(commands.Cog):
         """
         cmd = f"!mccmd({command})"
         cmd_msg = f"Sent following command to server: {command}"
-        if command == None:
-            mc_embed = discord.Embed(
-                title="Minecraft Server",
-                description="",
-                color=CUSTOM_COLOR,
-            )
-            mc_embed.add_field(
-                name="Client Version", value=f"``{self.get_mc_version()}``"
-            )
-            mc_embed.add_field(name="Server Address", value=f"``{SERVER_PUBLIC_IP}``")
-            await ctx.send(embed=mc_embed)
-            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+        await ctx.channel.purge(limit=1)
+        if Harbinger.is_minecraft(self, ctx, ctx.message.author) == True:
+
+            if command == None:
+                message_contents = f"``Minecraft Server IP: \n{SERVER_PUBLIC_IP}``"
+                await Harbinger.send_dm(
+                    ctx=ctx, member=ctx.message.author, content=message_contents
+                )
+                Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+            else:
+                subprocess.run(
+                    ["tmux", "send", "-t", "Harbinger.1", f"{command}", "C-m"],
+                )
+                await ctx.send(f"``> {command}``")
+                stdout = self.get_cmd_stdout()
+                await ctx.send(f"``{stdout}``")
         else:
-            subprocess.run(
-                ["tmux", "send", "-t", "Harbinger.1", f"{command}", "C-m"],
-            )
-            await ctx.channel.purge(limit=1)
-            await ctx.send(f"``> {command}``")
-            stdout = self.get_cmd_stdout()
-            await ctx.send(f"``{stdout}``")
-            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+            cmd_msg = f"ERROR: Missing Minecraft role."
+            await ctx.send("You must have Minecraft role to execute this command.")
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
 
 async def setup(bot):

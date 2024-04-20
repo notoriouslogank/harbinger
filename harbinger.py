@@ -25,7 +25,7 @@ parser = argparse.ArgumentParser(prog="Harbinger", description="Harbinger Discor
 parser.add_argument(
     "-c",
     "--configure",
-    help="create configuration file(s) for Harbinger",
+    help="create configuration file(s) for Harbinger and exit without running",
     action="store_true",
 )
 
@@ -90,13 +90,13 @@ TOKEN = configs.discord_token()
 OWNER = configs.owner_id()
 MODERATOR = configs.moderator_id()
 DEVELOPER = configs.developer_id()
+MINECRAFT = configs.minecraft_id()
 
 
 class Harbinger:
     """Class for the main bot functions."""
 
     start_time = datetime.now()
-
     intents = discord.Intents.default()
     intents.members = True
     intents.message_content = True
@@ -177,6 +177,14 @@ class Harbinger:
         roles = member.roles
         dev = discord.Guild.get_role(ctx.guild, DEVELOPER)
         if dev in roles:
+            return True
+        else:
+            return False
+
+    def is_minecraft(self, ctx: commands.Context, member: discord.Member) -> bool:
+        roles = member.roles
+        minecraft = discord.Guild.get_role(ctx.guild, MINECRAFT)
+        if minecraft in roles:
             return True
         else:
             return False
