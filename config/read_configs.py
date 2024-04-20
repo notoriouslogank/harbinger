@@ -172,7 +172,7 @@ class ReadConfigs:
         ReadConfigs.decrypt(python_config_file, ReadConfigs.load_key())
         config.read(python_config_file)
         minecraft_role_id = int(config["Roles"]["minecraft"])
-        Configure.encrypt(python_config_file, Configure.load_key * ())
+        Configure.encrypt(python_config_file, Configure.load_key())
         return minecraft_role_id
 
     def custom_color() -> discord.Color:
