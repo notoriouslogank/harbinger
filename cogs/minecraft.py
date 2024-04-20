@@ -134,9 +134,7 @@ class Minecraft(commands.Cog):
         if Harbinger.is_minecraft(self, ctx, ctx.message.author) == True:
 
             if command == None:
-                version = f"Client Version: {self.get_mc_version()}"
-                ip_address = f"Server IP: {SERVER_PUBLIC_IP}"
-                message_contents = f"``Minecraft Server Info\n{version}\n{ip_address}``"
+                message_contents = f"``Minecraft Server IP: \n{SERVER_PUBLIC_IP}``"
                 await Harbinger.send_dm(
                     ctx=ctx, member=ctx.message.author, content=message_contents
                 )
