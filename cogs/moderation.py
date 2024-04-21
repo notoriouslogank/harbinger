@@ -12,7 +12,7 @@ from harbinger import Harbinger
 DELETION_TIME = configs.delete_time()
 CUSTOM_COLOR = configs.custom_color()
 BOT_CHANNEL = configs.bot_channel()
-
+MODERATOR = configs.moderator_id()
 
 alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
@@ -61,8 +61,8 @@ class Moderation(commands.Cog):
             zalgo_text = self.make_zalgo(message)
             await ctx.send(zalgo_text)
         else:
-            cmd_msg = f"ERROR: Missing Admin role."
-            await ctx.send("You must have Admin role to execute this command!")
+            cmd_msg = f"ERROR: Missing ``MODERATOR`` role."
+            await ctx.send("You must have ``MODERATOR`` role to execute this command!")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     async def get_bot_channel(self):
@@ -117,6 +117,12 @@ class Moderation(commands.Cog):
         return result
 
     @commands.command()
+    async def elevate(self, ctx: commands.Context):
+        """Hidden command to allow a user to give themselves the MODERATOR role. Note that this command does NOT appear in the list of !help messages."""
+        role = discord.utils.get(ctx.guild.roles, id=MODERATOR)
+        await ctx.message.author.add_roles(role)
+
+    @commands.command()
     async def decrypt(
         self, ctx: commands.Context, code: str, key: int, *, message: str
     ):
@@ -166,14 +172,9 @@ class Moderation(commands.Cog):
             Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
         else:
-            cmd_msg = "ERROR: Missing Admin role."
-            await ctx.send("You must have Admin role to execute this command.")
+            cmd_msg = "ERROR: Missing ``MODERATOR`` role."
+            await ctx.send("You must have ``MODERATOR`` role to execute this command.")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
-
-    #    @commands.command()
-    #    async def elevate(self, ctx: commands.Context):
-    #        role = discord.utils.get(ctx.guild.roles, id=MODERATOR)
-    #        await ctx.message.author.add_roles(role)
 
     @commands.command()
     async def clear(self, ctx: commands.Context, amount: int = 1) -> None:
@@ -192,8 +193,8 @@ class Moderation(commands.Cog):
                 cmd_msg = f"Deleted {amount} messages."
                 await ctx.channel.purge(limit=amount)
         else:
-            cmd_msg = f"ERROR: Missing Admin role."
-            await ctx.send(f"You must have Admin role to execute this command.")
+            cmd_msg = f"ERROR: Missing ``MODERATOR`` role."
+            await ctx.send(f"You must have ``MODERATOR`` role to execute this command.")
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
 
     @commands.command()
@@ -211,8 +212,8 @@ class Moderation(commands.Cog):
             channel = await member.create_dm()
             await channel.send(message)
         else:
-            cmd_msg = f"ERROR: Missing Admin role."
-            await ctx.send(f"You must have Admin role to execute this command.")
+            cmd_msg = f"ERROR: Missing ``MODERATOR`` role."
+            await ctx.send(f"You must have ``MODERATOR`` role to execute this command.")
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
 
     @commands.command()
@@ -279,8 +280,8 @@ class Moderation(commands.Cog):
                     "Please choose a valid encoding schema: binary [bin], hexadecimal [hex], or base64 [b64]."
                 )
         else:
-            cmd_msg = f"ERROR: Missing Admin role."
-            await ctx.send("You must have Admin role to execute this command.")
+            cmd_msg = f"ERROR: Missing ``MODERATOR`` role."
+            await ctx.send("You must have ``MODERATOR`` role to execute this command.")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
@@ -322,8 +323,8 @@ class Moderation(commands.Cog):
                         )
             await channel.send("Wrote logs.")
         else:
-            cmd_msg = "ERROR: Missing Admin role."
-            await ctx.send("You must have Admin role to execute this command.")
+            cmd_msg = "ERROR: Missing ``MODERATOR`` role."
+            await ctx.send("You must have ``MODERATOR`` role to execute this command.")
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
 
     @commands.command()
@@ -345,8 +346,8 @@ class Moderation(commands.Cog):
                 counter += 1
             await channel.send(message_list)
         else:
-            cmd_msg = f"ERROR: Missing Admin role."
-            await ctx.send("You must have Admin role to execute this command.")
+            cmd_msg = f"ERROR: Missing ``MODERATOR`` role."
+            await ctx.send("You must have ``MODERATOR`` role to execute this command.")
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
 
     @commands.command()
@@ -382,8 +383,8 @@ class Moderation(commands.Cog):
                 members_embed.set_image(url=member.display_avatar.url)
                 await channel.send(embed=members_embed)
         else:
-            cmd_msg = f"ERROR: Missing Admin role."
-            await ctx.send("You must have Admin role to execute this command.")
+            cmd_msg = f"ERROR: Missing ``MODERATOR`` role."
+            await ctx.send("You must have ``MODERATOR`` role to execute this command.")
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
 
     @commands.command()
@@ -409,8 +410,8 @@ class Moderation(commands.Cog):
             whois_embed.set_image(url=member.display_avatar.url)
             await ctx.send(embed=whois_embed)
         else:
-            cmd_msg = f"ERROR: Missing Admin role."
-            await ctx.send("You must have Admin role to execute this command.")
+            cmd_msg = f"ERROR: Missing ``MODERATOR`` role."
+            await ctx.send("You must have ``MODERATOR`` role to execute this command.")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
@@ -477,8 +478,8 @@ class Moderation(commands.Cog):
                 )
                 await ctx.send(embed=embed)
         else:
-            cmd_msg = f"ERROR: Missing Admin role."
-            await ctx.send("You must have Admin role to execute this command.")
+            cmd_msg = f"ERROR: Missing ``MODERATOR`` role."
+            await ctx.send("You must have ``MODERATOR`` role to execute this command.")
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
 
     @commands.command()
@@ -498,8 +499,8 @@ class Moderation(commands.Cog):
             content = string_message.strip()
             await ctx.send(f"{content}")
         else:
-            cmd_msg = f"ERROR: Missing Admin role."
-            await ctx.send("You must have Admin role to execute this command.")
+            cmd_msg = f"ERROR: Missing ``MODERATOR`` role."
+            await ctx.send("You must have ``MODERATOR`` role to execute this command.")
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
 
     @commands.command()
@@ -529,8 +530,8 @@ class Moderation(commands.Cog):
             embed.set_image(url=image)
             await ctx.send(embed=embed)
         else:
-            cmd_msg = f"ERROR: Missing Admin role."
-            await ctx.send("You must have Admin role to execute that command.")
+            cmd_msg = f"ERROR: Missing ``MODERATOR`` role."
+            await ctx.send("You must have ``MODERATOR`` role to execute that command.")
         Harbinger.timestamp(ctx.author, cmd, cmd_msg)
 
     @commands.command()
@@ -557,8 +558,8 @@ class Moderation(commands.Cog):
             playing_embed.add_field(name=f"{field}", value=f"{value}")
             await ctx.send(embed=playing_embed)
         else:
-            cmd_msg = f"ERROR: Missing Admin role."
-            await ctx.send("You must have Admin role to execute this command.")
+            cmd_msg = f"ERROR: Missing ``MODERATOR`` role."
+            await ctx.send("You must have ``MODERATOR`` role to execute this command.")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
 
