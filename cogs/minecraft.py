@@ -4,7 +4,6 @@ import subprocess
 from shutil import make_archive
 from time import sleep
 
-import discord
 from discord.ext import commands
 
 from config.read_configs import ReadConfigs as configs
@@ -75,50 +74,71 @@ class Minecraft(commands.Cog):
 
     @commands.command()
     async def stopmc(self, ctx: commands.Context):
-        await ctx.channel.send("Stopping mc...")
-        self.stop_server()
+        cmd = "!stopmc"
+        if Harbinger.is_minecraft(self, ctx, ctx.message.author) == True:
+            cmd_msg = f"Stopping Minecraft server."
+            await ctx.channel.purge(limit=1)
+            stop_msg = await ctx.channel.send(
+                "Stopping Minecraft server; please wait..."
+            )
+            self.stop_server()
+            sleep(30)
+            await stop_msg.edit("Minecraft server successfully stopped.")
+        else:
+            cmd_msg = f"ERROR: Missing ``MINECRAFT`` role."
+            await ctx.send("You must have ``MINECRAFT`` role to execute this command.")
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
     async def backmc(self, ctx: commands.Context):
         """Create backup of Minecraft server (saves as *.tar.gz)"""
-        filename = datetime.datetime.strftime(datetime.datetime.now(), f"%d%m%Y-%H%M")
-        await ctx.channel.purge(limit=1)
-        self.save_all()
-        bak_msg = await ctx.channel.send(
-            "The Minecraft server will be shutting down in 30s for server backup.  Please save and disconnect to avoid and lost progress..."
-        )
-        sleep(30)
-        await bak_msg.edit(content="Minecraft server shutting down NOW!")
-
-        sleep(0.5)
-        self.stop_server()
-
-        await bak_msg.edit(content="Backing up Minecraft server, please standby...")
-
-        if os.path.exists(f"backups"):
-            os.chdir("backups")
-            make_archive(filename, "gztar", root_dir=SERVER_DIR)
-            await bak_msg.edit(content="Backup complete!")
+        cmd = "!backmc"
+        if Harbinger.is_minecraft(self, ctx, ctx.message.author) == True:
+            cmd_msg = "Backing up Minecraft server..."
+            filename = datetime.datetime.strftime(
+                datetime.datetime.now(), f"%d%m%Y-%H%M"
+            )
+            await ctx.channel.purge(limit=1)
+            self.save_all()
+            bak_msg = await ctx.channel.send(
+                "The Minecraft server will be shutting down in 30s for server backup.  Please save and disconnect to avoid and lost progress..."
+            )
+            sleep(30)
+            await bak_msg.edit(content="Minecraft server shutting down NOW!")
+            sleep(0.5)
+            self.stop_server()
+            await bak_msg.edit(content="Backing up Minecraft server, please standby...")
+            if os.path.exists(f"backups"):
+                os.chdir("backups")
+                make_archive(filename, "gztar", root_dir=SERVER_DIR)
+                await bak_msg.edit(content="Backup complete!")
+            else:
+                os.mkdir("backups")
+                os.chdir("backups")
+                make_archive(filename, "gztar", root_dir=SERVER_DIR)
+                await bak_msg.edit(content="Backup complete!")
+                os.chdir("..")
+                await bak_msg.edit(content="Minecraft server starting up...")
+                self.start_server()
+                sleep(20)
+                await bak_msg.edit(content="Minecraft server online.")
         else:
-            os.mkdir("backups")
-            os.chdir("backups")
-            make_archive(filename, "gztar", root_dir=SERVER_DIR)
-            await bak_msg.edit(content="Backup complete!")
-
-        os.chdir("..")
-
-        await bak_msg.edit(content="Minecraft server starting up...")
-        self.start_server()
-        sleep(20)
-        await bak_msg.edit(content="Minecraft server online.")
+            cmd_msg = f"ERROR: Missing ``MINECRAFT`` role."
+            await ctx.send("You must have ``MINECRAFT`` role to execute this command.")
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
     async def startmc(self, ctx: commands.Context):
         """Start the Minecraft server."""
         cmd = f"!startmc"
-        cmd_msg = f"Started Minecraft server."
-        self.start_server()
-        await ctx.send(f"Starting Minecraft server...")
+        if Harbinger.is_minecraft(self, ctx, ctx.message.author) == True:
+
+            cmd_msg = f"Started Minecraft server."
+            self.start_server()
+            await ctx.send(f"Starting Minecraft server...")
+        else:
+            cmd_msg = f"ERROR: Missing ``MINECRAFT`` role."
+            await ctx.send("You must have ``MINECRAFT`` role to execute this command.")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
@@ -147,8 +167,8 @@ class Minecraft(commands.Cog):
                 stdout = self.get_cmd_stdout()
                 await ctx.send(f"``{stdout}``")
         else:
-            cmd_msg = f"ERROR: Missing Minecraft role."
-            await ctx.send("You must have Minecraft role to execute this command.")
+            cmd_msg = f"ERROR: Missing ``MINECRAFT`` role."
+            await ctx.send("You must have ``MINECRAFT`` role to execute this command.")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
 
