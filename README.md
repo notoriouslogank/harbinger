@@ -2,6 +2,9 @@
 
 Harbinger, a Discord bot crafted in Python with a touch of Bash, seamlessly blends essential Discord server commands with a sophisticated integration that empowers users to effortlessly control their Minecraft server directly from within the Discord platform.
 
+- [Prerequisites](#prerequisites)
+  - [Discord Developer Portal](#discord-developer-portal)
+  - [Minecraft Server](#minecraft-server)
 - [Installation](#installation)
 - [Configuration](#configuration)
   - [Email](#email)
@@ -14,6 +17,16 @@ Harbinger, a Discord bot crafted in Python with a touch of Bash, seamlessly blen
 - [License](#license)
 - [Copyright](#copyright)
 - [Acknowledgements](#acknowledgements)
+
+## Prerequisites
+
+### Discord Developer Portal
+
+This guide assumes you've already registered your bot with Discord's Developer Portal.  Instructions for doing so are outside the scope of this guide, but you can follow Discord's guide [here](https://discord.com/developers/docs/quick-start/getting-started).
+
+### Minecraft Server
+
+This guide assumes you already have a fully-configured Minecraft Server instance.  While Harbinger only officially supports the Vanilla Mincraft Server (available [here](https://www.minecraft.net/en-us/download/server)), there's theoretically no reason that something like PaperMC, Forge, Fabric, or other server versions wouldn't work.  However, instructions for installing/configuring *any* Minecraft Server instance is outside the scope of this guide; please refer to your choice of server's documentation for further support.
 
 ## Installation
 
@@ -89,7 +102,7 @@ python3 run.py
 
 When launched in this manner, Harbinger will automatically create a new tmux session with two panes and attach to it.  In the first pane, the Minecraft Server instance will launch; in the second pane, the Harbinger bot instance will launch simultaneously.  At this point, the tmux session can be safely detached and continue running in the background.
 
-Please see the [tmux Github repository](https://github.com/tmux/tmux/wiki) for more information.
+Please see the [tmux Github repository](https://github.com/tmux/tmux/wiki) for more information and support.
 
 ```bash
 python3 harbinger.py
