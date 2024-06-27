@@ -26,6 +26,20 @@ TRUMP = [
     "https://media2.giphy.com/media/dyqBxR1TETxofUUz1i/200.webp?cid=ecf05e47w9pr2t22q66abmgm1tq7ek340dpo4yy1tcka31rg&ep=v1_gifs_search&rid=200.webp&ct=g",
 ]
 
+BIDEN = [
+    "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzZvMGRkbGFhMzgxbW5lZjQycGt5bjd5NGYwdzVuMjR3cW1odnBscSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/f9eYHQ8RZ4zfc4unXx/giphy.webp",
+    "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzZvMGRkbGFhMzgxbW5lZjQycGt5bjd5NGYwdzVuMjR3cW1odnBscSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/QWw4hc5gTnJhY0BUI3/200.webp",
+    "https://media2.giphy.com/media/l0ExtqzSKjYN8WICc/200.webp?cid=790b7611c6o0ddlaa381mnef42pkyn7y4f0w5n24wqmhvplq&ep=v1_gifs_search&rid=200.webp&ct=g",
+    "https://media0.giphy.com/media/rWgLOxrdNNDzUXaQnd/200.webp?cid=790b7611c6o0ddlaa381mnef42pkyn7y4f0w5n24wqmhvplq&ep=v1_gifs_search&rid=200.webp&ct=g",
+    "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExeDd4ZjQ1MmNvcng5amJvcm9xeDUyYW5wOGc3dTJpamVic3FsdjlsNyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/0eTrHu94lDhhFe4eNH/200.webp",
+    "https://media2.giphy.com/media/oNmOUAT3rgp7SOQb9n/200.webp?cid=790b7611x7xf452corx9jboroqx52anp8g7u2ijebsqlv9l7&ep=v1_gifs_search&rid=200.webp&ct=g",
+    "https://media4.giphy.com/media/VmMsKczHfFLcWxef0Q/200.webp?cid=790b7611x7xf452corx9jboroqx52anp8g7u2ijebsqlv9l7&ep=v1_gifs_search&rid=200.webp&ct=g",
+    "https://media0.giphy.com/media/p40zn0lUBGm0BX50th/200.webp?cid=ecf05e47t6ek3oyyz8gjxlg0c3sh11o3qj9ii5w21y6r92n1&ep=v1_gifs_search&rid=200.webp&ct=g",
+    "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXlmNWRvamd6ZTM2NTF3YWh0ZHNqYmptYXgwOHk0cDZwYjA4ZHc0YyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/fyZSoXV3nPCOk/200.webp",
+    "https://media4.giphy.com/media/Naygmnwr8i9vaEDvtC/200.webp?cid=790b7611s935hfx5rcunmf3y6hrpny42e2szki4c4032mjjd&ep=v1_gifs_search&rid=200.webp&ct=g",
+    "https://media0.giphy.com/media/zqThO2hWM3rFtRg8HU/200.webp?cid=790b7611s935hfx5rcunmf3y6hrpny42e2szki4c4032mjjd&ep=v1_gifs_search&rid=200.webp&ct=g",
+    "https://media3.giphy.com/media/ob3p5rc060QYzCUg3s/200.webp?cid=790b7611s935hfx5rcunmf3y6hrpny42e2szki4c4032mjjd&ep=v1_gifs_search&rid=200.webp&ct=g",
+]
 # REACTIONS
 LOL = [
     "https://64.media.tumblr.com/80ce2d4f77c4ddc5d9e395a43e37c532/tumblr_o5r3vkiaGo1qh9nffo3_250.gifv",
