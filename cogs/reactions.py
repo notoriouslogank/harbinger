@@ -20,10 +20,79 @@ sad = urls.SAD
 trump = urls.TRUMP
 biden = urls.BIDEN
 
+BINGO = [
+    "Trump stalks Biden like prey",
+    "Biden offers to fight",
+    "Biden loses his train of thought",
+    "'Bigly'",
+    "Fly lands on someone's head",
+    "Both candidates get muted",
+    "Biden gets muted",
+    "Trump gets muted",
+    "Biden freezes",
+    "Biden wanders off",
+    "'Malarkey'",
+    "'Not a joke'",
+    "'Gina'",
+    "'Will you shut up man?'",
+    "'Sleepy Joe'",
+    "'Creepy Joe'",
+    "Burisma",
+    "Cocaine",
+    "'Come on, man!'",
+    "'The sould of democracy'",
+    "'Build the wall'",
+    "Russia",
+    "'No tax off tips'",
+    "Student loans",
+    "Mentally unfit",
+    "'Rigged'",
+    "January 6",
+    "'Insurrection'",
+    "'MAGA Republicans'",
+    "'Convicted felon'",
+    "'Hilary'",
+    "Laptop from Hell",
+    "'Look, folks...'",
+    "Candidate told time is up",
+    "'COVID'",
+    "Biden refers to a dead person",
+    "TikTok",
+    "Hamas",
+    "'Fine people' hoax",
+    "'Let's go Brandon'",
+    "'FJB'",
+    "Fani Willis",
+    "Obama",
+    "'Crooked'",
+    "'Mar-a-lago'",
+    "Drug test",
+]
+
 
 class React(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
+
+    @commands.command()
+    async def bingo_card(self, ctx: commands.Context):
+        cmd = "!bingo_card"
+        cmd_msg = "Make bingo card."
+        await ctx.channel.purge(limit=1)
+        row1 = [
+            BINGO[randint(0, len(BINGO) - 1)],
+            BINGO[randint(0, len(BINGO) - 1)],
+            BINGO[randint(0, len(BINGO) - 1)],
+            BINGO[randint(0, len(BINGO) - 1)],
+            BINGO[randint(0, len(BINGO) - 1)],
+        ]
+        row2 = []
+        row3 = []
+        row4 = []
+        row5 = []
+        row1 = BINGO[randint(0, len(BINGO) - 1)]
+        await ctx.channel.send(row1)
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
     async def biden(self, ctx: commands.Context):
