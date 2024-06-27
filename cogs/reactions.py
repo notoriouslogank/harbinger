@@ -17,11 +17,21 @@ bored = urls.BORED
 shook = urls.SHOOK
 angry = urls.ANGRY
 sad = urls.SAD
+trump = urls.TRUMP
 
 
 class React(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
+
+    @commands.command()
+    async def trump(self, ctx: commands.Context):
+        cmd = "!trump"
+        cmd_msg = "Trump 2024"
+        await ctx.channel.purge(limit=1)
+        reaction = trump[randint(0, len(trump) - 1)]
+        await ctx.send(reaction)
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
     async def bored(self, ctx: commands.Context):
