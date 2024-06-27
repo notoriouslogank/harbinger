@@ -79,16 +79,12 @@ class React(commands.Cog):
         cmd = "!bingo_card"
         cmd_msg = "Make bingo card."
         await ctx.channel.purge(limit=1)
-        counter = 5
-        row1 = []
-        row2 = []
-        row3 = []
-        row4 = []
-        row5 = []
-        while counter >= 5:
-            row1.append(BINGO[randint(0, len(BINGO) - 1)])
+        card = []
+        counter = 26
+        while counter > 0:
+            card.append(BINGO[randint(0, len(BINGO) - 1)])
             counter -= 1
-        await ctx.channel.send(row1)
+        await ctx.channel.send(card)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
