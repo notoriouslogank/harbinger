@@ -11,6 +11,19 @@ TRUMP = [
     "https://media2.giphy.com/media/w9t0aFMjahdxpKKvzN/giphy.webp?cid=790b76111058xs5akrx71hxn2q4ynqxn78mxzi2bonjijpx5&ep=v1_gifs_search&rid=giphy.webp&ct=g",
     "https://media1.giphy.com/media/8DgE3oxtIp7nnVN615/200.webp?cid=790b76111058xs5akrx71hxn2q4ynqxn78mxzi2bonjijpx5&ep=v1_gifs_search&rid=200.webp&ct=g",
     "https://media4.giphy.com/media/T2bDC7TBZfdJAqNCSh/giphy.webp?cid=790b76111058xs5akrx71hxn2q4ynqxn78mxzi2bonjijpx5&ep=v1_gifs_search&rid=giphy.webp&ct=g",
+    "https://media1.giphy.com/media/BIzojuJFLPdEDHIoE7/giphy.webp?cid=790b76111058xs5akrx71hxn2q4ynqxn78mxzi2bonjijpx5&ep=v1_gifs_search&rid=giphy.webp&ct=g",
+    "https://media3.giphy.com/media/jUgOxnun3QPq0UbjDx/200.webp?cid=790b76111058xs5akrx71hxn2q4ynqxn78mxzi2bonjijpx5&ep=v1_gifs_search&rid=200.webp&ct=g",
+    "https://media0.giphy.com/media/wJNGA01o1Zxp6/giphy.webp?cid=ecf05e471l5rrobei0kg1vn09taflcff150jq348qn6x5vfg&ep=v1_gifs_search&rid=giphy.webp&ct=g",
+    "https://media1.giphy.com/media/FreWzu4xk2a6BXzMu3/200.webp?cid=ecf05e471l5rrobei0kg1vn09taflcff150jq348qn6x5vfg&ep=v1_gifs_search&rid=200.webp&ct=g",
+    "https://media4.giphy.com/media/hMTz1XDq2d54d0OTbR/giphy.webp?cid=ecf05e471l5rrobei0kg1vn09taflcff150jq348qn6x5vfg&ep=v1_gifs_search&rid=giphy.webp&ct=g",
+    "https://media4.giphy.com/media/Wks2VO2eeGvXxTOsnh/200.webp?cid=ecf05e471l5rrobei0kg1vn09taflcff150jq348qn6x5vfg&ep=v1_gifs_search&rid=200.webp&ct=g",
+    "https://media3.giphy.com/media/lSrA1g1YpJ9S1OGe8E/200.webp?cid=ecf05e471l5rrobei0kg1vn09taflcff150jq348qn6x5vfg&ep=v1_gifs_search&rid=200.webp&ct=g",
+    "https://media4.giphy.com/media/26gseThXKNAhvef3G/200.webp?cid=ecf05e47ls8yrahssbmb7y8mhf2tsfc4wncwepyxspoolzy8&ep=v1_gifs_search&rid=200.webp&ct=g",
+    "https://media4.giphy.com/media/Qs7zIiqo9cPb2vf1j2/giphy.webp?cid=ecf05e47ls8yrahssbmb7y8mhf2tsfc4wncwepyxspoolzy8&ep=v1_gifs_search&rid=giphy.webp&ct=g",
+    "https://media0.giphy.com/media/Xawr0Cx4mkm9tlVvxg/giphy.webp?cid=ecf05e47e8bmhddkqo3dr9oftojipbo3lpnogmrzsc8zyuk0&ep=v1_gifs_search&rid=giphy.webp&ct=g",
+    "https://media2.giphy.com/media/10tkf2u5HFDGWk/giphy.webp?cid=ecf05e47e8bmhddkqo3dr9oftojipbo3lpnogmrzsc8zyuk0&ep=v1_gifs_search&rid=giphy.webp&ct=g",
+    "https://media1.giphy.com/media/Pu9Aizj79EnlHIwsnH/200.webp?cid=ecf05e47e8bmhddkqo3dr9oftojipbo3lpnogmrzsc8zyuk0&ep=v1_gifs_search&rid=200.webp&ct=g",
+    "https://media2.giphy.com/media/dyqBxR1TETxofUUz1i/200.webp?cid=ecf05e47w9pr2t22q66abmgm1tq7ek340dpo4yy1tcka31rg&ep=v1_gifs_search&rid=200.webp&ct=g",
 ]
 
 # REACTIONS
