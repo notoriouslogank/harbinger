@@ -3,6 +3,16 @@ SOURCE_CODE = "https://github.com/notoriouslogank/harbinger/releases"
 ISSUES = "https://github.com/notoriouslogank/harbinger/issues"
 FOOTER = "For more information about a particular command, say !help <command>."
 
+# DEBATE
+TRUMP = [
+    "https://i.giphy.com/l3vR3EssQ5ALagr7y.webp",
+    "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTA1OHhzNWFrcng3MWh4bjJxNHlucXhuNzhteHppMmJvbmppanB4NSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/l2JhIUyUs8KDCCf3W/giphy.webp",
+    "https://media2.giphy.com/media/DJsXEMm8GS5PJ3Za00/giphy.webp?cid=790b76111058xs5akrx71hxn2q4ynqxn78mxzi2bonjijpx5&ep=v1_gifs_search&rid=giphy.webp&ct=g",
+    "https://media2.giphy.com/media/w9t0aFMjahdxpKKvzN/giphy.webp?cid=790b76111058xs5akrx71hxn2q4ynqxn78mxzi2bonjijpx5&ep=v1_gifs_search&rid=giphy.webp&ct=g",
+    "https://media1.giphy.com/media/8DgE3oxtIp7nnVN615/200.webp?cid=790b76111058xs5akrx71hxn2q4ynqxn78mxzi2bonjijpx5&ep=v1_gifs_search&rid=200.webp&ct=g",
+    "https://media4.giphy.com/media/T2bDC7TBZfdJAqNCSh/giphy.webp?cid=790b76111058xs5akrx71hxn2q4ynqxn78mxzi2bonjijpx5&ep=v1_gifs_search&rid=giphy.webp&ct=g",
+]
+
 # REACTIONS
 LOL = [
     "https://64.media.tumblr.com/80ce2d4f77c4ddc5d9e395a43e37c532/tumblr_o5r3vkiaGo1qh9nffo3_250.gifv",
