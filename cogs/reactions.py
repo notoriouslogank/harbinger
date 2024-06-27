@@ -18,11 +18,21 @@ shook = urls.SHOOK
 angry = urls.ANGRY
 sad = urls.SAD
 trump = urls.TRUMP
+biden = urls.BIDEN
 
 
 class React(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
+
+    @commands.command()
+    async def biden(self, ctx: commands.Context):
+        cmd = "!biden"
+        cmd_msg = "FJB"
+        await ctx.channel.purge(limit=1)
+        reaction = biden[randint(0, len(biden) - 1)]
+        await ctx.send(reaction)
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
     async def trump(self, ctx: commands.Context):
