@@ -87,11 +87,16 @@ class React(commands.Cog):
             BINGO[randint(0, 6)],
         ]
         embed = discord.Embed(title="BINGO")
-        embed.add_field(name="B", value=f"{BINGO[randint(0, len(BINGO) - 1)]}")
+        embed.add_field(name="B", value="")
+        embed.add_field(name="I", value="")
+        embed.add_field(name="N", value="")
+        embed.add_field(name="G", value="")
+        embed.add_field(name="O", value="")
+
         # counter = 5
         # row.append(BINGO[randint(0, len(BINGO) - 1)])
         # card.append(row)
-        await ctx.channel.send(row)
+        await ctx.channel.send(embed)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
