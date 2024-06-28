@@ -1,5 +1,5 @@
 from random import randint
-
+import discord
 from discord.ext import commands
 
 from assets import urls
@@ -86,6 +86,8 @@ class React(commands.Cog):
             BINGO[randint(0, 6)],
             BINGO[randint(0, 6)],
         ]
+        embed = discord.Embed(title="BINGO")
+        embed.add_field(name="B", value=f"{BINGO[randint(0, len(BINGO) - 1)]}")
         # counter = 5
         # row.append(BINGO[randint(0, len(BINGO) - 1)])
         # card.append(row)
