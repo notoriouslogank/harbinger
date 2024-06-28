@@ -82,7 +82,7 @@ class React(commands.Cog):
         row = []
         counter = 0
         while counter < 6:
-            row.append(BINGO[randint(o, len(BINGO) - 1)])
+            row.append(BINGO[randint(0, len(BINGO) - 1)])
             counter -= 1
         # counter = 5
         # row.append(BINGO[randint(0, len(BINGO) - 1)])
