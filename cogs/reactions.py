@@ -87,7 +87,7 @@ class React(commands.Cog):
         # counter = 5
         # row.append(BINGO[randint(0, len(BINGO) - 1)])
         # card.append(row)
-        await ctx.channel.send(card)
+        await ctx.channel.send(row)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
