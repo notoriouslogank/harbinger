@@ -79,11 +79,13 @@ class React(commands.Cog):
         cmd = "!bingo_card"
         cmd_msg = "Make bingo card."
         await ctx.channel.purge(limit=1)
-        row = []
-        counter = 0
-        while counter < 6:
-            row.append(BINGO[randint(0, len(BINGO) - 1)])
-            counter -= 1
+        row = [
+            BINGO[randint(0, 6)],
+            BINGO[randint(0, 6)],
+            BINGO[randint(0, 6)],
+            BINGO[randint(0, 6)],
+            BINGO[randint(0, 6)],
+        ]
         # counter = 5
         # row.append(BINGO[randint(0, len(BINGO) - 1)])
         # card.append(row)
