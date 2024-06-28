@@ -80,11 +80,11 @@ class React(commands.Cog):
         cmd_msg = "Make bingo card."
         await ctx.channel.purge(limit=1)
         embed = discord.Embed(title="BINGO", description="")
-        embed.add_field(name="B", value="", inline=True)
-        embed.add_field(name="I", value="", inline=True)
-        embed.add_field(name="N", value="", inline=True)
-        embed.add_field(name="G", value="", inline=True)
-        embed.add_field(name="O", value="", inline=True)
+        embed.add_field(name="B", value="", inline=False)
+        embed.add_field(name="I", value="", inline=False)
+        embed.add_field(name="N", value="", inline=False)
+        embed.add_field(name="G", value="", inline=False)
+        embed.add_field(name="O", value="", inline=False)
 
         # counter = 5
         # row.append(BINGO[randint(0, len(BINGO) - 1)])
