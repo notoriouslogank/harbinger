@@ -79,24 +79,17 @@ class React(commands.Cog):
         cmd = "!bingo_card"
         cmd_msg = "Make bingo card."
         await ctx.channel.purge(limit=1)
-        row = [
-            BINGO[randint(0, 6)],
-            BINGO[randint(0, 6)],
-            BINGO[randint(0, 6)],
-            BINGO[randint(0, 6)],
-            BINGO[randint(0, 6)],
-        ]
-        embed = discord.Embed(title="BINGO")
-        embed.add_field(name="B", value="")
-        embed.add_field(name="I", value="")
-        embed.add_field(name="N", value="")
-        embed.add_field(name="G", value="")
-        embed.add_field(name="O", value="")
+        embed = discord.Embed(title="BINGO", description="")
+        embed.add_field(name="B", value="", inline=True)
+        embed.add_field(name="I", value="", inline=True)
+        embed.add_field(name="N", value="", inline=True)
+        embed.add_field(name="G", value="", inline=True)
+        embed.add_field(name="O", value="", inline=True)
 
         # counter = 5
         # row.append(BINGO[randint(0, len(BINGO) - 1)])
         # card.append(row)
-        await ctx.channel.send(embed)
+        await ctx.channel.send(embed=embed)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
