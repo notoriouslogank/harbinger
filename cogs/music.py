@@ -215,7 +215,7 @@ class Music(commands.Cog):
                         await ctx.send(
                             f"Nothing in the queue. Or something got fucked."
                         )
-        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+                    Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @play.before_invoke
     async def ensure_voice(self, ctx) -> None:
