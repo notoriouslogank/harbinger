@@ -165,7 +165,7 @@ class Music(commands.Cog):
         tracklist = ""
         for i in queue:
             track = f"{i}\n"
-            tracklist.join(track)
+            tracklist = tracklist.join(track)
         return tracklist
 
     @commands.command()
