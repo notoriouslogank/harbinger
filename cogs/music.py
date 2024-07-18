@@ -5,7 +5,9 @@ import yt_dlp
 from discord.ext import commands
 
 from harbinger import Harbinger
+from config.read_configs import ReadConfigs as configs
 
+CUSTOM_COLOR = configs.custom_color
 bot = Harbinger.bot
 players = {}
 
@@ -146,7 +148,10 @@ class Music(commands.Cog):
         cmd = f"!queue"
         cmd_msg = f"Printed music queue."
         queue = self.music_queue[:]
-        await ctx.send(queue)
+        queue_embed = discord.Embed(color=CUSTOM_COLOR, title=f"Songs in Queue")
+        for item in queue:
+            queue_embed.add_field(name=item)
+        await ctx.send(queue_embed)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
