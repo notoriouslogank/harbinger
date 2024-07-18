@@ -153,7 +153,7 @@ class Music(commands.Cog):
         for item in queue:
             queue_embed.add_field(name=counter, value=item)
             counter += 1
-        await ctx.send(queue_embed)
+        await ctx.send(embed=queue_embed)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
