@@ -156,16 +156,14 @@ class Music(commands.Cog):
     async def queue(self, ctx):
         cmd = f"!queue"
         cmd_msg = f"Printed music queue."
-        # queue = self.music_queue[:]
-        #    counter = 0
-        #    queue_dict = {}
-        #    for item in queue:
-        #        queue_dict[f"{counter+1}"] = item
-        #        counter += 1
+        queue = self.make_queue_dict()
+        queue_list = []
+        for item in queue:
+            queue_list.append(item)
         queue_embed = discord.Embed(
             color=CUSTOM_COLOR,
             title=f"Songs in Queue",
-            description=self.make_queue_dict(),
+            description=queue_list,
         )
         await ctx.send(embed=queue_embed)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
