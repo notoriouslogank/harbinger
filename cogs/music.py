@@ -164,7 +164,7 @@ class Music(commands.Cog):
         queue = self.make_queue_list()
         for i in queue:
             track = f"{i}\n"
-        tracklist = "".join(track)
+            tracklist = track.join(track)
         return tracklist
 
     @commands.command()
