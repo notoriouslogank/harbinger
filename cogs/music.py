@@ -166,12 +166,20 @@ class Music(commands.Cog):
         cmd = f"!queue"
         cmd_msg = f"Printed music queue."
         queue = self.make_queue_list()
-        queue_embed = discord.Embed(
-            color=CUSTOM_COLOR,
-            title=f"Songs in Queue",
-            description=queue,
-        )
-        await ctx.send(embed=queue_embed)
+        if queue == None:
+            queue_embed = discord.Embed(
+                color=CUSTOM_COLOR,
+                title=f"Queue Empty",
+                description=queue,
+            )
+            await ctx.send(embed=queue_embed)
+        else:
+            queue_embed = discord.Embed(
+                color=CUSTOM_COLOR,
+                title=f"Songs in Queue",
+                description=queue,
+            )
+            await ctx.send(embed=queue_embed)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
