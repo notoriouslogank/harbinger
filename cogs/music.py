@@ -7,7 +7,7 @@ from discord.ext import commands
 from harbinger import Harbinger
 from config.read_configs import ReadConfigs as configs
 
-CUSTOM_COLOR = configs.custom_color
+CUSTOM_COLOR = configs.custom_color()
 bot = Harbinger.bot
 players = {}
 
