@@ -164,11 +164,11 @@ class Music(commands.Cog):
     async def queue(self, ctx):
         cmd = f"!queue"
         cmd_msg = f"Printed music queue."
-        # queue = self.make_queue_dict()
+        queue = self.make_queue_list()
         queue_embed = discord.Embed(
             color=CUSTOM_COLOR,
             title=f"Songs in Queue",
-            description=self.make_queue_list(),
+            description=queue,
         )
         await ctx.send(embed=queue_embed)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
@@ -182,13 +182,15 @@ class Music(commands.Cog):
         """
         cmd = f"!play {url}"
         self.music_queue.append(url)
+        track = self.music_queue.pop(0)
         async with ctx.typing():
             while self.music_queue != None:
                 try:
                     player = await YTDLSource.from_url(
-                        self.music_queue.pop(0), loop=self.bot.loop, stream=True
+                        track, loop=self.bot.loop, stream=True
                     )
                     cmd_msg = f"Started playing queue"
+                    await ctx.send(f"Playing {track}")
                     ctx.voice_client.play(
                         player,
                         after=lambda e: asyncio.run_coroutine_threadsafe(
