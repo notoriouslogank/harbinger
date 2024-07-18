@@ -163,7 +163,7 @@ class Music(commands.Cog):
     def make_queue_string(self):
         queue = self.make_queue_list()
         for i in queue:
-            tracklist = f"{str(i)}:{str(queue[i])}\n"
+            tracklist = f"{i}\n"
             return tracklist
 
     @commands.command()
