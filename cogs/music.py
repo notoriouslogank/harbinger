@@ -150,7 +150,14 @@ class Music(commands.Cog):
         self.music_queue.append(search_term)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
-    def make_queue_dict(self):
+    def make_queue_dict(
+        self,
+    ):  # This is probably a retarded way of doing things but I couldn't find a better way
+        """Creates a tracklist dictionary.
+
+        Returns:
+            queue_dict: Dictionary containing tracks in the queue
+        """
         queue_dict = {}
         counter = 0
         queue = self.music_queue[:]
@@ -160,6 +167,11 @@ class Music(commands.Cog):
         return queue_dict
 
     def make_queue_list(self):
+        """Cast the queue dict to a more easily-printable string
+
+        Returns:
+            queue_list (list): List version of track queue
+        """
         queue = self.make_queue_dict()
         queue_list = []
         for i in queue:
@@ -169,6 +181,7 @@ class Music(commands.Cog):
 
     @commands.command()
     async def queue(self, ctx):
+        """Display the music queue."""
         cmd = f"!queue"
         cmd_msg = f"Printed music queue."
         queue = self.make_queue_list()
