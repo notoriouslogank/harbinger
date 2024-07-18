@@ -4,6 +4,33 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.8.0] - 2024-07-18
+
+### Added
+
+- !nq command to add a track to the music queue
+- !queue command to view the current music queue
+
+### Fixed
+
+- The music player should now play music down the queue continually
+
+### Deprecated
+
+- !play command renamed to !resume
+- !stream command renamed to !play
+
+### Known Issues
+
+- For some reason, some tracks still cut off before the end
+- Issues arise depending how/when tracks are !nq'ed
+
+## [5.7.1] - 2024-07-18
+
+### Added
+
+- Election 2024 reaction gifs
+
 ## [5.7.0] - 2024-04-20
 
 ### Added

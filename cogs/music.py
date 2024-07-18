@@ -3,9 +3,12 @@ import asyncio
 import discord
 import yt_dlp
 from discord.ext import commands
+from rich import print as pprint
 
+from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
 
+CUSTOM_COLOR = configs.custom_color()
 bot = Harbinger.bot
 players = {}
 
@@ -99,7 +102,7 @@ class Music(commands.Cog):
     @commands.command()
     async def pause(self, ctx):
         """Pause the currently-playing song/video."""
-        cmd = "!pause"
+        cmd = "!resume"
         cmd_msg = "Paused playback."
         voice_client = ctx.message.guild.voice_client
         if voice_client.is_playing():
@@ -110,7 +113,7 @@ class Music(commands.Cog):
             await ctx.send("Nothing playing.")
 
     @commands.command()
-    async def play(self, ctx) -> None:
+    async def resume(self, ctx) -> None:
         """Resume playback of a previously-paused video/song."""
         cmd = "!play"
         voice_client = ctx.message.guild.voice_client
@@ -126,36 +129,106 @@ class Music(commands.Cog):
 
     @commands.command()
     async def stop(self, ctx: commands.Cog) -> None:
+        """Stops playback."""
         cmd = "!stop"
         cmd_msg = f"{ctx.message.author} stopped playback."
         voice_client = ctx.message.guild.voice_client
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         if voice_client.is_playing():
             voice_client.stop()
             await ctx.send("Stopping...")
 
     @commands.command()
-    async def stream(self, ctx, *, url: str) -> None:
+    async def nq(self, ctx, *, search_term):
+        """Enqueues track.
+
+        Args:
+            search_term (str): _description_
+        """
+        cmd = f"!nq {search_term}"
+        cmd_msg = f"{search_term} added to queue."
+        self.music_queue.append(search_term)
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+
+    def make_queue_dict(
+        self,
+    ):  # This is probably a retarded way of doing things but I couldn't find a better way
+        """Creates a tracklist dictionary.
+
+        Returns:
+            queue_dict: Dictionary containing tracks in the queue
+        """
+        queue_dict = {}
+        counter = 0
+        queue = self.music_queue[:]
+        for item in queue:
+            queue_dict[f"{counter+1}"] = item
+            counter += 1
+        return queue_dict
+
+    def make_queue_list(self):
+        """Cast the queue dict to a more easily-printable string
+
+        Returns:
+            queue_list (list): List version of track queue
+        """
+        queue = self.make_queue_dict()
+        queue_list = []
+        for i in queue:
+            track = f"{i}: {queue[i]}"
+            queue_list.append(track)
+        return queue_list
+
+    @commands.command()
+    async def queue(self, ctx):
+        """Display the music queue."""
+        cmd = f"!queue"
+        cmd_msg = f"Printed music queue."
+        queue = self.make_queue_list()
+        if queue == None:
+            queue_embed = discord.Embed(
+                color=CUSTOM_COLOR,
+                title=f"Queue Empty",
+                description=queue,
+            )
+        else:
+            queue_embed = discord.Embed(
+                color=CUSTOM_COLOR,
+                title=f"Songs in Queue",
+                description=queue,
+            )
+        await ctx.send(embed=queue_embed)
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+
+    @commands.command()
+    async def play(self, ctx, *, url: str = None) -> None:
         """Begin streaming audio from the given url.
 
         Args:
-            url (str): URL from which to stream audio.
+            url (str): YouTube search term from which to stream audio.
         """
-        cmd = f"!stream {url}"
-        self.music_queue.append(url)
-        print(self.music_queue)
-        async with ctx.typing():
-            player = await YTDLSource.from_url(
-                self.music_queue.pop(0), loop=self.bot.loop, stream=True
-            )
-            cmd_msg = f"Started playing {url}"
-            ctx.voice_client.play(
-                player,
-                after=lambda e: asyncio.run_coroutine_threadsafe(
-                    ctx.voice_client.play(player), bot.loop
-                ),
-            )
+        cmd = f"!play {url}"
 
-    @stream.before_invoke
+        self.music_queue.append(url)
+        async with ctx.typing():
+            while self.music_queue != None:
+                try:
+                    player = await YTDLSource.from_url(
+                        self.music_queue.pop(0), loop=self.bot.loop, stream=True
+                    )
+                    cmd_msg = f"Started playing queue"
+                    ctx.voice_client.play(
+                        player,
+                        after=lambda e: asyncio.run_coroutine_threadsafe(
+                            ctx.voice_client.play(player), bot.loop
+                        ),
+                    )
+
+                except IndexError:
+                    await ctx.send(f"Nothing in the queue. Or something got fucked.")
+                Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+
+    @play.before_invoke
     async def ensure_voice(self, ctx) -> None:
         """Ensure that the ctx.message.author is actively in a voice channel.
 
