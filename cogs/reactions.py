@@ -1,5 +1,5 @@
 from random import randint
-
+import discord
 from discord.ext import commands
 
 from assets import urls
@@ -17,11 +17,98 @@ bored = urls.BORED
 shook = urls.SHOOK
 angry = urls.ANGRY
 sad = urls.SAD
+trump = urls.TRUMP
+biden = urls.BIDEN
+
+BINGO = [
+    "Trump stalks Biden like prey",
+    "Biden offers to fight",
+    "Biden loses his train of thought",
+    "'Bigly'",
+    "Fly lands on someone's head",
+    "Both candidates get muted",
+    "Biden gets muted",
+    "Trump gets muted",
+    "Biden freezes",
+    "Biden wanders off",
+    "'Malarkey'",
+    "'Not a joke'",
+    "'Gina'",
+    "'Will you shut up man?'",
+    "'Sleepy Joe'",
+    "'Creepy Joe'",
+    "Burisma",
+    "Cocaine",
+    "'Come on, man!'",
+    "'The sould of democracy'",
+    "'Build the wall'",
+    "Russia",
+    "'No tax off tips'",
+    "Student loans",
+    "Mentally unfit",
+    "'Rigged'",
+    "January 6",
+    "'Insurrection'",
+    "'MAGA Republicans'",
+    "'Convicted felon'",
+    "'Hilary'",
+    "Laptop from Hell",
+    "'Look, folks...'",
+    "Candidate told time is up",
+    "'COVID'",
+    "Biden refers to a dead person",
+    "TikTok",
+    "Hamas",
+    "'Fine people' hoax",
+    "'Let's go Brandon'",
+    "'FJB'",
+    "Fani Willis",
+    "Obama",
+    "'Crooked'",
+    "'Mar-a-lago'",
+    "Drug test",
+]
 
 
 class React(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
+
+    @commands.command()
+    async def bingo_card(self, ctx: commands.Context):
+        cmd = "!bingo_card"
+        cmd_msg = "Make bingo card."
+        await ctx.channel.purge(limit=1)
+        embed = discord.Embed(title="BINGO", description="")
+        embed.add_field(name="B", value="", inline=False)
+        embed.add_field(name="I", value="", inline=False)
+        embed.add_field(name="N", value="", inline=False)
+        embed.add_field(name="G", value="", inline=False)
+        embed.add_field(name="O", value="", inline=False)
+
+        # counter = 5
+        # row.append(BINGO[randint(0, len(BINGO) - 1)])
+        # card.append(row)
+        await ctx.channel.send(embed=embed)
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+
+    @commands.command()
+    async def biden(self, ctx: commands.Context):
+        cmd = "!biden"
+        cmd_msg = "FJB"
+        await ctx.channel.purge(limit=1)
+        reaction = biden[randint(0, len(biden) - 1)]
+        await ctx.send(reaction)
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+
+    @commands.command()
+    async def trump(self, ctx: commands.Context):
+        cmd = "!trump"
+        cmd_msg = "Trump 2024"
+        await ctx.channel.purge(limit=1)
+        reaction = trump[randint(0, len(trump) - 1)]
+        await ctx.send(reaction)
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
     async def bored(self, ctx: commands.Context):
