@@ -38,12 +38,13 @@ bot_commands = {
 }
 
 music_commands = {
-    "join": "Join Harbinger to the currently-connected voice channel.",
+    "join": "Join Harbinger to the currently-connected voice channel. (Note: This command will be deprecated in a future update and is not necessary even now.)",
     "leave": "Remove Harbinger from the currently-connected voice channel.",
     "pause": "Pause the currently-playing stream.",
-    "play": "Play from url.",
+    "play": "Play a song from YouTube; if no search term provided, plays queue.",
     "stop": "Stop the currently-playing stream.",
-    "stream": "Start playing from url.",
+    "nq": "Enqueue (get it?) a YouTube search.",
+    "queue": "Show the currently-playing queue.",
 }
 
 misc_commands = {
@@ -273,14 +274,15 @@ class HelpCommand(commands.Cog):
         u_leave = {"__Usage__": "``!leave``", "__Args__": "[None]"}
         u_pause = {"__Usage__": "``!pause``", "__Args__": "[None]"}
         u_play = {
-            "__Usage__": "``!play <url>``",
-            "__Args__": "**url**: url to stream from (must be ``https``)",
+            "__Usage__": "``!play <query>``",
+            "__Args__": "**query**: text to search on YouTube; if blank, plays the queue",
         }
         u_stop = {"__Usage__": "``!stop``", "__Args__": "[None]"}
-        u_stream = {
-            "__Usage__": "``!stream <url>``",
-            "__Args__": "**url**: url to stream from (must be ``https``)",
+        u_nq = {
+            "__Usage__": "``!nq <query>``",
+            "__Args__": "**query**: text to search on YouTube",
         }
+        u_queue = {"__USage__": "``!queue``", "__Args__": "**None**"}
         u_reload_all = {"__Usage__": "``!reload_all``", "__Args__": "[None]"}
         u_load_cog = {
             "__Usage__": "``!load_cog <cog>``",
@@ -964,16 +966,27 @@ class HelpCommand(commands.Cog):
             )
             embed.add_field(name="__Args__", value=f'{u_stop["__Args__"]}')
             await ctx.send(embed=embed)
-        if command == "stream":
+        if command == "nq":
             embed = discord.Embed(
                 title=f"{command}",
                 description=f"{music_commands[command]}",
                 color=CUSTOM_COLOR,
             )
             embed.add_field(
-                name="__Usage__", value=f"{u_stream['__Usage__']}", inline=False
+                name="__Usage__", value=f"{u_nq['__Usage__']}", inline=False
             )
-            embed.add_field(name="__Args__", value=f'{u_stream["__Args__"]}')
+            embed.add_field(name="__Args__", value=f'{u_nq["__Args__"]}')
+            await ctx.send(embed=embed)
+        if command == "queue":
+            embed = discord.Embed(
+                title=f"{command}",
+                description=f"{music_commands[command]}",
+                color=CUSTOM_COLOR,
+            )
+            embed.add_field(
+                name="__Usage__", value=f"{u_queue['__USage__']}", inline=False
+            )
+            embed.add_field(name="__Args__", value=f"{u_queue['__Args__']}")
             await ctx.send(embed=embed)
         # MISC
         if command == "bw":
