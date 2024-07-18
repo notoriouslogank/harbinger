@@ -193,19 +193,20 @@ class Music(commands.Cog):
         self.music_queue.append(url)
         track = self.music_queue.pop(0)
         async with ctx.typing():
+            await ctx.send(f"Playing {track}")
             while self.music_queue != None:
                 try:
-                    await ctx.send(f"Playing {track}")
                     player = await YTDLSource.from_url(
                         track, loop=self.bot.loop, stream=True
                     )
                     cmd_msg = f"Started playing queue"
-                    ctx.voice_client.play(
-                        player,
-                        after=lambda e: asyncio.run_coroutine_threadsafe(
-                            ctx.voice_client.play(player), bot.loop
-                        ),
-                    )
+                    # ctx.voice_client.play(
+                    #    player,
+                    #    after=lambda e: asyncio.run_coroutine_threadsafe(
+                    #        ctx.voice_client.play(player), bot.loop
+                    #    ),
+                    # )
+
                 except IndexError:
                     await ctx.send(f"Nothing in the queue. Or something got fucked.")
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
