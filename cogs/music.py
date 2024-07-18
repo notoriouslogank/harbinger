@@ -218,6 +218,8 @@ class Music(commands.Cog):
         self.music_queue.append(url)
         async with ctx.typing():
             while self.music_queue != None:
+                if None in self.music_queue:
+                    self.music_queue.remove(None)
                 try:
                     player = await YTDLSource.from_url(
                         self.music_queue.pop(0), loop=self.bot.loop, stream=True
@@ -229,7 +231,6 @@ class Music(commands.Cog):
                             ctx.voice_client.play(player), bot.loop
                         ),
                     )
-
                 except IndexError:
                     await ctx.send(f"Nothing in the queue. Or something got fucked.")
                 Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
