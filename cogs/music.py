@@ -77,7 +77,7 @@ class Music(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def join(self, ctx):
+    async def join(self, ctx):  # Deprecated; to be removed in upcoming update
         """Join the bot to the contextual voice channel."""
         cmd = "!join"
         cmd_msg = f"Added bot to voice channel."
@@ -147,6 +147,10 @@ class Music(commands.Cog):
         """
         cmd = f"!nq {search_term}"
         cmd_msg = f"{search_term} added to queue."
+        await ctx.channel.purge(limit=1)
+        await ctx.channel.send(
+            f"Added **{search_term}** to queue. View the queue with ``!queue``"
+        )
         self.music_queue.append(search_term)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
@@ -184,6 +188,7 @@ class Music(commands.Cog):
         """Display the music queue."""
         cmd = f"!queue"
         cmd_msg = f"Printed music queue."
+        await ctx.channel.purge(limit=1)
         queue = self.make_queue_list()
         if queue == None:
             queue_embed = discord.Embed(
@@ -208,7 +213,8 @@ class Music(commands.Cog):
             url (str): YouTube search term from which to stream audio.
         """
         cmd = f"!play {url}"
-
+        await ctx.channel.purge(limit=1)
+        await ctx.channel.send(f"Playing...")
         self.music_queue.append(url)
         async with ctx.typing():
             while self.music_queue != None:
