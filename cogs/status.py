@@ -172,10 +172,8 @@ class Status(commands.Cog):
             smtp.starttls()
             smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
             smtp.send_message(email)
-        await Harbinger.send_dm(
-            ctx=ctx,
-            member=ctx.message.author,
-            content=f"```Thanks for submitting a bug report!  Maybe it'll get fixed someday...```",
+        await ctx.send(
+            f"```Thanks for submitting a bug report!  Maybe it'll get fixed someday...```"
         )
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
