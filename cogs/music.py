@@ -129,6 +129,7 @@ class Music(commands.Cog):
 
     @commands.command()
     async def stop(self, ctx: commands.Cog) -> None:
+        """Stops playback."""
         cmd = "!stop"
         cmd_msg = f"{ctx.message.author} stopped playback."
         voice_client = ctx.message.guild.voice_client
@@ -139,6 +140,11 @@ class Music(commands.Cog):
 
     @commands.command()
     async def nq(self, ctx, *, search_term):
+        """Enqueues track.
+
+        Args:
+            search_term (str): _description_
+        """
         cmd = f"!nq {search_term}"
         cmd_msg = f"{search_term} added to queue."
         self.music_queue.append(search_term)
@@ -172,14 +178,13 @@ class Music(commands.Cog):
                 title=f"Queue Empty",
                 description=queue,
             )
-            await ctx.send(embed=queue_embed)
         else:
             queue_embed = discord.Embed(
                 color=CUSTOM_COLOR,
                 title=f"Songs in Queue",
                 description=queue,
             )
-            await ctx.send(embed=queue_embed)
+        await ctx.send(embed=queue_embed)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
@@ -191,13 +196,11 @@ class Music(commands.Cog):
         """
         cmd = f"!play {url}"
         self.music_queue.append(url)
-        track = self.music_queue.pop(0)
         async with ctx.typing():
-            await ctx.send(f"Playing **{track}**")
             while self.music_queue != None:
                 try:
                     player = await YTDLSource.from_url(
-                        track, loop=self.bot.loop, stream=True
+                        self.music_queue.pop(0), loop=self.bot.loop, stream=True
                     )
                     cmd_msg = f"Started playing queue"
                     ctx.voice_client.play(
