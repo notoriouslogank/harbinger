@@ -157,7 +157,7 @@ class Music(commands.Cog):
             url (str): URL from which to stream audio.
         """
         cmd = f"!play {url}"
-        # self.music_queue.append(url)
+        self.music_queue.append(url)
         async with ctx.typing():
             if self.music_queue != None:
                 player = await YTDLSource.from_url(
@@ -170,9 +170,6 @@ class Music(commands.Cog):
                         ctx.voice_client.play(player), bot.loop
                     ),
                 )
-            else:
-                player = await YTDLSource.from_url(url, loop=self.bot.loop, stream=True)
-                cmd_msg = f"Started playing {url}"
             Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
