@@ -150,26 +150,26 @@ class Music(commands.Cog):
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
-    async def play(self, ctx, *, url: str) -> None:
+    async def play(self, ctx, *, url: str = None) -> None:
         """Begin streaming audio from the given url.
 
         Args:
             url (str): URL from which to stream audio.
         """
         cmd = f"!play {url}"
-        self.music_queue.append(url)
-        print(self.music_queue)
+        # self.music_queue.append(url)
         async with ctx.typing():
-            player = await YTDLSource.from_url(
-                self.music_queue.pop(0), loop=self.bot.loop, stream=True
-            )
-            cmd_msg = f"Started playing {url}"
-            ctx.voice_client.play(
-                player,
-                after=lambda e: asyncio.run_coroutine_threadsafe(
-                    ctx.voice_client.play(player), bot.loop
-                ),
-            )
+            while self.music_queue != None:
+                player = await YTDLSource.from_url(
+                    self.music_queue.pop(0), loop=self.bot.loop, stream=True
+                )
+                cmd_msg = f"Started playing {url}"
+                ctx.voice_client.play(
+                    player,
+                    after=lambda e: asyncio.run_coroutine_threadsafe(
+                        ctx.voice_client.play(player), bot.loop
+                    ),
+                )
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @play.before_invoke
