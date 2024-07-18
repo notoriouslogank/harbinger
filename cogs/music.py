@@ -156,7 +156,8 @@ class Music(commands.Cog):
         queue = self.make_queue_dict()
         queue_list = []
         for i in queue:
-            queue_list.append(i, queue[i])
+            track = f"{i}: {queue[i]}"
+            queue_list.append(track)
         return queue_list
 
     @commands.command()
