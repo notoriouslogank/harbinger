@@ -163,8 +163,9 @@ class Music(commands.Cog):
     def make_queue_string(self):
         queue = self.make_queue_list()
         for i in queue:
-            tracklist = f"{i}\n"
-            return tracklist
+            track = f"{i}\n"
+            tracklist = "".join(track)
+        return tracklist
 
     @commands.command()
     async def queue(self, ctx):
