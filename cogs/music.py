@@ -158,8 +158,8 @@ class Music(commands.Cog):
         cmd_msg = f"Printed music queue."
         queue = self.make_queue_dict()
         queue_list = []
-        for item in queue:
-            queue_list.append(item)
+        for item, name in queue:
+            queue_list.append(item, name)
         queue_embed = discord.Embed(
             color=CUSTOM_COLOR,
             title=f"Songs in Queue",
