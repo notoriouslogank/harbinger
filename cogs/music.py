@@ -148,9 +148,8 @@ class Music(commands.Cog):
         cmd = f"!nq {search_term}"
         cmd_msg = f"{search_term} added to queue."
         await ctx.channel.purge(limit=1)
-        await ctx.channel.send(
-            f"Added **{search_term}** to queue. View the queue with ``!queue``"
-        )
+        await ctx.channel.send(f"Added **{search_term}** to queue.")
+        await self.queue(ctx)
         self.music_queue.append(search_term)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
