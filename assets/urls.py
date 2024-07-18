@@ -42,12 +42,19 @@ BIDEN = [
 ]
 # REACTIONS
 LOL = [
+    "https://media4.giphy.com/media/3X5C68GcAnI7m/200.webp?cid=ecf05e47vaeke85apkxy3up5s7k0nq9945f387uqlif9kzp6&ep=v1_gifs_search&rid=200.webp&ct=g",
+    "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZHdkZXNtZmhiMXU2MDE2YXFuMnc3ZHZ3NWU1Y2dyNnpzZTd1bm16ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/wR7LHlfuRUjHW/giphy.webp",
+    "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmdpcm1qZmE1N2J3MDRucnlyM2M3d3Uxa3o2MmN5M3g2cTNkbnk2aSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NE9s6oJEOmFvG/giphy.webp",
     "https://64.media.tumblr.com/80ce2d4f77c4ddc5d9e395a43e37c532/tumblr_o5r3vkiaGo1qh9nffo3_250.gifv",
     "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2c4azRvZmpodDYzOTN5aGl0N2xqdGNnM3NzN2QwbWNybHgyYmQ3diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/12PIT4DOj6Tgek/giphy.gif",
     "https://media2.giphy.com/media/I8nepxWwlEuqI/200w.webp?cid=ecf05e47q00zdqc42u14cy528d4rcj89xaiu9gx3bz4xy3yr&ep=v1_gifs_search&rid=200w.webp&ct=g",
     "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXkzdGdzbHZra2JneXNhMnZ5cDkxcTRjdjlvZnhyZnFxYjBuaDF6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QgixZj4y3TwnS/giphy.gif",
 ]
 WTF = [
+    "https://media2.giphy.com/media/69c6vrxvSoStFFZKg3/200w.webp?cid=790b7611v97hq4nk4ptzp4zp0i2vvwxt3nynxhpcincbyw6a&ep=v1_gifs_search&rid=200w.webp&ct=g",
+    "https://media3.giphy.com/media/WGvwSV5qjBJuYPbzcT/200w.webp?cid=790b7611v97hq4nk4ptzp4zp0i2vvwxt3nynxhpcincbyw6a&ep=v1_gifs_search&rid=200w.webp&ct=g",
+    "https://media3.giphy.com/media/cu44HTq7TLWPslqslh/giphy.webp?cid=ecf05e470cys9hghtt0fnzh5hba56kxcii2zijv7dam7n5jp&ep=v1_gifs_search&rid=giphy.webp&ct=g",
+    "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTh4ZHRlNDdqbzhvNGlieGExNWcwcWN1bWZ0czNud3ByMDA1cmZxdSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/l49JD2nWqfZ7exBzW/100.webp",
     "https://media0.giphy.com/media/bzOwkffoJcEXcP2OxW/200w.webp?cid=ecf05e47rdl7ds16ptpy4ackpa1zfy6dzk25jbbqk47vc3yd&ep=v1_gifs_search&rid=200w.webp&ct=g",
     "https://media3.giphy.com/media/AAsj7jdrHjtp6/giphy.webp?cid=ecf05e47rdl7ds16ptpy4ackpa1zfy6dzk25jbbqk47vc3yd&ep=v1_gifs_search&rid=giphy.webp&ct=g",
     "https://media2.giphy.com/media/Ni4cpi0uUkd6U/giphy.webp?cid=ecf05e47rdl7ds16ptpy4ackpa1zfy6dzk25jbbqk47vc3yd&ep=v1_gifs_search&rid=giphy.webp&ct=g",
@@ -72,6 +79,10 @@ YES = [
     "https://media0.giphy.com/media/oGO1MPNUVbbk4/200.webp?cid=ecf05e47ptfnjng1zzw0gk4ophtvu32pmxg36wj2v7ftckyl&ep=v1_gifs_search&rid=200.webp&ct=g",
 ]
 FU = [
+    "https://media1.giphy.com/media/4BXKwKrbZxVNm/200w.webp?cid=ecf05e47phmoksrxc5z2409dw07uy84xr8wgnhyi9y40m4zp&ep=v1_gifs_search&rid=200w.webp&ct=g",
+    "https://media2.giphy.com/media/lIjjwfxKNIhoY/200w.webp?cid=790b7611b7zpgxz51mjrraty0l8zilelutw5bp2cfn4nuc20&ep=v1_gifs_search&rid=200w.webp&ct=g",
+    "https://media0.giphy.com/media/44Eq3Ab5LPYn6/200.webp?cid=790b7611b7zpgxz51mjrraty0l8zilelutw5bp2cfn4nuc20&ep=v1_gifs_search&rid=200.webp&ct=g",
+    "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjd6cGd4ejUxbWpycmF0eTBsOHppbGVsdXR3NWJwMmNmbjRudWMyMCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/vxBUmPA1bq0RyWi4et/200w.webp",
     "https://media2.giphy.com/media/wgts1jTI7vmy9M0XlP/200w.webp?cid=ecf05e47miltp8fnqr8oph03op32r4ng7lciaeyqoez7ygr7&ep=v1_gifs_search&rid=200w.webp&ct=g",
     "https://media4.giphy.com/media/duf84Bx74ujSXvJs0I/200w.webp?cid=ecf05e47miltp8fnqr8oph03op32r4ng7lciaeyqoez7ygr7&ep=v1_gifs_search&rid=200w.webp&ct=g",
     "https://media4.giphy.com/media/I7p8K5EY9w9dC/200.webp?cid=ecf05e47miltp8fnqr8oph03op32r4ng7lciaeyqoez7ygr7&ep=v1_gifs_search&rid=200.webp&ct=g",
