@@ -3,7 +3,7 @@ import asyncio
 import discord
 import yt_dlp
 from discord.ext import commands
-
+from rich import print as pprint
 from harbinger import Harbinger
 from config.read_configs import ReadConfigs as configs
 
@@ -157,13 +157,10 @@ class Music(commands.Cog):
         cmd = f"!queue"
         cmd_msg = f"Printed music queue."
         queue = self.make_queue_dict()
-        queue_list = []
-        for item, name in queue:
-            queue_list.append(item, name)
         queue_embed = discord.Embed(
             color=CUSTOM_COLOR,
             title=f"Songs in Queue",
-            description=queue_list,
+            description=pprint(queue),
         )
         await ctx.send(embed=queue_embed)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
