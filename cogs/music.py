@@ -99,7 +99,7 @@ class Music(commands.Cog):
     @commands.command()
     async def pause(self, ctx):
         """Pause the currently-playing song/video."""
-        cmd = "!pause"
+        cmd = "!resume"
         cmd_msg = "Paused playback."
         voice_client = ctx.message.guild.voice_client
         if voice_client.is_playing():
@@ -110,7 +110,7 @@ class Music(commands.Cog):
             await ctx.send("Nothing playing.")
 
     @commands.command()
-    async def play(self, ctx) -> None:
+    async def resume(self, ctx) -> None:
         """Resume playback of a previously-paused video/song."""
         cmd = "!play"
         voice_client = ctx.message.guild.voice_client
@@ -129,18 +129,34 @@ class Music(commands.Cog):
         cmd = "!stop"
         cmd_msg = f"{ctx.message.author} stopped playback."
         voice_client = ctx.message.guild.voice_client
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
         if voice_client.is_playing():
             voice_client.stop()
             await ctx.send("Stopping...")
 
     @commands.command()
-    async def stream(self, ctx, *, url: str) -> None:
+    async def nq(self, ctx, *, search_term):
+        cmd = f"!nq {search_term}"
+        cmd_msg = f"{search_term} added to queue."
+        self.music_queue.append(search_term)
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+
+    @commands.command()
+    async def queue(self, ctx, queue):
+        cmd = f"!queue"
+        cmd_msg = f"Printed music queue."
+        queue = self.music_queue[:]
+        print(queue)
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+
+    @commands.command()
+    async def play(self, ctx, *, url: str) -> None:
         """Begin streaming audio from the given url.
 
         Args:
             url (str): URL from which to stream audio.
         """
-        cmd = f"!stream {url}"
+        cmd = f"!play {url}"
         self.music_queue.append(url)
         print(self.music_queue)
         async with ctx.typing():
@@ -154,8 +170,9 @@ class Music(commands.Cog):
                     ctx.voice_client.play(player), bot.loop
                 ),
             )
+        Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
-    @stream.before_invoke
+    @play.before_invoke
     async def ensure_voice(self, ctx) -> None:
         """Ensure that the ctx.message.author is actively in a voice channel.
 
