@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.8.2] - 2024-07-18
+
+### Added
+
+- Several reaction gifs
+- Several help messages, mostly for music commands
+
+### Fixed
+
+- Minor grammatical errors
+- Incorrect help function(s)
+
+### Removed
+
+- Sporadic unnecessary comments
+- Unused code snippets throughout codebase
+
 ## [5.8.1] - 2024-07-18
 
 ### Fixed
