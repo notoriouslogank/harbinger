@@ -197,7 +197,7 @@ class Music(commands.Cog):
         cmd = f"!play {url}"
         self.music_queue.append(url)
         async with ctx.typing():
-            while self.music_queue != None:
+            if self.music_queue != None:
                 try:
                     player = await YTDLSource.from_url(
                         self.music_queue.pop(0), loop=self.bot.loop, stream=True
