@@ -142,7 +142,7 @@ class Music(commands.Cog):
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @commands.command()
-    async def queue(self, ctx, queue):
+    async def queue(self, ctx):
         cmd = f"!queue"
         cmd_msg = f"Printed music queue."
         queue = self.music_queue[:]
