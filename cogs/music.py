@@ -158,9 +158,7 @@ class Music(commands.Cog):
         cmd_msg = f"Printed music queue."
         queue = self.make_queue_dict()
         queue_embed = discord.Embed(
-            color=CUSTOM_COLOR,
-            title=f"Songs in Queue",
-            description=pprint(queue),
+            color=CUSTOM_COLOR, title=f"Songs in Queue", description=str(queue)
         )
         await ctx.send(embed=queue_embed)
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
