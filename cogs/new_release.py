@@ -2,8 +2,8 @@ from datetime import date
 
 import discord
 from discord.ext import commands
-from assets import urls
 
+from assets import urls
 from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
 
@@ -24,7 +24,7 @@ class Release(commands.Cog):
             description=f"v{self.version}",
             color=CUSTOM_COLOR,
         )
-        embed.add_field(name="Released", value=f"{date.today()}")
+        embed.add_field(name="Release Date", value=f"{date.today()}")
         embed.add_field(
             name="What's New",
             value=f"{text}\nTo view the full changelog for this release, run ``!changelog``",
