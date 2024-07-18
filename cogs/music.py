@@ -159,17 +159,22 @@ class Music(commands.Cog):
         cmd = f"!play {url}"
         # self.music_queue.append(url)
         async with ctx.typing():
-            while self.music_queue != None:
+            if self.music_queue != None:
                 player = await YTDLSource.from_url(
                     self.music_queue.pop(0), loop=self.bot.loop, stream=True
                 )
-                cmd_msg = f"Started playing {url}"
+                cmd_msg = f"Started playing queue"
                 ctx.voice_client.play(
                     player,
                     after=lambda e: asyncio.run_coroutine_threadsafe(
                         ctx.voice_client.play(player), bot.loop
                     ),
                 )
+            else:
+                player = await YTDLSource.from_url(url, loop=self.bot.loop, stream=True)
+                cmd_msg = f"Started playing {url}"
+            Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
+
         Harbinger.timestamp(ctx.message.author, cmd, cmd_msg)
 
     @play.before_invoke
