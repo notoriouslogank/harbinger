@@ -4,8 +4,9 @@ import discord
 import yt_dlp
 from discord.ext import commands
 from rich import print as pprint
-from harbinger import Harbinger
+
 from config.read_configs import ReadConfigs as configs
+from harbinger import Harbinger
 
 CUSTOM_COLOR = configs.custom_color()
 bot = Harbinger.bot
@@ -186,11 +187,11 @@ class Music(commands.Cog):
         async with ctx.typing():
             while self.music_queue != None:
                 try:
+                    await ctx.send(f"Playing {track}")
                     player = await YTDLSource.from_url(
                         track, loop=self.bot.loop, stream=True
                     )
                     cmd_msg = f"Started playing queue"
-                    await ctx.send(f"Playing {track}")
                     ctx.voice_client.play(
                         player,
                         after=lambda e: asyncio.run_coroutine_threadsafe(
