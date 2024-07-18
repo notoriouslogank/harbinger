@@ -6,10 +6,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [5.8.0] - 2024-07-18
 
+### Added
+
+- !nq command to add a track to the music queue
+- !queue command to view the current music queue
+
+### Fixed
+
+- The music player should now play music down the queue continually
+
 ### Deprecated
 
 - !play command renamed to !resume
 - !stream command renamed to !play
+
+### Known Issues
+
+- For some reason, some tracks still cut off before the end
+- Issues arise depending how/when tracks are !nq'ed
 
 ## [5.7.1] - 2024-07-18
 
