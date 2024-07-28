@@ -101,7 +101,7 @@ class Minecraft(commands.Cog):
             await ctx.channel.purge(limit=1)
             self.save_all()
             bak_msg = await ctx.channel.send(
-                "The Minecraft server will be shutting down in 30s for server backup.  Please save and disconnect to avoid and lost progress..."
+                "The Minecraft server will be shutting down in 30s for server backup.  Please save and disconnect to avoid any lost progress..."
             )
             sleep(30)
             await bak_msg.edit(content="Minecraft server shutting down NOW!")
