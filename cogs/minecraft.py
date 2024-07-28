@@ -96,7 +96,8 @@ class Minecraft(commands.Cog):
         if Harbinger.is_minecraft(self, ctx, ctx.message.author) == True:
             cmd_msg = "Backing up Minecraft server..."
             date = datetime.date(datetime.today())
-            filename = date
+            date_string = str(date)
+            filename = date_string
             await ctx.channel.purge(limit=1)
             self.save_all()
             bak_msg = await ctx.channel.send(
