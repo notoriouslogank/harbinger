@@ -1,6 +1,6 @@
-import datetime
 import os
 import subprocess
+from datetime import datetime
 from shutil import make_archive
 from time import sleep
 
