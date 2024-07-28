@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - Remove unused imports
 - Remove MODERATOR requirement on certain functions
+- Minecraft commands now actually require the MINECRAFT role to function
 
 ### Breaking Change
 
