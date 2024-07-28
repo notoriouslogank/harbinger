@@ -95,9 +95,8 @@ class Minecraft(commands.Cog):
         cmd = "!backmc"
         if Harbinger.is_minecraft(self, ctx, ctx.message.author) == True:
             cmd_msg = "Backing up Minecraft server..."
-            filename = datetime.datetime.strftime(
-                datetime.datetime.now(), f"%d%m%Y-%H%M"
-            )
+            date = datetime.date(datetime.today())
+            filename = date
             await ctx.channel.purge(limit=1)
             self.save_all()
             bak_msg = await ctx.channel.send(
