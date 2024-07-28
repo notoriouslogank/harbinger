@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# [5.9.0-dev] - Unreleased
+
+### Fixed
+
+- Remove unused imports
+- Remove MODERATOR requirement on certain functions
+
+### Breaking Change
+
+- Change naming convention for minecraft backup
+
 ## [5.8.1] - 2024-07-18
 
 ### Fixed
