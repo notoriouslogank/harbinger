@@ -1,6 +1,6 @@
-import datetime
 import os
 import subprocess
+from datetime import datetime
 from shutil import make_archive
 from time import sleep
 
@@ -95,17 +95,16 @@ class Minecraft(commands.Cog):
         cmd = "!backmc"
         if Harbinger.is_minecraft(self, ctx, ctx.message.author) == True:
             cmd_msg = "Backing up Minecraft server..."
-            filename = datetime.datetime.strftime(
-                datetime.datetime.now(), f"%d%m%Y-%H%M"
-            )
+            date = datetime.date(datetime.today())
+            date_string = str(date)
+            filename = date_string
             await ctx.channel.purge(limit=1)
             self.save_all()
             bak_msg = await ctx.channel.send(
-                "The Minecraft server will be shutting down in 30s for server backup.  Please save and disconnect to avoid and lost progress..."
+                "The Minecraft server will be shutting down in 15s for server backup.  Please save and disconnect to avoid any lost progress..."
             )
-            sleep(30)
+            sleep(15)
             await bak_msg.edit(content="Minecraft server shutting down NOW!")
-            sleep(0.5)
             self.stop_server()
             await bak_msg.edit(content="Backing up Minecraft server, please standby...")
             if os.path.exists(f"backups"):

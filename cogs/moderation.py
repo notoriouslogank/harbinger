@@ -311,16 +311,6 @@ class Moderation(commands.Cog):
                                 counter += 1
                         else:
                             await channel.send(f"{author} not found in messages.")
-                    elif author == None:
-                        logfile = Path(filename)
-                        entry = f"{counter+1} {message.created_at} - {message.author}: {message.content}\n"
-                        with open(logfile, "a") as log:
-                            log.write(entry)
-                            counter += 1
-                    else:
-                        await ctx.send(
-                            f"ERROR: If you've received this message, please file a bug report.\n!bug <exact message you attempted to send>."
-                        )
             await channel.send("Wrote logs.")
         else:
             cmd_msg = "ERROR: Missing ``MODERATOR`` role."

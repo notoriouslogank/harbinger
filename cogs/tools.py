@@ -2,13 +2,13 @@ from random import randint
 
 import aiohttp
 import discord
+import wikipediaapi
 from discord.ext import commands
 from jokeapi import Jokes
 
 from assets import strings
 from config.read_configs import ReadConfigs as configs
 from harbinger import Harbinger
-import wikipediaapi
 
 CUSTOM_COLOR = configs.custom_color()
 EMAIL_ADDRESS = configs.email_address()
