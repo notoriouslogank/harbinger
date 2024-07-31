@@ -5,7 +5,7 @@ from config.read_configs import ReadConfigs as configs
 STARTUP_SCRIPT = configs.startup_script()
 SERVER_DIR = configs.server_dir()
 
-start_tmux = ("tmux", "-S", "~/Harbinger")
+start_tmux = ("tmux", "-d", "-s", "~/Harbinger")
 tmux_perms = ("chmod", "777", "~/Harbinger")
 split_window = ("tmux", "split-window", "-v")
 start_harbinger = (
