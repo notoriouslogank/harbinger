@@ -17,8 +17,7 @@ start_harbinger = (
 )
 cd_mc = ("tmux", "send", "-t", "Harbinger.1", f"cd {SERVER_DIR}", "ENTER")
 start_minecraft = ("tmux", "send", "-t", "Harbinger.1", f"{STARTUP_SCRIPT}", "ENTER")
-attach_tmux = ("tmux", "a")
-
+attach_tmux = ("tmux", "-S", "/var/tmux/Harbinger", "att", "-t", "Harbinger")
 commands = [
     start_tmux,
     split_window,
