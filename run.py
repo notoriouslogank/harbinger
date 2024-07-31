@@ -6,6 +6,7 @@ STARTUP_SCRIPT = configs.startup_script()
 SERVER_DIR = configs.server_dir()
 
 start_tmux = ("tmux", "new-session", "-S", "/tmp/pair")
+set_tmux_perms = ("chmod", "777", "/tmp/pair")
 split_window = ("tmux", "split-window", "-v")
 start_harbinger = (
     "tmux",
